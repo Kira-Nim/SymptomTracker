@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This class has to do with UI where AppDelegate has to do with model and business logic
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
