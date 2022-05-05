@@ -17,6 +17,14 @@
 		4F8757D2282293D9003033B0 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757D1282293D9003033B0 /* FirebaseFirestoreCombine-Community */; };
 		4F8757D528229EF7003033B0 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757D428229EF7003033B0 /* FirebaseFirestoreSwift-Beta */; };
 		4F8757D72822A068003033B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757D62822A068003033B0 /* GoogleService-Info.plist */; };
+		4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCED328241381002CEFBE /* FirebaseActivity.swift */; };
+		4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCED528242151002CEFBE /* FirebaseSymptom.swift */; };
+		4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCED72824220A002CEFBE /* FirebaseSymptomRegistration.swift */; };
+		4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCED9282422A6002CEFBE /* FirebaseIntensityRegistration.swift */; };
+		4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEDC282423CC002CEFBE /* Activity.swift */; };
+		4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEDE28242408002CEFBE /* Symptom.swift */; };
+		4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */; };
+		4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +35,14 @@
 		4F8757C22822813B003033B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F8757C42822813B003033B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F8757D62822A068003033B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FAFCED328241381002CEFBE /* FirebaseActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseActivity.swift; sourceTree = "<group>"; };
+		4FAFCED528242151002CEFBE /* FirebaseSymptom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSymptom.swift; sourceTree = "<group>"; };
+		4FAFCED72824220A002CEFBE /* FirebaseSymptomRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSymptomRegistration.swift; sourceTree = "<group>"; };
+		4FAFCED9282422A6002CEFBE /* FirebaseIntensityRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIntensityRegistration.swift; sourceTree = "<group>"; };
+		4FAFCEDC282423CC002CEFBE /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		4FAFCEDE28242408002CEFBE /* Symptom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symptom.swift; sourceTree = "<group>"; };
+		4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistration.swift; sourceTree = "<group>"; };
+		4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityRegistration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +81,8 @@
 		4F8757B528228138003033B0 /* SymptomTrackerIOS */ = {
 			isa = PBXGroup;
 			children = (
+				4FAFCEDB28242344002CEFBE /* Adapters */,
+				4FAFCED228241308002CEFBE /* Model */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
 				4F8757BF2822813B003033B0 /* Assets.xcassets */,
@@ -80,6 +98,28 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4FAFCED228241308002CEFBE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4FAFCED328241381002CEFBE /* FirebaseActivity.swift */,
+				4FAFCED528242151002CEFBE /* FirebaseSymptom.swift */,
+				4FAFCED72824220A002CEFBE /* FirebaseSymptomRegistration.swift */,
+				4FAFCED9282422A6002CEFBE /* FirebaseIntensityRegistration.swift */,
+				4FAFCEDC282423CC002CEFBE /* Activity.swift */,
+				4FAFCEDE28242408002CEFBE /* Symptom.swift */,
+				4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */,
+				4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4FAFCEDB28242344002CEFBE /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,8 +203,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
+				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
+				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
+				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
+				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
+				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
+				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
+				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
