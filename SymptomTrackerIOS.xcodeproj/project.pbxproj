@@ -25,6 +25,14 @@
 		4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEDE28242408002CEFBE /* Symptom.swift */; };
 		4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */; };
 		4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */; };
+		4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE428252AD6002CEFBE /* AccountManager.swift */; };
+		4FAFCEE728252BDF002CEFBE /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE628252BDF002CEFBE /* ModelManager.swift */; };
+		4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */; };
+		4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */; };
+		4FAFCEEE28253ACC002CEFBE /* SymptomAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEED28253ACC002CEFBE /* SymptomAdapter.swift */; };
+		4FAFCEF028253AED002CEFBE /* ActivityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEEF28253AED002CEFBE /* ActivityAdapter.swift */; };
+		4FAFCEF228253B41002CEFBE /* SymptomRegistrationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF128253B41002CEFBE /* SymptomRegistrationAdapter.swift */; };
+		4FAFCEF428253B6E002CEFBE /* IntensityRegistrationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF328253B6E002CEFBE /* IntensityRegistrationAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +51,14 @@
 		4FAFCEDE28242408002CEFBE /* Symptom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symptom.swift; sourceTree = "<group>"; };
 		4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistration.swift; sourceTree = "<group>"; };
 		4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityRegistration.swift; sourceTree = "<group>"; };
+		4FAFCEE428252AD6002CEFBE /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		4FAFCEE628252BDF002CEFBE /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
+		4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		4FAFCEED28253ACC002CEFBE /* SymptomAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomAdapter.swift; sourceTree = "<group>"; };
+		4FAFCEEF28253AED002CEFBE /* ActivityAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAdapter.swift; sourceTree = "<group>"; };
+		4FAFCEF128253B41002CEFBE /* SymptomRegistrationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationAdapter.swift; sourceTree = "<group>"; };
+		4FAFCEF328253B6E002CEFBE /* IntensityRegistrationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityRegistrationAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +101,10 @@
 				4FAFCED228241308002CEFBE /* Model */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
+				4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */,
+				4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */,
+				4FAFCEE628252BDF002CEFBE /* ModelManager.swift */,
+				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
 				4F8757BF2822813B003033B0 /* Assets.xcassets */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
 				4F8757D62822A068003033B0 /* GoogleService-Info.plist */,
@@ -118,6 +138,10 @@
 		4FAFCEDB28242344002CEFBE /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
+				4FAFCEED28253ACC002CEFBE /* SymptomAdapter.swift */,
+				4FAFCEEF28253AED002CEFBE /* ActivityAdapter.swift */,
+				4FAFCEF128253B41002CEFBE /* SymptomRegistrationAdapter.swift */,
+				4FAFCEF328253B6E002CEFBE /* IntensityRegistrationAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -203,16 +227,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FAFCEF428253B6E002CEFBE /* IntensityRegistrationAdapter.swift in Sources */,
 				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
+				4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */,
 				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
+				4FAFCEE728252BDF002CEFBE /* ModelManager.swift in Sources */,
 				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
+				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
+				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
+				4FAFCEF228253B41002CEFBE /* SymptomRegistrationAdapter.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
+				4FAFCEF028253AED002CEFBE /* ActivityAdapter.swift in Sources */,
+				4FAFCEEE28253ACC002CEFBE /* SymptomAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

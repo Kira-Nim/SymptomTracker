@@ -12,10 +12,30 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var viewModelProvider: ViewModelProvider?
+    var accountManager: AccountManager?
+    
+    
     // This function is run when the app is started
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        /* The GoogleServive-info.plist file will be read.
+         It is now clear what project in firebase this app should be connected to and it is now possible to use the firebase library on the right data.
+        */
         FirebaseApp.configure()
+        
+        /* Instantiated here (not above) because:
+         These can not be instantieted before this point because:
+         
+         1) When instantiating ViewModelProvider you need a ModelManager instance and when instantiating the ModelManager, the model adapters are instantieted and the model adapters runs their listener methods on firebase collections.
+         
+         2) The accountManager runs its listener method on a firebase collection.
+         
+         Before 1 and 2 can happen the configuration file for Firebase (GoogleService-Info.plist) needs to be run.
+         */
+        viewModelProvider = ViewModelProvider(modelManager: ModelManager())
+        accountManager = AccountManager()
+        
         return true
     }
 
