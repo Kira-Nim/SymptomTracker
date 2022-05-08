@@ -7,6 +7,6 @@
 
 import Foundation
 
-class ActivityAdapter {
+class ActivityRepository {
     
 }

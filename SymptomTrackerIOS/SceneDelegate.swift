@@ -17,9 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      */
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        // The flowcoordinator is needed for getting initial controller (creating initial viewHierarchy.
-        let flowCoordinator = FlowCoordinator()
-        
         /* Getting appDelegate though UIApplikation
          An instanse of AppDelegate is needed because we need to get acces to its to the ViewModelProvider instance attribute that is needed when creating a the initial contriller with the Flowcoordinator instance.
          
@@ -28,7 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{return}
         
-        let initialViewController = flowCoordinator.createInitialViewController(viewModelProvider: appDelegate.viewModelProvider!)
+        // The flowcoordinator is needed for getting initial controller (creating initial viewHierarchy.
+        let flowCoordinator = FlowCoordinator(viewModelProvider: appDelegate.viewModelProvider!)
+        
+        let initialViewController = flowCoordinator.createInitialViewController()
         
         /* Cast the param of type UIScene to a UIWindowScene if possible, else early return - UIWindowScene extends UIScene.
          

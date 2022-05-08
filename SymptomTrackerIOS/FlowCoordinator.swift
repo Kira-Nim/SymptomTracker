@@ -22,8 +22,14 @@ import UIKit
 
 class FlowCoordinator {
     
-    func createInitialViewController(viewModelProvider: ViewModelProvider) -> UIViewController {
+    private let viewModelProvider: ViewModelProvider
+    
+    func createInitialViewController() -> UIViewController {
         
-        return UIViewController()
+        return CreateUserViewController()
+    }
+    
+    init(viewModelProvider: ViewModelProvider) {
+        self.viewModelProvider = viewModelProvider
     }
 }

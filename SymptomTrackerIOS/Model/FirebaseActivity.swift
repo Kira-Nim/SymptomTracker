@@ -7,7 +7,6 @@
 
 import Foundation
 import Firebase
-import SwiftProtobuf
 
 class FirebaseActivity: Activity {
 

@@ -17,19 +17,19 @@ Manages the Combine pipeline
 
 class ModelManager {
     
-    private let symptomAdapter: SymptomAdapter
-    private let activityAdapter: ActivityAdapter
-    private let symptomRegistrationAdapter: SymptomRegistrationAdapter
-    private let intensityRegistrationAdapter: IntensityRegistrationAdapter
+    private let symptomReposityry: SymptomRepository
+    private let activityReposityry: ActivityRepository
+    private let symptomRegistrationReposityry: SymptomRegistrationRepository
+    private let intensityRegistrationReposityry: IntensityRegistrationRepository
     
     // Manages information about logged in user
     private let accountManager: AccountManager
     
     init() {
-    symptomAdapter = SymptomAdapter()
-    activityAdapter = ActivityAdapter()
-    symptomRegistrationAdapter = SymptomRegistrationAdapter()
-    intensityRegistrationAdapter = IntensityRegistrationAdapter()
+    symptomReposityry = SymptomRepository()
+    activityReposityry = ActivityRepository()
+    symptomRegistrationReposityry = SymptomRegistrationRepository()
+    intensityRegistrationReposityry = IntensityRegistrationRepository()
     accountManager = AccountManager()
     }
 }
