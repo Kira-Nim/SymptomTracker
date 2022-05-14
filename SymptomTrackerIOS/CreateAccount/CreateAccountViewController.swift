@@ -8,11 +8,18 @@
 import Foundation
 import UIKit
 
-class CreateUserViewController: UIViewController {
+
+class CreateAccountViewController: UIViewController {
     
-    init() {
+    private var createAccountViewModel: CreateAccountViewModel;
+    
+    init(viewModel: CreateAccountViewModel) {
+        createAccountViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        view = CreateUserView()
+        
+        let createAccountView = CreateAccountView()
+        view = createAccountView
+        createAccountViewModel.setView(view: createAccountView)
     }
     
     /*

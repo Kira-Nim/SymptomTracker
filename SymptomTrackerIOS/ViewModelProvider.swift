@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 // Provides VM classes for the Flowcoordinator, provides data for the VM classes.
 class ViewModelProvider {
     
@@ -20,5 +21,9 @@ class ViewModelProvider {
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
+    }
+    
+    public func getCreateAccountViewModel() -> CreateAccountViewModel {
+        return CreateAccountViewModel(modelManager: modelManager)
     }
 }

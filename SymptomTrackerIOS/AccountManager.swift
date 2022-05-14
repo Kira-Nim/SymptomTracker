@@ -12,11 +12,23 @@ import Foundation
  The AccountManager is responsible for keeping track of who logged in user is.
  It is also responsible for adding this information to documents that is to be stored in Firebase.*/
 
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
+
 class AccountManager {
+    public var loggedInUserId: String?
     
-    var loggedInUserId: String
-    
-    init(){
-        loggedInUserId = ""
+    public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+          
+            if let error = error {
+                createUserCompletionCallback(error.localizedDescription)
+                
+            } else if let authResult = authResult {
+                self.loggedInUserId = authResult.user.uid
+                createUserCompletionCallback(nil)
+            }
+        }
     }
 }

@@ -12,9 +12,7 @@
 		4F8757C02822813B003033B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757BF2822813B003033B0 /* Assets.xcassets */; };
 		4F8757C32822813B003033B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757C12822813B003033B0 /* LaunchScreen.storyboard */; };
 		4F8757CC282293D9003033B0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757CB282293D9003033B0 /* FirebaseAuth */; };
-		4F8757CE282293D9003033B0 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757CD282293D9003033B0 /* FirebaseAuthCombine-Community */; };
 		4F8757D0282293D9003033B0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757CF282293D9003033B0 /* FirebaseFirestore */; };
-		4F8757D2282293D9003033B0 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757D1282293D9003033B0 /* FirebaseFirestoreCombine-Community */; };
 		4F8757D528229EF7003033B0 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8757D428229EF7003033B0 /* FirebaseFirestoreSwift-Beta */; };
 		4F8757D72822A068003033B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757D62822A068003033B0 /* GoogleService-Info.plist */; };
 		4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCED328241381002CEFBE /* FirebaseActivity.swift */; };
@@ -26,15 +24,17 @@
 		4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */; };
 		4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */; };
 		4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE428252AD6002CEFBE /* AccountManager.swift */; };
-		4FAFCEE728252BDF002CEFBE /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE628252BDF002CEFBE /* ModelManager.swift */; };
+		4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE628252BDF002CEFBE /* ModelManagerImplementation.swift */; };
 		4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */; };
 		4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */; };
 		4FAFCEEE28253ACC002CEFBE /* SymptomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEED28253ACC002CEFBE /* SymptomRepository.swift */; };
 		4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEEF28253AED002CEFBE /* ActivityRepository.swift */; };
 		4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF128253B41002CEFBE /* SymptomRegistrationRepository.swift */; };
 		4FAFCEF428253B6E002CEFBE /* IntensityRegistrationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF328253B6E002CEFBE /* IntensityRegistrationRepository.swift */; };
-		4FAFCEF72827F68B002CEFBE /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF62827F68B002CEFBE /* CreateUserViewController.swift */; };
-		4FAFCEF92827FF33002CEFBE /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF82827FF33002CEFBE /* CreateUserView.swift */; };
+		4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF62827F68B002CEFBE /* CreateAccountViewController.swift */; };
+		4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */; };
+		4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */; };
+		4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,15 +54,17 @@
 		4FAFCEE028242571002CEFBE /* SymptomRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistration.swift; sourceTree = "<group>"; };
 		4FAFCEE2282425AD002CEFBE /* IntensityRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityRegistration.swift; sourceTree = "<group>"; };
 		4FAFCEE428252AD6002CEFBE /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
-		4FAFCEE628252BDF002CEFBE /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		4FAFCEE628252BDF002CEFBE /* ModelManagerImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagerImplementation.swift; sourceTree = "<group>"; };
 		4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
 		4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
 		4FAFCEED28253ACC002CEFBE /* SymptomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRepository.swift; sourceTree = "<group>"; };
 		4FAFCEEF28253AED002CEFBE /* ActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRepository.swift; sourceTree = "<group>"; };
 		4FAFCEF128253B41002CEFBE /* SymptomRegistrationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationRepository.swift; sourceTree = "<group>"; };
 		4FAFCEF328253B6E002CEFBE /* IntensityRegistrationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntensityRegistrationRepository.swift; sourceTree = "<group>"; };
-		4FAFCEF62827F68B002CEFBE /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
-		4FAFCEF82827FF33002CEFBE /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
+		4FAFCEF62827F68B002CEFBE /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F8757CC282293D9003033B0 /* FirebaseAuth in Frameworks */,
-				4F8757D2282293D9003033B0 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				4F8757D528229EF7003033B0 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				4F8757CE282293D9003033B0 /* FirebaseAuthCombine-Community in Frameworks */,
 				4F8757D0282293D9003033B0 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +101,7 @@
 		4F8757B528228138003033B0 /* SymptomTrackerIOS */ = {
 			isa = PBXGroup;
 			children = (
+				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
 				4FAFCEF52826CC93002CEFBE /* Services */,
 				4FAFCEDB28242344002CEFBE /* Adapters */,
 				4FAFCED228241308002CEFBE /* Model */,
@@ -108,10 +109,9 @@
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
 				4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */,
 				4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */,
-				4FAFCEE628252BDF002CEFBE /* ModelManager.swift */,
+				4FAFCEE628252BDF002CEFBE /* ModelManagerImplementation.swift */,
+				4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */,
 				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
-				4FAFCEF62827F68B002CEFBE /* CreateUserViewController.swift */,
-				4FAFCEF82827FF33002CEFBE /* CreateUserView.swift */,
 				4F8757BF2822813B003033B0 /* Assets.xcassets */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
 				4F8757D62822A068003033B0 /* GoogleService-Info.plist */,
@@ -160,6 +160,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		4FAFCEFC282D353C002CEFBE /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				4FAFCEF62827F68B002CEFBE /* CreateAccountViewController.swift */,
+				4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */,
+				4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */,
+			);
+			path = CreateAccount;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -178,9 +188,7 @@
 			name = SymptomTrackerIOS;
 			packageProductDependencies = (
 				4F8757CB282293D9003033B0 /* FirebaseAuth */,
-				4F8757CD282293D9003033B0 /* FirebaseAuthCombine-Community */,
 				4F8757CF282293D9003033B0 /* FirebaseFirestore */,
-				4F8757D1282293D9003033B0 /* FirebaseFirestoreCombine-Community */,
 				4F8757D428229EF7003033B0 /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = SymptomTrackerIOS;
@@ -242,15 +250,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FAFCEF428253B6E002CEFBE /* IntensityRegistrationRepository.swift in Sources */,
-				4FAFCEF92827FF33002CEFBE /* CreateUserView.swift in Sources */,
+				4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */,
 				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
 				4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */,
 				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
-				4FAFCEF72827F68B002CEFBE /* CreateUserViewController.swift in Sources */,
+				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
-				4FAFCEE728252BDF002CEFBE /* ModelManager.swift in Sources */,
+				4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */,
 				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
+				4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */,
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
 				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
 				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
@@ -258,6 +267,7 @@
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
+				4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
 				4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */,
 				4FAFCEEE28253ACC002CEFBE /* SymptomRepository.swift in Sources */,
@@ -409,7 +419,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -438,7 +448,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -492,20 +502,10 @@
 			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		4F8757CD282293D9003033B0 /* FirebaseAuthCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAuthCombine-Community";
-		};
 		4F8757CF282293D9003033B0 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		4F8757D1282293D9003033B0 /* FirebaseFirestoreCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreCombine-Community";
 		};
 		4F8757D428229EF7003033B0 /* FirebaseFirestoreSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -24,12 +24,16 @@ class FlowCoordinator {
     
     private let viewModelProvider: ViewModelProvider
     
-    func createInitialViewController() -> UIViewController {
-        
-        return CreateUserViewController()
-    }
-    
+    //MARK: Init
     init(viewModelProvider: ViewModelProvider) {
         self.viewModelProvider = viewModelProvider
+    }
+    
+    //MARK: Create controller hierarchy
+    func createInitialViewController() -> UIViewController {
+        
+        let createAccountViewController = CreateAccountViewController(viewModel: viewModelProvider.getCreateAccountViewModel())
+        
+        return createAccountViewController
     }
 }

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          
          Before 1 and 2 can happen the configuration file for Firebase (GoogleService-Info.plist) needs to be run.
          */
-        viewModelProvider = ViewModelProvider(modelManager: ModelManager())
+        viewModelProvider = ViewModelProvider(modelManager: ModelManagerImplementation())
         accountManager = AccountManager()
         
         return true
