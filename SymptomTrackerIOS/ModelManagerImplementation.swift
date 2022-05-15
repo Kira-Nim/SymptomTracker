@@ -41,17 +41,21 @@ class ModelManagerImplementation: ModelManager {
         accountManager = AccountManager()
     }
 
+    public func getLoggedInUser() -> String? {
+        return accountManager.loggedInUserId
+    }
+    
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
         
         accountManager.createAccountWith(email: email, password: password) { errorMessage in
             // "getCreationResultCallback(..)" returns the enum value used to determine which error message
             //(if any) should be passed to the view from the VM
-            showErrorMessageFor(self.getCreationResultCallback(errorMessage: errorMessage))
+            showErrorMessageFor(self.getCreationResult(errorMessage: errorMessage))
         }
     }
     
     // Method for translating error message (and nill) to enum "ErrorIdentifyer"
-    public func getCreationResultCallback(errorMessage: String?) -> AccountCreationResult {
+    public func getCreationResult(errorMessage: String?) -> AccountCreationResult {
         
         let errorMappingDict: [String: AccountCreationResult] = [ "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
                                  "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,

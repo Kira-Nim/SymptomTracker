@@ -23,17 +23,41 @@ import UIKit
 class FlowCoordinator {
     
     private let viewModelProvider: ViewModelProvider
+    private let window: UIWindow
     
     //MARK: Init
-    init(viewModelProvider: ViewModelProvider) {
+    init(viewModelProvider: ViewModelProvider, window: UIWindow) {
         self.viewModelProvider = viewModelProvider
+        self.window = window
     }
     
     //MARK: Create controller hierarchy
-    func createInitialViewController() -> UIViewController {
+    func setInitialViewController() {
         
-        let createAccountViewController = CreateAccountViewController(viewModel: viewModelProvider.getCreateAccountViewModel())
-        
-        return createAccountViewController
+        if let loggedInUser = viewModelProvider.modelManager.getLoggedInUser() {
+            
+            let registrationTableViewController = RegistrationTableViewController()
+            
+            let symptomNavigationController = UINavigationController(rootViewController: registrationTableViewController)
+            let activityNavigationController = UINavigationController()
+            let insightNavigationController = UINavigationController()
+            let accountSettingsController = UIViewController()
+            
+            let tabBarController = UITabBarController()
+            tabBarController.viewControllers = [symptomNavigationController, activityNavigationController, insightNavigationController, accountSettingsController]
+            
+            window.rootViewController = tabBarController
+            
+            // window.rootViewController =    ...Initial hierarchy controller here - NB! Remove rootcontroller below
+            
+        } else {
+            window.rootViewController = LoginViewController(viewModel: viewModelProvider.getLoginViewModel())
+        }
     }
+    
+    /*
+    let createAccountViewController = CreateAccountViewController(viewModel: viewModelProvider.getCreateAccountViewModel())
+    window?.rootViewController = createAccountViewController
+     
+     */
 }

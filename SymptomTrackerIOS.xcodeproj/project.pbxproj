@@ -35,6 +35,11 @@
 		4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */; };
 		4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */; };
 		4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */; };
+		4FAFCF05283153D2002CEFBE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF04283153D2002CEFBE /* LoginViewController.swift */; };
+		4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF06283153E2002CEFBE /* LoginView.swift */; };
+		4FAFCF09283153F4002CEFBE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */; };
+		4FAFCF0C28317D57002CEFBE /* SymptomRegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */; };
+		4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +70,11 @@
 		4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		4FAFCF04283153D2002CEFBE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4FAFCF06283153E2002CEFBE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationTableViewController.swift; sourceTree = "<group>"; };
+		4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,10 @@
 		4F8757B528228138003033B0 /* SymptomTrackerIOS */ = {
 			isa = PBXGroup;
 			children = (
+				4FAFCF1028317E36002CEFBE /* Insight */,
+				4FAFCF0D28317DBB002CEFBE /* Activity */,
+				4FAFCF0A28317D29002CEFBE /* Symptom */,
+				4FAFCF032831539D002CEFBE /* Login */,
 				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
 				4FAFCEF52826CC93002CEFBE /* Services */,
 				4FAFCEDB28242344002CEFBE /* Adapters */,
@@ -168,6 +182,39 @@
 				4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */,
 			);
 			path = CreateAccount;
+			sourceTree = "<group>";
+		};
+		4FAFCF032831539D002CEFBE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4FAFCF04283153D2002CEFBE /* LoginViewController.swift */,
+				4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */,
+				4FAFCF06283153E2002CEFBE /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4FAFCF0A28317D29002CEFBE /* Symptom */ = {
+			isa = PBXGroup;
+			children = (
+				4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */,
+				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
+			);
+			path = Symptom;
+			sourceTree = "<group>";
+		};
+		4FAFCF0D28317DBB002CEFBE /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		4FAFCF1028317E36002CEFBE /* Insight */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Insight;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,19 +299,24 @@
 				4FAFCEF428253B6E002CEFBE /* IntensityRegistrationRepository.swift in Sources */,
 				4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */,
 				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
+				4FAFCF05283153D2002CEFBE /* LoginViewController.swift in Sources */,
 				4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */,
 				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
+				4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
 				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
+				4FAFCF0C28317D57002CEFBE /* SymptomRegistrationTableViewController.swift in Sources */,
 				4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */,
 				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
 				4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */,
+				4FAFCF09283153F4002CEFBE /* LoginViewModel.swift in Sources */,
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
 				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
 				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
+				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
 				4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */,

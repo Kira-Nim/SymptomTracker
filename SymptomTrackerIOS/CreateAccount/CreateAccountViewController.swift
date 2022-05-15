@@ -11,7 +11,7 @@ import UIKit
 
 class CreateAccountViewController: UIViewController {
     
-    private var createAccountViewModel: CreateAccountViewModel;
+    private var createAccountViewModel: CreateAccountViewModel
     
     init(viewModel: CreateAccountViewModel) {
         createAccountViewModel = viewModel

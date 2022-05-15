@@ -17,6 +17,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      */
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        /* Create a window of the same size (bounds) as the main screen
+            A window covering the whole screen.
+            A phone screen will only have something else as the main screen if a external monitor is connectes or something like that.
+         */
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        /* Cast the param of type UIScene to a UIWindowScene if possible, else early return - UIWindowScene extends UIScene.
+            Using Liskovs law - In this code we are counting on the UIScene param actually holding an instance of UIWindowScene.
+            If this is not the case we will make an early return.
+         
+            This early return is efficient because we would not be able to use a UIScene when setting up window to be part of a Scene.
+            The windowScene value shall be stored in an att. of type UIWindowScene.
+         */
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window?.windowScene = windowScene
+
+        
         /* Getting appDelegate though UIApplikation
          An instanse of AppDelegate is needed because we need to get acces to its to the ViewModelProvider instance attribute that is needed when creating a the initial contriller with the Flowcoordinator instance.
          
@@ -25,24 +42,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{return}
         
-        // The flowcoordinator is needed for getting initial controller (creating initial viewHierarchy.
-        let flowCoordinator = FlowCoordinator(viewModelProvider: appDelegate.viewModelProvider!)
-        
-        let initialViewController = flowCoordinator.createInitialViewController()
-        
-        /* Cast the param of type UIScene to a UIWindowScene if possible, else early return - UIWindowScene extends UIScene.
-         
-         Using Liskovs law - In this code we are counting on the UIScene param actually holding an instance of UIWindowScene. If this is not the case we will make an early return.
-         
-         This early return is efficient because we would not be able to use a UIScene for what we need later on when setting up window to be part of a Scene. Later our windowScene value shall be stored in an att. of type UIWindowScene, on UIWindow.
-         */
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        /* Create a window of the same size (bounds) as the main screen
-            A window covering the whole screen.
-            A phone screen will only have something else as the main screen if a external monitor is connectes or something like that.
-         */
-        window = UIWindow(frame: UIScreen.main.bounds)
+        // The flowcoordinator is needed for setting initial controller on window
+        let flowCoordinator = FlowCoordinator(viewModelProvider: appDelegate.viewModelProvider!, window: window!)
+        flowCoordinator.setInitialViewController()
         
         /*
          makeKeyAndVisible()
@@ -52,9 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          Window expects to be part of a scene. This tells window what scene it is part of.
          This att. explaines why we, in the above, had to cast the UIScene to a UIWindowScene.
          */
-        window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
-        window?.windowScene = windowScene
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

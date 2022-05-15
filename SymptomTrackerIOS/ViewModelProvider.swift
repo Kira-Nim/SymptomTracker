@@ -17,7 +17,7 @@ class ViewModelProvider {
     Manages the Combine pipeline
     Handles business logic
      */
-    let modelManager: ModelManager
+    public let modelManager: ModelManager
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -25,5 +25,9 @@ class ViewModelProvider {
     
     public func getCreateAccountViewModel() -> CreateAccountViewModel {
         return CreateAccountViewModel(modelManager: modelManager)
+    }
+    
+    public func getLoginViewModel() -> LoginViewModel {
+        return LoginViewModel(modelManager: modelManager)
     }
 }
