@@ -51,22 +51,18 @@ class ModelManagerImplementation: ModelManager {
     // Method used in callback - for translating error message (and nill) to enum "ErrorIdentifyer"
     // which is used in callback for showing error messages if needed (which comes from CreateAccountViewModel)
     public func createUserCompletionCallback(errorMessage: String?, showErrorMessageFor: (AccountCreationResult) -> Void) {
+        
+        let errorMappingDict: [String: AccountCreationResult] = [ "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
+                                 "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,
+                                 "FIRAuthErrorCodeWeakPassword": .weakPasswordError]
+        
+        if let errorMessage = errorMessage {
             
-        switch (errorMessage) {
-            case "FIRAuthErrorCodeInvalidEmail":
-                showErrorMessageFor(.invalidEmail)
-                
-            case "FIRAuthErrorCodeEmailAlreadyInUse":
-                showErrorMessageFor(.emailAlreadyExist)
-                
-            case "FIRAuthErrorCodeWeakPassword":
-                showErrorMessageFor(.weakPasswordError)
+            let creationResult = errorMappingDict[errorMessage] ?? .failed
+            showErrorMessageFor(creationResult)
             
-            case nil:
-                showErrorMessageFor(.userCreated)
-                
-            default:
-                showErrorMessageFor(.failed)
+        }else{
+            showErrorMessageFor(.userCreated)
         }
     }
 }
