@@ -44,25 +44,25 @@ class ModelManagerImplementation: ModelManager {
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
         
         accountManager.createAccountWith(email: email, password: password) { errorMessage in
-            self.createUserCompletionCallback(errorMessage: errorMessage, showErrorMessageFor: showErrorMessageFor)
+            // "getCreationResultCallback(..)" returns the enum value used to determine which error message
+            //(if any) should be passed to the view from the VM
+            showErrorMessageFor(self.getCreationResultCallback(errorMessage: errorMessage))
         }
     }
     
-    // Method used in callback - for translating error message (and nill) to enum "ErrorIdentifyer"
-    // which is used in callback for showing error messages if needed (which comes from CreateAccountViewModel)
-    public func createUserCompletionCallback(errorMessage: String?, showErrorMessageFor: (AccountCreationResult) -> Void) {
+    // Method for translating error message (and nill) to enum "ErrorIdentifyer"
+    public func getCreationResultCallback(errorMessage: String?) -> AccountCreationResult {
         
         let errorMappingDict: [String: AccountCreationResult] = [ "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
                                  "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,
                                  "FIRAuthErrorCodeWeakPassword": .weakPasswordError]
         
         if let errorMessage = errorMessage {
-            
             let creationResult = errorMappingDict[errorMessage] ?? .failed
-            showErrorMessageFor(creationResult)
+            return creationResult
             
         }else{
-            showErrorMessageFor(.userCreated)
+            return .userCreated
         }
     }
 }
