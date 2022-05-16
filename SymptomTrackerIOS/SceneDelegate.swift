@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // The flowcoordinator is needed for setting initial controller on window
         let flowCoordinator = FlowCoordinator(viewModelProvider: appDelegate.viewModelProvider!, window: window!)
-        flowCoordinator.setInitialViewController()
+        flowCoordinator.setRootViewController()
         
         /*
          makeKeyAndVisible()

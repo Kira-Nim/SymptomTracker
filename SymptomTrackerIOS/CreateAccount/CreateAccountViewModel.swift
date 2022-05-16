@@ -11,9 +11,9 @@ import UIKit
 
 class CreateAccountViewModel {
     
-    private var view: CreateAccountView? = nil;
-    public var modelManager: ModelManager;
-    //private var afterCreationCallback:
+    private var view: CreateAccountView? = nil
+    public var modelManager: ModelManager
+    public var afterCreationCallback: (()->Void)? = nil
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -39,6 +39,7 @@ class CreateAccountViewModel {
         }, for: .touchUpInside)
     }
     
+    
     private func showErrorMessageFor(identifyer: AccountCreationResult) {
         
         switch (identifyer) {
@@ -53,7 +54,7 @@ class CreateAccountViewModel {
             
         case .userCreated:
             view?.errorMessage.text = ""
-            //navigateToLoginCallback()
+            afterCreationCallback?()
         
         case .weakPasswordError:
             view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"

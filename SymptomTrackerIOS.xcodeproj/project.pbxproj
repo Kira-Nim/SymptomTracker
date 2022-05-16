@@ -38,8 +38,18 @@
 		4FAFCF05283153D2002CEFBE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF04283153D2002CEFBE /* LoginViewController.swift */; };
 		4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF06283153E2002CEFBE /* LoginView.swift */; };
 		4FAFCF09283153F4002CEFBE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */; };
-		4FAFCF0C28317D57002CEFBE /* SymptomRegistrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */; };
+		4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */; };
 		4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */; };
+		4FDB44C728319DD8005D35A1 /* SymptomRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */; };
+		4FDB44C92831A14C005D35A1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */; };
+		4FDB44CB2831A160005D35A1 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */; };
+		4FDB44CD2831A172005D35A1 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CC2831A172005D35A1 /* ActivityView.swift */; };
+		4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */; };
+		4FDB44D12831A411005D35A1 /* InsightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D02831A411005D35A1 /* InsightViewModel.swift */; };
+		4FDB44D32831A46A005D35A1 /* InsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D22831A46A005D35A1 /* InsightView.swift */; };
+		4FDB44D62831A72C005D35A1 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */; };
+		4FDB44D82831A7B0005D35A1 /* AccountSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */; };
+		4FDB44DA2831A88A005D35A1 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,8 +83,18 @@
 		4FAFCF04283153D2002CEFBE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4FAFCF06283153E2002CEFBE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationTableViewController.swift; sourceTree = "<group>"; };
+		4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewController.swift; sourceTree = "<group>"; };
 		4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewModel.swift; sourceTree = "<group>"; };
+		4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationView.swift; sourceTree = "<group>"; };
+		4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		4FDB44CC2831A172005D35A1 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightViewController.swift; sourceTree = "<group>"; };
+		4FDB44D02831A411005D35A1 /* InsightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightViewModel.swift; sourceTree = "<group>"; };
+		4FDB44D22831A46A005D35A1 /* InsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightView.swift; sourceTree = "<group>"; };
+		4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewModel.swift; sourceTree = "<group>"; };
+		4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +131,7 @@
 		4F8757B528228138003033B0 /* SymptomTrackerIOS */ = {
 			isa = PBXGroup;
 			children = (
+				4FDB44D42831A709005D35A1 /* AccountSettings */,
 				4FAFCF1028317E36002CEFBE /* Insight */,
 				4FAFCF0D28317DBB002CEFBE /* Activity */,
 				4FAFCF0A28317D29002CEFBE /* Symptom */,
@@ -178,8 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				4FAFCEF62827F68B002CEFBE /* CreateAccountViewController.swift */,
-				4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */,
 				4FAFCEFD282D3594002CEFBE /* CreateAccountViewModel.swift */,
+				4FAFCEF82827FF33002CEFBE /* CreateAccountView.swift */,
 			);
 			path = CreateAccount;
 			sourceTree = "<group>";
@@ -197,8 +218,9 @@
 		4FAFCF0A28317D29002CEFBE /* Symptom */ = {
 			isa = PBXGroup;
 			children = (
-				4FAFCF0B28317D56002CEFBE /* SymptomRegistrationTableViewController.swift */,
+				4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */,
 				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
+				4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */,
 			);
 			path = Symptom;
 			sourceTree = "<group>";
@@ -206,6 +228,9 @@
 		4FAFCF0D28317DBB002CEFBE /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */,
+				4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */,
+				4FDB44CC2831A172005D35A1 /* ActivityView.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -213,8 +238,21 @@
 		4FAFCF1028317E36002CEFBE /* Insight */ = {
 			isa = PBXGroup;
 			children = (
+				4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */,
+				4FDB44D02831A411005D35A1 /* InsightViewModel.swift */,
+				4FDB44D22831A46A005D35A1 /* InsightView.swift */,
 			);
 			path = Insight;
+			sourceTree = "<group>";
+		};
+		4FDB44D42831A709005D35A1 /* AccountSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */,
+				4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */,
+				4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */,
+			);
+			path = AccountSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,25 +338,35 @@
 				4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */,
 				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
 				4FAFCF05283153D2002CEFBE /* LoginViewController.swift in Sources */,
+				4FDB44C92831A14C005D35A1 /* ActivityViewController.swift in Sources */,
+				4FDB44CB2831A160005D35A1 /* ActivityViewModel.swift in Sources */,
 				4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */,
 				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
+				4FDB44D12831A411005D35A1 /* InsightViewModel.swift in Sources */,
+				4FDB44D32831A46A005D35A1 /* InsightView.swift in Sources */,
 				4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */,
+				4FDB44D82831A7B0005D35A1 /* AccountSettingsViewModel.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
+				4FDB44D62831A72C005D35A1 /* AccountSettingsViewController.swift in Sources */,
 				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
+				4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
-				4FAFCF0C28317D57002CEFBE /* SymptomRegistrationTableViewController.swift in Sources */,
+				4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */,
 				4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */,
 				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
 				4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */,
 				4FAFCF09283153F4002CEFBE /* LoginViewModel.swift in Sources */,
+				4FDB44C728319DD8005D35A1 /* SymptomRegistrationView.swift in Sources */,
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
 				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
 				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
+				4FDB44DA2831A88A005D35A1 /* AccountSettingsView.swift in Sources */,
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
+				4FDB44CD2831A172005D35A1 /* ActivityView.swift in Sources */,
 				4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
 				4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */,

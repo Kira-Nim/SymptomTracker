@@ -30,4 +30,20 @@ class ViewModelProvider {
     public func getLoginViewModel() -> LoginViewModel {
         return LoginViewModel(modelManager: modelManager)
     }
+    
+    public func getSymptomRegistrationViewModel() -> SymptomRegistrationViewModel {
+        return SymptomRegistrationViewModel(modelManager: modelManager)
+    }
+    
+    public func getAccountSettingsViewModel() -> AccountSettingsViewModel {
+        return AccountSettingsViewModel(modelManager: modelManager)
+    }
+    
+    public func getActivityViewModel() -> ActivityViewModel {
+        return ActivityViewModel(modelManager: modelManager)
+    }
+    
+    public func getInsightViewModel() -> InsightViewModel {
+        return InsightViewModel(modelManager: modelManager)
+    }
 }

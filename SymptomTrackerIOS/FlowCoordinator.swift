@@ -31,33 +31,36 @@ class FlowCoordinator {
         self.window = window
     }
     
-    //MARK: Create controller hierarchy
-    func setInitialViewController() {
+    //MARK: Create controller hierarchy to be shown if user is logged in
+    public func setRootViewController() {
         
         if let loggedInUser = viewModelProvider.modelManager.getLoggedInUser() {
+        
+            let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
+            let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
+            let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
+            let accountSettingsViewController = AccountSettingsViewController(viewModel: viewModelProvider.getAccountSettingsViewModel())
             
-            let registrationTableViewController = RegistrationTableViewController()
-            
-            let symptomNavigationController = UINavigationController(rootViewController: registrationTableViewController)
-            let activityNavigationController = UINavigationController()
-            let insightNavigationController = UINavigationController()
-            let accountSettingsController = UIViewController()
+            let symptomNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
+            let activityNavigationController = UINavigationController(rootViewController: activityViewController)
+            let insightNavigationController = UINavigationController(rootViewController: insightViewController)
+            let accountSettingsNavigationController = UINavigationController(rootViewController: accountSettingsViewController)
             
             let tabBarController = UITabBarController()
-            tabBarController.viewControllers = [symptomNavigationController, activityNavigationController, insightNavigationController, accountSettingsController]
+            tabBarController.viewControllers = [symptomNavigationController, activityNavigationController, insightNavigationController, accountSettingsNavigationController]
             
             window.rootViewController = tabBarController
             
-            // window.rootViewController =    ...Initial hierarchy controller here - NB! Remove rootcontroller below
-            
         } else {
+            
             window.rootViewController = LoginViewController(viewModel: viewModelProvider.getLoginViewModel())
+            
+            /*
+            let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
+            createAccountViewModel.afterCreationCallback = setRootViewController
+            let createAccountViewController = CreateAccountViewController(viewModel: createAccountViewModel)
+            window.rootViewController = createAccountViewController
+             */
         }
     }
-    
-    /*
-    let createAccountViewController = CreateAccountViewController(viewModel: viewModelProvider.getCreateAccountViewModel())
-    window?.rootViewController = createAccountViewController
-     
-     */
 }

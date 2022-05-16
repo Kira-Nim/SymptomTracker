@@ -74,7 +74,6 @@ class CreateAccountView: UIView {
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(red: 143/255, green: 158/255, blue: 183/255, alpha: 1.0).cgColor
-        
         return button
     }()
     
@@ -90,7 +89,7 @@ class CreateAccountView: UIView {
         return label
     }()
     
-    //MARK: super init
+    //MARK: init
     init() {
         /*
          The frame of the super view to this view, is temperarily set to zero until this view is placed into the view hierarchy and this this super view gets its real freme bounds from the OS (when the controller ordered to show its view)
@@ -109,11 +108,10 @@ class CreateAccountView: UIView {
     // MARK: Setup SubViews
     func setupSubViews() {
         imageContentView.addSubview(brainImage)
-        
         [imageContentView, contentStackView, createButton, closeButton, errorMessage].forEach({self.addSubview($0)})
-
     }
     
+    // MARK: Setup constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             imageContentView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -162,12 +160,10 @@ class CreateAccountView: UIView {
         inputField.layer.borderColor = UIColor.lightGray.cgColor
         inputField.layer.borderColor = UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0).cgColor //UIColor(red: 143/255, green: 158/255, blue: 183/255, alpha: 1.0).cgColor
         inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)])
-        
         inputField.backgroundColor = UIColor.white
         inputField.layer.cornerRadius = 3
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always
-        
         return inputField
     }
 }

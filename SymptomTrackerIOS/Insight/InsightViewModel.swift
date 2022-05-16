@@ -1,5 +1,5 @@
 //
-//  SymptomRegistrationViewModel.swift
+//  InsightViewModel.swift
 //  SymptomTrackerIOS
 //
 //  Created by Kira Nim on 15/05/2022.
@@ -8,28 +8,30 @@
 import Foundation
 import UIKit
 
-class SymptomRegistrationViewModel: NSObject {
+class InsightViewModel: NSObject {
     
-    private var view: SymptomRegistrationView? = nil
+    private var view: InsightView? = nil
     public var modelManager: ModelManager
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
     }
     
-    public func setView(view: SymptomRegistrationView) {
+    public func setView(view: InsightView) {
         self.view = view
     }
-}
-
-extension SymptomRegistrationViewModel: UITableViewDelegate {
     
 }
 
-extension SymptomRegistrationViewModel: UITableViewDataSource {
+extension InsightViewModel: UITableViewDelegate {
+    
+}
+
+extension InsightViewModel: UITableViewDataSource {
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
