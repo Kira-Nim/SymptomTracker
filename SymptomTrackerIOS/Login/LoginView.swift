@@ -19,8 +19,7 @@ class LoginView: UIView {
         label.numberOfLines = 0
         label.textColor = UIColor(red: 165/255, green: 191/255, blue: 241/255, alpha: 1.0)
         label.text = "Symptom Tracker"
-        label.font.withSize(40)
-        label.font = UIFont(name: "San Francisco", size: 50)
+        label.font = UIFont(name: "PingFangHK-Regular", size: 30.0)
         label.textAlignment = NSTextAlignment.center
         
         return label
@@ -82,7 +81,7 @@ class LoginView: UIView {
         label.numberOfLines = 0
         label.textColor = UIColor.black
         label.text = "Opret konto"
-        label.font = UIFont(name: "San Francisco", size: 17)
+        label.font = UIFont(name: "San Francisco", size: 17.0)
         label.textAlignment = NSTextAlignment.center
         return label
     }()
@@ -105,6 +104,7 @@ class LoginView: UIView {
          */
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
+        
         self.setupSubViews()
         self.setupConstraints()
     }
@@ -120,18 +120,21 @@ class LoginView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+            titleLabel.heightAnchor.constraint(equalToConstant: 100),
+            titleLabel.bottomAnchor.constraint(equalTo: imageContentView.topAnchor),
             
-            imageContentView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             imageContentView.bottomAnchor.constraint(equalTo: errorMessage.topAnchor, constant: -50),
             imageContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             imageContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            brainImage.centerYAnchor.constraint(equalTo: imageContentView.centerYAnchor, constant: 75),
+            brainImage.centerYAnchor.constraint(equalTo: imageContentView.centerYAnchor),
             brainImage.centerXAnchor.constraint(equalTo: imageContentView.centerXAnchor),
             brainImage.heightAnchor.constraint(lessThanOrEqualToConstant: 135),
+            brainImage.leadingAnchor.constraint(equalTo: imageContentView.leadingAnchor),
+            brainImage.trailingAnchor.constraint(equalTo: imageContentView.trailingAnchor),
             
             errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -30),
             errorMessage.heightAnchor.constraint(equalToConstant: 48),
