@@ -15,11 +15,11 @@ class LoginView: UIView {
     public lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 165/255, green: 191/255, blue: 241/255, alpha: 1.0)
+        //label.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
+        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
         label.text = "Symptom Tracker"
-        label.font = UIFont(name: "PingFangHK-Regular", size: 30.0)
+        label.font = UIFont(name: "PingFangHK-Semibold", size: 30.0)
         label.textAlignment = NSTextAlignment.center
         
         return label
@@ -66,11 +66,11 @@ class LoginView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log ind", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "San Francisco", size: 17)
-        button.backgroundColor = UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)
+        button.titleLabel?.font = UIFont(name: "PingFangHK-Medium", size: 20.0)
+        button.backgroundColor = UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 143/255, green: 158/255, blue: 183/255, alpha: 1.0).cgColor
+        button.layer.borderColor = UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0).cgColor
         
         return button
     }()
@@ -79,9 +79,9 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor.black
+        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
         label.text = "Opret konto"
-        label.font = UIFont(name: "San Francisco", size: 17.0)
+        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
         label.textAlignment = NSTextAlignment.center
         return label
     }()
@@ -90,9 +90,9 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor.red
-        label.text = "Der skete en fejl ved logind  noget noget prøv igen"
-        label.font = UIFont(name: "San Francisco", size: 17)
+        label.textColor = UIColor(red: 232/255, green: 55/255, blue: 2/255, alpha: 1.0)
+        label.text = ""
+        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
         label.textAlignment = NSTextAlignment.center
         return label
     }()
@@ -120,10 +120,10 @@ class LoginView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 60),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            titleLabel.heightAnchor.constraint(equalToConstant: 100),
+            titleLabel.heightAnchor.constraint(equalToConstant: 70),
             titleLabel.bottomAnchor.constraint(equalTo: imageContentView.topAnchor),
             
             imageContentView.bottomAnchor.constraint(equalTo: errorMessage.topAnchor, constant: -50),
@@ -133,8 +133,6 @@ class LoginView: UIView {
             brainImage.centerYAnchor.constraint(equalTo: imageContentView.centerYAnchor),
             brainImage.centerXAnchor.constraint(equalTo: imageContentView.centerXAnchor),
             brainImage.heightAnchor.constraint(lessThanOrEqualToConstant: 135),
-            brainImage.leadingAnchor.constraint(equalTo: imageContentView.leadingAnchor),
-            brainImage.trailingAnchor.constraint(equalTo: imageContentView.trailingAnchor),
             
             errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -30),
             errorMessage.heightAnchor.constraint(equalToConstant: 48),
@@ -166,13 +164,12 @@ class LoginView: UIView {
         
         inputField.translatesAutoresizingMaskIntoConstraints = false
         inputField.textColor = UIColor.black
-        inputField.font = UIFont(name: "San Francisco", size: 17)
+        inputField.font = UIFont(name: "PingFangHK-Thin", size: 17.0)
         inputField.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
         inputField.layer.cornerRadius = 3
-        inputField.layer.borderWidth = 1.5
-        inputField.layer.borderColor = UIColor.lightGray.cgColor
-        inputField.layer.borderColor = UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0).cgColor //UIColor(red: 143/255, green: 158/255, blue: 183/255, alpha: 1.0).cgColor
-        inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)])
+        inputField.layer.borderWidth = 1
+        inputField.layer.borderColor = UIColor(red: 91/255, green: 107/255, blue: 142/255, alpha: 1.0).cgColor
+        inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 36/255, green: 57/255, blue: 99/255, alpha: 1.0)])
         
         inputField.backgroundColor = UIColor.white
         inputField.layer.cornerRadius = 3

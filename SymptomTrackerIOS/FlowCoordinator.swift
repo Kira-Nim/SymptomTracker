@@ -39,7 +39,10 @@ class FlowCoordinator {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
-            let accountSettingsViewController = AccountSettingsViewController(viewModel: viewModelProvider.getAccountSettingsViewModel())
+            
+            let accountViewModel = viewModelProvider.getAccountSettingsViewModel()
+            accountViewModel.afterLogoutCallback = setRootViewController
+            let accountSettingsViewController = AccountViewController(viewModel: accountViewModel)
             
             let symptomNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
             let activityNavigationController = UINavigationController(rootViewController: activityViewController)
@@ -53,13 +56,14 @@ class FlowCoordinator {
             
         } else {
             
-            window.rootViewController = LoginViewController(viewModel: viewModelProvider.getLoginViewModel())
+            let loginViewModel = viewModelProvider.getLoginViewModel()
+            loginViewModel.afterLoginCallback = setRootViewController
+            window.rootViewController = LoginViewController(viewModel: loginViewModel)
             
             /*
             let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
             createAccountViewModel.afterCreationCallback = setRootViewController
-            let createAccountViewController = CreateAccountViewController(viewModel: createAccountViewModel)
-            window.rootViewController = createAccountViewController
+            window.rootViewController = CreateAccountViewController(viewModel: createAccountViewModel)
              */
         }
     }

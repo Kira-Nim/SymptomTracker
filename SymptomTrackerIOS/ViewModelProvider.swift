@@ -35,8 +35,8 @@ class ViewModelProvider {
         return SymptomRegistrationViewModel(modelManager: modelManager)
     }
     
-    public func getAccountSettingsViewModel() -> AccountSettingsViewModel {
-        return AccountSettingsViewModel(modelManager: modelManager)
+    public func getAccountSettingsViewModel() -> AccountViewModel {
+        return AccountViewModel(modelManager: modelManager)
     }
     
     public func getActivityViewModel() -> ActivityViewModel {

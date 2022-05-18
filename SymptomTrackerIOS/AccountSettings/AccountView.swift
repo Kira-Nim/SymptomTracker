@@ -8,12 +8,11 @@
 import Foundation
 import UIKit
 
-class AccountSettingsView: UIView {
+class AccountView: UITableView {
     
+    //MARK: init
     init() {
-        super.init(frame: CGRect.zero)
-        
-        backgroundColor = UIColor.green
+        super.init(frame: CGRect.zero, style: .plain)
     }
     
     required init?(coder: NSCoder) {

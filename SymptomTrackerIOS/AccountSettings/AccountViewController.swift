@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-class AccountSettingsViewController: UIViewController {
+class AccountViewController: UIViewController {
     
-    private var accountSettingsViewModel: AccountSettingsViewModel
+    private var accountSettingsViewModel: AccountViewModel
     
-    init(viewModel: AccountSettingsViewModel) {
+    init(viewModel: AccountViewModel) {
         accountSettingsViewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
         
-        title = "Konto"
+        title = "Indstillinger"
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Indsigt", image: UIImage(named: "icons8-slider-30"), tag: 0)
         
-        let accountSettingsView = AccountSettingsView()
+        let accountSettingsView = AccountView()
         view = accountSettingsView
         accountSettingsViewModel.setView(view: accountSettingsView)
     }

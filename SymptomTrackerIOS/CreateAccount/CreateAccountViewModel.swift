@@ -31,7 +31,7 @@ class CreateAccountViewModel {
                 
             } else {
                 if let email = view.emailInputField.text, let password = view.emailInputField.text {
-                    self?.modelManager.createNewAccountWith(email: email, password: password) {[weak self] (identifyer) in
+                    self?.modelManager.createNewAccountWith(email: email, password: password) { [weak self] (identifyer) in
                         self?.showErrorMessageFor(identifyer: identifyer)
                     }
                 }

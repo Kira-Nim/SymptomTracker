@@ -18,11 +18,12 @@ import FirebaseAuth
 
 class AccountManager {
     public var loggedInUserId: String?
+    private let firebaseAuth = Auth.auth()
     
     public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-          
+        firebaseAuth.createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
+                print(error.localizedDescription)
                 createUserCompletionCallback(error.localizedDescription)
                 
             } else if let authResult = authResult {
@@ -30,5 +31,41 @@ class AccountManager {
                 createUserCompletionCallback(nil)
             }
         }
+    }
+    
+    public func loginWith (email: String, password: String, loginCompletionCallback: @escaping (String?) -> Void) {
+        firebaseAuth.signIn(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                print(error.localizedDescription)
+                loginCompletionCallback(error.localizedDescription)
+                
+            } else if let authResult = authResult {
+                self.loggedInUserId = authResult.user.uid
+                loginCompletionCallback(nil)
+            }
+        }
+    }
+    
+    public func logOut(logOutCompletionCallback: (() -> Void)?) {
+        do {
+            try firebaseAuth.signOut()
+            self.loggedInUserId = nil
+            logOutCompletionCallback?()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+    }
+    
+    public func changePassword(email: String, chagePasswordCompletionCallback: @escaping (String?) -> Void) {
+        firebaseAuth.sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print(error.localizedDescription)
+                chagePasswordCompletionCallback(error.localizedDescription)
+            }
+            else {
+                chagePasswordCompletionCallback(nil)
+            }
+        }
+                                       
     }
 }

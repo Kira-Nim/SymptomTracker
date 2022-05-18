@@ -47,9 +47,9 @@
 		4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */; };
 		4FDB44D12831A411005D35A1 /* InsightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D02831A411005D35A1 /* InsightViewModel.swift */; };
 		4FDB44D32831A46A005D35A1 /* InsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D22831A46A005D35A1 /* InsightView.swift */; };
-		4FDB44D62831A72C005D35A1 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */; };
-		4FDB44D82831A7B0005D35A1 /* AccountSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */; };
-		4FDB44DA2831A88A005D35A1 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */; };
+		4FDB44D62831A72C005D35A1 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D52831A72C005D35A1 /* AccountViewController.swift */; };
+		4FDB44D82831A7B0005D35A1 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */; };
+		4FDB44DA2831A88A005D35A1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D92831A88A005D35A1 /* AccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,9 +92,9 @@
 		4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightViewController.swift; sourceTree = "<group>"; };
 		4FDB44D02831A411005D35A1 /* InsightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightViewModel.swift; sourceTree = "<group>"; };
 		4FDB44D22831A46A005D35A1 /* InsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightView.swift; sourceTree = "<group>"; };
-		4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewModel.swift; sourceTree = "<group>"; };
-		4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		4FDB44D52831A72C005D35A1 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		4FDB44D92831A88A005D35A1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,9 +248,9 @@
 		4FDB44D42831A709005D35A1 /* AccountSettings */ = {
 			isa = PBXGroup;
 			children = (
-				4FDB44D52831A72C005D35A1 /* AccountSettingsViewController.swift */,
-				4FDB44D72831A7B0005D35A1 /* AccountSettingsViewModel.swift */,
-				4FDB44D92831A88A005D35A1 /* AccountSettingsView.swift */,
+				4FDB44D52831A72C005D35A1 /* AccountViewController.swift */,
+				4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */,
+				4FDB44D92831A88A005D35A1 /* AccountView.swift */,
 			);
 			path = AccountSettings;
 			sourceTree = "<group>";
@@ -345,9 +345,9 @@
 				4FDB44D12831A411005D35A1 /* InsightViewModel.swift in Sources */,
 				4FDB44D32831A46A005D35A1 /* InsightView.swift in Sources */,
 				4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */,
-				4FDB44D82831A7B0005D35A1 /* AccountSettingsViewModel.swift in Sources */,
+				4FDB44D82831A7B0005D35A1 /* AccountViewModel.swift in Sources */,
 				4F8757B728228138003033B0 /* AppDelegate.swift in Sources */,
-				4FDB44D62831A72C005D35A1 /* AccountSettingsViewController.swift in Sources */,
+				4FDB44D62831A72C005D35A1 /* AccountViewController.swift in Sources */,
 				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
 				4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
@@ -360,7 +360,7 @@
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
 				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
 				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
-				4FDB44DA2831A88A005D35A1 /* AccountSettingsView.swift in Sources */,
+				4FDB44DA2831A88A005D35A1 /* AccountView.swift in Sources */,
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
@@ -439,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -494,7 +494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

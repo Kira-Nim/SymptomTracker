@@ -15,15 +15,25 @@ Holds the model data classes adapted to be used throuhout the system.
 Manages the Combine pipeline
  */
 
-public enum AccountCreationResult { case repeatPasswordFailed,
+public enum AccountCreationResult {case repeatPasswordFailed,
                                          failed,
                                          emailAlreadyExist,
                                          userCreated,
                                          invalidEmail,
-                                         weakPasswordError }
+                                         weakPasswordError}
+
+public enum AccountLoginResult {case loginSucceded,
+                                      logInCredentialsNotValid,
+                                      failed,
+                                      accountDisabled}
+
+public enum ChangePasswordResult {case changeSucceded,
+                                       failed,
+                                       weakPasswordError}
 
 class ModelManagerImplementation: ModelManager {
     
+    // Repositories - Takes care of CRUD
     private let symptomReposityry: SymptomRepository
     private let activityReposityry: ActivityRepository
     private let symptomRegistrationReposityry: SymptomRegistrationRepository
@@ -33,6 +43,7 @@ class ModelManagerImplementation: ModelManager {
     private let accountManager: AccountManager
     
     
+    //MARK: Init
     init() {
         symptomReposityry = SymptomRepository()
         activityReposityry = ActivityRepository()
@@ -41,14 +52,17 @@ class ModelManagerImplementation: ModelManager {
         accountManager = AccountManager()
     }
 
+    //MARK Get logged in user
     public func getLoggedInUser() -> String? {
         return accountManager.loggedInUserId
     }
     
+    //MARK: Create account functionality
+    
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
         
         accountManager.createAccountWith(email: email, password: password) { errorMessage in
-            // "getCreationResultCallback(..)" returns the enum value used to determine which error message
+            // "getCreationResult(..)" returns the enum value used to determine which error message
             //(if any) should be passed to the view from the VM
             showErrorMessageFor(self.getCreationResult(errorMessage: errorMessage))
         }
@@ -57,21 +71,70 @@ class ModelManagerImplementation: ModelManager {
     // Method for translating error message (and nill) to enum "ErrorIdentifyer"
     public func getCreationResult(errorMessage: String?) -> AccountCreationResult {
         
-        let errorMappingDict: [String: AccountCreationResult] = [ "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
-                                 "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,
-                                 "FIRAuthErrorCodeWeakPassword": .weakPasswordError]
+        let errorMappingDict: [String: AccountCreationResult] = [
+                "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
+                "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,
+                "FIRAuthErrorCodeWeakPassword": .weakPasswordError]
         
         if let errorMessage = errorMessage {
             let creationResult = errorMappingDict[errorMessage] ?? .failed
             return creationResult
-            
-        }else{
+        }else {
             return .userCreated
         }
     }
+    
+    //MARK: Login functionality
+    
+    public func loginWith(email: String, password: String, showErrorMessageFor: @escaping (AccountLoginResult) -> Void) {
+        
+        // "getLoginResult(..)" returns the enum value used to determine which error message
+        // (if any) should be passed to the view from the VM
+        accountManager.loginWith(email: email, password: password) { errorMessage in
+            showErrorMessageFor(self.getLoginResult(errorMessage: errorMessage))
+        }
+    }
+    
+    public func getLoginResult(errorMessage: String?) -> AccountLoginResult {
+        let errorMappingDict: [String: AccountLoginResult] = [
+                "FIRAuthErrorCodeWrongPassword": .logInCredentialsNotValid,
+                "FIRAuthErrorCodeInvalidEmail": .logInCredentialsNotValid,
+                "FIRAuthErrorCodeUserDisabled": .accountDisabled]
+        
+        if let errorMessage = errorMessage {
+            let loginResult = errorMappingDict[errorMessage] ?? .failed
+            return loginResult
+        }else {
+            return .loginSucceded
+        }
+    }
+    
+    //MARK: Logout functionality
+    
+    public func logOut(logOutCompletionCallback: (() -> Void)?) {
+        accountManager.logOut(logOutCompletionCallback: logOutCompletionCallback)
+    }
+    
+    //MARK Change password functionality
+    
+    public func changePassword(email: String, showErrorMessageFor: @escaping (ChangePasswordResult) -> Void) {
+        
+        accountManager.changePassword(email: email) { errorMessage in
+            showErrorMessageFor(self.getResultForChangePassword(errorMessage: errorMessage))
+        }
+    }
+    
+    public func getResultForChangePassword(errorMessage: String?) -> ChangePasswordResult {
+        let errorMappingDict: [String: ChangePasswordResult] = ["FIRAuthErrorCodeWeakPassword": .weakPasswordError]
+        
+        if let errorMessage = errorMessage {
+            let changePasswordResult = errorMappingDict[errorMessage] ?? .failed
+            return changePasswordResult
+        }else {
+            return .changeSucceded
+        }
+    }
 }
-
-
 
 
 
