@@ -68,9 +68,8 @@ class ModelManagerImplementation: ModelManager {
     public func getCreationResult(errorMessage: String?) -> AccountCreationResult {
         
         let errorMappingDict: [String: AccountCreationResult] = [
-                "FIRAuthErrorCodeInvalidEmail": .invalidEmail,
-                "FIRAuthErrorCodeEmailAlreadyInUse": .emailAlreadyExist,
-                "FIRAuthErrorCodeWeakPassword": .weakPasswordError]
+                "ERROR_INVALID_EMAIL": .invalidEmail,
+                "ERROR_EMAIL_ALREADY_IN_USE": .emailAlreadyExist]
         
         if let errorMessage = errorMessage {
             let creationResult = errorMappingDict[errorMessage] ?? .failed
@@ -93,9 +92,9 @@ class ModelManagerImplementation: ModelManager {
     
     public func getLoginResult(errorMessage: String?) -> AccountLoginResult {
         let errorMappingDict: [String: AccountLoginResult] = [
-                "FIRAuthErrorCodeWrongPassword": .logInCredentialsNotValid,
-                "FIRAuthErrorCodeInvalidEmail": .logInCredentialsNotValid,
-                "FIRAuthErrorCodeUserDisabled": .accountDisabled]
+                "ERROR_WRONG_PASSWORD": .logInCredentialsNotValid,
+                "ERROR_INVALID_EMAIL": .logInCredentialsNotValid,
+                "ERROR_USER_DISABLED": .accountDisabled]
         
         if let errorMessage = errorMessage {
             let loginResult = errorMappingDict[errorMessage] ?? .failed

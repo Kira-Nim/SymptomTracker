@@ -35,7 +35,7 @@ class FlowCoordinator {
     public func setRootViewController() {
         
         if let loggedInUser = viewModelProvider.modelManager.getLoggedInUser() {
-        
+            
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
@@ -55,16 +55,28 @@ class FlowCoordinator {
             window.rootViewController = tabBarController
             
         } else {
-            
             let loginViewModel = viewModelProvider.getLoginViewModel()
+            let logInViewController = LoginViewController(viewModel: loginViewModel)
+            window.rootViewController = logInViewController
+            
             loginViewModel.afterLoginCallback = setRootViewController
-            window.rootViewController = LoginViewController(viewModel: loginViewModel)
+            loginViewModel.presentCreateAccountCallback = { () in
+                self.presentCreateAccountViewControllerTo(presenter: logInViewController)
+            }
             
             /*
-            let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
-            createAccountViewModel.afterCreationCallback = setRootViewController
-            window.rootViewController = CreateAccountViewController(viewModel: createAccountViewModel)
+             let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
+             createAccountViewModel.afterCreationCallback = setRootViewController
+             window.rootViewController = CreateAccountViewController(viewModel: createAccountViewModel)
              */
         }
+    }
+    
+    func presentCreateAccountViewControllerTo(presenter: UIViewController) {
+        let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
+        createAccountViewModel.afterCreationCallback = setRootViewController
+        
+        let createAccountViewController = CreateAccountViewController(viewModel: createAccountViewModel)
+        presenter.present(createAccountViewController, animated: true, completion: nil)
     }
 }

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class CreateAccountViewModel {
     
     private var view: CreateAccountView? = nil
@@ -23,12 +22,12 @@ class CreateAccountViewModel {
         self.view = view
         
         view.createButton.addAction(UIAction {[weak self] _ in
-            
-            //self?.view?.createButton.backgroundColor = UIColor.blue
-            
             if (!(view.passwordInputField.text == view.passwordRepeatInputField.text)) {
                 self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
-                
+            
+            } else if (view.passwordInputField.text?.count ?? 0 < 6) {
+                self?.showErrorMessageFor(identifyer: .weakPasswordError)
+                        
             } else {
                 if let email = view.emailInputField.text, let password = view.emailInputField.text {
                     self?.modelManager.createNewAccountWith(email: email, password: password) { [weak self] (identifyer) in

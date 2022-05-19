@@ -12,6 +12,7 @@ class LoginViewModel {
     private var view: LoginView? = nil
     public var modelManager: ModelManager
     public var afterLoginCallback: (()->Void)? = nil
+    public var presentCreateAccountCallback: (()->Void)? = nil
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager

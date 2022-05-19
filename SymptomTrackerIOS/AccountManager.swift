@@ -23,9 +23,24 @@ class AccountManager {
     public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
+                print("________________________________________________________")
                 print(error.localizedDescription)
-                createUserCompletionCallback(error.localizedDescription)
                 
+                
+                if let nsError: NSError = error as NSError? {
+                    let errorCode = nsError.userInfo["FIRAuthErrorUserInfoNameKey"]
+                    let errorCodeString: String? = errorCode as? String
+                    createUserCompletionCallback(errorCodeString)
+                                                     
+                    print("....................................................")
+                    for item in nsError.userInfo{
+                        print(item)
+                    }
+                    print("****************************************************")
+                    print(errorCode)
+                    if ((errorCodeString) != nil) {print(errorCodeString ?? "No errorCodeString!")}
+                    
+                }
             } else if let authResult = authResult {
                 self.loggedInUserId = authResult.user.uid
                 createUserCompletionCallback(nil)
@@ -36,8 +51,23 @@ class AccountManager {
     public func loginWith (email: String, password: String, loginCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
+                print("________________________________________________________")
                 print(error.localizedDescription)
-                loginCompletionCallback(error.localizedDescription)
+                
+                if let nsError: NSError = error as NSError? {
+                    let errorCode = nsError.userInfo["FIRAuthErrorUserInfoNameKey"]
+                    let errorCodeString: String? = errorCode as? String
+                    loginCompletionCallback(errorCodeString)
+                    
+                    print("....................................................")
+                    for item in nsError.userInfo{
+                        print(item)
+                    }
+                    print("****************************************************")
+                    print(errorCode)
+                    if ((errorCodeString) != nil) {print(errorCodeString ?? "No errorCodeString!")}
+                    
+                }
                 
             } else if let authResult = authResult {
                 self.loggedInUserId = authResult.user.uid
@@ -64,4 +94,9 @@ class AccountManager {
         }
     }
 }
+
+
+
+
+
 
