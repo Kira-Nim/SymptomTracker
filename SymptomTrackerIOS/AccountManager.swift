@@ -56,16 +56,12 @@ class AccountManager {
         }
     }
     
-    public func changePassword(email: String, chagePasswordCompletionCallback: @escaping (String?) -> Void) {
+    public func resetPassword(email: String) {
         firebaseAuth.sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 print(error.localizedDescription)
-                chagePasswordCompletionCallback(error.localizedDescription)
-            }
-            else {
-                chagePasswordCompletionCallback(nil)
-            }
+            } else { print("Reset email has been sent")}
         }
-                                       
     }
 }
+

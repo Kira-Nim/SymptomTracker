@@ -14,7 +14,7 @@ protocol ModelManager {
     
     func logOut(logOutCompletionCallback: (() -> Void)?) -> Void
     
-    func changePassword(email: String, showErrorMessageFor: @escaping (ChangePasswordResult) -> Void)
+    func resetPassword(email: String)
     
     func getLoggedInUser() -> String?
 }

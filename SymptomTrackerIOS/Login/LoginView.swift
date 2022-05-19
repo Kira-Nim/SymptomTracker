@@ -10,6 +10,8 @@ import UIKit
 
 class LoginView: UIView {
     
+    public var contentStackViewConstraint: NSLayoutConstraint? = nil
+    
     // MARK: Subviews
     
     public lazy var titleLabel: UILabel = {
@@ -59,10 +61,22 @@ class LoginView: UIView {
         return stackView
     }()
     
+    public lazy var resetButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Nulstil Password", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "PingFangHK-Medium", size: 20.0)
+        button.backgroundColor = UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+        button.layer.cornerRadius = 3
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0).cgColor
+        button.isHidden = true
+        return button
+    }()
+    
     public lazy var loginButton: UIButton = {
         let button = UIButton()
-        
-        //button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log ind", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -75,15 +89,35 @@ class LoginView: UIView {
         return button
     }()
     
-    public lazy var createAccountButton: UILabel = {
+    public lazy var createAccountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
         label.text = "Opret konto"
         label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
-        label.textAlignment = NSTextAlignment.center
+        label.textAlignment = NSTextAlignment.left
         return label
+    }()
+    
+    public lazy var resetPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+        label.text = "Glemt password"
+        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
+        label.textAlignment = NSTextAlignment.right
+        return label
+    }()
+    
+    public lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [createAccountLabel,
+                                                       resetPasswordLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        return stackView
     }()
     
     public lazy var errorMessage: UILabel = {
@@ -97,6 +131,18 @@ class LoginView: UIView {
         return label
     }()
     
+    public lazy var passwordResetConfirmationMessage: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = UIColor(red: 75/255, green: 119/255, blue: 127/255, alpha: 1.0)
+        label.text = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
+        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
+        label.textAlignment = NSTextAlignment.center
+        label.isHidden = true
+        return label
+    }()
+    
     //MARK: init
     init() {
         /*
@@ -105,6 +151,7 @@ class LoginView: UIView {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         
+        self.contentStackViewConstraint = contentStackView.heightAnchor.constraint(equalToConstant: 114)
         self.setupSubViews()
         self.setupConstraints()
     }
@@ -115,15 +162,20 @@ class LoginView: UIView {
     
     private func setupSubViews() {
         imageContentView.addSubview(brainImage)
-        [imageContentView, contentStackView, loginButton, createAccountButton, errorMessage, titleLabel].forEach({self.addSubview($0)})
+        [imageContentView, contentStackView, loginButton, buttonStackView, errorMessage, titleLabel, resetButton, passwordResetConfirmationMessage].forEach({self.addSubview($0)})
     }
     
     private func setupConstraints() {
+        
+        if let contentStackViewConstraint = contentStackViewConstraint {
+            NSLayoutConstraint.activate([contentStackViewConstraint])
+        }
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 60),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 35),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            titleLabel.heightAnchor.constraint(equalToConstant: 70),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80),
             titleLabel.bottomAnchor.constraint(equalTo: imageContentView.topAnchor),
             
             imageContentView.bottomAnchor.constraint(equalTo: errorMessage.topAnchor, constant: -50),
@@ -134,25 +186,34 @@ class LoginView: UIView {
             brainImage.centerXAnchor.constraint(equalTo: imageContentView.centerXAnchor),
             brainImage.heightAnchor.constraint(lessThanOrEqualToConstant: 135),
             
-            errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -30),
+            errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -25),
             errorMessage.heightAnchor.constraint(equalToConstant: 48),
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            contentStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 120),
+            contentStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 90),
             contentStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             contentStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            contentStackView.heightAnchor.constraint(equalToConstant: 114),
-            
-            createAccountButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
-            createAccountButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            createAccountButton.topAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: 5),
-            createAccountButton.heightAnchor.constraint(equalToConstant: 48),
             
             loginButton.heightAnchor.constraint(equalToConstant: 48),
             loginButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             loginButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            loginButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            loginButton.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -42),
+            
+            buttonStackView.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor, constant: 4),
+            buttonStackView.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: -4),
+            buttonStackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            
+            resetButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor),
+            resetButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor),
+            resetButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor),
+            resetButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor),
+  
+            passwordResetConfirmationMessage.bottomAnchor.constraint(equalTo: errorMessage.bottomAnchor),
+            passwordResetConfirmationMessage.heightAnchor.constraint(equalTo: errorMessage.heightAnchor),
+            passwordResetConfirmationMessage.leadingAnchor.constraint(equalTo: errorMessage.leadingAnchor),
+            passwordResetConfirmationMessage.trailingAnchor.constraint(equalTo: errorMessage.trailingAnchor)
         ])
     }
     

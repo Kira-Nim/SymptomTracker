@@ -39,7 +39,6 @@ class CreateAccountViewModel {
         }, for: .touchUpInside)
     }
     
-    
     private func showErrorMessageFor(identifyer: AccountCreationResult) {
         
         switch (identifyer) {

@@ -27,10 +27,6 @@ public enum AccountLoginResult {case loginSucceded,
                                       failed,
                                       accountDisabled}
 
-public enum ChangePasswordResult {case changeSucceded,
-                                       failed,
-                                       weakPasswordError}
-
 class ModelManagerImplementation: ModelManager {
     
     // Repositories - Takes care of CRUD
@@ -115,24 +111,10 @@ class ModelManagerImplementation: ModelManager {
         accountManager.logOut(logOutCompletionCallback: logOutCompletionCallback)
     }
     
-    //MARK Change password functionality
+    //MARK Reset password functionality
     
-    public func changePassword(email: String, showErrorMessageFor: @escaping (ChangePasswordResult) -> Void) {
-        
-        accountManager.changePassword(email: email) { errorMessage in
-            showErrorMessageFor(self.getResultForChangePassword(errorMessage: errorMessage))
-        }
-    }
-    
-    public func getResultForChangePassword(errorMessage: String?) -> ChangePasswordResult {
-        let errorMappingDict: [String: ChangePasswordResult] = ["FIRAuthErrorCodeWeakPassword": .weakPasswordError]
-        
-        if let errorMessage = errorMessage {
-            let changePasswordResult = errorMappingDict[errorMessage] ?? .failed
-            return changePasswordResult
-        }else {
-            return .changeSucceded
-        }
+    public func resetPassword(email: String) {
+        accountManager.resetPassword(email: email)
     }
 }
 

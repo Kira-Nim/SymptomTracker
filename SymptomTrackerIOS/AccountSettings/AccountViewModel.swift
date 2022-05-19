@@ -17,7 +17,7 @@ class AccountViewModel: NSObject {
     public var afterPasswordChangeCallback: (()->Void)? = nil
     
     private lazy var accountSettingsOptionsList: [(String, () -> Void)] = {
-        [("Log ud", logOut), ("Skift password", changePassword)]
+        [("Log ud", logOut)]
     }()
     
     init(modelManager: ModelManager) {
@@ -36,34 +36,6 @@ class AccountViewModel: NSObject {
     private func logOut() {
         modelManager.logOut(logOutCompletionCallback: afterLogoutCallback)
     }
-    
-    private func changePassword(email: String?) {
-        
-        if let email = email {
-            self.modelManager.changePassword(email: email) { [weak self] (identifyer) in
-                self?.showErrorMessageFor(identifyer: identifyer)
-            }
-        }
-    }
-
-    private func showErrorMessageFor(identifyer: ChangePasswordResult){
-
-        print("Test ChangePasswordResult...................................")
-        print(identifyer)
-        /*
-        switch (identifyer) {
-        case .changeSucceded:
-            view?.errorMessage.text = ""
-            afterPasswordChangeCallback?()
-
-        case .weakPasswordError:
-            view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"
-            
-        default:
-            view?.errorMessage.text = "Ændring af password fejlede"
-         */
-    }
-         
 }
 
 // Extension containing logit required for UITableViewDelegate protocol
