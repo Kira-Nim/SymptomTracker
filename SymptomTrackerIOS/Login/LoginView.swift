@@ -182,6 +182,11 @@ class LoginView: UIView {
         }
         
         NSLayoutConstraint.activate([
+            closeResetButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            closeResetButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            closeResetButton.heightAnchor.constraint(equalToConstant: 30),
+            closeResetButton.widthAnchor.constraint(equalToConstant: 30),
+            
             titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 35),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
@@ -201,35 +206,30 @@ class LoginView: UIView {
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            contentStackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 60),
+            passwordResetConfirmationMessage.bottomAnchor.constraint(equalTo: errorMessage.bottomAnchor),
+            passwordResetConfirmationMessage.heightAnchor.constraint(equalTo: errorMessage.heightAnchor),
+            passwordResetConfirmationMessage.leadingAnchor.constraint(equalTo: errorMessage.leadingAnchor),
+            passwordResetConfirmationMessage.trailingAnchor.constraint(equalTo: errorMessage.trailingAnchor),
+            
+            contentStackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 15),
             contentStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             contentStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
             loginButton.heightAnchor.constraint(equalToConstant: 48),
             loginButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             loginButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            loginButton.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -42),
             loginButton.topAnchor.constraint(greaterThanOrEqualTo: contentStackView.bottomAnchor, constant: 10),
-            
-            buttonStackView.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor, constant: 4),
-            buttonStackView.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: -4),
-            buttonStackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor),
-            buttonStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            loginButton.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -52),
             
             resetButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor),
             resetButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor),
             resetButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor),
-            resetButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: -25),
-  
-            passwordResetConfirmationMessage.bottomAnchor.constraint(equalTo: errorMessage.bottomAnchor),
-            passwordResetConfirmationMessage.heightAnchor.constraint(equalTo: errorMessage.heightAnchor),
-            passwordResetConfirmationMessage.leadingAnchor.constraint(equalTo: errorMessage.leadingAnchor),
-            passwordResetConfirmationMessage.trailingAnchor.constraint(equalTo: errorMessage.trailingAnchor),
+            resetButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: -23),
             
-            closeResetButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            closeResetButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            closeResetButton.heightAnchor.constraint(equalToConstant: 30),
-            closeResetButton.widthAnchor.constraint(equalToConstant: 30)
+            buttonStackView.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor, constant: 4),
+            buttonStackView.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: -4),
+            buttonStackView.topAnchor.constraint(equalTo: loginButton.bottomAnchor),
+            buttonStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -25)
         ])
     }
     

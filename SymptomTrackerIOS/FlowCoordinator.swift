@@ -63,12 +63,6 @@ class FlowCoordinator {
             loginViewModel.presentCreateAccountCallback = { () in
                 self.presentCreateAccountViewControllerTo(presenter: logInViewController)
             }
-            
-            /*
-             let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
-             createAccountViewModel.afterCreationCallback = setRootViewController
-             window.rootViewController = CreateAccountViewController(viewModel: createAccountViewModel)
-             */
         }
     }
     
@@ -77,6 +71,8 @@ class FlowCoordinator {
         createAccountViewModel.afterCreationCallback = setRootViewController
         
         let createAccountViewController = CreateAccountViewController(viewModel: createAccountViewModel)
+        
+        createAccountViewController.modalPresentationStyle = .automatic
         presenter.present(createAccountViewController, animated: true, completion: nil)
     }
 }

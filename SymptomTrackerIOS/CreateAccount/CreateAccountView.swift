@@ -12,16 +12,6 @@ import SwiftUI
 class CreateAccountView: UIView {
     
     // MARK: subviews
-    
-    public lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("✕", for: .normal) //"╳✕✖⨉⨯"
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
-        button.setTitleColor(UIColor.black, for: .normal)
-        return button
-    }()
-    
     public lazy var brainImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Logo"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,32 +98,27 @@ class CreateAccountView: UIView {
     // MARK: Setup SubViews
     func setupSubViews() {
         imageContentView.addSubview(brainImage)
-        [imageContentView, contentStackView, createButton, closeButton, errorMessage].forEach({self.addSubview($0)})
+        [imageContentView, contentStackView, createButton, errorMessage].forEach({self.addSubview($0)})
     }
     
     // MARK: Setup constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            imageContentView.topAnchor.constraint(equalTo: self.topAnchor),
+            imageContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             imageContentView.bottomAnchor.constraint(equalTo: errorMessage.topAnchor, constant: -50),
             imageContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             imageContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            brainImage.centerYAnchor.constraint(equalTo: imageContentView.centerYAnchor, constant: 75),
+            brainImage.centerYAnchor.constraint(equalTo: imageContentView.centerYAnchor, constant: 50),
             brainImage.centerXAnchor.constraint(equalTo: imageContentView.centerXAnchor),
             brainImage.heightAnchor.constraint(lessThanOrEqualToConstant: 135),
             
-            closeButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            closeButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            closeButton.heightAnchor.constraint(equalToConstant: 30),
-            closeButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -30),
+            errorMessage.bottomAnchor.constraint(equalTo: contentStackView.topAnchor, constant: -25),
             errorMessage.heightAnchor.constraint(equalToConstant: 48),
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            contentStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 120),
+            contentStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 90),
             contentStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             contentStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             contentStackView.heightAnchor.constraint(equalToConstant: 161),
@@ -141,7 +126,7 @@ class CreateAccountView: UIView {
             createButton.heightAnchor.constraint(equalToConstant: 48),
             createButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             createButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            createButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -40),
+            createButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -50),
         ])
     }
     

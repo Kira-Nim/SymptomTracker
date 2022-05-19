@@ -25,11 +25,8 @@ class CreateAccountViewModel {
             if (!(view.passwordInputField.text == view.passwordRepeatInputField.text)) {
                 self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
             
-            } else if (view.passwordInputField.text?.count ?? 0 < 6) {
-                self?.showErrorMessageFor(identifyer: .weakPasswordError)
-                        
             } else {
-                if let email = view.emailInputField.text, let password = view.emailInputField.text {
+                if let email = view.emailInputField.text, let password = view.passwordInputField.text {
                     self?.modelManager.createNewAccountWith(email: email, password: password) { [weak self] (identifyer) in
                         self?.showErrorMessageFor(identifyer: identifyer)
                     }

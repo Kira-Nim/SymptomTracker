@@ -69,7 +69,8 @@ class ModelManagerImplementation: ModelManager {
         
         let errorMappingDict: [String: AccountCreationResult] = [
                 "ERROR_INVALID_EMAIL": .invalidEmail,
-                "ERROR_EMAIL_ALREADY_IN_USE": .emailAlreadyExist]
+                "ERROR_EMAIL_ALREADY_IN_USE": .emailAlreadyExist,
+                "ERROR_WEAK_PASSWORD": .weakPasswordError]
         
         if let errorMessage = errorMessage {
             let creationResult = errorMappingDict[errorMessage] ?? .failed

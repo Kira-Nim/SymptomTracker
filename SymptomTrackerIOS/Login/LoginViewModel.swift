@@ -27,7 +27,7 @@ class LoginViewModel {
             self?.view?.errorMessage.text = ""
             self?.view?.errorMessage.isHidden = false
             
-            if let email = view.emailInputField.text, let password = view.emailInputField.text {
+            if let email = view.emailInputField.text, let password = view.passwordInputField.text {
                 self?.modelManager.loginWith(email: email, password: password) {[weak self] (identifyer) in
                     
                     self?.showErrorMessageFor(identifyer: identifyer)
@@ -42,6 +42,48 @@ class LoginViewModel {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(resetPasswordClicked))
             passwordResetLabel.addGestureRecognizer(tapGestureRecognizer)
         }
+        
+        // Set gesturerecognizer on "createAccountLabel" sub view and action for when it is tapped
+        if let createAccountLabel = self.view?.createAccountLabel {
+            createAccountLabel.isUserInteractionEnabled = true
+            
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentCreateAccountClicked))
+            createAccountLabel.addGestureRecognizer(tapGestureRecognizer)
+        }
+        
+        // Set functionality for when the "resetButton" is clicked
+        self.view?.resetButton.addAction(UIAction {[weak self] _ in
+            if let email = self?.view?.emailInputField.text {
+                if(email != "") {
+                    self?.modelManager.resetPassword(email: email)
+                    self?.view?.resetButton.isHidden = true
+                    self?.view?.loginButton.isHidden = false
+                    self?.view?.passwordInputField.isHidden = false
+                    self?.view?.createAccountLabel.isHidden = false
+                    self?.view?.resetPasswordLabel.isHidden = false
+                    self?.view?.errorMessage.isHidden = true
+                    self?.view?.contentStackViewConstraint?.constant = 114
+                    self?.view?.passwordResetConfirmationMessage.isHidden = false
+                }else{
+                    self?.view?.errorMessage.text = "Angiv email"
+                    self?.view?.passwordResetConfirmationMessage.isHidden = true
+                    self?.view?.errorMessage.isHidden = false
+                }
+            }
+        }, for: .touchUpInside)
+        
+        // Set functionality for when the x (or dismis reset mode) button is clicked
+        self.view?.closeResetButton.addAction(UIAction {[weak self] _ in
+            self?.view?.resetButton.isHidden = true
+            self?.view?.loginButton.isHidden = false
+            self?.view?.passwordInputField.isHidden = false
+            self?.view?.createAccountLabel.isHidden = false
+            self?.view?.resetPasswordLabel.isHidden = false
+            self?.view?.errorMessage.isHidden = true
+            self?.view?.contentStackViewConstraint?.constant = 114
+            self?.view?.passwordResetConfirmationMessage.isHidden = true
+            self?.view?.closeResetButton.isHidden = true
+        }, for: .touchUpInside)
     }
 
     public func showErrorMessageFor(identifyer: AccountLoginResult) {
@@ -61,47 +103,26 @@ class LoginViewModel {
         }
     }
     
-    // Functionality to be executed when "passwordResetLabel" sub view is tapped.
-   @IBAction func resetPasswordClicked(_ gesture: UIGestureRecognizer) {
-       self.view?.resetButton.isHidden = false
-       self.view?.closeResetButton.isHidden = false
-       self.view?.passwordResetConfirmationMessage.isHidden = true
-       self.view?.loginButton.isHidden = true
-       self.view?.passwordInputField.isHidden = true
-       self.view?.createAccountLabel.isHidden = true
-       self.view?.resetPasswordLabel.isHidden = true
-       self.view?.contentStackViewConstraint?.constant = 50
-       self.view?.errorMessage.isHidden = true
-       self.view?.resetButton.addAction(UIAction {[weak self] _ in
-           if let email = self?.view?.emailInputField.text {
-               if(email != "") {
-                   self?.modelManager.resetPassword(email: email)
-                   self?.view?.resetButton.isHidden = true
-                   self?.view?.loginButton.isHidden = false
-                   self?.view?.passwordInputField.isHidden = false
-                   self?.view?.createAccountLabel.isHidden = false
-                   self?.view?.resetPasswordLabel.isHidden = false
-                   self?.view?.errorMessage.isHidden = true
-                   self?.view?.contentStackViewConstraint?.constant = 114
-                   self?.view?.passwordResetConfirmationMessage.isHidden = false
-               }else{
-                   self?.view?.errorMessage.text = "Angiv email"
-                   self?.view?.passwordResetConfirmationMessage.isHidden = true
-                   self?.view?.errorMessage.isHidden = false
-               }
-           }
-       }, for: .touchUpInside)
-       self.view?.closeResetButton.addAction(UIAction {[weak self] _ in
-           self?.view?.resetButton.isHidden = true
-           self?.view?.loginButton.isHidden = false
-           self?.view?.passwordInputField.isHidden = false
-           self?.view?.createAccountLabel.isHidden = false
-           self?.view?.resetPasswordLabel.isHidden = false
-           self?.view?.errorMessage.isHidden = true
-           self?.view?.contentStackViewConstraint?.constant = 114
-           self?.view?.passwordResetConfirmationMessage.isHidden = true
-           self?.view?.closeResetButton.isHidden = true
-       }, for: .touchUpInside)
-   }
-       
+    // Helpfunction containing functionality for when the resetPasswordButton is clicked
+    @IBAction func resetPasswordClicked(_ gesture: UIGestureRecognizer) {
+        self.view?.resetButton.isHidden = false
+        self.view?.closeResetButton.isHidden = false
+        self.view?.passwordResetConfirmationMessage.isHidden = true
+        self.view?.loginButton.isHidden = true
+        self.view?.passwordInputField.isHidden = true
+        self.view?.createAccountLabel.isHidden = true
+        self.view?.resetPasswordLabel.isHidden = true
+        self.view?.contentStackViewConstraint?.constant = 50
+        self.view?.errorMessage.isHidden = true
+    }
+    
+    // Help function for running presentCreateAccountCallback when gesturerecognizer for createAccountLabel is activated
+    @IBAction func presentCreateAccountClicked(_gesture: UIGestureRecognizer) {
+        if let presentCreateAccountCallback = presentCreateAccountCallback {
+            presentCreateAccountCallback()
+        }
+    }
 }
+
+
+
