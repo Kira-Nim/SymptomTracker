@@ -92,6 +92,7 @@ class ModelManagerImplementation: ModelManager {
     
     public func getLoginResult(errorMessage: String?) -> AccountLoginResult {
         let errorMappingDict: [String: AccountLoginResult] = [
+                "ERROR_USER_NOT_FOUND": .logInCredentialsNotValid,
                 "ERROR_WRONG_PASSWORD": .logInCredentialsNotValid,
                 "ERROR_INVALID_EMAIL": .logInCredentialsNotValid,
                 "ERROR_USER_DISABLED": .accountDisabled]

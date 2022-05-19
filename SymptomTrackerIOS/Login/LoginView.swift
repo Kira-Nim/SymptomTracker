@@ -143,6 +143,16 @@ class LoginView: UIView {
         return label
     }()
     
+    public lazy var closeResetButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("✕", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.isHidden = true
+        return button
+    }()
+    
     //MARK: init
     init() {
         /*
@@ -162,7 +172,7 @@ class LoginView: UIView {
     
     private func setupSubViews() {
         imageContentView.addSubview(brainImage)
-        [imageContentView, contentStackView, loginButton, buttonStackView, errorMessage, titleLabel, resetButton, passwordResetConfirmationMessage].forEach({self.addSubview($0)})
+        [imageContentView, contentStackView, loginButton, buttonStackView, errorMessage, titleLabel, resetButton, passwordResetConfirmationMessage, closeResetButton].forEach({self.addSubview($0)})
     }
     
     private func setupConstraints() {
@@ -191,7 +201,7 @@ class LoginView: UIView {
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            contentStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 90),
+            contentStackView.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 60),
             contentStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             contentStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
@@ -199,6 +209,7 @@ class LoginView: UIView {
             loginButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             loginButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             loginButton.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -42),
+            loginButton.topAnchor.constraint(greaterThanOrEqualTo: contentStackView.bottomAnchor, constant: 10),
             
             buttonStackView.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor, constant: 4),
             buttonStackView.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor, constant: -4),
@@ -208,12 +219,17 @@ class LoginView: UIView {
             resetButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor),
             resetButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor),
             resetButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor),
-            resetButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor),
+            resetButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: -25),
   
             passwordResetConfirmationMessage.bottomAnchor.constraint(equalTo: errorMessage.bottomAnchor),
             passwordResetConfirmationMessage.heightAnchor.constraint(equalTo: errorMessage.heightAnchor),
             passwordResetConfirmationMessage.leadingAnchor.constraint(equalTo: errorMessage.leadingAnchor),
-            passwordResetConfirmationMessage.trailingAnchor.constraint(equalTo: errorMessage.trailingAnchor)
+            passwordResetConfirmationMessage.trailingAnchor.constraint(equalTo: errorMessage.trailingAnchor),
+            
+            closeResetButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            closeResetButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            closeResetButton.heightAnchor.constraint(equalToConstant: 30),
+            closeResetButton.widthAnchor.constraint(equalToConstant: 30)
         ])
     }
     
