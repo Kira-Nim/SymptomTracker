@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */; };
 		4F8757B728228138003033B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B628228138003033B0 /* AppDelegate.swift */; };
 		4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B828228138003033B0 /* SceneDelegate.swift */; };
 		4F8757C02822813B003033B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757BF2822813B003033B0 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStyleSheet.swift; sourceTree = "<group>"; };
 		4F8757B328228138003033B0 /* SymptomTrackerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymptomTrackerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8757B628228138003033B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8757B828228138003033B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F388E5A2837BCB7009F684C /* SharedStyleElements */ = {
+			isa = PBXGroup;
+			children = (
+				4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */,
+			);
+			path = SharedStyleElements;
+			sourceTree = "<group>";
+		};
 		4F8757AA28228137003033B0 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +141,7 @@
 		4F8757B528228138003033B0 /* SymptomTrackerIOS */ = {
 			isa = PBXGroup;
 			children = (
+				4F388E5A2837BCB7009F684C /* SharedStyleElements */,
 				4FDB44D42831A709005D35A1 /* AccountSettings */,
 				4FAFCF1028317E36002CEFBE /* Insight */,
 				4FAFCF0D28317DBB002CEFBE /* Activity */,
@@ -364,6 +375,7 @@
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
+				4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */,
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
 				4FDB44CD2831A172005D35A1 /* ActivityView.swift in Sources */,

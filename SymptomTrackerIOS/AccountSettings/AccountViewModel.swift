@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AccountViewModel: NSObject {
+final class AccountViewModel: NSObject {
     
     private var view: AccountView? = nil
     public var modelManager: ModelManager

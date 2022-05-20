@@ -19,9 +19,9 @@ class LoginView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         //label.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
-        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+        label.textColor = .appColor(name: .textBlack)
         label.text = "Symptom Tracker"
-        label.font = UIFont(name: "PingFangHK-Semibold", size: 30.0)
+        label.font = .appFont(ofSize: 30, weight: .medium)
         label.textAlignment = NSTextAlignment.center
         
         return label
@@ -42,11 +42,15 @@ class LoginView: UIView {
     
     public lazy var emailInputField: UITextField = {
         let inputField =  loginInputFieldWith(placeholderText: "Email")
+        inputField.keyboardType = .emailAddress
+        inputField.autocorrectionType = .no
+        inputField.autocapitalizationType = .none
         return inputField
     }()
     
     public lazy var passwordInputField: UITextField = {
         let inputField = loginInputFieldWith(placeholderText: "Password")
+        inputField.isSecureTextEntry = true
         return inputField
     }()
     
@@ -66,11 +70,11 @@ class LoginView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Nulstil Password", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "PingFangHK-Medium", size: 20.0)
-        button.backgroundColor = UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+        button.titleLabel?.font = .appFont(ofSize: 20, weight: .medium)
+        button.backgroundColor = .appColor(name: .buttonBlue)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0).cgColor
+        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
         button.isHidden = true
         return button
     }()
@@ -80,11 +84,11 @@ class LoginView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log ind", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "PingFangHK-Medium", size: 20.0)
-        button.backgroundColor = UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
+        button.backgroundColor = .appColor(name: .buttonBlue)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0).cgColor
+        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
         
         return button
     }()
@@ -93,9 +97,9 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+            label.textColor = .appColor(name: .textBlack)
         label.text = "Opret konto"
-        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
+        label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = NSTextAlignment.left
         return label
     }()
@@ -104,9 +108,9 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+        label.textColor = .appColor(name: .textBlack)
         label.text = "Glemt password"
-        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
+        label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = NSTextAlignment.right
         return label
     }()
@@ -124,10 +128,10 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 232/255, green: 55/255, blue: 2/255, alpha: 1.0)
+        label.textColor = .appColor(name: .errorRed)
         label.text = ""
-        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
-        label.textAlignment = NSTextAlignment.center
+        label.font = .appFont(ofSize: 17, weight: .medium)
+        label.textAlignment = .center
         return label
     }()
     
@@ -135,10 +139,10 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor(red: 75/255, green: 119/255, blue: 127/255, alpha: 1.0)
+            label.textColor = .appColor(name: .confirmationGreen)
         label.text = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
-        label.font = UIFont(name: "PingFangHK-Medium", size: 17.0)
-        label.textAlignment = NSTextAlignment.center
+        label.font = .appFont(ofSize: 17, weight: .medium)
+        label.textAlignment = .center
         label.isHidden = true
         return label
     }()
@@ -148,7 +152,7 @@ class LoginView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("✕", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(.appColor(name: .textBlack), for: .normal)
         button.isHidden = true
         return button
     }()
@@ -241,8 +245,7 @@ class LoginView: UIView {
         
         inputField.translatesAutoresizingMaskIntoConstraints = false
         inputField.textColor = UIColor.black
-        inputField.font = UIFont(name: "PingFangHK-Thin", size: 17.0)
-        inputField.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
+        inputField.font = .appFont(ofSize: 17, weight: .regular)
         inputField.layer.cornerRadius = 3
         inputField.layer.borderWidth = 1
         inputField.layer.borderColor = UIColor(red: 91/255, green: 107/255, blue: 142/255, alpha: 1.0).cgColor
@@ -256,8 +259,3 @@ class LoginView: UIView {
         return inputField
     }
 }
-
-
-
-
-

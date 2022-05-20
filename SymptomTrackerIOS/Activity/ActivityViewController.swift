@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class ActivityViewController: UIViewController {
+final class ActivityViewController: UIViewController {
     
     private var activityViewModel: ActivityViewModel
+    private lazy var activityView = ActivityView()
     
     init(viewModel: ActivityViewModel) {
         activityViewModel = viewModel
@@ -20,10 +21,6 @@ class ActivityViewController: UIViewController {
         title = "Aktivitet"
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Aktivitet", image: UIImage(named: "icons8-slider-30"), tag: 0)
-        
-        let activityView = ActivityView()
-        view = activityView
-        activityViewModel.setView(view: activityView)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
@@ -31,4 +28,12 @@ class ActivityViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        view = activityView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityViewModel.setView(view: activityView)
+    }
 }

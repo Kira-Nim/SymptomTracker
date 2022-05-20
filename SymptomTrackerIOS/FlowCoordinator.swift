@@ -20,7 +20,7 @@ import UIKit
     Controller will create their views and provide these to the given VM.
  */
 
-class FlowCoordinator {
+final class FlowCoordinator {
     
     private let viewModelProvider: ViewModelProvider
     private let window: UIWindow
@@ -34,8 +34,7 @@ class FlowCoordinator {
     //MARK: Create controller hierarchy to be shown if user is logged in
     public func setRootViewController() {
         
-        if let loggedInUser = viewModelProvider.modelManager.getLoggedInUser() {
-            
+        if(viewModelProvider.modelManager.getLoggedInUser() != nil) {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
@@ -60,7 +59,7 @@ class FlowCoordinator {
             window.rootViewController = logInViewController
             
             loginViewModel.afterLoginCallback = setRootViewController
-            loginViewModel.presentCreateAccountCallback = { () in
+            loginViewModel.presentCreateAccountCallback = { [unowned logInViewController] () in
                 self.presentCreateAccountViewControllerTo(presenter: logInViewController)
             }
         }

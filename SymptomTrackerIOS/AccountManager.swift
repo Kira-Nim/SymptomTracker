@@ -16,9 +16,15 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-class AccountManager {
-    public var loggedInUserId: String?
+final class AccountManager {
     private let firebaseAuth = Auth.auth()
+    public var loggedInUserId: String? {
+        return firebaseAuth.currentUser?.uid
+    }
+    
+    var isLoggedIn: Bool {
+        loggedInUserId != nil
+    }
     
     public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.createUser(withEmail: email, password: password) { authResult, error in
@@ -42,7 +48,6 @@ class AccountManager {
                     
                 }
             } else if let authResult = authResult {
-                self.loggedInUserId = authResult.user.uid
                 createUserCompletionCallback(nil)
             }
         }
@@ -70,7 +75,6 @@ class AccountManager {
                 }
                 
             } else if let authResult = authResult {
-                self.loggedInUserId = authResult.user.uid
                 loginCompletionCallback(nil)
             }
         }
@@ -79,7 +83,6 @@ class AccountManager {
     public func logOut(logOutCompletionCallback: (() -> Void)?) {
         do {
             try firebaseAuth.signOut()
-            self.loggedInUserId = nil
             logOutCompletionCallback?()
         } catch let signOutError as NSError {
           print("Error signing out: %@", signOutError)

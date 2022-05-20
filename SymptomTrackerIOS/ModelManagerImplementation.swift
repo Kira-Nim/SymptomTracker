@@ -27,7 +27,7 @@ public enum AccountLoginResult {case loginSucceded,
                                       failed,
                                       accountDisabled}
 
-class ModelManagerImplementation: ModelManager {
+final class ModelManagerImplementation: ModelManager {
     
     // Repositories - Takes care of CRUD
     private let symptomReposityry: SymptomRepository

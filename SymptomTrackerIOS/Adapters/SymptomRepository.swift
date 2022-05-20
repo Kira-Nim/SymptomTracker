@@ -7,6 +7,6 @@
 
 import Foundation
 
-class SymptomRepository {
+final class SymptomRepository {
     
 }

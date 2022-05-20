@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class InsightViewController: UIViewController {
+final class InsightViewController: UIViewController {
     
     private var insightViewModel: InsightViewModel
+    private lazy var insightView = InsightView()
     
     init(viewModel: InsightViewModel) {
         insightViewModel = viewModel
@@ -20,14 +21,19 @@ class InsightViewController: UIViewController {
         title = "Indsigt"
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Indsigt", image: UIImage(named: "icons8-slider-30"), tag: 0)
-        
-        let insightView = InsightView()
-        view = insightView
-        insightViewModel.setView(view: insightView)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = insightView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        insightViewModel.setView(view: insightView)
     }
 }

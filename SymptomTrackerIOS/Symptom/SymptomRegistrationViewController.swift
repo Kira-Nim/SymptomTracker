@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class SymptomRegistrationViewController: UIViewController {
+final class SymptomRegistrationViewController: UIViewController {
     
     private var symptomRegistrationViewModel: SymptomRegistrationViewModel
+    private lazy var symptomRegistrationView = SymptomRegistrationView()
     
     init(viewModel: SymptomRegistrationViewModel) {
         symptomRegistrationViewModel = viewModel
@@ -20,15 +21,20 @@ class SymptomRegistrationViewController: UIViewController {
         title = "Symptomer"
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Registration", image: UIImage(named: "icons8-slider-30"), tag: 0)
-        
-        let symptomRegistrationView = SymptomRegistrationView()
-        view = symptomRegistrationView
-        symptomRegistrationViewModel.setView(view: symptomRegistrationView)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = symptomRegistrationView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        symptomRegistrationViewModel.setView(view: symptomRegistrationView)
     }
     
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CreateAccountViewModel {
+final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
     
     private var view: CreateAccountView? = nil
     public var modelManager: ModelManager
@@ -21,8 +21,12 @@ class CreateAccountViewModel {
     public func setView(view: CreateAccountView) {
         self.view = view
         
+        view.emailInputField.delegate = self
+        view.passwordInputField.delegate = self
+        view.passwordRepeatInputField.delegate = self
+        
         view.createButton.addAction(UIAction {[weak self] _ in
-            if (!(view.passwordInputField.text == view.passwordRepeatInputField.text)) {
+            if view.passwordInputField.text != view.passwordRepeatInputField.text {
                 self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
             
             } else {
@@ -35,27 +39,44 @@ class CreateAccountViewModel {
         }, for: .touchUpInside)
     }
     
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch (textField) {
+            
+            case view?.passwordInputField:
+                view?.passwordRepeatInputField.becomeFirstResponder()
+            
+            case view?.emailInputField:
+                view?.passwordInputField.becomeFirstResponder()
+        
+            default:
+                textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
     private func showErrorMessageFor(identifyer: AccountCreationResult) {
         
         switch (identifyer) {
-        case .repeatPasswordFailed:
-            view?.errorMessage.text = "gentag password fejlede"
+            case .repeatPasswordFailed:
+                view?.errorMessage.text = "gentag password fejlede"
+                
+            case .emailAlreadyExist:
+                view?.errorMessage.text = "Den valgte email eksisterer allerede"
             
-        case .emailAlreadyExist:
-            view?.errorMessage.text = "Den valgte email eksisterer allerede"
-        
-        case .invalidEmail:
-            view?.errorMessage.text = "Fejl med den valgte email"
+            case .invalidEmail:
+                view?.errorMessage.text = "Fejl med den valgte email"
+                
+            case .userCreated:
+                view?.errorMessage.text = ""
+                afterCreationCallback?()
             
-        case .userCreated:
-            view?.errorMessage.text = ""
-            afterCreationCallback?()
-        
-        case .weakPasswordError:
-            view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"
-            
-        default:
-            view?.errorMessage.text = "Fejl ved oprettelse af bruger"
+            case .weakPasswordError:
+                view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"
+                
+            default:
+                view?.errorMessage.text = "Fejl ved oprettelse af bruger"
         }
     }
 }

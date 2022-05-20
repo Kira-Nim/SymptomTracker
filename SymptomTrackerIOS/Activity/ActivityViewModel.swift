@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ActivityViewModel: NSObject {
+final class ActivityViewModel: NSObject {
     
     private var view: ActivityView? = nil
     public var modelManager: ModelManager

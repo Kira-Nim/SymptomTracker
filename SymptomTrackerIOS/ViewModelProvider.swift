@@ -9,7 +9,7 @@ import Foundation
 
 
 // Provides VM classes for the Flowcoordinator, provides data for the VM classes.
-class ViewModelProvider {
+final class ViewModelProvider {
     
     /* Manages business logic - For the model data that has been adapted to the system.
     Manages the model-adapter classes (that takes care of CRUD).

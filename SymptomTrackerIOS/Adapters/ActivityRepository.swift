@@ -7,6 +7,6 @@
 
 import Foundation
 
-class ActivityRepository {
+final class ActivityRepository {
     
 }

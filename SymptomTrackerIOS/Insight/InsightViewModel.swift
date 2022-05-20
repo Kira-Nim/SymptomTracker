@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class InsightViewModel: NSObject {
+final class InsightViewModel: NSObject {
     
     private var view: InsightView? = nil
     public var modelManager: ModelManager

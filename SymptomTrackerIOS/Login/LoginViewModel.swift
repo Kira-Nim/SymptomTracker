@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LoginViewModel {
+final class LoginViewModel {
     private var view: LoginView? = nil
     public var modelManager: ModelManager
     public var afterLoginCallback: (()->Void)? = nil

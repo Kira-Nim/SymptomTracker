@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SymptomRegistrationViewModel: NSObject {
+final class SymptomRegistrationViewModel: NSObject {
     
     private var view: SymptomRegistrationView? = nil
     public var modelManager: ModelManager
