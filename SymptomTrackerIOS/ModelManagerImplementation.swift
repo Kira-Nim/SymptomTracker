@@ -16,16 +16,17 @@ Manages the Combine pipeline
  */
 
 public enum AccountCreationResult {case repeatPasswordFailed,
-                                         failed,
-                                         emailAlreadyExist,
-                                         userCreated,
-                                         invalidEmail,
-                                         weakPasswordError}
+                                        failed,
+                                        emailAlreadyExist,
+                                        userCreated,
+                                        invalidEmail,
+                                        weakPasswordError,
+                                        emptyField }
 
 public enum AccountLoginResult {case loginSucceded,
                                       logInCredentialsNotValid,
                                       failed,
-                                      accountDisabled}
+                                      accountDisabled }
 
 final class ModelManagerImplementation: ModelManager {
     

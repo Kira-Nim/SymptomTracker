@@ -20,39 +20,36 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
     
     public func setView(view: CreateAccountView) {
         self.view = view
-        
         view.emailInputField.delegate = self
         view.passwordInputField.delegate = self
         view.passwordRepeatInputField.delegate = self
         
         view.createButton.addAction(UIAction {[weak self] _ in
-            if view.passwordInputField.text != view.passwordRepeatInputField.text {
-                self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
+            let validationService = ValidationService()
+            let email: String? = view.emailInputField.text
+            let password: String? = view.passwordInputField.text
+            let passwordRepeat: String? = view.passwordRepeatInputField.text
             
-            } else {
-                if let email = view.emailInputField.text, let password = view.passwordInputField.text {
+            if let email = email, let password = password, let passwordRepeat = passwordRepeat {
+                if(validationService.validatePasswordRepeatFor(password: password, passwordRepeat: passwordRepeat) != true) {
+                    self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
+                }else if(validationService.validateFormatOf(email: email) != true) {
+                    self?.showErrorMessageFor(identifyer: .invalidEmail)
+                }else if(validationService.validatePasswordStrengthFor(password: password) != true) {
+                    self?.showErrorMessageFor(identifyer: .weakPasswordError)
+                }else {
                     self?.modelManager.createNewAccountWith(email: email, password: password) { [weak self] (identifyer) in
                         self?.showErrorMessageFor(identifyer: identifyer)
                     }
                 }
+            }else {
+                self?.showErrorMessageFor(identifyer: .emptyField)
             }
         }, for: .touchUpInside)
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        switch (textField) {
-            
-            case view?.passwordInputField:
-                view?.passwordRepeatInputField.becomeFirstResponder()
-            
-            case view?.emailInputField:
-                view?.passwordInputField.becomeFirstResponder()
-        
-            default:
-                textField.resignFirstResponder()
-        }
-        
+        textField.resignFirstResponder()
         return true
     }
     
@@ -74,6 +71,9 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
             
             case .weakPasswordError:
                 view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"
+            
+            case .emptyField:
+            view?.errorMessage.text = "Udfyld alle felterne"
                 
             default:
                 view?.errorMessage.text = "Fejl ved oprettelse af bruger"

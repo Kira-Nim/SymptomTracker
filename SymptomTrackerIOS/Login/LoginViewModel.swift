@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class LoginViewModel {
+final class LoginViewModel: NSObject, UITextFieldDelegate {
     private var view: LoginView? = nil
     public var modelManager: ModelManager
     public var afterLoginCallback: (()->Void)? = nil
@@ -20,6 +20,9 @@ final class LoginViewModel {
     
     public func setView(view: LoginView) {
         self.view = view
+        
+        view.emailInputField.delegate = self
+        view.passwordInputField.delegate = self
         
         // set functionality to be executed when login button is tapped
         self.view?.loginButton.addAction(UIAction {[weak self] _ in
@@ -86,6 +89,11 @@ final class LoginViewModel {
         }, for: .touchUpInside)
     }
 
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     public func showErrorMessageFor(identifyer: AccountLoginResult) {
         switch (identifyer) {
             case .loginSucceded:

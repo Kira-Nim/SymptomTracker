@@ -59,9 +59,9 @@ extension UIColor {
             case .buttonBlue:
                 return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
             case .buttonBlueBorderColor:
-                return UIColor.blue
+                return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
             case .buttonBlueClicked:
-                return UIColor.orange
+                return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
             case .buttonBlueTextColor:
                 return UIColor.white
             case .textFieldBorderColor:

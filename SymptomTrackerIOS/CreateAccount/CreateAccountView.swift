@@ -27,16 +27,21 @@ class CreateAccountView: UIView {
     
     public lazy var emailInputField: UITextField = {
         let inputField =  createInputFieldWith(placeholderText: "Email")
+        inputField.keyboardType = .emailAddress
+        inputField.autocorrectionType = .no
+        inputField.autocapitalizationType = .none
         return inputField
     }()
     
     public lazy var passwordInputField: UITextField = {
         let inputField = createInputFieldWith(placeholderText: "Password")
+        inputField.isSecureTextEntry = true
         return inputField
     }()
     
     public lazy var passwordRepeatInputField: UITextField = {
         let inputField = createInputFieldWith(placeholderText: "Gentag Password")
+        inputField.isSecureTextEntry = true
         return inputField
     }()
     
@@ -57,7 +62,7 @@ class CreateAccountView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Opret", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 17, weight: .regular)
+        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
         button.backgroundColor = .appColor(name: .buttonBlue)
         button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
         button.layer.cornerRadius = 3

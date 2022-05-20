@@ -70,8 +70,9 @@ class LoginView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Nulstil Password", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 20, weight: .medium)
+        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
         button.backgroundColor = .appColor(name: .buttonBlue)
+        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
@@ -86,6 +87,7 @@ class LoginView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
         button.backgroundColor = .appColor(name: .buttonBlue)
+        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 // This class has to do with UI where AppDelegate has to do with model and business logic
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -55,6 +56,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          This att. explaines why we, in the above, had to cast the UIScene to a UIWindowScene.
          */
         window?.makeKeyAndVisible()
+        
+        // Enable keyboard manager from IQKeyboardManagerSwift to handle keyboard events
+        IQKeyboardManager.shared.enable = true
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
