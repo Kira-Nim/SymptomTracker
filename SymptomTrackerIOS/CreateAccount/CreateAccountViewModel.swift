@@ -17,7 +17,7 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
     }
-    
+
     public func setView(view: CreateAccountView) {
         self.view = view
         view.emailInputField.delegate = self
@@ -25,27 +25,24 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
         view.passwordRepeatInputField.delegate = self
         
         view.createButton.addAction(UIAction {[weak self] _ in
-            let validationService = ValidationService()
-            let email: String? = view.emailInputField.text
-            let password: String? = view.passwordInputField.text
-            let passwordRepeat: String? = view.passwordRepeatInputField.text
-            
-            if let email = email, let password = password, let passwordRepeat = passwordRepeat {
-                if(validationService.validatePasswordRepeatFor(password: password, passwordRepeat: passwordRepeat) != true) {
-                    self?.showErrorMessageFor(identifyer: .repeatPasswordFailed)
-                }else if(validationService.validateFormatOf(email: email) != true) {
-                    self?.showErrorMessageFor(identifyer: .invalidEmail)
-                }else if(validationService.validatePasswordStrengthFor(password: password) != true) {
-                    self?.showErrorMessageFor(identifyer: .weakPasswordError)
-                }else {
-                    self?.modelManager.createNewAccountWith(email: email, password: password) { [weak self] (identifyer) in
-                        self?.showErrorMessageFor(identifyer: identifyer)
-                    }
-                }
-            }else {
-                self?.showErrorMessageFor(identifyer: .emptyField)
-            }
+            self?.createAccountOrShowError(email: view.emailInputField.text,
+                                           password: view.passwordInputField.text,
+                                           passwordRepeat: view.passwordRepeatInputField.text)
         }, for: .touchUpInside)
+    }
+    
+    private func createAccountOrShowError(email: String?, password: String?, passwordRepeat: String?) {
+        let validationService = ValidationService()
+        let error = validationService.validateUserInputForAccountCreationOrReturnError(email: email, password: password, passwordRepeat: passwordRepeat)
+        if let error = error {
+            self.showErrorMessageFor(identifyer: error)
+        } else {
+            
+            // Email and password can be forced unwrapped here because it has been validated that they are not nuill in createNewAccountWith
+            self.modelManager.createNewAccountWith(email: email!, password: password!) { [weak self] (identifyer) in
+                self?.showErrorMessageFor(identifyer: identifyer)
+            }
+        }
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -76,7 +73,7 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
             view?.errorMessage.text = LocalizedStrings.shared.emptyFieldError
                 
             default:
-            view?.errorMessage.text = LocalizedError.shared.accountCreationFailedError
+            view?.errorMessage.text = LocalizedStrings.shared.accountCreationFailedError
         }
     }
 }

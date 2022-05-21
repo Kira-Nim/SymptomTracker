@@ -24,9 +24,11 @@ public enum AccountCreationResult {case repeatPasswordFailed,
                                         emptyField }
 
 public enum AccountLoginResult {case loginSucceded,
-                                      logInCredentialsNotValid,
-                                      failed,
-                                      accountDisabled }
+                                     logInCredentialsNotValid,
+                                     failed,
+                                     accountDisabled,
+                                     emptyField,
+                                     invalidEmail}
 
 final class ModelManagerImplementation: ModelManager {
     
@@ -50,8 +52,9 @@ final class ModelManagerImplementation: ModelManager {
     }
 
     //MARK Get logged in user
-    public func getLoggedInUser() -> String? {
-        return accountManager.loggedInUserId
+    
+    public func isUserLoggedIn() -> Bool {
+        return accountManager.isLoggedIn
     }
     
     //MARK: Create account functionality

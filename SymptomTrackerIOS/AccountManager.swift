@@ -21,8 +21,7 @@ final class AccountManager {
     public var loggedInUserId: String? {
         return firebaseAuth.currentUser?.uid
     }
-    
-    var isLoggedIn: Bool {
+    public var isLoggedIn: Bool {
         loggedInUserId != nil
     }
     

@@ -16,5 +16,5 @@ protocol ModelManager {
     
     func resetPassword(email: String)
     
-    func getLoggedInUser() -> String?
+    func isUserLoggedIn() -> Bool
 }

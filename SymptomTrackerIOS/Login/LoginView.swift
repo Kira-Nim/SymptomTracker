@@ -49,7 +49,7 @@ class LoginView: UIView {
     }()
     
     public lazy var passwordInputField: UITextField = {
-        let inputField = loginInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText)
+        let inputField = loginInputFieldWith(placeholderText: LocalizedStrings.shared.passwordPlaceholderText)
         inputField.isSecureTextEntry = true
         return inputField
     }()

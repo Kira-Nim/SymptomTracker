@@ -10,7 +10,8 @@ import Foundation
 final class LocalizedStrings {
     static let shared = LocalizedStrings()
     
-    public let repeatPasswordError = "gentag password fejlede"
+    //MARK:  Error messages
+    public let repeatPasswordError = "Gentag password fejlede"
     public let accountCreationFailedError = "Fejl ved oprettelse af bruger"
     public let emailAlreadyExistError = "Den valgte email eksisterer allerede"
     public let invalidEmailError = "Fejl med den valgte email"
@@ -21,10 +22,10 @@ final class LocalizedStrings {
     public let loginFailedError = "Fejl ved login"
     public let accountDisabledError = "Kontoen er blevet lukket"
     
-    public let loginConfirmation = ""
-    public let userCreatedConfirmation = ""
+    //MARK: Confirmation messages
     public let passwordResetConfirmation = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
     
+    //MARK: Strings shown on buttons and other clickable elements
     public let x = "✕"
     public let logOutButtonText = "Log ud"
     public let loginButtonText = "login"
@@ -33,15 +34,18 @@ final class LocalizedStrings {
     public let forgotPasswordClickableLabetText = "Glemt password"
     public let createAccountButtonText = "Opret"
     
+    //MARK: Placeholder text
     public let emailPlaceholderText = "Email"
     public let passwordPlaceholderText = "Password"
-    public let passwordRepeatPlaceholderText = "Repeat Password"
+    public let passwordRepeatPlaceholderText = "Gentag password"
     
+    //MARK: Tabbar labels
     public let tabbarAccountText = "Konto"
     public let tabbarInsightText = "Overblik"
     public let tabbarSymptomsText = "Symptomer"
     public let tabbarRegistrationsText = "Registrerin"
     public let tabbarActivityText = "Aktiviteter"
     
+    //MARK: Name of app "Logo" text
     public let appTitle = "Symptom Tracker"
 }

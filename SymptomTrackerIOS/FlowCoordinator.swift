@@ -34,7 +34,7 @@ final class FlowCoordinator {
     //MARK: Create controller hierarchy to be shown if user is logged in
     public func setRootViewController() {
         
-        if(viewModelProvider.modelManager.getLoggedInUser() != nil) {
+        if(viewModelProvider.modelManager.isUserLoggedIn() == true) {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())

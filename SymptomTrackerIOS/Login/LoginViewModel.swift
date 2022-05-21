@@ -20,7 +20,6 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
     
     public func setView(view: LoginView) {
         self.view = view
-        
         view.emailInputField.delegate = self
         view.passwordInputField.delegate = self
         
@@ -30,14 +29,10 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
             self?.view?.errorMessage.text = ""
             self?.view?.errorMessage.isHidden = false
             
-            if let email = view.emailInputField.text, let password = view.passwordInputField.text {
-                self?.modelManager.loginWith(email: email, password: password) {[weak self] (identifyer) in
-                    
-                    self?.showErrorMessageFor(identifyer: identifyer)
-                }
-            }
+            self?.loginOrShowError(email: view.emailInputField.text,
+                                           password: view.passwordInputField.text)
         }, for: .touchUpInside)
-        
+                
         // Set gesture recognizer on "passwordResetLabel" sub view and action for when it is tapped.
         if let passwordResetLabel = self.view?.resetPasswordLabel {
             passwordResetLabel.isUserInteractionEnabled = true
@@ -56,23 +51,7 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
         
         // Set functionality for when the "resetButton" is clicked
         self.view?.resetButton.addAction(UIAction {[weak self] _ in
-            if let email = self?.view?.emailInputField.text {
-                if(email != "") {
-                    self?.modelManager.resetPassword(email: email)
-                    self?.view?.resetButton.isHidden = true
-                    self?.view?.loginButton.isHidden = false
-                    self?.view?.passwordInputField.isHidden = false
-                    self?.view?.createAccountLabel.isHidden = false
-                    self?.view?.resetPasswordLabel.isHidden = false
-                    self?.view?.errorMessage.isHidden = true
-                    self?.view?.contentStackViewConstraint?.constant = 114
-                    self?.view?.passwordResetConfirmationMessage.isHidden = false
-                }else{
-                    self?.view?.errorMessage.text = LocalizedStrings.shared.emptyEmailFieldError
-                    self?.view?.passwordResetConfirmationMessage.isHidden = true
-                    self?.view?.errorMessage.isHidden = false
-                }
-            }
+            self?.resetPasswordOrShowError(email: view.emailInputField.text)
         }, for: .touchUpInside)
         
         // Set functionality for when the x (or dismis reset mode) button is clicked
@@ -89,6 +68,46 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
         }, for: .touchUpInside)
     }
 
+    private func loginOrShowError(email: String?, password: String?) {
+        let validationService = ValidationService()
+        let error = validationService.validateLoginCredentialsOrReturnError(email: email, password: password)
+        
+        if let error = error {
+            self.showErrorMessageFor(identifyer: error)
+        } else {
+            // Email and password can be forced unwrapped here because it has been validated that they are not nuill in createNewAccountWith
+            self.modelManager.loginWith(email: email!, password: password!) { [weak self] (identifyer) in
+                self?.showErrorMessageFor(identifyer: identifyer)
+            }
+        }
+    }
+    
+    private func resetPasswordOrShowError(email: String?) {
+        if let email = email {
+            let validationService = ValidationService()
+            if (email == "") {
+                self.view?.errorMessage.isHidden = false
+                self.view?.errorMessage.text = LocalizedStrings.shared.emptyEmailFieldError
+            } else if(validationService.validateFormatOf(email: email) == false) {
+                self.view?.errorMessage.isHidden = false
+                self.view?.errorMessage.text = LocalizedStrings.shared.invalidEmailError
+            } else {
+                self.modelManager.resetPassword(email: email)
+                self.view?.resetButton.isHidden = true
+                self.view?.loginButton.isHidden = false
+                self.view?.passwordInputField.isHidden = false
+                self.view?.createAccountLabel.isHidden = false
+                self.view?.resetPasswordLabel.isHidden = false
+                self.view?.errorMessage.isHidden = true
+                self.view?.contentStackViewConstraint?.constant = 114
+                self.view?.passwordResetConfirmationMessage.isHidden = false
+            }
+        } else {
+            self.view?.errorMessage.isHidden = false
+            self.view?.errorMessage.text = LocalizedStrings.shared.emptyEmailFieldError
+        }
+    }
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -97,17 +116,23 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
     public func showErrorMessageFor(identifyer: AccountLoginResult) {
         switch (identifyer) {
             case .loginSucceded:
-            view?.errorMessage.text = ""
-            afterLoginCallback?()
+                view?.errorMessage.text = ""
+                afterLoginCallback?()
             
             case .logInCredentialsNotValid:
-            view?.errorMessage.text = LocalizedStrings.shared.invalidCredentialsError
+                view?.errorMessage.text = LocalizedStrings.shared.invalidCredentialsError
             
             case .accountDisabled:
-            view?.errorMessage.text = LocalizedStrings.shared.accountDisabledError
+                view?.errorMessage.text = LocalizedStrings.shared.accountDisabledError
+            
+            case .invalidEmail:
+                view?.errorMessage.text = LocalizedStrings.shared.invalidEmailError
+            
+            case .emptyField:
+                view?.errorMessage.text = LocalizedStrings.shared.emptyFieldError
             
             default:
-            view?.errorMessage.text = LocalizedStrings.shared.loginFailedError
+                view?.errorMessage.text = LocalizedStrings.shared.loginFailedError
         }
     }
     
