@@ -57,26 +57,26 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
         
         switch (identifyer) {
             case .repeatPasswordFailed:
-                view?.errorMessage.text = "gentag password fejlede"
+            view?.errorMessage.text = LocalizedStrings.shared.repeatPasswordError
                 
             case .emailAlreadyExist:
-                view?.errorMessage.text = "Den valgte email eksisterer allerede"
+            view?.errorMessage.text = LocalizedStrings.shared.emailAlreadyExistError
             
             case .invalidEmail:
-                view?.errorMessage.text = "Fejl med den valgte email"
+            view?.errorMessage.text = LocalizedStrings.shared.invalidEmailError
                 
             case .userCreated:
                 view?.errorMessage.text = ""
                 afterCreationCallback?()
             
             case .weakPasswordError:
-                view?.errorMessage.text = "Password skal indeholde minimum 6 tegn"
+            view?.errorMessage.text = LocalizedStrings.shared.weakPasswordError
             
             case .emptyField:
-            view?.errorMessage.text = "Udfyld alle felterne"
+            view?.errorMessage.text = LocalizedStrings.shared.emptyFieldError
                 
             default:
-                view?.errorMessage.text = "Fejl ved oprettelse af bruger"
+            view?.errorMessage.text = LocalizedError.shared.accountCreationFailedError
         }
     }
 }

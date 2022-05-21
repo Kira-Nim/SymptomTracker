@@ -10,6 +10,7 @@
 		4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */; };
 		4F388E5F2837EA40009F684C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F388E5E2837EA40009F684C /* IQKeyboardManagerSwift */; };
 		4F388E612837F71B009F684C /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E602837F71B009F684C /* ValidationService.swift */; };
+		4F388E6328380BE2009F684C /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6228380BE2009F684C /* LocalizedStrings.swift */; };
 		4F8757B728228138003033B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B628228138003033B0 /* AppDelegate.swift */; };
 		4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B828228138003033B0 /* SceneDelegate.swift */; };
 		4F8757C02822813B003033B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757BF2822813B003033B0 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStyleSheet.swift; sourceTree = "<group>"; };
 		4F388E602837F71B009F684C /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		4F388E6228380BE2009F684C /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		4F8757B328228138003033B0 /* SymptomTrackerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymptomTrackerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8757B628228138003033B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8757B828228138003033B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */,
+				4F388E6228380BE2009F684C /* LocalizedStrings.swift */,
 			);
 			path = SharedStyleElements;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
 				4FDB44CD2831A172005D35A1 /* ActivityView.swift in Sources */,
+				4F388E6328380BE2009F684C /* LocalizedStrings.swift in Sources */,
 				4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */,
 				4F388E612837F71B009F684C /* ValidationService.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,

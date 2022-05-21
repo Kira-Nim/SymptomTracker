@@ -20,7 +20,7 @@ class LoginView: UIView {
         label.numberOfLines = 0
         //label.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
         label.textColor = .appColor(name: .textBlack)
-        label.text = "Symptom Tracker"
+        label.text = LocalizedStrings.shared.appTitle
         label.font = .appFont(ofSize: 30, weight: .medium)
         label.textAlignment = NSTextAlignment.center
         
@@ -41,7 +41,7 @@ class LoginView: UIView {
     }()
     
     public lazy var emailInputField: UITextField = {
-        let inputField =  loginInputFieldWith(placeholderText: "Email")
+        let inputField =  loginInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText)
         inputField.keyboardType = .emailAddress
         inputField.autocorrectionType = .no
         inputField.autocapitalizationType = .none
@@ -49,7 +49,7 @@ class LoginView: UIView {
     }()
     
     public lazy var passwordInputField: UITextField = {
-        let inputField = loginInputFieldWith(placeholderText: "Password")
+        let inputField = loginInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText)
         inputField.isSecureTextEntry = true
         return inputField
     }()
@@ -68,7 +68,7 @@ class LoginView: UIView {
     public lazy var resetButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Nulstil Password", for: .normal)
+        button.setTitle(LocalizedStrings.shared.resetPasswordButtonText, for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
         button.backgroundColor = .appColor(name: .buttonBlue)
@@ -83,7 +83,7 @@ class LoginView: UIView {
     public lazy var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log ind", for: .normal)
+        button.setTitle(LocalizedStrings.shared.loginButtonText, for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
         button.backgroundColor = .appColor(name: .buttonBlue)
@@ -100,7 +100,7 @@ class LoginView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
             label.textColor = .appColor(name: .textBlack)
-        label.text = "Opret konto"
+        label.text = LocalizedStrings.shared.createAccountClickableLabelText
         label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = NSTextAlignment.left
         return label
@@ -111,7 +111,7 @@ class LoginView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textColor = .appColor(name: .textBlack)
-        label.text = "Glemt password"
+        label.text = LocalizedStrings.shared.forgotPasswordClickableLabetText
         label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = NSTextAlignment.right
         return label
@@ -142,7 +142,7 @@ class LoginView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
             label.textColor = .appColor(name: .confirmationGreen)
-        label.text = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
+        label.text = LocalizedStrings.shared.passwordResetConfirmation
         label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = .center
         label.isHidden = true
@@ -152,7 +152,7 @@ class LoginView: UIView {
     public lazy var closeResetButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("✕", for: .normal)
+        button.setTitle(LocalizedStrings.shared.x, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
         button.setTitleColor(.appColor(name: .textBlack), for: .normal)
         button.isHidden = true

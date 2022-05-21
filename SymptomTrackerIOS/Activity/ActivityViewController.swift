@@ -18,7 +18,7 @@ final class ActivityViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        title = "Aktivitet"
+        title = LocalizedStrings.shared.tabbarActivityText
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Aktivitet", image: UIImage(named: "icons8-slider-30"), tag: 0)
     }

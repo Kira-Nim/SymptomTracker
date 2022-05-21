@@ -17,7 +17,7 @@ final class AccountViewModel: NSObject {
     public var afterPasswordChangeCallback: (()->Void)? = nil
     
     private lazy var accountSettingsOptionsList: [(String, () -> Void)] = {
-        [("Log ud", logOut)]
+        [(LocalizedStrings.shared.logOutButtonText, logOut)]
     }()
     
     init(modelManager: ModelManager) {

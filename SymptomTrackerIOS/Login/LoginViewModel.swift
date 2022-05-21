@@ -68,7 +68,7 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
                     self?.view?.contentStackViewConstraint?.constant = 114
                     self?.view?.passwordResetConfirmationMessage.isHidden = false
                 }else{
-                    self?.view?.errorMessage.text = "Angiv email"
+                    self?.view?.errorMessage.text = LocalizedStrings.shared.emptyEmailFieldError
                     self?.view?.passwordResetConfirmationMessage.isHidden = true
                     self?.view?.errorMessage.isHidden = false
                 }
@@ -101,13 +101,13 @@ final class LoginViewModel: NSObject, UITextFieldDelegate {
             afterLoginCallback?()
             
             case .logInCredentialsNotValid:
-            view?.errorMessage.text = "Forkert email eller password"
+            view?.errorMessage.text = LocalizedStrings.shared.invalidCredentialsError
             
             case .accountDisabled:
-            view?.errorMessage.text = "Kontoen er blevet lukket"
+            view?.errorMessage.text = LocalizedStrings.shared.accountDisabledError
             
             default:
-            view?.errorMessage.text = "Fejl ved login"
+            view?.errorMessage.text = LocalizedStrings.shared.loginFailedError
         }
     }
     
