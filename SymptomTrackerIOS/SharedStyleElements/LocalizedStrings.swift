@@ -33,19 +33,23 @@ final class LocalizedStrings {
     public let createAccountClickableLabelText = "Opret konto"
     public let forgotPasswordClickableLabetText = "Glemt password"
     public let createAccountButtonText = "Opret"
+    public let settingsListSymptomListItem = "Symptom List"
     
     //MARK: Placeholder text
     public let emailPlaceholderText = "Email"
     public let passwordPlaceholderText = "Password"
     public let passwordRepeatPlaceholderText = "Gentag password"
     
-    //MARK: Tabbar labels
-    public let tabbarAccountText = "Konto"
-    public let tabbarInsightText = "Overblik"
-    public let tabbarSymptomsText = "Symptomer"
-    public let tabbarRegistrationsText = "Registrerin"
-    public let tabbarActivityText = "Aktiviteter"
-    
     //MARK: Name of app "Logo" text
     public let appTitle = "Symptom Tracker"
+    
+    //MARK: Tabbar labels
+    public let tabbarAccountText = "Indstillinger"
+    public let tabbarInsightText = "Overblik"
+    public let tabbarRegistrationsText = "Symptomer"
+    public let tabbarActivityText = "Aktiviteter"
+    
+    // Controller titles
+    public let symptomListControllerTitle = "Symptom Liste"
+
 }

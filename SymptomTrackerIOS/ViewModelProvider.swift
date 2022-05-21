@@ -46,4 +46,8 @@ final class ViewModelProvider {
     public func getInsightViewModel() -> InsightViewModel {
         return InsightViewModel(modelManager: modelManager)
     }
+    
+    public func getSymptomListViewModel() -> SymptomListViewModel {
+        return SymptomListViewModel(modelManager: modelManager)
+    }
 }

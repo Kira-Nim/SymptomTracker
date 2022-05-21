@@ -18,7 +18,7 @@ final class SymptomRegistrationViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        title = LocalizedStrings.shared.tabbarSymptomsText
+        title = LocalizedStrings.shared.tabbarRegistrationsText
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Registration", image: UIImage(named: "icons8-slider-30"), tag: 0)
     }

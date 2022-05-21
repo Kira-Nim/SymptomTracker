@@ -15,9 +15,10 @@ final class AccountViewModel: NSObject {
     private let cellReuseIdentifier =  "cell"
     public var afterLogoutCallback: (()->Void)? = nil
     public var afterPasswordChangeCallback: (()->Void)? = nil
+    public var symptomListSelectedCallback: (()->Void)? = nil
     
     private lazy var accountSettingsOptionsList: [(String, () -> Void)] = {
-        [(LocalizedStrings.shared.logOutButtonText, logOut)]
+        [(LocalizedStrings.shared.logOutButtonText, logOut), (LocalizedStrings.shared.settingsListSymptomListItem, navigateToSymptomList)]
     }()
     
     init(modelManager: ModelManager) {
@@ -35,6 +36,10 @@ final class AccountViewModel: NSObject {
     
     private func logOut() {
         modelManager.logOut(logOutCompletionCallback: afterLogoutCallback)
+    }
+    
+    private func navigateToSymptomList() {
+        symptomListSelectedCallback?()
     }
 }
 
@@ -62,6 +67,11 @@ extension AccountViewModel: UITableViewDataSource {
     // How many rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accountSettingsOptionsList.count
+    }
+    
+    // Method for configuring row height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     // Choose cell type for each row and configure it.
