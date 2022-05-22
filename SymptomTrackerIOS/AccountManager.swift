@@ -25,52 +25,42 @@ final class AccountManager {
         loggedInUserId != nil
     }
     
-    public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
+    public func createAccountWith (email: String, password: String, createDefaultSymptomList: @escaping (String) -> Void, createUserCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("________________________________________________________")
-                print(error.localizedDescription)
-                
-                
                 if let nsError: NSError = error as NSError? {
                     let errorCode = nsError.userInfo["FIRAuthErrorUserInfoNameKey"]
                     let errorCodeString: String? = errorCode as? String
                     createUserCompletionCallback(errorCodeString)
-                                                     
-                    print("....................................................")
-                    for item in nsError.userInfo{
-                        print(item)
-                    }
-                    print("****************************************************")
-                    print(errorCode)
-                    if ((errorCodeString) != nil) {print(errorCodeString ?? "No errorCodeString!")}
                     
-                }
+                    print("....................................................")
+                    print(error.localizedDescription)
+                    print(errorCode)
+                    if let errorCodeString = errorCodeString {print(errorCodeString)
+                    }else{ print("No error code string") }
+                    print("....................................................") }
+                
             } else if let authResult = authResult {
                 createUserCompletionCallback(nil)
+                createdefaultSymptomListCallback(authResult.user.uid)
             }
         }
     }
-    
+
     public func loginWith (email: String, password: String, loginCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                print("________________________________________________________")
-                print(error.localizedDescription)
-                
                 if let nsError: NSError = error as NSError? {
                     let errorCode = nsError.userInfo["FIRAuthErrorUserInfoNameKey"]
                     let errorCodeString: String? = errorCode as? String
                     loginCompletionCallback(errorCodeString)
                     
                     print("....................................................")
-                    for item in nsError.userInfo{
-                        print(item)
-                    }
-                    print("****************************************************")
+                    print(error.localizedDescription)
                     print(errorCode)
-                    if ((errorCodeString) != nil) {print(errorCodeString ?? "No errorCodeString!")}
-                    
+                    if let errorCodeString = errorCodeString { print(errorCodeString)
+                    }else {print("No error code string") }
+                    print("....................................................")
                 }
                 
             } else if let authResult = authResult {

@@ -136,7 +136,7 @@
 			path = SharedStyleElements;
 			sourceTree = "<group>";
 		};
-		4F388E642839599C009F684C /* Symptom */ = {
+		4F388E642839599C009F684C /* SymptomList */ = {
 			isa = PBXGroup;
 			children = (
 				4F388E65283959DF009F684C /* SymptomListViewController.swift */,
@@ -144,7 +144,7 @@
 				4F388E6928395C4E009F684C /* SymptomListView.swift */,
 				4F388E6B28397430009F684C /* SymptomListCell.swift */,
 			);
-			path = Symptom;
+			path = SymptomList;
 			sourceTree = "<group>";
 		};
 		4F8757AA28228137003033B0 = {
@@ -168,15 +168,15 @@
 			isa = PBXGroup;
 			children = (
 				4F388E5A2837BCB7009F684C /* SharedStyleElements */,
-				4F388E642839599C009F684C /* Symptom */,
+				4F388E642839599C009F684C /* SymptomList */,
 				4FDB44D42831A709005D35A1 /* AccountSettings */,
 				4FAFCF1028317E36002CEFBE /* Insight */,
-				4FAFCF0D28317DBB002CEFBE /* Activity */,
-				4FAFCF0A28317D29002CEFBE /* Registretion */,
+				4FAFCF0D28317DBB002CEFBE /* ActivityRegistration */,
+				4FAFCF0A28317D29002CEFBE /* SymptomRegistretion */,
 				4FAFCF032831539D002CEFBE /* Login */,
 				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
 				4FAFCEF52826CC93002CEFBE /* Services */,
-				4FAFCEDB28242344002CEFBE /* Adapters */,
+				4FAFCEDB28242344002CEFBE /* Repositories */,
 				4FAFCED228241308002CEFBE /* Model */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
@@ -215,7 +215,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4FAFCEDB28242344002CEFBE /* Adapters */ = {
+		4FAFCEDB28242344002CEFBE /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				4FAFCEED28253ACC002CEFBE /* SymptomRepository.swift */,
@@ -223,7 +223,7 @@
 				4FAFCEF128253B41002CEFBE /* SymptomRegistrationRepository.swift */,
 				4FAFCEF328253B6E002CEFBE /* IntensityRegistrationRepository.swift */,
 			);
-			path = Adapters;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		4FAFCEF52826CC93002CEFBE /* Services */ = {
@@ -254,24 +254,24 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		4FAFCF0A28317D29002CEFBE /* Registretion */ = {
+		4FAFCF0A28317D29002CEFBE /* SymptomRegistretion */ = {
 			isa = PBXGroup;
 			children = (
 				4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */,
 				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
 				4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */,
 			);
-			path = Registretion;
+			path = SymptomRegistretion;
 			sourceTree = "<group>";
 		};
-		4FAFCF0D28317DBB002CEFBE /* Activity */ = {
+		4FAFCF0D28317DBB002CEFBE /* ActivityRegistration */ = {
 			isa = PBXGroup;
 			children = (
 				4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */,
 				4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */,
 				4FDB44CC2831A172005D35A1 /* ActivityView.swift */,
 			);
-			path = Activity;
+			path = ActivityRegistration;
 			sourceTree = "<group>";
 		};
 		4FAFCF1028317E36002CEFBE /* Insight */ = {
