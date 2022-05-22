@@ -10,11 +10,11 @@ import UIKit
 
 final class LoginViewModel: NSObject, UITextFieldDelegate {
     private var view: LoginView? = nil
-    public var modelManager: ModelManager
+    public var modelManager: AccountModelManager
     public var afterLoginCallback: (()->Void)? = nil
     public var presentCreateAccountCallback: (()->Void)? = nil
     
-    init(modelManager: ModelManager) {
+    init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
     

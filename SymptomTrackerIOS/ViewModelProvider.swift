@@ -18,25 +18,27 @@ final class ViewModelProvider {
     Handles business logic
      */
     public let modelManager: ModelManager
+    public let accountModelManager: AccountModelManager
     
-    init(modelManager: ModelManager) {
+    init(modelManager: ModelManagerImplementation) {
         self.modelManager = modelManager
+        self.accountModelManager = modelManager
     }
     
     public func getCreateAccountViewModel() -> CreateAccountViewModel {
-        return CreateAccountViewModel(modelManager: modelManager)
+        return CreateAccountViewModel(modelManager: accountModelManager)
     }
     
     public func getLoginViewModel() -> LoginViewModel {
-        return LoginViewModel(modelManager: modelManager)
+        return LoginViewModel(modelManager: accountModelManager)
+    }
+    
+    public func getAccountSettingsViewModel() -> AccountViewModel {
+        return AccountViewModel(modelManager: accountModelManager)
     }
     
     public func getSymptomRegistrationViewModel() -> SymptomRegistrationViewModel {
         return SymptomRegistrationViewModel(modelManager: modelManager)
-    }
-    
-    public func getAccountSettingsViewModel() -> AccountViewModel {
-        return AccountViewModel(modelManager: modelManager)
     }
     
     public func getActivityViewModel() -> ActivityViewModel {

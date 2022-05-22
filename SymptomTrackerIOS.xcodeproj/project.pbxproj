@@ -15,6 +15,7 @@
 		4F388E6828395B3C009F684C /* SymptomListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6728395B3C009F684C /* SymptomListViewModel.swift */; };
 		4F388E6A28395C4E009F684C /* SymptomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6928395C4E009F684C /* SymptomListView.swift */; };
 		4F388E6C28397430009F684C /* SymptomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6B28397430009F684C /* SymptomListCell.swift */; };
+		4F388E6E283ABD61009F684C /* AccountModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6D283ABD5F009F684C /* AccountModelManager.swift */; };
 		4F8757B728228138003033B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B628228138003033B0 /* AppDelegate.swift */; };
 		4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B828228138003033B0 /* SceneDelegate.swift */; };
 		4F8757C02822813B003033B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757BF2822813B003033B0 /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 		4F388E6728395B3C009F684C /* SymptomListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListViewModel.swift; sourceTree = "<group>"; };
 		4F388E6928395C4E009F684C /* SymptomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListView.swift; sourceTree = "<group>"; };
 		4F388E6B28397430009F684C /* SymptomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListCell.swift; sourceTree = "<group>"; };
+		4F388E6D283ABD5F009F684C /* AccountModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModelManager.swift; sourceTree = "<group>"; };
 		4F8757B328228138003033B0 /* SymptomTrackerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymptomTrackerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8757B628228138003033B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8757B828228138003033B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 				4FAFCF032831539D002CEFBE /* Login */,
 				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
 				4FAFCEF52826CC93002CEFBE /* Services */,
-				4FAFCEDB28242344002CEFBE /* Repositories */,
 				4FAFCED228241308002CEFBE /* Model */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
@@ -184,6 +185,7 @@
 				4FAFCEE828252F29002CEFBE /* ViewModelProvider.swift */,
 				4FAFCEE628252BDF002CEFBE /* ModelManagerImplementation.swift */,
 				4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */,
+				4F388E6D283ABD5F009F684C /* AccountModelManager.swift */,
 				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
 				4F8757BF2822813B003033B0 /* Assets.xcassets */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
@@ -203,6 +205,7 @@
 		4FAFCED228241308002CEFBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4FAFCEDB28242344002CEFBE /* Repositories */,
 				4FAFCED328241381002CEFBE /* FirebaseActivity.swift */,
 				4FAFCED528242151002CEFBE /* FirebaseSymptom.swift */,
 				4FAFCED72824220A002CEFBE /* FirebaseSymptomRegistration.swift */,
@@ -395,6 +398,7 @@
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
 				4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */,
 				4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */,
+				4F388E6E283ABD61009F684C /* AccountModelManager.swift in Sources */,
 				4FAFCEE3282425AD002CEFBE /* IntensityRegistration.swift in Sources */,
 				4F388E6A28395C4E009F684C /* SymptomListView.swift in Sources */,
 				4FAFCF02282D4B4E002CEFBE /* ModelManager.swift in Sources */,

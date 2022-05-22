@@ -11,7 +11,7 @@ import UIKit
 final class AccountViewModel: NSObject {
     
     private var view: AccountView? = nil
-    public var modelManager: ModelManager
+    public var modelManager: AccountModelManager
     private let cellReuseIdentifier =  "cell"
     public var afterLogoutCallback: (()->Void)? = nil
     public var afterPasswordChangeCallback: (()->Void)? = nil
@@ -21,7 +21,7 @@ final class AccountViewModel: NSObject {
         [(LocalizedStrings.shared.logOutButtonText, logOut), (LocalizedStrings.shared.settingsListSymptomListItem, navigateToSymptomList)]
     }()
     
-    init(modelManager: ModelManager) {
+    init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
     

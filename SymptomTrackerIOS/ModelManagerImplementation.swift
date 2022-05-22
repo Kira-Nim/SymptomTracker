@@ -8,39 +8,22 @@
 import Foundation
 
 /* Responsibilities of the ModelManager:
- 
 The ModelManager manages business logic concerning model data that has been adapted to the system.
 It manages the model-adapter classes (that takes care of CRUD).
 Holds the model data classes adapted to be used throuhout the system.
 Manages the Combine pipeline
  */
 
-public enum AccountCreationResult {case repeatPasswordFailed,
-                                        failed,
-                                        emailAlreadyExist,
-                                        userCreated,
-                                        invalidEmail,
-                                        weakPasswordError,
-                                        emptyField }
-
-public enum AccountLoginResult {case loginSucceded,
-                                     logInCredentialsNotValid,
-                                     failed,
-                                     accountDisabled,
-                                     emptyField,
-                                     invalidEmail}
-
 final class ModelManagerImplementation: ModelManager {
     
     // Repositories - Takes care of CRUD
-    private lazy var symptomReposityry = SymptomRepository()
-    private lazy var activityReposityry: ActivityRepository = ActivityRepository()
-    private lazy var symptomRegistrationReposityry = SymptomRegistrationRepository()
-    private lazy var intensityRegistrationReposityry = IntensityRegistrationRepository()
+    private let symptomReposityry: SymptomRepository
+    private let activityReposityry: ActivityRepository
+    private let symptomRegistrationReposityry: SymptomRegistrationRepository
+    private let intensityRegistrationReposityry: IntensityRegistrationRepository
     
     // Manages information about logged in user
     private let accountManager: AccountManager
-    
     
     //MARK: Init
     init() {
@@ -52,25 +35,32 @@ final class ModelManagerImplementation: ModelManager {
     }
 
     //MARK Get logged in user
-    
     public func isUserLoggedIn() -> Bool {
         return accountManager.isLoggedIn
     }
+}
+
+//MARK: ModelManager Extension
+
+// For logic concerning login/logout and create account
+extension ModelManagerImplementation: AccountModelManager {
     
     //MARK: Create account functionality
-    
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
-        
-        accountManager.createAccountWith(email: email, password: password, createDefaultSymptomList: createDefaultSymptomListDatabase) { errorMessage in
+        accountManager.createAccountWith(email: email, password: password) { errorMessage in
             // "getCreationResult(..)" returns the enum value used to determine which error message
             //(if any) should be passed to the view from the VM
             showErrorMessageFor(self.getCreationResult(errorMessage: errorMessage))
+            
+            if let loggedInUserId = self.accountManager.loggedInUserId {
+                self.createDefaultSymptomListDatabase(user: loggedInUserId)
+            }
         }
     }
     
     public func createDefaultSymptomListDatabase(user: String) {
         let defaultSymptomsNamesAndState = getDefaultSymptomNamesAndState()
-        let count = 0
+        var count = 0
         for item in defaultSymptomsNamesAndState {
             
             let document: [String:Any] = [
@@ -81,13 +71,12 @@ final class ModelManagerImplementation: ModelManager {
                 "user_id": user]
             
             symptomReposityry.saveSymptomToDB(symptomDocument: document)
-            count ++
+            count += 1
         }
     }
     
     // Method for translating error message (and nill) to enum "ErrorIdentifyer"
     public func getCreationResult(errorMessage: String?) -> AccountCreationResult {
-        
         let errorMappingDict: [String: AccountCreationResult] = [
                 "ERROR_INVALID_EMAIL": .invalidEmail,
                 "ERROR_EMAIL_ALREADY_IN_USE": .emailAlreadyExist,
@@ -140,49 +129,50 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     //MARK: get default symptom tuples list
-    private func getDefaultSymptomNamesAndState() -> [(String, Bool)]{
-        return [(LocalizedStrings.shared.headache, false),
-                (LocalizedStrings.shared.neckPain, false),
-                (LocalizedStrings.shared.dizziness, true),
-                (LocalizedStrings.shared.nausea, true),
-                (LocalizedStrings.shared.soundSensitivity, false),
-                (LocalizedStrings.shared.lightSensitivity, true),
-                (LocalizedStrings.shared.impairedVision, false),
-                (LocalizedStrings.shared.jointPain, true),
-                (LocalizedStrings.shared.pressureInTheHead, true),
-                (LocalizedStrings.shared.ringingInTheHead, true),
-                (LocalizedStrings.shared.overactiveNervousSystem, false),
-                (LocalizedStrings.shared.muscleTension, true),
-                (LocalizedStrings.shared.alcoholIntolerance, true),
-                (LocalizedStrings.shared.extremeFatigue, true),
-                (LocalizedStrings.shared.delayedFatigue, true),
-                (LocalizedStrings.shared.quickExhaustion, true),
-                (LocalizedStrings.shared.seizureFatigue, true),
-                (LocalizedStrings.shared.stressFatigue, true),
-                (LocalizedStrings.shared.alteredSleep, true),
-                (LocalizedStrings.shared.insomnia, true),
-                (LocalizedStrings.shared.hypersomnia, true),
-                (LocalizedStrings.shared.stress, false),
-                (LocalizedStrings.shared.difficultyPayingAttention, false),
-                (LocalizedStrings.shared.learningDifficulties, true),
-                (LocalizedStrings.shared.impairedVisionRegistration, true),
-                (LocalizedStrings.shared.decisionFatigue, true),
-                (LocalizedStrings.shared.slowThinking, true),
-                (LocalizedStrings.shared.slowResponsiveness, false),
-                (LocalizedStrings.shared.difficultyConcentrating, false),
-                (LocalizedStrings.shared.reducedSensoryFilter, true),
-                (LocalizedStrings.shared.memoryProblems, true),
-                (LocalizedStrings.shared.difficultiesUsingTheWorkingMemory, false),
-                (LocalizedStrings.shared.reducedExecutiveFunctions, true),
-                (LocalizedStrings.shared.reducedReadinessForChange, true),
-                (LocalizedStrings.shared.sadness, true),
-                (LocalizedStrings.shared.severeAnxciety, true),
-                (LocalizedStrings.shared.mildAnxciety, false),
-                (LocalizedStrings.shared.irritability, false),
-                (LocalizedStrings.shared.aggression, true),
-                (LocalizedStrings.shared.moodChanges, false),
-                (LocalizedStrings.shared.difficultyWithEmotionalControl, true),
-                (LocalizedStrings.shared.changedPersonality, true)]
+    
+    private func getDefaultSymptomNamesAndState() -> [(String, Bool, Bool)]{
+        return [(LocalizedStrings.shared.headache, false, true),
+                (LocalizedStrings.shared.neckPain, false, false),
+                (LocalizedStrings.shared.dizziness, true, false),
+                (LocalizedStrings.shared.nausea, true, false),
+                (LocalizedStrings.shared.soundSensitivity, false, false),
+                (LocalizedStrings.shared.lightSensitivity, false, true),
+                (LocalizedStrings.shared.impairedVision, false, false),
+                (LocalizedStrings.shared.jointPain, true, false),
+                (LocalizedStrings.shared.pressureInTheHead, true, false),
+                (LocalizedStrings.shared.ringingInTheHead, true, false),
+                (LocalizedStrings.shared.overactiveNervousSystem, false, false),
+                (LocalizedStrings.shared.muscleTension, true, false),
+                (LocalizedStrings.shared.alcoholIntolerance, true, false),
+                (LocalizedStrings.shared.extremeFatigue, false, true),
+                (LocalizedStrings.shared.delayedFatigue, true, false),
+                (LocalizedStrings.shared.quickExhaustion, true, false),
+                (LocalizedStrings.shared.seizureFatigue, true, false),
+                (LocalizedStrings.shared.stressFatigue, true, false),
+                (LocalizedStrings.shared.alteredSleep, true, false),
+                (LocalizedStrings.shared.insomnia, true, false),
+                (LocalizedStrings.shared.hypersomnia, true, false),
+                (LocalizedStrings.shared.stress, false, false),
+                (LocalizedStrings.shared.difficultyPayingAttention, false, false),
+                (LocalizedStrings.shared.learningDifficulties, true, false),
+                (LocalizedStrings.shared.impairedVisionRegistration, true, false),
+                (LocalizedStrings.shared.decisionFatigue, true, false),
+                (LocalizedStrings.shared.slowThinking, true, false),
+                (LocalizedStrings.shared.slowResponsiveness, false, false),
+                (LocalizedStrings.shared.difficultyConcentrating, false, false),
+                (LocalizedStrings.shared.reducedSensoryFilter, true, false),
+                (LocalizedStrings.shared.memoryProblems, true, false),
+                (LocalizedStrings.shared.difficultiesUsingTheWorkingMemory, false, false),
+                (LocalizedStrings.shared.reducedExecutiveFunctions, true, false),
+                (LocalizedStrings.shared.reducedReadinessForChange, true, false),
+                (LocalizedStrings.shared.sadness, true, false),
+                (LocalizedStrings.shared.severeAnxciety, true, false),
+                (LocalizedStrings.shared.mildAnxciety, false, false),
+                (LocalizedStrings.shared.irritability, false, false),
+                (LocalizedStrings.shared.aggression, true, false),
+                (LocalizedStrings.shared.moodChanges, false, false),
+                (LocalizedStrings.shared.difficultyWithEmotionalControl, true, false),
+                (LocalizedStrings.shared.changedPersonality, true, false)]
     }
 }
 

@@ -20,6 +20,5 @@ final class SymptomRepository {
         
         // Add a new document with a generated id to collection.
         db.collection(symptomCollection).addDocument(data: symptomDocument)
-        
     }
 }

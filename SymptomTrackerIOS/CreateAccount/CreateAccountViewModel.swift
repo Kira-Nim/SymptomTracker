@@ -11,10 +11,10 @@ import UIKit
 final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
     
     private var view: CreateAccountView? = nil
-    public var modelManager: ModelManager
+    public var modelManager: AccountModelManager
     public var afterCreationCallback: (()->Void)? = nil
     
-    init(modelManager: ModelManager) {
+    init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
 

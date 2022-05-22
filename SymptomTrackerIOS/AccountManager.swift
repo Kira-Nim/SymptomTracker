@@ -25,7 +25,7 @@ final class AccountManager {
         loggedInUserId != nil
     }
     
-    public func createAccountWith (email: String, password: String, createDefaultSymptomList: @escaping (String) -> Void, createUserCompletionCallback: @escaping (String?) -> Void) {
+    public func createAccountWith (email: String, password: String, createUserCompletionCallback: @escaping (String?) -> Void) {
         firebaseAuth.createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 if let nsError: NSError = error as NSError? {
@@ -42,7 +42,6 @@ final class AccountManager {
                 
             } else if let authResult = authResult {
                 createUserCompletionCallback(nil)
-                createdefaultSymptomListCallback(authResult.user.uid)
             }
         }
     }
