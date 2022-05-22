@@ -50,6 +50,9 @@ extension UIColor {
         case activityGreen
         case backgroundColor
         case placeholderTextColor
+        case switchButtonOffTintColor
+        case switchButtonOnTintColor
+        case switchButtonThumbColor
     }
     
     static func appColor(name: AppColor) -> UIColor {
@@ -57,21 +60,27 @@ extension UIColor {
             case .errorRed:
                 return UIColor(red: 232/255, green: 55/255, blue: 2/255, alpha: 1.0)
             case .buttonBlue:
-                return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+                //return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+                return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
             case .buttonBlueBorderColor:
-                return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
+                //return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
+                return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
             case .buttonBlueClicked:
-                return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
+                //return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
+                return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
             case .buttonBlueTextColor:
                 return UIColor.white
             case .textFieldBorderColor:
-                return UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0)
+                //return UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0)
+                return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
             case .confirmationGreen:
                 return UIColor(red: 75/255, green: 119/255, blue: 127/255, alpha: 1.0)
             case .headerColor:
                 return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
             case .textBlack:
                 return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+            case .placeholderTextColor:
+                return UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)
             case .registrationGreen:
                 return UIColor.systemGreen
             case .registrationYellow:
@@ -88,8 +97,12 @@ extension UIColor {
                 return UIColor.systemGreen
             case .backgroundColor:
                 return UIColor.white
-            case .placeholderTextColor:
-                return UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)
+            case .switchButtonOffTintColor:
+                return UIColor(red: 239/255, green: 244/255, blue: 255/255, alpha: 1.0)
+            case .switchButtonOnTintColor:
+                return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+            case .switchButtonThumbColor:
+                return UIColor.orange
         }
     }
     

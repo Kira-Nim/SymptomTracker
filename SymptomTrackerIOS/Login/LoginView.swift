@@ -141,7 +141,7 @@ class LoginView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-            label.textColor = .appColor(name: .confirmationGreen)
+        label.textColor = .appColor(name: .confirmationGreen)
         label.text = LocalizedStrings.shared.passwordResetConfirmation
         label.font = .appFont(ofSize: 17, weight: .medium)
         label.textAlignment = .center

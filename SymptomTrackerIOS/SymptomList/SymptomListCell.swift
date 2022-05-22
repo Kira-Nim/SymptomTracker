@@ -10,7 +10,7 @@ import UIKit
 
 class SymptomListCell: UITableViewCell {
     
-    private var symptomName: String = "Kognitive vanskeligheder med sy e"
+    private var symptomName: String = "String of maximum 31 characters"
     
     //MARK: Subviews
     public lazy var symptomLabel: UILabel = {
@@ -18,6 +18,8 @@ class SymptomListCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = symptomName
         label.numberOfLines = 0
+        label.font = .appFont(ofSize: 17, weight: .medium)
+        label.textColor = UIColor.appColor(name: .textBlack)
         
         return label
     }()
@@ -26,13 +28,12 @@ class SymptomListCell: UITableViewCell {
         let switchButton = UISwitch()
         switchButton.translatesAutoresizingMaskIntoConstraints = false
         
-        switchButton.onTintColor = UIColor.orange
-        switchButton.thumbTintColor = UIColor.purple
-        switchButton.tintColor = UIColor.green
-        //switchButton.thumbTintColor = UIColor.yellow
-        //switchButton.onTintColor = UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 0.4)
+        
+        //switchButton.thumbTintColor = UIColor.appColor(name: .switchButtonThumbColor)
+        switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
+        //switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
+        switchButton.backgroundColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.layer.cornerRadius = switchButton.frame.height / 2.0
-        switchButton.backgroundColor = UIColor.green
         switchButton.clipsToBounds = true
         
         return switchButton
@@ -65,7 +66,7 @@ class SymptomListCell: UITableViewCell {
             symptomLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             //symptomLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             //symptomLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
-            symptomLabel.trailingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: 90),
+            symptomLabel.trailingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: 95),
             
             switchButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
             switchButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
