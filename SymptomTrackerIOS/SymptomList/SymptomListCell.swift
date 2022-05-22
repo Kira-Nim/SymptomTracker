@@ -31,7 +31,7 @@ class SymptomListCell: UITableViewCell {
         
         //switchButton.thumbTintColor = UIColor.appColor(name: .switchButtonThumbColor)
         switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
-        //switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
+        switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
         switchButton.backgroundColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.layer.cornerRadius = switchButton.frame.height / 2.0
         switchButton.clipsToBounds = true

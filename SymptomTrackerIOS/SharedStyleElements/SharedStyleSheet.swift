@@ -62,6 +62,8 @@ extension UIColor {
             case .buttonBlue:
                 //return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
                 return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
+                
+            
             case .buttonBlueBorderColor:
                 //return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
                 return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
@@ -80,7 +82,8 @@ extension UIColor {
             case .textBlack:
                 return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
             case .placeholderTextColor:
-                return UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)
+                //return UIColor(red: 173/255, green: 196/255, blue: 237/255, alpha: 1.0)
+                return UIColor(red: 196/255, green: 194/255, blue: 220/255, alpha: 1.0)
             case .registrationGreen:
                 return UIColor.systemGreen
             case .registrationYellow:
@@ -98,13 +101,17 @@ extension UIColor {
             case .backgroundColor:
                 return UIColor.white
             case .switchButtonOffTintColor:
-                return UIColor(red: 239/255, green: 244/255, blue: 255/255, alpha: 1.0)
+                //return UIColor(red: 239/255, green: 244/255, blue: 255/255, alpha: 1.0)
+                return UIColor(red: 215/255, green: 213/255, blue: 231/255, alpha: 1.0)
             case .switchButtonOnTintColor:
-                return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
+                return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
             case .switchButtonThumbColor:
                 return UIColor.orange
         }
     }
+    
+    // Other purple: return UIColor(red: 169/255, green: 166/255, blue: 205/255, alpha: 1.0)
+    
     
     /* Syntax painfully explained here:
      "CGSize = CGSize(width: 1, height: 1" default value if a size is not given as para.
