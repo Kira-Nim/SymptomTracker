@@ -10,7 +10,8 @@ import UIKit
 
 class SymptomListCell: UITableViewCell {
     
-    private var symptomName: String = "String of maximum 31 characters"
+    private var symptom: Symptom?
+    private var switchCallback: ((Symptom) -> Void)? = nil
     
     //MARK: Subviews
     public lazy var symptomLabel: UILabel = {
@@ -26,14 +27,20 @@ class SymptomListCell: UITableViewCell {
     public lazy var switchButton: UISwitch = {
         let switchButton = UISwitch()
         switchButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        
         //switchButton.thumbTintColor = UIColor.appColor(name: .switchButtonThumbColor)
         switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
         switchButton.backgroundColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.layer.cornerRadius = switchButton.frame.height / 2.0
         switchButton.clipsToBounds = true
+        
+        switchButton.addAction(UIAction {[weak self] _ in
+            if let switchCallback = self?.switchCallback,
+               var symptom = self?.symptom {
+                symptom.disabled = !switchButton.isOn
+                switchCallback(symptom)
+            }
+        }, for: .touchUpInside)
         
         return switchButton
     }()
@@ -63,21 +70,17 @@ class SymptomListCell: UITableViewCell {
         NSLayoutConstraint.activate([
             symptomLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             symptomLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            //symptomLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            //symptomLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
             symptomLabel.trailingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: 95),
-            
             switchButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
             switchButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             symptomLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
     }
     
-    public func configureCell(symptoms: [Symptom]) {
-        
-        for symptom in symptoms {
-            symptomLabel.text = symptom.name
-            switchButton.isOn = !symptom.disabled
-        }
+    public func configureCell(symptom: Symptom, switchCallback: @escaping (Symptom) -> Void ) {
+        self.symptom = symptom
+        symptomLabel.text = symptom.name
+        switchButton.isOn = !symptom.disabled
+        self.switchCallback = switchCallback
     }
 }

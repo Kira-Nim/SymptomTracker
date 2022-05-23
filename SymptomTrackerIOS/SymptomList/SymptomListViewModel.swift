@@ -46,7 +46,7 @@ extension SymptomListViewModel: UITableViewDataSource {
     
     // How many rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return symptomList.count
     }
     
     // Method for configuring row height
@@ -57,12 +57,11 @@ extension SymptomListViewModel: UITableViewDataSource {
     // Choose cell type for each row and configure it.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-        
         if let symptomListCell = cell as? SymptomListCell {
-            symptomListCell.configureCell(symptoms: symptomList)
+            symptomListCell.configureCell(symptom: symptomList[indexPath.row]) { symptom in
+                self.modelManager.updateSymptomInDb(symptom: symptom)
+            }
         }
-        
         return cell
     }
 }
-

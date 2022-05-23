@@ -21,18 +21,13 @@ final class SymptomRepository {
     // List of callbacks to be run when the Symptoms collection in db changes
     var callbacks: [() -> Void] = []
     
-    // MARK: initializer
-    init (){
-        startListener()
-    }
-    
     // MARK: - startListener()
-    func startListener() {
+    func startListener(loggedInUser: String) {
         // Set listener to get updates from Db when collection "Symptoms" changes.
         /*
          A snapShotListener contains a callback that is set on the Symptoms collection in db.
          */
-        db.collection(symptomCollection).addSnapshotListener { snapshot, error in
+        db.collection(symptomCollection).whereField("user_id", isEqualTo: loggedInUser).addSnapshotListener { snapshot, error in
             
             if let e = error {
                 print("Error: \(e)")
@@ -72,4 +67,20 @@ final class SymptomRepository {
     func getSymptomsFromDb() -> [FirebaseSymptom]{
         return firebaseSymptoms
     }
+    
+    func update(symptom: FirebaseSymptom) {
+
+        if let documentId = symptom.id {
+            let symptomDict: [String: Any] = [
+                "name": symptom.name,
+                "disabled": symptom.disabled,
+                "visibility_on_graph": symptom.visibilityOnGraph,
+                "sorting_placement": symptom.sortingPlacement,
+                "user_id": symptom.userId ]
+
+            db.collection(symptomCollection).document(documentId).setData(symptomDict)
+        }
+    }
 }
+
+

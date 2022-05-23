@@ -17,7 +17,7 @@ Manages the Combine pipeline
 final class ModelManagerImplementation: ModelManager {
     
     // Repositories - Takes care of CRUD
-    private let symptomReposityry: SymptomRepository
+    private let symptomRepository: SymptomRepository
     private let activityReposityry: ActivityRepository
     private let symptomRegistrationReposityry: SymptomRegistrationRepository
     private let intensityRegistrationReposityry: IntensityRegistrationRepository
@@ -27,11 +27,16 @@ final class ModelManagerImplementation: ModelManager {
     
     //MARK: Init
     init() {
-        symptomReposityry = SymptomRepository()
+        symptomRepository = SymptomRepository()
         activityReposityry = ActivityRepository()
         symptomRegistrationReposityry = SymptomRegistrationRepository()
         intensityRegistrationReposityry = IntensityRegistrationRepository()
         accountManager = AccountManager()
+        
+        // If the user is still logged then the snapshot listener should be started.
+        if let userId = self.accountManager.loggedInUserId {
+            self.symptomRepository.startListener(loggedInUser: userId)
+        }
     }
 
     //MARK Get logged in user
@@ -42,19 +47,31 @@ final class ModelManagerImplementation: ModelManager {
     //MARK: Symptom CRUD
     
     public func getSymptoms() -> [Symptom] {
-        let firebaseSymptoms = symptomReposityry.getSymptomsFromDb()
+        let firebaseSymptoms = symptomRepository.getSymptomsFromDb()
+        var symptomList: [Symptom] = firebaseSymptoms
         
-        let symptomList: [Symptom] = firebaseSymptoms
+        for item in symptomList {
+            print(item.sortingPlacement)
+        }
+        symptomList.sort {
+            $0.sortingPlacement < $1.sortingPlacement
+        }
         return symptomList
+    }
+    
+    public func updateSymptomInDb(symptom: Symptom) {
+        if let firebaseSymptom = symptom as? FirebaseSymptom {
+            symptomRepository.update(symptom: firebaseSymptom)
+        }
     }
 }
 
-//MARK: ModelManager Extension
+//MARK: Extension
 
 // For logic concerning login/logout and create account
 extension ModelManagerImplementation: AccountModelManager {
     
-    //MARK: Create account functionality
+    //MARK: Create account
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
         accountManager.createAccountWith(email: email, password: password) { errorMessage in
             // "getCreationResult(..)" returns the enum value used to determine which error message
@@ -62,25 +79,25 @@ extension ModelManagerImplementation: AccountModelManager {
             showErrorMessageFor(self.getCreationResult(errorMessage: errorMessage))
             
             if let loggedInUserId = self.accountManager.loggedInUserId {
-                self.createDefaultSymptomListDatabase(user: loggedInUserId)
+                self.createDefaultSymptomListForDatabase(user: loggedInUserId)
+                self.symptomRepository.startListener(loggedInUser: loggedInUserId)
             }
         }
     }
     
-    public func createDefaultSymptomListDatabase(user: String) {
+    public func createDefaultSymptomListForDatabase(user: String) {
         let defaultSymptomsNamesAndState = getDefaultSymptomNamesAndState()
-        var count = 0
-        for item in defaultSymptomsNamesAndState {
+                
+        for (index, item) in defaultSymptomsNamesAndState.enumerated() {
             
             let document: [String:Any] = [
                 "name": item.0,
                 "disabled": item.1,
                 "visibility_On_Graph": false,
-                "sorting_placement": count,
+                "sorting_placement": index,
                 "user_id": user]
             
-            symptomReposityry.saveSymptomToDB(symptomDocument: document)
-            count += 1
+            symptomRepository.saveSymptomToDB(symptomDocument: document)
         }
     }
     
@@ -99,7 +116,7 @@ extension ModelManagerImplementation: AccountModelManager {
         }
     }
         
-    //MARK: Login functionality
+    //MARK: Login
     
     public func loginWith(email: String, password: String, showErrorMessageFor: @escaping (AccountLoginResult) -> Void) {
         
@@ -107,6 +124,10 @@ extension ModelManagerImplementation: AccountModelManager {
         // (if any) should be passed to the view from the VM
         accountManager.loginWith(email: email, password: password) { errorMessage in
             showErrorMessageFor(self.getLoginResult(errorMessage: errorMessage))
+            
+            if let userId = self.accountManager.loggedInUserId {
+                self.symptomRepository.startListener(loggedInUser: userId)
+            }
         }
     }
     
@@ -138,22 +159,29 @@ extension ModelManagerImplementation: AccountModelManager {
     }
     
     //MARK: get default symptom tuples list
-    
     private func getDefaultSymptomNamesAndState() -> [(String, Bool, Bool)]{
         return [(LocalizedStrings.shared.headache, false, true),
+                (LocalizedStrings.shared.lightSensitivity, false, true),
+                (LocalizedStrings.shared.extremeFatigue, false, true),
                 (LocalizedStrings.shared.neckPain, false, false),
+                (LocalizedStrings.shared.soundSensitivity, false, false),
+                (LocalizedStrings.shared.impairedVision, false, false),
+                (LocalizedStrings.shared.overactiveNervousSystem, false, false),
+                (LocalizedStrings.shared.difficultyConcentrating, false, false),
+                (LocalizedStrings.shared.mildAnxciety, true, false),
+                (LocalizedStrings.shared.difficultiesUsingTheWorkingMemory, true, false),
+                (LocalizedStrings.shared.difficultyPayingAttention, true, false),
+                (LocalizedStrings.shared.moodChanges, true, false),
+                (LocalizedStrings.shared.irritability, true, false),
+                (LocalizedStrings.shared.slowResponsiveness, true, false),
+                (LocalizedStrings.shared.stress, true, false),
                 (LocalizedStrings.shared.dizziness, true, false),
                 (LocalizedStrings.shared.nausea, true, false),
-                (LocalizedStrings.shared.soundSensitivity, false, false),
-                (LocalizedStrings.shared.lightSensitivity, false, true),
-                (LocalizedStrings.shared.impairedVision, false, false),
                 (LocalizedStrings.shared.jointPain, true, false),
                 (LocalizedStrings.shared.pressureInTheHead, true, false),
                 (LocalizedStrings.shared.ringingInTheHead, true, false),
-                (LocalizedStrings.shared.overactiveNervousSystem, false, false),
                 (LocalizedStrings.shared.muscleTension, true, false),
                 (LocalizedStrings.shared.alcoholIntolerance, true, false),
-                (LocalizedStrings.shared.extremeFatigue, false, true),
                 (LocalizedStrings.shared.delayedFatigue, true, false),
                 (LocalizedStrings.shared.quickExhaustion, true, false),
                 (LocalizedStrings.shared.seizureFatigue, true, false),
@@ -161,25 +189,17 @@ extension ModelManagerImplementation: AccountModelManager {
                 (LocalizedStrings.shared.alteredSleep, true, false),
                 (LocalizedStrings.shared.insomnia, true, false),
                 (LocalizedStrings.shared.hypersomnia, true, false),
-                (LocalizedStrings.shared.stress, false, false),
-                (LocalizedStrings.shared.difficultyPayingAttention, false, false),
                 (LocalizedStrings.shared.learningDifficulties, true, false),
                 (LocalizedStrings.shared.impairedVisionRegistration, true, false),
                 (LocalizedStrings.shared.decisionFatigue, true, false),
                 (LocalizedStrings.shared.slowThinking, true, false),
-                (LocalizedStrings.shared.slowResponsiveness, false, false),
-                (LocalizedStrings.shared.difficultyConcentrating, false, false),
                 (LocalizedStrings.shared.reducedSensoryFilter, true, false),
                 (LocalizedStrings.shared.memoryProblems, true, false),
-                (LocalizedStrings.shared.difficultiesUsingTheWorkingMemory, false, false),
                 (LocalizedStrings.shared.reducedExecutiveFunctions, true, false),
                 (LocalizedStrings.shared.reducedReadinessForChange, true, false),
                 (LocalizedStrings.shared.sadness, true, false),
                 (LocalizedStrings.shared.severeAnxciety, true, false),
-                (LocalizedStrings.shared.mildAnxciety, false, false),
-                (LocalizedStrings.shared.irritability, false, false),
                 (LocalizedStrings.shared.aggression, true, false),
-                (LocalizedStrings.shared.moodChanges, false, false),
                 (LocalizedStrings.shared.difficultyWithEmotionalControl, true, false),
                 (LocalizedStrings.shared.changedPersonality, true, false)]
     }

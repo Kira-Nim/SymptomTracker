@@ -9,7 +9,7 @@ import Foundation
 
 class FirebaseSymptom: Symptom {
     
-    var symptomId: String?
+    var id: String?
     var name: String
     var disabled: Bool
     var visibilityOnGraph: Bool
@@ -27,11 +27,11 @@ class FirebaseSymptom: Symptom {
     
     // Initializer used when mapping from Firebase to Symptom
     init(firebaseSymptom: [String: Any], symptomId: String) {
-        self.symptomId = symptomId
+        self.id = symptomId
         self.name = firebaseSymptom["name"] as? String ?? ""
         self.disabled = firebaseSymptom["disabled"] as? Bool ?? false
         self.visibilityOnGraph = firebaseSymptom["visibility_on_graph"] as? Bool ?? false
-        self.sortingPlacement = firebaseSymptom["sorting_plaement"] as? Int ?? -1
+        self.sortingPlacement = firebaseSymptom["sorting_placement"] as? Int ?? -1
         self.userId = firebaseSymptom["user_id"] as? String ?? ""
     }
 }
