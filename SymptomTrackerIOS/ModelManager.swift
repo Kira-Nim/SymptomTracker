@@ -9,4 +9,5 @@ import Foundation
 
 protocol ModelManager {
     func isUserLoggedIn() -> Bool
+    func getSymptoms() -> [Symptom]
 }

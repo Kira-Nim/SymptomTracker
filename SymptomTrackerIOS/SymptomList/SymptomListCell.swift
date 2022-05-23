@@ -16,7 +16,6 @@ class SymptomListCell: UITableViewCell {
     public lazy var symptomLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = symptomName
         label.numberOfLines = 0
         label.font = .appFont(ofSize: 17, weight: .medium)
         label.textColor = UIColor.appColor(name: .textBlack)
@@ -72,5 +71,13 @@ class SymptomListCell: UITableViewCell {
             switchButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             symptomLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
+    }
+    
+    public func configureCell(symptoms: [Symptom]) {
+        
+        for symptom in symptoms {
+            symptomLabel.text = symptom.name
+            switchButton.isOn = !symptom.disabled
+        }
     }
 }

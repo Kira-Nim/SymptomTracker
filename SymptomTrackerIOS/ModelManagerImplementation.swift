@@ -38,6 +38,15 @@ final class ModelManagerImplementation: ModelManager {
     public func isUserLoggedIn() -> Bool {
         return accountManager.isLoggedIn
     }
+    
+    //MARK: Symptom CRUD
+    
+    public func getSymptoms() -> [Symptom] {
+        let firebaseSymptoms = symptomReposityry.getSymptomsFromDb()
+        
+        let symptomList: [Symptom] = firebaseSymptoms
+        return symptomList
+    }
 }
 
 //MARK: ModelManager Extension

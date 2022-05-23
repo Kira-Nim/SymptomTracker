@@ -170,15 +170,16 @@
 			isa = PBXGroup;
 			children = (
 				4F388E5A2837BCB7009F684C /* SharedStyleElements */,
-				4F388E642839599C009F684C /* SymptomList */,
-				4FDB44D42831A709005D35A1 /* AccountSettings */,
-				4FAFCF1028317E36002CEFBE /* Insight */,
-				4FAFCF0D28317DBB002CEFBE /* ActivityRegistration */,
-				4FAFCF0A28317D29002CEFBE /* SymptomRegistretion */,
-				4FAFCF032831539D002CEFBE /* Login */,
-				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
-				4FAFCEF52826CC93002CEFBE /* Services */,
 				4FAFCED228241308002CEFBE /* Model */,
+				4FAFCEDB28242344002CEFBE /* Repositories */,
+				4F388E642839599C009F684C /* SymptomList */,
+				4FAFCF0A28317D29002CEFBE /* SymptomRegistretion */,
+				4FAFCF0D28317DBB002CEFBE /* ActivityRegistration */,
+				4FAFCF1028317E36002CEFBE /* Insight */,
+				4FDB44D42831A709005D35A1 /* AccountSettings */,
+				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
+				4FAFCF032831539D002CEFBE /* Login */,
+				4FAFCEF52826CC93002CEFBE /* Services */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
 				4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */,
@@ -205,7 +206,6 @@
 		4FAFCED228241308002CEFBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4FAFCEDB28242344002CEFBE /* Repositories */,
 				4FAFCED328241381002CEFBE /* FirebaseActivity.swift */,
 				4FAFCED528242151002CEFBE /* FirebaseSymptom.swift */,
 				4FAFCED72824220A002CEFBE /* FirebaseSymptomRegistration.swift */,

@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 
 final class SymptomListViewModel: NSObject {
-    
-    
     private var view: SymptomListView? = nil
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "cell"
+    private var symptomList: [Symptom]
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
+        symptomList = modelManager.getSymptoms()
     }
     
     public func setView(view: SymptomListView) {
@@ -33,7 +33,7 @@ extension SymptomListViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        // code here
     }
 }
 
@@ -59,7 +59,7 @@ extension SymptomListViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         
         if let symptomListCell = cell as? SymptomListCell {
-        // configure cell here: symptomListCell.configureCell(data: somedata, callback: somecallback)
+            symptomListCell.configureCell(symptoms: symptomList)
         }
         
         return cell
