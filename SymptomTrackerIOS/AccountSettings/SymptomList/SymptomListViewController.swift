@@ -19,7 +19,6 @@ final class SymptomListViewController: UIViewController {
         title = LocalizedStrings.shared.symptomListControllerTitle
         
         navigationItem.rightBarButtonItem = editButtonItem
-
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {
@@ -40,5 +39,10 @@ final class SymptomListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         symptomListViewModel.setView(view: symptomListView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        symptomListViewModel.updateView()
     }
 }

@@ -52,4 +52,8 @@ final class ViewModelProvider {
     public func getSymptomListViewModel() -> SymptomListViewModel {
         return SymptomListViewModel(modelManager: modelManager)
     }
+    
+    public func getChangeSymptomNameViewModel(symptom: Symptom) -> ChangeSymptomNameViewModel {
+        return ChangeSymptomNameViewModel(modelManager: modelManager, symptom: symptom)
+    }
 }

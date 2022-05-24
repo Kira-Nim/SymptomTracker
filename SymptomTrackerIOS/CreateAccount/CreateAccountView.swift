@@ -76,7 +76,7 @@ class CreateAccountView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor.red
+        label.textColor = .appColor(name: .errorRed)
         label.text = ""
         label.font = .appFont(ofSize: 17, weight: .regular)
         label.textAlignment = NSTextAlignment.center

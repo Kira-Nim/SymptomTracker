@@ -13,6 +13,7 @@ final class SymptomListViewModel: NSObject {
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "cell"
     private var symptomList: [Symptom]
+    public var changeNameCallback: ((Symptom) -> Void)? = nil
     
 //MARK: Init
     init(modelManager: ModelManager) {
@@ -23,6 +24,7 @@ final class SymptomListViewModel: NSObject {
     public func setView(view: SymptomListView) {
         view.delegate = self
         view.dataSource = self
+        view.allowsSelectionDuringEditing = true
         
         // To make sure that a cell of type SymptomListCell is now available to the tableView.
         view.register(SymptomListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -32,6 +34,10 @@ final class SymptomListViewModel: NSObject {
     public func changeEditingStateTo(_ state: Bool, animated: Bool) {
         view?.setEditing(state, animated: animated)
     }
+    
+    public func updateView() {
+        view?.reloadData()
+    }
 }
 
 //MARK: Extension implementing UITableViewDelegate
@@ -39,7 +45,14 @@ extension SymptomListViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Code for when row is selected
+        if let changeNameCallback = changeNameCallback {
+            
+            // Only navigate to change symptom name page if the symptom name is selected in editing mode
+            // tableView refers to self.view
+            if(tableView.isEditing) {
+                changeNameCallback(symptomList[indexPath.row])
+            }
+        }
     }
     
     // Method for setting editing style on cell.
@@ -102,4 +115,5 @@ extension SymptomListViewModel: UITableViewDataSource {
         // The tableView taken as param above (and used here) refers to self.view.
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
+    
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1CAC5E283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC5D283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift */; };
+		4F1CAC60283D1B230081FA45 /* ChangeSymptomNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC5F283D1B230081FA45 /* ChangeSymptomNameViewController.swift */; };
+		4F1CAC62283D1B530081FA45 /* ChangeSymptomNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC61283D1B530081FA45 /* ChangeSymptomNameView.swift */; };
 		4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */; };
 		4F388E5F2837EA40009F684C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F388E5E2837EA40009F684C /* IQKeyboardManagerSwift */; };
 		4F388E612837F71B009F684C /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E602837F71B009F684C /* ValidationService.swift */; };
@@ -63,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		4F1CAC5B283C68430081FA45 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4F1CAC5D283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameViewModel.swift; sourceTree = "<group>"; };
+		4F1CAC5F283D1B230081FA45 /* ChangeSymptomNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameViewController.swift; sourceTree = "<group>"; };
+		4F1CAC61283D1B530081FA45 /* ChangeSymptomNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameView.swift; sourceTree = "<group>"; };
 		4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStyleSheet.swift; sourceTree = "<group>"; };
 		4F388E602837F71B009F684C /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		4F388E6228380BE2009F684C /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
@@ -130,6 +136,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F1CAC5C283D1AD30081FA45 /* ChangeSymptomName */ = {
+			isa = PBXGroup;
+			children = (
+				4F1CAC5D283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift */,
+				4F1CAC5F283D1B230081FA45 /* ChangeSymptomNameViewController.swift */,
+				4F1CAC61283D1B530081FA45 /* ChangeSymptomNameView.swift */,
+			);
+			path = ChangeSymptomName;
+			sourceTree = "<group>";
+		};
 		4F388E5A2837BCB7009F684C /* SharedStyleElements */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +158,7 @@
 		4F388E642839599C009F684C /* SymptomList */ = {
 			isa = PBXGroup;
 			children = (
+				4F1CAC5C283D1AD30081FA45 /* ChangeSymptomName */,
 				4F388E65283959DF009F684C /* SymptomListViewController.swift */,
 				4F388E6728395B3C009F684C /* SymptomListViewModel.swift */,
 				4F388E6928395C4E009F684C /* SymptomListView.swift */,
@@ -173,7 +190,6 @@
 				4F388E5A2837BCB7009F684C /* SharedStyleElements */,
 				4FAFCED228241308002CEFBE /* Model */,
 				4FAFCEDB28242344002CEFBE /* Repositories */,
-				4F388E642839599C009F684C /* SymptomList */,
 				4FAFCF0A28317D29002CEFBE /* SymptomRegistretion */,
 				4FAFCF0D28317DBB002CEFBE /* ActivityRegistration */,
 				4FAFCF1028317E36002CEFBE /* Insight */,
@@ -291,6 +307,7 @@
 		4FDB44D42831A709005D35A1 /* AccountSettings */ = {
 			isa = PBXGroup;
 			children = (
+				4F388E642839599C009F684C /* SymptomList */,
 				4FDB44D52831A72C005D35A1 /* AccountViewController.swift */,
 				4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */,
 				4FDB44D92831A88A005D35A1 /* AccountView.swift */,
@@ -410,8 +427,10 @@
 				4FAFCEE128242571002CEFBE /* SymptomRegistration.swift in Sources */,
 				4FAFCEEB282534E3002CEFBE /* FlowCoordinator.swift in Sources */,
 				4FAFCEE928252F29002CEFBE /* ViewModelProvider.swift in Sources */,
+				4F1CAC5E283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift in Sources */,
 				4FDB44DA2831A88A005D35A1 /* AccountView.swift in Sources */,
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
+				4F1CAC62283D1B530081FA45 /* ChangeSymptomNameView.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
 				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
 				4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */,
@@ -419,6 +438,7 @@
 				4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */,
 				4F388E6828395B3C009F684C /* SymptomListViewModel.swift in Sources */,
 				4FDB44CD2831A172005D35A1 /* ActivityView.swift in Sources */,
+				4F1CAC60283D1B230081FA45 /* ChangeSymptomNameViewController.swift in Sources */,
 				4F388E6328380BE2009F684C /* LocalizedStrings.swift in Sources */,
 				4FAFCEFE282D3595002CEFBE /* CreateAccountViewModel.swift in Sources */,
 				4F388E612837F71B009F684C /* ValidationService.swift in Sources */,

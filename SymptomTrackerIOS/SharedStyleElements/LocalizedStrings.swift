@@ -21,7 +21,7 @@ final class LocalizedStrings {
     public let invalidCredentialsError = "Forkert email eller password"
     public let loginFailedError = "Fejl ved login"
     public let accountDisabledError = "Kontoen er blevet lukket"
-    
+    public let inputIsToLongError = "Den maksimal længde symptomets navn er 55 anslag"
     //MARK: Confirmation messages
     public let passwordResetConfirmation = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
     
@@ -43,6 +43,9 @@ final class LocalizedStrings {
     //MARK: Name of app "Logo" text
     public let appTitle = "Symptom Tracker"
     
+    //MARK: Labels
+    public let createSymptomLabelText = "Symptom navn"
+    
     //MARK: Tabbar labels
     public let tabbarAccountText = "Indstillinger"
     public let tabbarInsightText = "Overblik"
@@ -51,6 +54,8 @@ final class LocalizedStrings {
     
     // Controller titles
     public let symptomListControllerTitle = "Symptom Liste"
+    public let editSymptomControllerTitle = "Rediger navn"
+    public let createSymptomControllerTitle = "Opret Symptom"
 
     // Symptomer
     public let headache = "Hovedpine"
@@ -102,7 +107,7 @@ final class LocalizedStrings {
 }
 
 
-
+/*
 public let repeatPasswordError = "Gentag password fejlede"
 public let accountCreationFailedError = "Fejl ved oprettelse af bruger"
 public let emailAlreadyExistError = "Den valgte email eksisterer allerede"
@@ -191,3 +196,4 @@ public let aggression = "Agression"
 public let moodChanges = "Humørsvingninger"
 public let difficultyWithEmotionalControl = "problemer med emotionel kontrol"
 public let changedPersonality = "Ændret personlighed"
+*/

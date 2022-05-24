@@ -39,12 +39,10 @@ final class FlowCoordinator {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
-            
             let accountViewModel = viewModelProvider.getAccountSettingsViewModel()
             accountViewModel.afterLogoutCallback = setRootViewController
             accountViewModel.symptomListSelectedCallback = createSymptomListViewController
             let accountSettingsViewController = AccountViewController(viewModel: accountViewModel)
-            
             let symptomRegistrationNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
             let activityNavigationController = UINavigationController(rootViewController: activityViewController)
             let insightNavigationController = UINavigationController(rootViewController: insightViewController)
@@ -64,7 +62,6 @@ final class FlowCoordinator {
             let loginViewModel = viewModelProvider.getLoginViewModel()
             let logInViewController = LoginViewController(viewModel: loginViewModel)
             window.rootViewController = logInViewController
-            
             loginViewModel.afterLoginCallback = setRootViewController
             loginViewModel.presentCreateAccountCallback = { [unowned logInViewController] () in
                 self.presentCreateAccountViewControllerTo(presenter: logInViewController)
@@ -75,17 +72,27 @@ final class FlowCoordinator {
     func presentCreateAccountViewControllerTo(presenter: UIViewController) {
         let createAccountViewModel = viewModelProvider.getCreateAccountViewModel()
         createAccountViewModel.afterCreationCallback = setRootViewController
-        
         let createAccountViewController = CreateAccountViewController(viewModel: createAccountViewModel)
-        
         createAccountViewController.modalPresentationStyle = .automatic
         presenter.present(createAccountViewController, animated: true, completion: nil)
     }
     
     func createSymptomListViewController() {
         let symptomListViewModel = viewModelProvider.getSymptomListViewModel()
+        symptomListViewModel.changeNameCallback = createChangeSymptomNameViewController
         let symptomListViewController = SymptomListViewController(viewModel: symptomListViewModel)
         accountSettingsNavigationController?.pushViewController(symptomListViewController, animated: true)
+    }
+    
+    func createChangeSymptomNameViewController(symptom: Symptom) {
+        let changeSymptomNameViewModel = viewModelProvider.getChangeSymptomNameViewModel(symptom: symptom)
+        let changeSymptomNameViewController = ChangeSymptomNameViewController(viewModel: changeSymptomNameViewModel)
+        
+        changeSymptomNameViewModel.changeSymptomNameCompletionCallback = {
+            self.accountSettingsNavigationController?.popViewController(animated: true)
+        }
+        
+        accountSettingsNavigationController?.pushViewController(changeSymptomNameViewController, animated: true)
     }
 }
 
