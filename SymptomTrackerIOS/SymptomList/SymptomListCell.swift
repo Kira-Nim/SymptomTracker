@@ -51,6 +51,7 @@ class SymptomListCell: UITableViewCell {
         
         //Turn off default way of showing that row has been selected
         self.selectionStyle = .none
+        self.showsReorderControl = true
         
         setupSubViews()
         setupConstraints()
@@ -82,5 +83,6 @@ class SymptomListCell: UITableViewCell {
         symptomLabel.text = symptom.name
         switchButton.isOn = !symptom.disabled
         self.switchCallback = switchCallback
+        
     }
 }

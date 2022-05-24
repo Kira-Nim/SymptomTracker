@@ -27,13 +27,32 @@ final class SymptomListViewModel: NSObject {
         view.register(SymptomListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.view = view
     }
+    
+    public func changeEditingStateTo(_ state: Bool, animated: Bool) {
+        view?.setEditing(state, animated: animated)
+    }
 }
 
 extension SymptomListViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // code here
+        // Code for when row is selected
+    }
+    
+    // Method for setting editing style on cell.
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return.delete
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        var movingSymptom = symptomList.remove(at: sourceIndexPath.row)
+        symptomList.insert(movingSymptom, at: destinationIndexPath.row)
+        
+        for (index, var symptom) in symptomList.enumerated() {
+            symptom.sortingPlacement = index
+        }
     }
 }
 

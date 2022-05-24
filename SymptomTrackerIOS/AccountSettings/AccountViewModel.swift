@@ -53,6 +53,8 @@ extension AccountViewModel: UITableViewDelegate {
         // Get functionality to be run when row is selected - run it
         let selectedRowFunctionality = accountSettingsOptionsList[indexPath.row].1
         selectedRowFunctionality()
+        
+        view?.deselectRow(at: indexPath, animated: true)
     }
 }
 

@@ -16,8 +16,16 @@ final class SymptomListViewController: UIViewController {
         symptomListViewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
-        
         title = LocalizedStrings.shared.symptomListControllerTitle
+        
+        navigationItem.rightBarButtonItem = editButtonItem
+
+    }
+    
+    override func setEditing(_ state:Bool, animated: Bool) {
+        super.setEditing(state, animated: animated)
+        
+        symptomListViewModel.changeEditingStateTo(state, animated: animated)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.

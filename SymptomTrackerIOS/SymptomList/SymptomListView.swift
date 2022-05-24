@@ -11,8 +11,7 @@ import UIKit
 final class SymptomListView: UITableView {
     init() {
         super.init(frame: CGRect.zero, style: .plain)
-        
-        backgroundColor = UIColor.green
+        backgroundColor = UIColor.appColor(name: .backgroundColor)
     }
     
     required init?(coder: NSCoder) {
