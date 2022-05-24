@@ -85,4 +85,14 @@ class SymptomListCell: UITableViewCell {
         self.switchCallback = switchCallback
         
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if(editing) {
+            switchButton.isHidden = true
+        } else {
+            switchButton.isHidden = false
+        }
+    }
 }

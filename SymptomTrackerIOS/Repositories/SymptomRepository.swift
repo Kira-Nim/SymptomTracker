@@ -69,17 +69,51 @@ final class SymptomRepository {
     }
     
     func update(symptom: FirebaseSymptom) {
-
         if let documentId = symptom.id {
-            let symptomDict: [String: Any] = [
-                "name": symptom.name,
+            let symptomDict: [String: Any] = prepareSymptomDict(symptom: symptom)
+            db.collection(symptomCollection).document(documentId).setData(symptomDict)
+        }
+    }
+    
+    // Update batch of documents in db
+    func updateSymptoms(Symptoms: [FirebaseSymptom]) {
+        // Get new write batch
+        let batch = db.batch()
+        
+        // Add items to batch
+        for symptom in Symptoms {
+            if let documentId = symptom.id {
+                let documentForBatch = db.collection(symptomCollection).document(documentId)
+                let symptomDict: [String: Any] = prepareSymptomDict(symptom: symptom)
+                batch.setData(symptomDict, forDocument: documentForBatch)
+            }
+        }
+
+        // Commit the batch
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch \(err)")
+            } else {
+                print("Batch write succeeded.")
+            }
+        }
+    }
+    
+    // Delete symptom from collection in db
+    func deleteSymptom(symptom: FirebaseSymptom) {
+        if let documentId = symptom.id {
+            db.collection(symptomCollection).document(documentId).delete()
+        }
+    }
+    
+    // Help function used for mapping a FirebaseSymptom instance to a dictionary
+    // that can be mapped to a Firebase document
+    func prepareSymptomDict(symptom: FirebaseSymptom) -> [String: Any] {
+        return ["name": symptom.name,
                 "disabled": symptom.disabled,
                 "visibility_on_graph": symptom.visibilityOnGraph,
                 "sorting_placement": symptom.sortingPlacement,
                 "user_id": symptom.userId ]
-
-            db.collection(symptomCollection).document(documentId).setData(symptomDict)
-        }
     }
 }
 
