@@ -10,5 +10,7 @@ import Foundation
 protocol ModelManager {
     func isUserLoggedIn() -> Bool
     func getSymptoms() -> [Symptom]
-    func updateSymptomInDb(symptom: Symptom)
+    func updateSymptom(symptom: Symptom)
+    func updateSymptoms(symptoms: [Symptom])
+    func delete(symptom: Symptom)
 }

@@ -59,9 +59,25 @@ final class ModelManagerImplementation: ModelManager {
         return symptomList
     }
     
-    public func updateSymptomInDb(symptom: Symptom) {
+    public func updateSymptom(symptom: Symptom) {
         if let firebaseSymptom = symptom as? FirebaseSymptom {
             symptomRepository.update(symptom: firebaseSymptom)
+        }
+    }
+    
+    public func updateSymptoms(symptoms: [Symptom]) {
+        var firebaseSymptoms: [FirebaseSymptom] = []
+        for symptom in symptoms {
+            if let firebaseSymptom = symptom as? FirebaseSymptom {
+                firebaseSymptoms.append(firebaseSymptom)
+            }
+        }
+        symptomRepository.updateSymptoms(symptoms: firebaseSymptoms)
+    }
+    
+    public func delete(symptom: Symptom) {
+        if let firebaseSymptom = symptom as? FirebaseSymptom {
+            symptomRepository.delete(symptom: firebaseSymptom)
         }
     }
 }

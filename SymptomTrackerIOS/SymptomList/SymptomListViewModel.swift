@@ -14,6 +14,7 @@ final class SymptomListViewModel: NSObject {
     private let cellReuseIdentifier =  "cell"
     private var symptomList: [Symptom]
     
+//MARK: Init
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         symptomList = modelManager.getSymptoms()
@@ -33,6 +34,7 @@ final class SymptomListViewModel: NSObject {
     }
 }
 
+//MARK: Extension implementing UITableViewDelegate
 extension SymptomListViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
@@ -53,9 +55,11 @@ extension SymptomListViewModel: UITableViewDelegate {
         for (index, var symptom) in symptomList.enumerated() {
             symptom.sortingPlacement = index
         }
+        modelManager.updateSymptoms(symptoms: symptomList)
     }
 }
 
+//MARK: Extension implementing UITableViewDataSource
 extension SymptomListViewModel: UITableViewDataSource {
 
     // How many sections
@@ -78,9 +82,24 @@ extension SymptomListViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         if let symptomListCell = cell as? SymptomListCell {
             symptomListCell.configureCell(symptom: symptomList[indexPath.row]) { symptom in
-                self.modelManager.updateSymptomInDb(symptom: symptom)
+                self.modelManager.updateSymptom(symptom: symptom)
             }
         }
         return cell
+    }
+    
+    // For when user chooses to delete a symptom from symptomlist in editing state
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        // Delete symptom frem db
+        let symptomToDelete = symptomList[indexPath.row]
+        modelManager.delete(symptom: symptomToDelete)
+        
+        //Remove symptom from local list
+        symptomList.remove(at: indexPath.row)
+        
+        // Update view
+        // The tableView taken as param above (and used here) refers to self.view.
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 }

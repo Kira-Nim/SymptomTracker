@@ -76,12 +76,12 @@ final class SymptomRepository {
     }
     
     // Update batch of documents in db
-    func updateSymptoms(Symptoms: [FirebaseSymptom]) {
+    func updateSymptoms(symptoms: [FirebaseSymptom]) {
         // Get new write batch
         let batch = db.batch()
         
         // Add items to batch
-        for symptom in Symptoms {
+        for symptom in symptoms {
             if let documentId = symptom.id {
                 let documentForBatch = db.collection(symptomCollection).document(documentId)
                 let symptomDict: [String: Any] = prepareSymptomDict(symptom: symptom)
@@ -100,9 +100,15 @@ final class SymptomRepository {
     }
     
     // Delete symptom from collection in db
-    func deleteSymptom(symptom: FirebaseSymptom) {
+    func delete(symptom: FirebaseSymptom) {
         if let documentId = symptom.id {
-            db.collection(symptomCollection).document(documentId).delete()
+            db.collection(symptomCollection).document(documentId).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
         }
     }
     
