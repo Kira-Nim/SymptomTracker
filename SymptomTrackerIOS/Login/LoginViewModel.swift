@@ -9,15 +9,17 @@ import Foundation
 import UIKit
 
 final class LoginViewModel: NSObject, UITextFieldDelegate {
-    private var view: LoginView? = nil
+    private var view: LoginView?
     public var modelManager: AccountModelManager
-    public var afterLoginCallback: (()->Void)? = nil
-    public var presentCreateAccountCallback: (()->Void)? = nil
+    public var afterLoginCallback: (()->Void)?
+    public var presentCreateAccountCallback: (()->Void)?
     
+    // MARK: Init
     init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
     
+    // MARK: setView()
     public func setView(view: LoginView) {
         self.view = view
         view.emailInputField.delegate = self

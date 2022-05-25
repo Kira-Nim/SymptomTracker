@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol IntensityRegistration {
+protocol IntensityRegistration: AnyObject  {
     var intensity: Int { get set }
     var timeOrder: Int { get set }
 }

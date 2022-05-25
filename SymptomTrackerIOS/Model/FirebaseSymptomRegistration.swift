@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 
 class FirebaseSymptomRegistration: SymptomRegistration {
-    
     var date: Date
     var intensityRegistrations: [IntensityRegistration]
     var intensityRegistrationAverage: Int {
@@ -26,7 +25,6 @@ class FirebaseSymptomRegistration: SymptomRegistration {
     }
     
     init(firebaseSymptomRegistration: [String: Any]) {
-        
         // Default value is a safety precaution - It should never be used
         self.date = (firebaseSymptomRegistration["date"] as? Timestamp)?.dateValue() ?? Date()
         self.intensityRegistrations = firebaseSymptomRegistration["intensity_registrations"] as? [FirebaseIntensityRegistration] ?? []

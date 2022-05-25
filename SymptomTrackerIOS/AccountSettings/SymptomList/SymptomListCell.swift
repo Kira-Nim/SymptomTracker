@@ -9,41 +9,34 @@ import Foundation
 import UIKit
 
 class SymptomListCell: UITableViewCell {
-    
     private var symptom: Symptom?
     private var switchCallback: ((Symptom) -> Void)? = nil
     
     //MARK: Subviews
-    public lazy var symptomLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.font = .appFont(ofSize: 17, weight: .medium)
-        label.textColor = UIColor.appColor(name: .textBlack)
-        
-        return label
-    }()
+    public var symptomLabel = UILabel()
+    public var switchButton: UISwitch = UISwitch()
     
-    public lazy var switchButton: UISwitch = {
-        let switchButton = UISwitch()
+    func setAttributesOnSubViews() {
+        symptomLabel.translatesAutoresizingMaskIntoConstraints = false
+        symptomLabel.numberOfLines = 0
+        symptomLabel.font = .appFont(ofSize: 17, weight: .medium)
+        symptomLabel.textColor = UIColor.appColor(name: .textBlack)
+        
         switchButton.translatesAutoresizingMaskIntoConstraints = false
         //switchButton.thumbTintColor = UIColor.appColor(name: .switchButtonThumbColor)
         switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
-        switchButton.backgroundColor = UIColor.appColor(name: .switchButtonOffTintColor)
-        switchButton.layer.cornerRadius = switchButton.frame.height / 2.0
-        switchButton.clipsToBounds = true
         
-        switchButton.addAction(UIAction {[weak self] _ in
+        switchButton.addAction(UIAction { [weak self] _ in
             if let switchCallback = self?.switchCallback,
                var symptom = self?.symptom {
-                symptom.disabled = !switchButton.isOn
+                if let switchButtonState = self?.switchButton.isOn {
+                    symptom.disabled = !switchButtonState
+                }
                 switchCallback(symptom)
             }
         }, for: .touchUpInside)
-        
-        return switchButton
-    }()
+    }
 
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,6 +46,7 @@ class SymptomListCell: UITableViewCell {
         self.selectionStyle = .none
         self.showsReorderControl = true
         
+        setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
     }
@@ -63,7 +57,7 @@ class SymptomListCell: UITableViewCell {
     
     // MARK: Setup SubViews
     private func setupSubViews() {
-        [symptomLabel, switchButton].forEach({self.contentView.addSubview($0)})
+        [symptomLabel, switchButton].forEach({ self.contentView.addSubview($0) })
     }
     
     // MARK: Setup constraints
@@ -78,12 +72,12 @@ class SymptomListCell: UITableViewCell {
         ])
     }
     
+    // MARK: Confuguration for cell
     public func configureCell(symptom: Symptom, switchCallback: @escaping (Symptom) -> Void ) {
         self.symptom = symptom
         symptomLabel.text = symptom.name
         switchButton.isOn = !symptom.disabled
         self.switchCallback = switchCallback
-        
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

@@ -9,49 +9,26 @@ import Foundation
 import UIKit
 
 class LoginView: UIView {
-    
     public var contentStackViewConstraint: NSLayoutConstraint? = nil
     
     // MARK: Subviews
     
-    public lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        //label.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
-        label.textColor = .appColor(name: .textBlack)
-        label.text = LocalizedStrings.shared.appTitle
-        label.font = .appFont(ofSize: 30, weight: .medium)
-        label.textAlignment = NSTextAlignment.center
-        
-        return label
-    }()
+    public var titleLabel = UILabel()
+    public var brainImage = UIImageView(image: UIImage(named: "Logo"))
+    public var emailInputField = UITextField()
+    public var passwordInputField = UITextField()
+    public var resetButton = UIButton()
+    public var loginButton = UIButton()
+    public var createAccountLabel = UILabel()
+    public var resetPasswordLabel = UILabel()
+    public var errorMessage = UILabel()
+    public var passwordResetConfirmationMessage = UILabel()
+    public var closeResetButton = UIButton()
     
-    public lazy var brainImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Logo"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    public lazy var imageContentView: UIView = {
+    public var imageContentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    public lazy var emailInputField: UITextField = {
-        let inputField =  loginInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText)
-        inputField.keyboardType = .emailAddress
-        inputField.autocorrectionType = .no
-        inputField.autocapitalizationType = .none
-        return inputField
-    }()
-    
-    public lazy var passwordInputField: UITextField = {
-        let inputField = loginInputFieldWith(placeholderText: LocalizedStrings.shared.passwordPlaceholderText)
-        inputField.isSecureTextEntry = true
-        return inputField
     }()
     
     public lazy var contentStackView: UIStackView = {
@@ -65,58 +42,6 @@ class LoginView: UIView {
         return stackView
     }()
     
-    public lazy var resetButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(LocalizedStrings.shared.resetPasswordButtonText, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        button.backgroundColor = .appColor(name: .buttonBlue)
-        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        button.layer.cornerRadius = 3
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
-        button.isHidden = true
-        return button
-    }()
-    
-    public lazy var loginButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(LocalizedStrings.shared.loginButtonText, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        button.backgroundColor = .appColor(name: .buttonBlue)
-        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        button.layer.cornerRadius = 3
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
-        
-        return button
-    }()
-    
-    public lazy var createAccountLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-            label.textColor = .appColor(name: .textBlack)
-        label.text = LocalizedStrings.shared.createAccountClickableLabelText
-        label.font = .appFont(ofSize: 17, weight: .medium)
-        label.textAlignment = NSTextAlignment.left
-        return label
-    }()
-    
-    public lazy var resetPasswordLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .appColor(name: .textBlack)
-        label.text = LocalizedStrings.shared.forgotPasswordClickableLabetText
-        label.font = .appFont(ofSize: 17, weight: .medium)
-        label.textAlignment = NSTextAlignment.right
-        return label
-    }()
-    
     public lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [createAccountLabel,
                                                        resetPasswordLabel])
@@ -124,39 +49,6 @@ class LoginView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         return stackView
-    }()
-    
-    public lazy var errorMessage: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .appColor(name: .errorRed)
-        label.text = ""
-        label.font = .appFont(ofSize: 17, weight: .medium)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    public lazy var passwordResetConfirmationMessage: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .appColor(name: .confirmationGreen)
-        label.text = LocalizedStrings.shared.passwordResetConfirmation
-        label.font = .appFont(ofSize: 17, weight: .medium)
-        label.textAlignment = .center
-        label.isHidden = true
-        return label
-    }()
-    
-    public lazy var closeResetButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(LocalizedStrings.shared.x, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
-        button.setTitleColor(.appColor(name: .textBlack), for: .normal)
-        button.isHidden = true
-        return button
     }()
     
     //MARK: init
@@ -167,13 +59,91 @@ class LoginView: UIView {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.white
         
+        self.setAttributesOnSubview()
         self.contentStackViewConstraint = contentStackView.heightAnchor.constraint(equalToConstant: 114)
         self.setupSubViews()
         self.setupConstraints()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setAttributesOnSubview() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.numberOfLines = 0
+            //titleLabel.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
+        titleLabel.textColor = .appColor(name: .textBlack)
+        titleLabel.text = LocalizedStrings.shared.appTitle
+        titleLabel.font = .appFont(ofSize: 30, weight: .medium)
+        titleLabel.textAlignment = NSTextAlignment.center
+        
+        brainImage.translatesAutoresizingMaskIntoConstraints = false
+        brainImage.contentMode = .scaleAspectFit
+        
+        setAttributesOnTextFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText, inputField: emailInputField)
+        emailInputField.keyboardType = .emailAddress
+        emailInputField.autocorrectionType = .no
+        emailInputField.autocapitalizationType = .none
+        
+        setAttributesOnTextFieldWith(placeholderText: LocalizedStrings.shared.passwordPlaceholderText, inputField: passwordInputField)
+        passwordInputField.isSecureTextEntry = true
+        
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.setTitle(LocalizedStrings.shared.resetPasswordButtonText, for: .normal)
+        resetButton.setTitleColor(UIColor.white, for: .normal)
+        resetButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
+        resetButton.backgroundColor = .appColor(name: .buttonBlue)
+        resetButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        resetButton.layer.cornerRadius = 3
+        resetButton.layer.borderWidth = 1
+        resetButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        resetButton.isHidden = true
+
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.setTitle(LocalizedStrings.shared.loginButtonText, for: .normal)
+        loginButton.setTitleColor(UIColor.white, for: .normal)
+        loginButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
+        loginButton.backgroundColor = .appColor(name: .buttonBlue)
+        loginButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        loginButton.layer.cornerRadius = 3
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        
+        createAccountLabel.translatesAutoresizingMaskIntoConstraints = false
+        createAccountLabel.numberOfLines = 0
+        createAccountLabel.textColor = .appColor(name: .textBlack)
+        createAccountLabel.text = LocalizedStrings.shared.createAccountClickableLabelText
+        createAccountLabel.font = .appFont(ofSize: 17, weight: .medium)
+        createAccountLabel.textAlignment = NSTextAlignment.left
+        
+        resetPasswordLabel.translatesAutoresizingMaskIntoConstraints = false
+        resetPasswordLabel.numberOfLines = 0
+        resetPasswordLabel.textColor = .appColor(name: .textBlack)
+        resetPasswordLabel.text = LocalizedStrings.shared.forgotPasswordClickableLabetText
+        resetPasswordLabel.font = .appFont(ofSize: 17, weight: .medium)
+        resetPasswordLabel.textAlignment = NSTextAlignment.right
+        
+        errorMessage.translatesAutoresizingMaskIntoConstraints = false
+        errorMessage.numberOfLines = 0
+        errorMessage.textColor = .appColor(name: .errorRed)
+        errorMessage.text = ""
+        errorMessage.font = .appFont(ofSize: 17, weight: .medium)
+        errorMessage.textAlignment = .center
+        
+        passwordResetConfirmationMessage.translatesAutoresizingMaskIntoConstraints = false
+        passwordResetConfirmationMessage.numberOfLines = 0
+        passwordResetConfirmationMessage.textColor = .appColor(name: .confirmationGreen)
+        passwordResetConfirmationMessage.text = LocalizedStrings.shared.passwordResetConfirmation
+        passwordResetConfirmationMessage.font = .appFont(ofSize: 17, weight: .medium)
+        passwordResetConfirmationMessage.textAlignment = .center
+        passwordResetConfirmationMessage.isHidden = true
+        
+        closeResetButton.translatesAutoresizingMaskIntoConstraints = false
+        closeResetButton.setTitle(LocalizedStrings.shared.x, for: .normal)
+        closeResetButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
+        closeResetButton.setTitleColor(.appColor(name: .textBlack), for: .normal)
+        closeResetButton.isHidden = true
+
     }
     
     private func setupSubViews() {
@@ -182,7 +152,6 @@ class LoginView: UIView {
     }
     
     private func setupConstraints() {
-        
         if let contentStackViewConstraint = contentStackViewConstraint {
             NSLayoutConstraint.activate([contentStackViewConstraint])
         }
@@ -242,9 +211,7 @@ class LoginView: UIView {
     //MARK: Help functions
     
     // Helpfunction for creating textField subclasses
-    private func loginInputFieldWith(placeholderText: String) -> UITextField {
-        let inputField = UITextField()
-        
+    private func setAttributesOnTextFieldWith(placeholderText: String, inputField: UITextField) {
         inputField.translatesAutoresizingMaskIntoConstraints = false
         inputField.textColor = UIColor.black
         inputField.font = .appFont(ofSize: 17, weight: .regular)
@@ -257,7 +224,5 @@ class LoginView: UIView {
         inputField.layer.cornerRadius = 3
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always
-        
-        return inputField
     }
 }

@@ -21,10 +21,12 @@ final class AccountViewModel: NSObject {
         [(LocalizedStrings.shared.logOutButtonText, logOut), (LocalizedStrings.shared.settingsListSymptomListItem, navigateToSymptomList)]
     }()
     
+    // MARK: Init
     init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
     
+    // MARK: Set view
     public func setView(view: AccountView) {
         view.delegate = self
         view.dataSource = self
@@ -34,6 +36,7 @@ final class AccountViewModel: NSObject {
         self.view = view
     }
     
+    // MARK: Other functionality
     private func logOut() {
         modelManager.logOut(logOutCompletionCallback: afterLogoutCallback)
     }
@@ -42,6 +45,8 @@ final class AccountViewModel: NSObject {
         symptomListSelectedCallback?()
     }
 }
+
+// MARK: Extension - UITableViewDelegate
 
 // Extension containing logit required for UITableViewDelegate protocol
 extension AccountViewModel: UITableViewDelegate {
@@ -57,6 +62,8 @@ extension AccountViewModel: UITableViewDelegate {
         view?.deselectRow(at: indexPath, animated: true)
     }
 }
+
+// MARK: Extension - UITableViewDataSource
 
 // Extension containing logit required for UITableViewDataSource protocol
 extension AccountViewModel: UITableViewDataSource {

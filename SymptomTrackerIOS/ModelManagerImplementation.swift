@@ -66,12 +66,9 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     public func updateSymptoms(symptoms: [Symptom]) {
-        var firebaseSymptoms: [FirebaseSymptom] = []
-        for symptom in symptoms {
-            if let firebaseSymptom = symptom as? FirebaseSymptom {
-                firebaseSymptoms.append(firebaseSymptom)
-            }
-        }
+        
+        // use compactMap to cast all symptoms from Symptom to FirebaseSymptom before saving them to db
+        let firebaseSymptoms = symptoms.compactMap({ $0 as? FirebaseSymptom })
         symptomRepository.updateSymptoms(symptoms: firebaseSymptoms)
     }
     

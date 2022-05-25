@@ -9,15 +9,16 @@ import Foundation
 import UIKit
 
 final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
-    
     private var view: CreateAccountView? = nil
     public var modelManager: AccountModelManager
     public var afterCreationCallback: (()->Void)? = nil
     
+    // MARK: Init
     init(modelManager: AccountModelManager) {
         self.modelManager = modelManager
     }
 
+    // MARK: setView()
     public func setView(view: CreateAccountView) {
         self.view = view
         view.emailInputField.delegate = self
@@ -31,13 +32,13 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
         }, for: .touchUpInside)
     }
     
+    // MARK: Other functionality
     private func createAccountOrShowError(email: String?, password: String?, passwordRepeat: String?) {
         let validationService = ValidationService()
         let error = validationService.validateUserInputForAccountCreationOrReturnError(email: email, password: password, passwordRepeat: passwordRepeat)
         if let error = error {
             self.showErrorMessageFor(identifyer: error)
         } else {
-            
             // Email and password can be forced unwrapped here because it has been validated that they are not nuill in createNewAccountWith
             self.modelManager.createNewAccountWith(email: email!, password: password!) { [weak self] (identifyer) in
                 self?.showErrorMessageFor(identifyer: identifyer)
@@ -51,7 +52,6 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
     }
     
     private func showErrorMessageFor(identifyer: AccountCreationResult) {
-        
         switch (identifyer) {
             case .repeatPasswordFailed:
             view?.errorMessage.text = LocalizedStrings.shared.repeatPasswordError

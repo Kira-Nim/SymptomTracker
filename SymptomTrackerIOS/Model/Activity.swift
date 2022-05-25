@@ -9,7 +9,7 @@ import Foundation
 
 enum Strain { case red, yellow, green, white }
 
-protocol Activity {
+protocol Activity: AnyObject {
     
     var date: Date { get set }
     var name: String { get set }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SymptomRegistration {
+protocol SymptomRegistration: AnyObject  {
     var date: Date { get set }
     var intensityRegistrations: [IntensityRegistration] { get set }
     var intensityRegistrationAverage: Int { get }

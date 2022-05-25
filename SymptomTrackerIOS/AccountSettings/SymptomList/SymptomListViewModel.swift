@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 final class SymptomListViewModel: NSObject {
-    private var view: SymptomListView? = nil
+    private var view: SymptomListView?
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "cell"
     private var symptomList: [Symptom]
-    public var changeNameCallback: ((Symptom) -> Void)? = nil
+    public var changeNameCallback: ((Symptom) -> Void)?
     
 //MARK: Init
     init(modelManager: ModelManager) {
@@ -42,7 +42,7 @@ final class SymptomListViewModel: NSObject {
                 
                     // reset sortingPlacement attribrutes on all symptoms in symptomList
                     // to match their new index in list
-                    for (index, var symptom) in symptomList.enumerated() {
+                    for (index, symptom) in symptomList.enumerated() {
                         symptom.sortingPlacement = index
                     }
                 
@@ -60,14 +60,9 @@ final class SymptomListViewModel: NSObject {
         view?.symptomsTableView.setEditing(state, animated: animated)
         
         if let view = view {
-  
-            /*
-            if(view.buttonContentViewConstraint?.constant == 0 && view.createSymptomButtonViewConstraint?.constant == 0) {
-             */
-            if(state) {
-                view.buttonContentViewConstraint?.constant = 75//63
+            if state {
+                view.buttonContentViewConstraint?.constant = 75
                 view.createSymptomButtonViewConstraint?.constant = 38
-                view.setNeedsLayout()
             } else {
                 view.buttonContentViewConstraint?.constant = 0
                 view.createSymptomButtonViewConstraint?.constant = 0
@@ -78,7 +73,6 @@ final class SymptomListViewModel: NSObject {
     public func updateView() {
         view?.symptomsTableView.reloadData()
     }
-    
 }
 
 //MARK: Extension implementing UITableViewDelegate
@@ -86,27 +80,23 @@ extension SymptomListViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let changeNameCallback = changeNameCallback {
-            
-            // Only navigate to change symptom name page if the symptom name is selected in editing mode
-            // tableView refers to self.view
-            if(tableView.isEditing) {
-                changeNameCallback(symptomList[indexPath.row])
-            }
+        // Only navigate to change symptom name page if the symptom name is selected in editing mode
+        // tableView refers to self.view
+        if tableView.isEditing {
+            changeNameCallback?(symptomList[indexPath.row])
         }
     }
     
     // Method for setting editing style on cell.
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return.delete
+        return .delete
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
         let movingSymptom = symptomList.remove(at: sourceIndexPath.row)
         symptomList.insert(movingSymptom, at: destinationIndexPath.row)
         
-        for (index, var symptom) in symptomList.enumerated() {
+        for (index, symptom) in symptomList.enumerated() {
             symptom.sortingPlacement = index
         }
         modelManager.updateSymptoms(symptoms: symptomList)
@@ -156,5 +146,4 @@ extension SymptomListViewModel: UITableViewDataSource {
         // The tableView taken as param above (and used here) refers to self.view.
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
-    
 }

@@ -10,61 +10,61 @@ import UIKit
 
 class ChangeSymptomNameView: UIView {
     
+    //MARK: Subviews
+    public lazy var symptomNameLabel = UILabel()
+    public lazy var nameInputField = UITextField()
+    public lazy var errorMessage = UILabel()
+    
+    // MARK: Init
     init() {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.appColor(name: .backgroundColor)
+        
+        setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public lazy var symptomNameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = UIColor.appColor(name: .textBlack)
-        label.text = LocalizedStrings.shared.createSymptomLabelText
-        label.font = .appFont(ofSize: 23, weight: .regular)
-        label.textAlignment = NSTextAlignment.center
-        return label
-    }()
+    // MARK: Set attributes on subviews
+    private func setAttributesOnSubViews() {
+        symptomNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        symptomNameLabel.numberOfLines = 0
+        symptomNameLabel.textColor = UIColor.appColor(name: .textBlack)
+        symptomNameLabel.text = LocalizedStrings.shared.createSymptomLabelText
+        symptomNameLabel.font = .appFont(ofSize: 23, weight: .regular)
+        symptomNameLabel.textAlignment = NSTextAlignment.center
+
+        nameInputField.translatesAutoresizingMaskIntoConstraints = false
+        nameInputField.autocorrectionType = .no
+        nameInputField.autocapitalizationType = .sentences
+        nameInputField.textColor = .appColor(name: .textBlack)
+        nameInputField.font = .appFont(ofSize: 17, weight: .regular)
+        nameInputField.layer.cornerRadius = 3
+        nameInputField.layer.borderWidth = 1.5
+        nameInputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor).cgColor
+        nameInputField.backgroundColor = .appColor(name: .backgroundColor)
+        nameInputField.layer.cornerRadius = 3
+        nameInputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
+        nameInputField.leftViewMode = .always
+        
+        errorMessage.translatesAutoresizingMaskIntoConstraints = false
+        errorMessage.numberOfLines = 0
+        errorMessage.textColor = .appColor(name: .errorRed)
+        errorMessage.text = LocalizedStrings.shared.inputIsToLongError
+        errorMessage.font = .appFont(ofSize: 17, weight: .regular)
+        errorMessage.textAlignment = NSTextAlignment.center
+        errorMessage.isHidden = true
+    }
     
-    public lazy var nameInputField: UITextField = {
-        let inputField =  UITextField()
-        inputField.translatesAutoresizingMaskIntoConstraints = false
-        inputField.autocorrectionType = .no
-        inputField.autocapitalizationType = .sentences
-        inputField.textColor = .appColor(name: .textBlack)
-        inputField.font = .appFont(ofSize: 17, weight: .regular)
-        inputField.layer.cornerRadius = 3
-        inputField.layer.borderWidth = 1.5
-        inputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor).cgColor
-        inputField.backgroundColor = .appColor(name: .backgroundColor)
-        inputField.layer.cornerRadius = 3
-        inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
-        inputField.leftViewMode = .always
-        return inputField
-    }()
-    
-    public lazy var errorMessage: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .appColor(name: .errorRed)
-        label.text = LocalizedStrings.shared.inputIsToLongError
-        label.font = .appFont(ofSize: 17, weight: .regular)
-        label.textAlignment = NSTextAlignment.center
-        label.isHidden = true
-        return label
-    }()
-    
+    // MARK: Set subviews
     private func setupSubViews() {
         [symptomNameLabel, nameInputField, errorMessage].forEach({self.addSubview($0)})
     }
     
+    // MARK: Set constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             nameInputField.topAnchor.constraint(equalTo: self.centerYAnchor, constant: -40),
@@ -80,8 +80,6 @@ class ChangeSymptomNameView: UIView {
             errorMessage.bottomAnchor.constraint(equalTo: symptomNameLabel.topAnchor),
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33)
-            
-            
         ])
     }
 }

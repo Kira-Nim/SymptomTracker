@@ -10,15 +10,14 @@ import UIKit
 
 
 final class CreateAccountViewController: UIViewController {
-    
     private let createAccountViewModel: CreateAccountViewModel
     private lazy var contentView = CreateAccountView()
     
+    //MARK: Init
     init(viewModel: CreateAccountViewModel) {
         createAccountViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     /*
     Formel requirement for all ViewControllers to have this initializer.
     This is not a initializer that is going to be used
@@ -33,10 +32,12 @@ final class CreateAccountViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: loadView()
     override func loadView() {
         view = contentView
     }
     
+    // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         createAccountViewModel.setView(view: contentView)

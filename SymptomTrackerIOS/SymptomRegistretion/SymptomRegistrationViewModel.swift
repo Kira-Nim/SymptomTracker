@@ -23,7 +23,6 @@ final class SymptomRegistrationViewModel: NSObject {
 }
 
 extension SymptomRegistrationViewModel: UITableViewDelegate {
-    
 }
 
 extension SymptomRegistrationViewModel: UITableViewDataSource {

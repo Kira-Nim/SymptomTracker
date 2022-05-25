@@ -12,37 +12,17 @@ import SwiftUI
 class CreateAccountView: UIView {
     
     // MARK: subviews
-    public lazy var brainImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Logo"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    public var brainImage = UIImageView(image: UIImage(named: "Logo"))
+    public var emailInputField = UITextField()
+    public var passwordInputField = UITextField()
+    public var passwordRepeatInputField = UITextField()
+    public var createButton = UIButton()
+    public var errorMessage = UILabel()
     
     public lazy var imageContentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    public lazy var emailInputField: UITextField = {
-        let inputField =  createInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText)
-        inputField.keyboardType = .emailAddress
-        inputField.autocorrectionType = .no
-        inputField.autocapitalizationType = .none
-        return inputField
-    }()
-    
-    public lazy var passwordInputField: UITextField = {
-        let inputField = createInputFieldWith(placeholderText: LocalizedStrings.shared.passwordPlaceholderText)
-        inputField.isSecureTextEntry = true
-        return inputField
-    }()
-    
-    public lazy var passwordRepeatInputField: UITextField = {
-        let inputField = createInputFieldWith(placeholderText: LocalizedStrings.shared.passwordRepeatPlaceholderText)
-        inputField.isSecureTextEntry = true
-        return inputField
     }()
     
     public lazy var contentStackView: UIStackView = {
@@ -57,32 +37,6 @@ class CreateAccountView: UIView {
         return stackView
     }()
     
-    public lazy var createButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(LocalizedStrings.shared.createAccountButtonText, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        button.backgroundColor = .appColor(name: .buttonBlue)
-        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        button.layer.cornerRadius = 3
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
-        return button
-    }()
-    
-    
-    public lazy var errorMessage: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textColor = .appColor(name: .errorRed)
-        label.text = ""
-        label.font = .appFont(ofSize: 17, weight: .regular)
-        label.textAlignment = NSTextAlignment.center
-        return label
-    }()
-    
     //MARK: init
     init() {
         /*
@@ -90,13 +44,47 @@ class CreateAccountView: UIView {
          */
         super.init(frame: CGRect.zero)
         backgroundColor = .appColor(name: .backgroundColor)
+        self.setAttributesOnSubview()
         self.setupSubViews()
         self.setupConstraints()
     }
-    
     // Explained in CreateUserViewController.swift
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Set attributes on subviews
+    func setAttributesOnSubview() {
+        brainImage.translatesAutoresizingMaskIntoConstraints = false
+        brainImage.contentMode = .scaleAspectFit
+        
+        setAttributesOnInputFieldWith(placeholderText: LocalizedStrings.shared.emailPlaceholderText, inputField: emailInputField)
+        emailInputField.keyboardType = .emailAddress
+        emailInputField.autocorrectionType = .no
+        emailInputField.autocapitalizationType = .none
+        
+        setAttributesOnInputFieldWith(placeholderText: LocalizedStrings.shared.passwordPlaceholderText, inputField: passwordInputField)
+        passwordInputField.isSecureTextEntry = true
+        
+        setAttributesOnInputFieldWith(placeholderText: LocalizedStrings.shared.passwordRepeatPlaceholderText, inputField: passwordRepeatInputField)
+        passwordRepeatInputField.isSecureTextEntry = true
+        
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        createButton.setTitle(LocalizedStrings.shared.createAccountButtonText, for: .normal)
+        createButton.setTitleColor(UIColor.white, for: .normal)
+        createButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
+        createButton.backgroundColor = .appColor(name: .buttonBlue)
+        createButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        createButton.layer.cornerRadius = 3
+        createButton.layer.borderWidth = 1
+        createButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+
+        errorMessage.translatesAutoresizingMaskIntoConstraints = false
+        errorMessage.numberOfLines = 0
+        errorMessage.textColor = .appColor(name: .errorRed)
+        errorMessage.text = ""
+        errorMessage.font = .appFont(ofSize: 17, weight: .regular)
+        errorMessage.textAlignment = NSTextAlignment.center
     }
     
     // MARK: Setup SubViews
@@ -137,9 +125,7 @@ class CreateAccountView: UIView {
     //MARK: Help functions
     
     // Helpfunction for creating textField subclasses
-    private func createInputFieldWith(placeholderText: String) -> UITextField {
-        let inputField = UITextField()
-        
+    private func setAttributesOnInputFieldWith(placeholderText: String, inputField: UITextField) {
         inputField.translatesAutoresizingMaskIntoConstraints = false
         inputField.textColor = .appColor(name: .textBlack)
         inputField.font = .appFont(ofSize: 17, weight: .regular)
@@ -152,6 +138,5 @@ class CreateAccountView: UIView {
         inputField.layer.cornerRadius = 3
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always
-        return inputField
     }
 }

@@ -17,7 +17,6 @@ class FirebaseIntensityRegistration: IntensityRegistration {
     }
     
     init(firebaseIntensityRegistration: [String: Any]) {
-        
         // Default value is a safety precaution - It should never be used
         self.intensity = firebaseIntensityRegistration["intensity"] as? Int ?? 0
         self.timeOrder = firebaseIntensityRegistration["timeOrder"] as? Int ?? -1

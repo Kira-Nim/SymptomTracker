@@ -115,6 +115,7 @@ extension UIColor {
     // Other purple: return UIColor(red: 169/255, green: 166/255, blue: 205/255, alpha: 1.0)
     
     
+    // Make an image containing a color to be used as background when applying color to view element
     /* Syntax painfully explained here:
      "CGSize = CGSize(width: 1, height: 1" default value if a size is not given as para.
        This function returns a UIImage

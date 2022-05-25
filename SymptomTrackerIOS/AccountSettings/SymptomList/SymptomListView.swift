@@ -9,16 +9,12 @@ import Foundation
 import UIKit
 
 final class SymptomListView: UIView {
-    
     public var buttonContentViewConstraint: NSLayoutConstraint? = nil
     public var createSymptomButtonViewConstraint: NSLayoutConstraint? = nil
     
-    public lazy var symptomsTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return tableView
-    }()
+    //MARK: Subviews
+    public var symptomsTableView: UITableView = UITableView()
+    public var createSymptomButtonView = UIButton()
     
     public lazy var buttonContentView: UIView = {
         let view = UIView()
@@ -27,20 +23,7 @@ final class SymptomListView: UIView {
         return view
     }()
     
-    public lazy var createSymptomButtonView: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(LocalizedStrings.shared.createSymptomButtonText, for: .normal)
-        button.setTitleColor(UIColor.appColor(name: .buttonBlueTextColor), for: .normal)
-        button.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        button.backgroundColor = .appColor(name: .buttonBlue)
-        button.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        button.layer.cornerRadius = 3
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
-        return button
-    }()
-    
+    // MARK: - Initializer
     init() {
         /*
         The frame of the super view to this view, is temperarily set to zero
@@ -54,23 +37,39 @@ final class SymptomListView: UIView {
         self.buttonContentViewConstraint = buttonContentView.heightAnchor.constraint(equalToConstant: 0)
         self.createSymptomButtonViewConstraint = createSymptomButtonView.heightAnchor.constraint(equalToConstant: 0)
 
+        setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Set attributesOn subviews
+    private func setAttributesOnSubViews() {
+        symptomsTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        createSymptomButtonView.translatesAutoresizingMaskIntoConstraints = false
+        createSymptomButtonView.setTitle(LocalizedStrings.shared.createSymptomButtonText, for: .normal)
+        createSymptomButtonView.setTitleColor(UIColor.appColor(name: .buttonBlueTextColor), for: .normal)
+        createSymptomButtonView.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
+        createSymptomButtonView.backgroundColor = .appColor(name: .buttonBlue)
+        createSymptomButtonView.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        createSymptomButtonView.layer.cornerRadius = 3
+        createSymptomButtonView.layer.borderWidth = 1
+        createSymptomButtonView.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+    }
+    
+    // MARK: Setup SubViews
     private func setupSubViews() {
         buttonContentView.addSubview(createSymptomButtonView)
         [buttonContentView, symptomsTableView].forEach({self.addSubview($0)})
     }
     
+    // MARK: Setup constraints
     private func setupConstraints() {
         if let buttonContentViewConstraint = buttonContentViewConstraint,
            let createSymptomButtonViewConstraint = createSymptomButtonViewConstraint {
-            
             NSLayoutConstraint.activate([buttonContentViewConstraint, createSymptomButtonViewConstraint])
         }
         

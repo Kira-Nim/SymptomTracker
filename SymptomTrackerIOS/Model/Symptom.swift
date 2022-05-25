@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Symptom {
+protocol Symptom: AnyObject {
     var name: String { get set }
     var disabled: Bool { get set }
     var visibilityOnGraph: Bool { get set }
