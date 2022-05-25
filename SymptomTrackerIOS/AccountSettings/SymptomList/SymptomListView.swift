@@ -10,6 +10,9 @@ import UIKit
 
 final class SymptomListView: UIView {
     
+    public var buttonContentViewConstraint: NSLayoutConstraint? = nil
+    public var createSymptomButtonViewConstraint: NSLayoutConstraint? = nil
+    
     public lazy var symptomsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +50,10 @@ final class SymptomListView: UIView {
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.appColor(name: .backgroundColor)
         
+        // Because we only want these elements to be shown to user when list is in editing stete
+        self.buttonContentViewConstraint = buttonContentView.heightAnchor.constraint(equalToConstant: 0)
+        self.createSymptomButtonViewConstraint = createSymptomButtonView.heightAnchor.constraint(equalToConstant: 0)
+
         setupSubViews()
         setupConstraints()
     }
@@ -61,23 +68,25 @@ final class SymptomListView: UIView {
     }
     
     private func setupConstraints() {
+        if let buttonContentViewConstraint = buttonContentViewConstraint,
+           let createSymptomButtonViewConstraint = createSymptomButtonViewConstraint {
+            
+            NSLayoutConstraint.activate([buttonContentViewConstraint, createSymptomButtonViewConstraint])
+        }
+        
         NSLayoutConstraint.activate([
             buttonContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             buttonContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             buttonContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            buttonContentView.heightAnchor.constraint(equalToConstant: 63),
             
             createSymptomButtonView.leadingAnchor.constraint(equalTo: buttonContentView.leadingAnchor, constant: 115),
             createSymptomButtonView.trailingAnchor.constraint(equalTo: buttonContentView.trailingAnchor, constant: -115),
             createSymptomButtonView.centerYAnchor.constraint(equalTo: buttonContentView.centerYAnchor, constant: 3),
-            createSymptomButtonView.heightAnchor.constraint(equalToConstant: 38),
             
             symptomsTableView.topAnchor.constraint(equalTo: buttonContentView.bottomAnchor),
             symptomsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             symptomsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             symptomsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
-        
     }
 }

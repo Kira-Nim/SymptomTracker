@@ -23,7 +23,7 @@ final class SymptomListViewController: UIViewController {
     
     override func setEditing(_ state:Bool, animated: Bool) {
         super.setEditing(state, animated: animated)
-        symptomListViewModel.changeEditingStateTo(state, animated: animated)
+        symptomListViewModel.setEditing(state, animated: animated)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.

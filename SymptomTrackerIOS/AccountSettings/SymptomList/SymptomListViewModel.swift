@@ -55,22 +55,24 @@ final class SymptomListViewModel: NSObject {
         }, for: .touchUpInside)
     }
     
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
     // When OS calles setEditing() on SymptomListViewController, the controller will call this method.
-    public func changeEditingStateTo(_ state: Bool, animated: Bool) {
+    public func setEditing(_ state: Bool, animated: Bool) {
         view?.symptomsTableView.setEditing(state, animated: animated)
+        
+        if let view = view {
+  
+            /*
+            if(view.buttonContentViewConstraint?.constant == 0 && view.createSymptomButtonViewConstraint?.constant == 0) {
+             */
+            if(state) {
+                view.buttonContentViewConstraint?.constant = 75//63
+                view.createSymptomButtonViewConstraint?.constant = 38
+                view.setNeedsLayout()
+            } else {
+                view.buttonContentViewConstraint?.constant = 0
+                view.createSymptomButtonViewConstraint?.constant = 0
+            }
+        }
     }
     
     public func updateView() {

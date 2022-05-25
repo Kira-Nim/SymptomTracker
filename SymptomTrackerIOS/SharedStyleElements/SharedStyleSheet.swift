@@ -107,7 +107,8 @@ extension UIColor {
             case .switchButtonThumbColor:
                 return UIColor.orange
             case .sectionBacgroundColor:
-                return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
+            return UIColor.white
+                //return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
         }
     }
     
