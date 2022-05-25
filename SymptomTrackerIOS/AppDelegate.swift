@@ -11,7 +11,6 @@ import Firebase
 // This class has to do with model and business logic where SceneDelegate has to do with UI
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var viewModelProvider: ViewModelProvider?
     var accountManager: AccountManager?
     

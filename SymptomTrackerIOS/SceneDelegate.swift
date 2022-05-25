@@ -10,7 +10,6 @@ import IQKeyboardManagerSwift
 
 // This class has to do with UI where AppDelegate has to do with model and business logic
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
 
     /* This method is the first to be run when the system starts.
@@ -33,7 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window?.windowScene = windowScene
-
         
         /* Getting appDelegate though UIApplikation
          An instanse of AppDelegate is needed because we need to get acces to its to the ViewModelProvider instance attribute that is needed when creating a the initial contriller with the Flowcoordinator instance.
@@ -88,7 +86,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-

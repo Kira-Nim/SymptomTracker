@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 /* Responsibilities:
- 
     The flowCoordinator is responsible for navigation - The flowcoordinator is responsible for
     creating all controllers in the system.
  
@@ -21,10 +20,9 @@ import UIKit
  */
 
 final class FlowCoordinator {
-    
     private let viewModelProvider: ViewModelProvider
     private let window: UIWindow
-    private var accountSettingsNavigationController: UINavigationController? = nil
+    private var accountSettingsNavigationController: UINavigationController?
     
     //MARK: Init
     init(viewModelProvider: ViewModelProvider, window: UIWindow) {
@@ -32,10 +30,12 @@ final class FlowCoordinator {
         self.window = window
     }
     
-    //MARK: Create controller hierarchy to be shown if user is logged in
+    // MARK: setRootViewController
+    
+    // Create controller hierarchy to be shown if user is logged in
     public func setRootViewController() {
         
-        if(viewModelProvider.modelManager.isUserLoggedIn() == true) {
+        if viewModelProvider.modelManager.isUserLoggedIn() == true {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
@@ -49,13 +49,11 @@ final class FlowCoordinator {
             accountSettingsNavigationController = UINavigationController(rootViewController: accountSettingsViewController)
             
             if let accountSettingsNavigationController = accountSettingsNavigationController {
-                
                 let tabBarController = UITabBarController()
                 tabBarController.viewControllers = [symptomRegistrationNavigationController,
                                                     activityNavigationController,
                                                     insightNavigationController,
                                                     accountSettingsNavigationController]
-                
                 window.rootViewController = tabBarController
             }
         } else {
@@ -91,7 +89,6 @@ final class FlowCoordinator {
         changeSymptomNameViewModel.changeSymptomNameCompletionCallback = {
             self.accountSettingsNavigationController?.popViewController(animated: true)
         }
-        
         accountSettingsNavigationController?.pushViewController(changeSymptomNameViewController, animated: true)
     }
 }
