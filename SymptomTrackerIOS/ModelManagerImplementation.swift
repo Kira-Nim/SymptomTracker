@@ -80,6 +80,15 @@ final class ModelManagerImplementation: ModelManager {
             symptomRepository.delete(symptom: firebaseSymptom)
         }
     }
+    
+    public func createSymptom(sortingPlacement: Int) -> Symptom? {
+        if let userId = accountManager.loggedInUserId {
+            let symptom = FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId)
+            return symptom
+        } else {
+            return nil
+        }
+    }
 }
 
 //MARK: Extension

@@ -69,9 +69,11 @@ final class SymptomRepository {
     }
     
     func update(symptom: FirebaseSymptom) {
+        let symptomDict: [String: Any] = prepareSymptomDict(symptom: symptom)
         if let documentId = symptom.id {
-            let symptomDict: [String: Any] = prepareSymptomDict(symptom: symptom)
             db.collection(symptomCollection).document(documentId).setData(symptomDict)
+        } else {
+            saveSymptomToDB(symptomDocument: symptomDict)
         }
     }
     

@@ -22,22 +22,61 @@ final class SymptomListViewModel: NSObject {
     }
     
     public func setView(view: SymptomListView) {
-        view.delegate = self
-        view.dataSource = self
-        view.allowsSelectionDuringEditing = true
+        view.symptomsTableView.delegate = self
+        view.symptomsTableView.dataSource = self
+        view.symptomsTableView.allowsSelectionDuringEditing = true
         
         // To make sure that a cell of type SymptomListCell is now available to the tableView.
-        view.register(SymptomListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        view.symptomsTableView.register(SymptomListCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         self.view = view
+        
+        
+        // set functionality to be executed when create new symptom confirmation button is tapped
+        view.createSymptomButtonView.addAction(UIAction {[weak self] _ in
+            if let changeNameCallback = self?.changeNameCallback,
+               let symptom = self?.modelManager.createSymptom(sortingPlacement: 0),
+               let symptomList = self?.symptomList {
+                    
+                    // incert new symptom into local symptomList at index 0
+                    self?.symptomList.insert(symptom, at: 0)
+                
+                    // reset sortingPlacement attribrutes on all symptoms in symptomList
+                    // to match their new index in list
+                    for (index, var symptom) in symptomList.enumerated() {
+                        symptom.sortingPlacement = index
+                    }
+                
+                    // Save symptom in db
+                    self?.modelManager.updateSymptoms(symptoms: symptomList)
+                
+                    // Run callback to navigate back to symptom list page
+                    changeNameCallback(symptom)
+            }
+        }, for: .touchUpInside)
     }
     
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    // When OS calles setEditing() on SymptomListViewController, the controller will call this method.
     public func changeEditingStateTo(_ state: Bool, animated: Bool) {
-        view?.setEditing(state, animated: animated)
+        view?.symptomsTableView.setEditing(state, animated: animated)
     }
     
     public func updateView() {
-        view?.reloadData()
+        view?.symptomsTableView.reloadData()
     }
+    
 }
 
 //MARK: Extension implementing UITableViewDelegate
@@ -62,7 +101,7 @@ extension SymptomListViewModel: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        var movingSymptom = symptomList.remove(at: sourceIndexPath.row)
+        let movingSymptom = symptomList.remove(at: sourceIndexPath.row)
         symptomList.insert(movingSymptom, at: destinationIndexPath.row)
         
         for (index, var symptom) in symptomList.enumerated() {

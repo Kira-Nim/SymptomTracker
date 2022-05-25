@@ -23,7 +23,6 @@ final class SymptomListViewController: UIViewController {
     
     override func setEditing(_ state:Bool, animated: Bool) {
         super.setEditing(state, animated: animated)
-        
         symptomListViewModel.changeEditingStateTo(state, animated: animated)
     }
     

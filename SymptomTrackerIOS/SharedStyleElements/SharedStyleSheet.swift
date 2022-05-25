@@ -53,6 +53,7 @@ extension UIColor {
         case switchButtonOffTintColor
         case switchButtonOnTintColor
         case switchButtonThumbColor
+        case sectionBacgroundColor
     }
     
     static func appColor(name: AppColor) -> UIColor {
@@ -62,8 +63,6 @@ extension UIColor {
             case .buttonBlue:
                 //return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
                 return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
-                
-            
             case .buttonBlueBorderColor:
                 //return UIColor(red: 125/255, green: 142/255, blue: 176/255, alpha: 1.0)
                 return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
@@ -102,11 +101,13 @@ extension UIColor {
                 return UIColor.white
             case .switchButtonOffTintColor:
                 //return UIColor(red: 239/255, green: 244/255, blue: 255/255, alpha: 1.0)
-                return UIColor(red: 215/255, green: 213/255, blue: 231/255, alpha: 1.0)
+                return UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
             case .switchButtonOnTintColor:
                 return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
             case .switchButtonThumbColor:
                 return UIColor.orange
+            case .sectionBacgroundColor:
+                return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
         }
     }
     

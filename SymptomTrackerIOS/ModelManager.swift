@@ -13,4 +13,5 @@ protocol ModelManager {
     func updateSymptom(symptom: Symptom)
     func updateSymptoms(symptoms: [Symptom])
     func delete(symptom: Symptom)
+    func createSymptom(sortingPlacement: Int) -> Symptom?
 }
