@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 final class SymptomListView: UIView {
-    public var buttonContentViewConstraint: NSLayoutConstraint? = nil
-    public var createSymptomButtonViewConstraint: NSLayoutConstraint? = nil
+    public var buttonContentViewConstraint: NSLayoutConstraint?
+    public var createSymptomButtonViewConstraint: NSLayoutConstraint?
     
     //MARK: Subviews
     public var symptomsTableView: UITableView = UITableView()
@@ -84,8 +84,8 @@ final class SymptomListView: UIView {
             
             symptomsTableView.topAnchor.constraint(equalTo: buttonContentView.bottomAnchor),
             symptomsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            symptomsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15),
-            symptomsTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            symptomsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            symptomsTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

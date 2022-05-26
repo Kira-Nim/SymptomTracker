@@ -37,12 +37,16 @@ final class FlowCoordinator {
         
         if viewModelProvider.modelManager.isUserLoggedIn() == true {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
+            
             let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
+            
             let accountViewModel = viewModelProvider.getAccountSettingsViewModel()
             accountViewModel.afterLogoutCallback = setRootViewController
             accountViewModel.symptomListSelectedCallback = createSymptomListViewController
+            
             let accountSettingsViewController = AccountViewController(viewModel: accountViewModel)
+            
             let symptomRegistrationNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
             let activityNavigationController = UINavigationController(rootViewController: activityViewController)
             let insightNavigationController = UINavigationController(rootViewController: insightViewController)

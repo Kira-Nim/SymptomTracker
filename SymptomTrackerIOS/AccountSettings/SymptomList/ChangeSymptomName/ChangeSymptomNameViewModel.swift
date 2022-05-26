@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ChangeSymptomNameViewModel: NSObject, UITextFieldDelegate {
+class ChangeSymptomNameViewModel: NSObject {
     private var view: ChangeSymptomNameView?
     public var modelManager: ModelManager
     public var symptom: Symptom
@@ -35,10 +35,6 @@ class ChangeSymptomNameViewModel: NSObject, UITextFieldDelegate {
     }
     
     // MARK: Other
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
     
     public func saveSymptomName() {
         let newName = view?.nameInputField.text
@@ -52,5 +48,12 @@ class ChangeSymptomNameViewModel: NSObject, UITextFieldDelegate {
                 changeSymptomNameCompletionCallback?()
             }
         }
+    }
+}
+
+extension ChangeSymptomNameViewModel: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

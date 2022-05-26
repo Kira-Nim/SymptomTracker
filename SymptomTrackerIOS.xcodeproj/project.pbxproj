@@ -52,6 +52,7 @@
 		4FAFCF09283153F4002CEFBE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */; };
 		4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */; };
 		4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */; };
+		4FB0C9F0283FBAF100DB553C /* symptomRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9EF283FBAF000DB553C /* symptomRegistrationCell.swift */; };
 		4FDB44C728319DD8005D35A1 /* SymptomRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */; };
 		4FDB44C92831A14C005D35A1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */; };
 		4FDB44CB2831A160005D35A1 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */; };
@@ -109,6 +110,7 @@
 		4FAFCF08283153F4002CEFBE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewController.swift; sourceTree = "<group>"; };
 		4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewModel.swift; sourceTree = "<group>"; };
+		4FB0C9EF283FBAF000DB553C /* symptomRegistrationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = symptomRegistrationCell.swift; sourceTree = "<group>"; };
 		4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationView.swift; sourceTree = "<group>"; };
 		4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */,
 				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
 				4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */,
+				4FB0C9EF283FBAF000DB553C /* symptomRegistrationCell.swift */,
 			);
 			path = SymptomRegistretion;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				4FAFCEE528252AD6002CEFBE /* AccountManager.swift in Sources */,
 				4FAFCEDF28242408002CEFBE /* Symptom.swift in Sources */,
 				4FDB44D12831A411005D35A1 /* InsightViewModel.swift in Sources */,
+				4FB0C9F0283FBAF100DB553C /* symptomRegistrationCell.swift in Sources */,
 				4FDB44D32831A46A005D35A1 /* InsightView.swift in Sources */,
 				4FAFCF07283153E2002CEFBE /* LoginView.swift in Sources */,
 				4FDB44D82831A7B0005D35A1 /* AccountViewModel.swift in Sources */,
