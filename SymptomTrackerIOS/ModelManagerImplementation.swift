@@ -16,12 +16,12 @@ Manages the Combine pipeline
 
 final class ModelManagerImplementation: ModelManager {
     
-    // Repositories - Takes care of CRUD
+    //MARK: Repositories - Takes care of CRUD
     private let symptomRepository: SymptomRepository
     private let activityReposityry: ActivityRepository
     private let symptomRegistrationReposityry: SymptomRegistrationRepository
     private let intensityRegistrationReposityry: IntensityRegistrationRepository
-    
+
     // Manages information about logged in user
     private let accountManager: AccountManager
     
@@ -45,7 +45,7 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     //MARK: Symptom CRUD
-    
+
     public func getSymptoms() -> [Symptom] {
         let firebaseSymptoms = symptomRepository.getSymptomsFromDb()
         var symptomList: [Symptom] = firebaseSymptoms
@@ -88,12 +88,13 @@ final class ModelManagerImplementation: ModelManager {
     }
 }
 
-//MARK: Extension
+//MARK: Extension - AccountModelManager
 
 // For logic concerning login/logout and create account
 extension ModelManagerImplementation: AccountModelManager {
     
     //MARK: Create account
+    
     public func createNewAccountWith(email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void) {
         accountManager.createAccountWith(email: email, password: password) { errorMessage in
             // "getCreationResult(..)" returns the enum value used to determine which error message
@@ -111,7 +112,6 @@ extension ModelManagerImplementation: AccountModelManager {
         let defaultSymptomsNamesAndState = getDefaultSymptomNamesAndState()
                 
         for (index, item) in defaultSymptomsNamesAndState.enumerated() {
-            
             let document: [String:Any] = [
                 "name": item.0,
                 "disabled": item.1,
