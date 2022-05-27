@@ -19,7 +19,7 @@ class AccountViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         title = LocalizedStrings.shared.tabbarAccountText
-        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
+        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Settings"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Indsigt", image: UIImage(named: "icons8-slider-30"), tag: 0)
     }
     //Formel requirement for all ViewControllers to have this initializer.

@@ -19,7 +19,7 @@ final class InsightViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         title = LocalizedStrings.shared.tabbarInsightText
-        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
+        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Insight"), tag: 0)
         //tabBarItem = UITabBarItem(title: "Indsigt", image: UIImage(named: "icons8-slider-30"), tag: 0)
     }
     

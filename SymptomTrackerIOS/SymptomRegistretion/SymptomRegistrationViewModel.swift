@@ -11,6 +11,7 @@ import UIKit
 final class SymptomRegistrationViewModel: NSObject {
     
     private var view: SymptomRegistrationView?
+    private var navbarView: UIView?
     private let cellReuseIdentifier =  "cellReuseIdentifier"
     public var modelManager: ModelManager
     private var symptomList: [Symptom]
@@ -21,8 +22,9 @@ final class SymptomRegistrationViewModel: NSObject {
         print(symptomList.count)
     }
     
-    public func setView(view: SymptomRegistrationView) {
+    public func setView(view: SymptomRegistrationView, navbarView: SymptomRegistrationNavbarView) {
         self.view = view
+        self.navbarView = navbarView
         view.registrationTableView.delegate = self
         view.registrationTableView.dataSource = self
         
