@@ -14,11 +14,11 @@ final class SymptomRegistrationViewModel: NSObject {
     private var navbarView: UIView?
     private let cellReuseIdentifier =  "cellReuseIdentifier"
     public var modelManager: ModelManager
-    private var symptomList: [Symptom]
+    private var symptomList: [String] = ["Hello", "hello", "World", "World"]
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
-        symptomList = modelManager.getSymptoms()
+        //symptomList = modelManager.getSymptoms()
         print(symptomList.count)
     }
     
@@ -57,15 +57,16 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
     
     // Method responsible for declaring whitch cell type should be used for each row and for configuring that cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         if let symptomRegistrationCell = cell as?  SymptomRegistrationCell {
-            symptomRegistrationCell.configureCell(symptom: symptomList[indexPath.row])
+            //symptomRegistrationCell.configureCell(symptom: symptomList[indexPath.row])
+            print("made a cell")
         }
         return cell
     }
     
     // Method for configuring row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 75
     }
 }

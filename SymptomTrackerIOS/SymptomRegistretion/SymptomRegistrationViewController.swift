@@ -36,5 +36,4 @@ final class SymptomRegistrationViewController: UIViewController {
         super.viewDidLoad()
         symptomRegistrationViewModel.setView(view: symptomRegistrationView, navbarView: navbarView)
     }
-    
 }
