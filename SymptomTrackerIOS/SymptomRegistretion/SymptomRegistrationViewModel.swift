@@ -14,7 +14,7 @@ final class SymptomRegistrationViewModel: NSObject {
     private var navbarView: UIView?
     private let cellReuseIdentifier =  "cellReuseIdentifier"
     public var modelManager: ModelManager
-    private var symptomList: [String] = ["Hello", "hello", "World", "World"]
+    private var symptomList: [String] = ["Hello", "hello", "World", "World", "Hello", "hello", "World", "World","Hello", "hello", "World", "World"]
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -67,6 +67,6 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
     
     // Method for configuring row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 97
     }
 }

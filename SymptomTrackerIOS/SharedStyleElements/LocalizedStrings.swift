@@ -35,6 +35,7 @@ final class LocalizedStrings {
     public let createAccountButtonText = "Opret"
     public let settingsListSymptomListItem = "Symptom List"
     public let createSymptomButtonText = "Nyt Symptom"
+    public let AllDayRegistrationButtonText = "Overordnet"
     
     //MARK: Placeholder text
     public let emailPlaceholderText = "Email"

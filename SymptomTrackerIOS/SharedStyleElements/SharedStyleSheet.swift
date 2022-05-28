@@ -55,6 +55,9 @@ extension UIColor {
         case switchButtonThumbColor
         case sectionBacgroundColor
         case dateLabelColor
+        case registrationButtonBorderColor
+        case registrationButtonText
+        case registrationNeutral
     }
     
     static func appColor(name: AppColor) -> UIColor {
@@ -113,6 +116,12 @@ extension UIColor {
             case .dateLabelColor:
                 //return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
                 return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
+            case .registrationButtonBorderColor:
+                return UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1.0)
+            case .registrationButtonText:
+                return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
+            case .registrationNeutral:
+                return UIColor.clear
         }
     }
     
