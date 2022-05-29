@@ -36,4 +36,9 @@ final class SymptomRegistrationViewController: UIViewController {
         super.viewDidLoad()
         symptomRegistrationViewModel.setView(view: symptomRegistrationView, navbarView: navbarView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        symptomRegistrationViewModel.viewWillAppear()
+    }
 }

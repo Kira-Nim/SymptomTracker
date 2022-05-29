@@ -10,6 +10,7 @@
 		4F1CAC5E283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC5D283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift */; };
 		4F1CAC60283D1B230081FA45 /* ChangeSymptomNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC5F283D1B230081FA45 /* ChangeSymptomNameViewController.swift */; };
 		4F1CAC62283D1B530081FA45 /* ChangeSymptomNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1CAC61283D1B530081FA45 /* ChangeSymptomNameView.swift */; };
+		4F3693E72843B4B50077F3A8 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3693E62843B4B50077F3A8 /* RegistrationService.swift */; };
 		4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */; };
 		4F388E5F2837EA40009F684C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F388E5E2837EA40009F684C /* IQKeyboardManagerSwift */; };
 		4F388E612837F71B009F684C /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E602837F71B009F684C /* ValidationService.swift */; };
@@ -71,6 +72,7 @@
 		4F1CAC5D283D1AF80081FA45 /* ChangeSymptomNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameViewModel.swift; sourceTree = "<group>"; };
 		4F1CAC5F283D1B230081FA45 /* ChangeSymptomNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameViewController.swift; sourceTree = "<group>"; };
 		4F1CAC61283D1B530081FA45 /* ChangeSymptomNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSymptomNameView.swift; sourceTree = "<group>"; };
+		4F3693E62843B4B50077F3A8 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
 		4F388E5B2837BEB5009F684C /* SharedStyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStyleSheet.swift; sourceTree = "<group>"; };
 		4F388E602837F71B009F684C /* ValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		4F388E6228380BE2009F684C /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				4F388E602837F71B009F684C /* ValidationService.swift */,
+				4F3693E62843B4B50077F3A8 /* RegistrationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FAFCEF428253B6E002CEFBE /* IntensityRegistrationRepository.swift in Sources */,
+				4F3693E72843B4B50077F3A8 /* RegistrationService.swift in Sources */,
 				4FAFCEF92827FF33002CEFBE /* CreateAccountView.swift in Sources */,
 				4FAFCED428241381002CEFBE /* FirebaseActivity.swift in Sources */,
 				4FAFCF05283153D2002CEFBE /* LoginViewController.swift in Sources */,

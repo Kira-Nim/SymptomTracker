@@ -14,4 +14,6 @@ protocol ModelManager {
     func updateSymptoms(symptoms: [Symptom])
     func delete(symptom: Symptom)
     func createSymptom(sortingPlacement: Int) -> Symptom?
+    func getRegistrationsForDate(date: Date, symptomId: String) -> [SymptomRegistration]
+    func updateRegistration(registration: SymptomRegistration)
 }

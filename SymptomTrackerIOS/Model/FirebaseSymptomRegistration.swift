@@ -9,7 +9,9 @@ import Foundation
 import Firebase
 
 class FirebaseSymptomRegistration: SymptomRegistration {
+    var id: String?
     var date: Date
+    var symptomId: String?
     var intensityRegistrations: [IntensityRegistration]
     var intensityRegistrationAverage: Int {
         var intensitySum: Int = 0
@@ -19,14 +21,20 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         return intensitySum/4
     }
     
-    init(intensityRegistrationsSet: [FirebaseIntensityRegistration]) {
+    // initializer for when creating a new registration
+    init(intensityRegistrationsSet: [FirebaseIntensityRegistration], symptomId: String) {
         self.date = Date()
         self.intensityRegistrations = intensityRegistrationsSet
+        self.symptomId = symptomId
     }
     
-    init(firebaseSymptomRegistration: [String: Any]) {
+    // Initializer used when mapping from registration collection in db
+    init(firebaseSymptomRegistration: [String: Any], symptomRegistrationId: String) {
+        
         // Default value is a safety precaution - It should never be used
         self.date = (firebaseSymptomRegistration["date"] as? Timestamp)?.dateValue() ?? Date()
         self.intensityRegistrations = firebaseSymptomRegistration["intensity_registrations"] as? [FirebaseIntensityRegistration] ?? []
+        self.symptomId = firebaseSymptomRegistration["symptomId"] as? String
+        self.id = symptomRegistrationId
     }
 }

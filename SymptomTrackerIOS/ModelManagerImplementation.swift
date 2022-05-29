@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /* Responsibilities of the ModelManager:
 The ModelManager manages business logic concerning model data that has been adapted to the system.
@@ -21,7 +22,8 @@ final class ModelManagerImplementation: ModelManager {
     private let activityReposityry: ActivityRepository
     private let symptomRegistrationReposityry: SymptomRegistrationRepository
     private let intensityRegistrationReposityry: IntensityRegistrationRepository
-
+    private var firebaseSymptoms: [FirebaseSymptom] = []
+    
     // Manages information about logged in user
     private let accountManager: AccountManager
     
@@ -36,18 +38,23 @@ final class ModelManagerImplementation: ModelManager {
         // If the user is still logged then the snapshot listener should be started.
         if let userId = self.accountManager.loggedInUserId {
             self.symptomRepository.startListener(loggedInUser: userId)
+            self.symptomRepository.callbacks.append(updateFirebaseSymptomList)
         }
     }
 
-    //MARK Get logged in user
+    // MARK: Update symptomlist
+    public func updateFirebaseSymptomList() {
+        firebaseSymptoms = symptomRepository.firebaseSymptoms
+    }
+    
+    // MARK Get logged in user
     public func isUserLoggedIn() -> Bool {
         return accountManager.isLoggedIn
     }
     
-    //MARK: Symptom CRUD
+    // MARK: Symptom CRUD
 
     public func getSymptoms() -> [Symptom] {
-        let firebaseSymptoms = symptomRepository.getSymptomsFromDb()
         var symptomList: [Symptom] = firebaseSymptoms
         
         for item in symptomList {
@@ -86,6 +93,32 @@ final class ModelManagerImplementation: ModelManager {
             return nil
         }
     }
+    
+    // MARK: CRUD for Registrations
+    
+    public func getRegistrationsForDate(date: Date, symptomId: String) -> [SymptomRegistration] {
+        
+        let firebaseRegistrations = symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, symptomId: symptomId)
+        
+
+        
+        return symptomRegistrations
+    }
+    
+    public func updateRegistration(registration: SymptomRegistration) {
+        
+        if registration.id == nil {
+            // Lav en ny FirebaseRegistrering og gem den i firebase registreringslisten
+            // Gem ny registrering i firebase
+            // Gem den i firebase registration listen
+        } else {
+            // Oversæt symptomRegistrering til noget som kan gemmes i db og gem det
+        }
+    }
+    
+    
+    
+    
 }
 
 //MARK: Extension - AccountModelManager

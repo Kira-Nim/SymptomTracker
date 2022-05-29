@@ -8,7 +8,9 @@
 import Foundation
 
 protocol SymptomRegistration: AnyObject  {
+    var id: String? {get }
     var date: Date { get set }
     var intensityRegistrations: [IntensityRegistration] { get set }
     var intensityRegistrationAverage: Int { get }
+    var symptomId: String? { get set }
 }

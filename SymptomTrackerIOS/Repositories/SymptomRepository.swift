@@ -23,8 +23,8 @@ final class SymptomRepository {
     
     // MARK: - startListener()
     func startListener(loggedInUser: String) {
-        // Set listener to get updates from Db when collection "Symptoms" changes.
-        /*
+
+        /* Set listener to get updates from Db when collection "Symptoms" changes.
          A snapShotListener contains a callback that is set on the Symptoms collection in db.
          */
         db.collection(symptomCollection).whereField("user_id", isEqualTo: loggedInUser).addSnapshotListener { snapshot, error in
@@ -52,6 +52,7 @@ final class SymptomRepository {
                 // Add firebaseSymptom to firebaseSymptoms list
                 self.firebaseSymptoms.append(firebaseSymptom)
             }
+            
             // run all callbacks in global variable called "callbacks"
             for callback in self.callbacks {
                 callback()
