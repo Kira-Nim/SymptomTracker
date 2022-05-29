@@ -8,7 +8,7 @@
 import Foundation
 
 class FirebaseIntensityRegistration: IntensityRegistration {
-    var intensity: Int
+    var intensity: Int?
     var timeOrder: Int
     
     init(timeOrder: Int) {
@@ -16,9 +16,9 @@ class FirebaseIntensityRegistration: IntensityRegistration {
         self.timeOrder = timeOrder
     }
     
-    init(firebaseIntensityRegistration: [String: Any]) {
-        // Default value is a safety precaution - It should never be used
-        self.intensity = firebaseIntensityRegistration["intensity"] as? Int ?? 0
-        self.timeOrder = firebaseIntensityRegistration["timeOrder"] as? Int ?? -1
+    // Initializer used when mapping from list in attribute on instance of registration from registration collection in db
+    init(intensity: Int?, timeOrder: Int) {
+        self.intensity = intensity
+        self.timeOrder = timeOrder
     }
 }

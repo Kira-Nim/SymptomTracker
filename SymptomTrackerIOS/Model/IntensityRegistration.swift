@@ -8,6 +8,6 @@
 import Foundation
 
 protocol IntensityRegistration: AnyObject  {
-    var intensity: Int { get set }
+    var intensity: Int? { get set }
     var timeOrder: Int { get set }
 }

@@ -9,7 +9,10 @@ import Foundation
 
 class RegistrationService {
     
-    func GetSymptomRegistrationListFrom(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom]) -> [SymptomRegistration] {
+    // Function for getting list of symptomregistrations for a day.
+    // If registrations on symptoms does not exist. they will be created.
+    // The registration list will be ordered the same way the symptom list is.
+    func getSymptomRegistrationListFrom(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom]) -> [SymptomRegistration] {
     
         var symptomRegistrations: [SymptomRegistration] = []
         
@@ -17,9 +20,7 @@ class RegistrationService {
         // Created for the purpose of checking that there is an registration for each symptom in symptomList
         var firebaseSymptomRegistrationsDict: [String: FirebaseSymptomRegistration] = [:]
         firebaseSymptomRegistrationList.forEach({
-            if let symptomIdOnRegistration = $0.symptomId {
-                firebaseSymptomRegistrationsDict[symptomIdOnRegistration] = $0
-            }
+            firebaseSymptomRegistrationsDict[$0.symptomId] = $0
         })
         
         /*
@@ -31,25 +32,30 @@ class RegistrationService {
         symptomList.forEach({
             if let firebaseSymptomId = $0.id {
                 if let firebaseSymptomRegistration = firebaseSymptomRegistrationsDict[firebaseSymptomId] {
-                    let symptomRegistration: SymptomRegistration = firebaseSymptomRegistration as SymptomRegistration
-                    symptomRegistrations.append(symptomRegistration)
+                    firebaseSymptomRegistration.symptom = $0
+                    symptomRegistrations.append(firebaseSymptomRegistration)
                     
                 } else {
-                    let intensityRegistrationsSet: [FirebaseIntensityRegistration] = []
+                    let intensityRegistrationsSet: [FirebaseIntensityRegistration] = createNewIntensityRegistrationList()
                     let newFirebaseSymptomRegistration = FirebaseSymptomRegistration(
                                                         intensityRegistrationsSet: intensityRegistrationsSet,
                                                         symptomId: firebaseSymptomId)
-                    
-                    let symptomRegistration: SymptomRegistration = newFirebaseSymptomRegistration as SymptomRegistration
-                    symptomRegistrations.append(symptomRegistration)
+                    newFirebaseSymptomRegistration.symptom = $0
+                    symptomRegistrations.append(newFirebaseSymptomRegistration)
                 }
             }
         })
-        
         return symptomRegistrations
     }
     
-    func createNewIntensityRegistrationList(){
-        
+    // Create list containing 4 new intensity instances
+    func createNewIntensityRegistrationList() -> [FirebaseIntensityRegistration] {
+        var firebaseIntensityRegistrationList: [FirebaseIntensityRegistration] = []
+
+        for number in (0...3){
+            let firebaseIntensityRegistration = FirebaseIntensityRegistration(intensity: nil, timeOrder: number)
+            firebaseIntensityRegistrationList.append(firebaseIntensityRegistration)
+        }
+        return firebaseIntensityRegistrationList
     }
 }

@@ -96,29 +96,31 @@ final class ModelManagerImplementation: ModelManager {
     
     // MARK: CRUD for Registrations
     
-    public func getRegistrationsForDate(date: Date, symptomId: String) -> [SymptomRegistration] {
+    public func getRegistrationsForDate(date: Date) -> [SymptomRegistration] {
+        let registrationsService = RegistrationService()
+        var symptomRegistrationsList: [SymptomRegistration] = []
         
-        let firebaseRegistrations = symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, symptomId: symptomId)
+        // If user is not logged in - should never happen
+        guard let userId = accountManager.loggedInUserId else {
+            return symptomRegistrationsList
+        }
+            
+        let firebaseSymptomRegistrationList = symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, userId: userId)
         
-
-        
-        return symptomRegistrations
+        // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
+        symptomRegistrationsList = registrationsService.getSymptomRegistrationListFrom(
+                                                firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
+                                                symptomList: firebaseSymptoms)
+        return symptomRegistrationsList
     }
     
-    public func updateRegistration(registration: SymptomRegistration) {
-        
-        if registration.id == nil {
-            // Lav en ny FirebaseRegistrering og gem den i firebase registreringslisten
-            // Gem ny registrering i firebase
-            // Gem den i firebase registration listen
-        } else {
-            // Oversæt symptomRegistrering til noget som kan gemmes i db og gem det
+    // Update/save symptomRegistraytion to database.
+    public func updateRegistration(symptomRegistration: SymptomRegistration) {
+        if let firebaseSymptomRegistration = symptomRegistration as? FirebaseSymptomRegistration, let userId = accountManager.loggedInUserId {
+            
+            symptomRegistrationReposityry.updateSymptomRegistration(firebaseSymptomRegistration: firebaseSymptomRegistration, userId: userId)
         }
     }
-    
-    
-    
-    
 }
 
 //MARK: Extension - AccountModelManager
