@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class SymptomRegistrationCell: UITableViewCell {
-    private var symptom: Symptom?
+    private var symptomRegistration: SymptomRegistration?
     
     // MARK: Subviews
     public var oneCollectedRegistrationButton = UIButton()
@@ -78,9 +78,8 @@ class SymptomRegistrationCell: UITableViewCell {
         resetRegistrationsButton.layer.borderWidth = 1
         resetRegistrationsButton.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
         
-        
         symptomNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        symptomNameLabel.text = "symptom?.name"
+        symptomNameLabel.text = symptomRegistration?.symptom?.name
         symptomNameLabel.numberOfLines = 0
         symptomNameLabel.textColor = .appColor(name: .textBlack)
         symptomNameLabel.font = .appFont(ofSize: 19, weight: .medium)
@@ -132,9 +131,10 @@ class SymptomRegistrationCell: UITableViewCell {
             resetRegistrationsButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -15)
         ])
     }
+    
     // MARK: Confuguration for cell
-    public func configureCell(symptom: Symptom) {
-        self.symptom = symptom
+    public func configureCell(symptomRegistration: SymptomRegistration) {
+        self.symptomRegistration = symptomRegistration
     }
     
     private func setButtonattributes(button: UIButton, color: UIColor.AppColor) {

@@ -18,7 +18,7 @@ final class SymptomRegistrationRepository {
 
     func getSymptomRegistrationsForDate(date: Date, userId: String) -> [FirebaseSymptomRegistration] {
         var firebaseRegistrations: [FirebaseSymptomRegistration] = []
-        db.collection(registrationCollection).whereField("userId", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
+        db.collection(registrationCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

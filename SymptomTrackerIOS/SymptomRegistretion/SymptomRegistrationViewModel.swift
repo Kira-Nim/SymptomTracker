@@ -9,18 +9,16 @@ import Foundation
 import UIKit
 
 final class SymptomRegistrationViewModel: NSObject {
-    
     public var modelManager: ModelManager
-    
     private var view: SymptomRegistrationView?
     private var navbarView: UIView?
     private let cellReuseIdentifier =  "cellReuseIdentifier"
-    
     private var selectedDateRegistrations: [SymptomRegistration] = []
     private var nextDateRegistrations: [SymptomRegistration] = []
     private var previousDateRegistrations: [SymptomRegistration] = []
     private var selectedDate: Date
     
+    // MARK: Init
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         self.selectedDate = Date()
@@ -37,13 +35,25 @@ final class SymptomRegistrationViewModel: NSObject {
         self.view = view
     }
     
-    //MARK: updateView()
+    // MARK: updateView()
     public func updateView() {
         view?.registrationTableView.reloadData()
     }
     
+    // MARK: viewWillAppear
     public func viewWillAppear() {
         
+        // Get registrations for selected date
+        selectedDateRegistrations = modelManager.getRegistrationsForDate(date: selectedDate)
+        
+        // If .date returns a non nil object for both metod calls get SymptomRegistration lists for previous and next date (compared to selected date)
+        if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
+            
+            nextDateRegistrations = modelManager.getRegistrationsForDate(date: nextDate)
+            previousDateRegistrations = modelManager.getRegistrationsForDate(date: previousDate)
+        }
+        
+        updateView()
     }
 }
 
@@ -68,8 +78,7 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         
         if let symptomRegistrationCell = cell as?  SymptomRegistrationCell {
-            //symptomRegistrationCell.configureCell(registration: selectedDateRegistrations.sympyom.sortingPlacement)
-            print("made a cell")
+            symptomRegistrationCell.configureCell(symptomRegistration: selectedDateRegistrations[indexPath.row])
         }
         return cell
     }
