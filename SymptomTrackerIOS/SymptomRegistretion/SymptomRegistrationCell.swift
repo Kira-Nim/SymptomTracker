@@ -55,19 +55,19 @@ class SymptomRegistrationCell: UITableViewCell {
         
         registrationButtonMorning.backgroundColor = UIColor.orange
         setButtonattributes(button: registrationButtonMorning, color: .registrationNeutral)
-        //registrationButtonMorning.setBackgroundImage(UIImage(named: "SunRise"), for: .normal)
+        registrationButtonMorning.setBackgroundImage(UIImage(named: "SunRise"), for: .normal)
         
         registrationButtonMidday.backgroundColor = UIColor.orange
         setButtonattributes(button: registrationButtonMidday, color: .registrationOrange)
-        //registrationButtonMorning.setBackgroundImage(UIImage(named: "Sun"), for: .normal)
+        registrationButtonMidday.setBackgroundImage(UIImage(named: "Sun"), for: .normal)
         
         registrationButtonEvening.backgroundColor = UIColor.orange
         setButtonattributes(button: registrationButtonEvening, color: .registrationYellow)
-        //registrationButtonMorning.setBackgroundImage(UIImage(named: "SunSet"), for: .normal)
+        registrationButtonEvening.setBackgroundImage(UIImage(named: "SunSet"), for: .normal)
         
         registrationButtonBedTime.backgroundColor = UIColor.orange
         setButtonattributes(button: registrationButtonBedTime, color: .registrationGreen)
-        //registrationButtonMorning.setBackgroundImage(UIImage(named: "moon_2"), for: .normal)
+        registrationButtonBedTime.setBackgroundImage(UIImage(named: "Moon_2"), for: .normal)
         
         oneCollectedRegistrationButton.backgroundColor = UIColor.red
         oneCollectedRegistrationButton.setTitle(LocalizedStrings.shared.AllDayRegistrationButtonText, for: .normal)
@@ -81,6 +81,7 @@ class SymptomRegistrationCell: UITableViewCell {
         resetRegistrationsButton.layer.cornerRadius = 15.5
         resetRegistrationsButton.layer.borderWidth = 1
         resetRegistrationsButton.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
+        resetRegistrationsButton.setBackgroundImage(UIImage(named: "ResetRegistrations_x"), for: .normal)
         
         symptomNameLabel.translatesAutoresizingMaskIntoConstraints = false
         symptomNameLabel.text = symptomRegistration?.symptom?.name

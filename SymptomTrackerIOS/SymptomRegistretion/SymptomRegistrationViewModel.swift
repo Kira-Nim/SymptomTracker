@@ -42,18 +42,29 @@ final class SymptomRegistrationViewModel: NSObject {
     
     // MARK: viewWillAppear
     public func viewWillAppear() {
+        updateSymptomRegistrationLists()
+    }
+    
+    private func updateSymptomRegistrationLists() {
         
-        // Get registrations for selected date
-        selectedDateRegistrations = modelManager.getRegistrationsForDate(date: selectedDate)
+        // update list containing registrations for selected date
+        modelManager.getRegistrationsForDate(date: selectedDate) { symptomRegistrations in
+            
+            self.selectedDateRegistrations = symptomRegistrations
+            self.updateView()
+        }
         
         // If .date returns a non nil object for both metod calls get SymptomRegistration lists for previous and next date (compared to selected date)
         if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
             
-            nextDateRegistrations = modelManager.getRegistrationsForDate(date: nextDate)
-            previousDateRegistrations = modelManager.getRegistrationsForDate(date: previousDate)
+            modelManager.getRegistrationsForDate(date: nextDate){ symptomRegistrations in
+                self.nextDateRegistrations = symptomRegistrations
+            }
+            
+            modelManager.getRegistrationsForDate(date: previousDate){ symptomRegistrations in
+                self.previousDateRegistrations = symptomRegistrations
+            }
         }
-        
-        updateView()
     }
 }
 

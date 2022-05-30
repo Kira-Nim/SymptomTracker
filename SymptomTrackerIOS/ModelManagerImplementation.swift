@@ -96,22 +96,24 @@ final class ModelManagerImplementation: ModelManager {
     
     // MARK: CRUD for Registrations
     
-    public func getRegistrationsForDate(date: Date) -> [SymptomRegistration] {
+    public func getRegistrationsForDate(date: Date,
+                                        getRegistrationsForDateCompletionCallback: @escaping (([SymptomRegistration]) -> Void)) {
         let registrationsService = RegistrationService()
-        var symptomRegistrationsList: [SymptomRegistration] = []
         
         // If user is not logged in - should never happen
-        guard let userId = accountManager.loggedInUserId else {
-            return symptomRegistrationsList
-        }
+        if let userId = accountManager.loggedInUserId {
             
-        let firebaseSymptomRegistrationList = symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, userId: userId)
-        
-        // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
-        symptomRegistrationsList = registrationsService.getSymptomRegistrationListFrom(
-                                                firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
-                                                symptomList: firebaseSymptoms)
-        return symptomRegistrationsList
+            symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, userId: userId) { firebaseSymptomRegistrationList in
+                
+                // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
+                let symptomRegistrationsList = registrationsService.getSymptomRegistrationListFrom(
+                                                        firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
+                                                        symptomList: self.firebaseSymptoms)
+                
+                // Run callback passed from symptomRegistrationViewModel
+                getRegistrationsForDateCompletionCallback(symptomRegistrationsList)
+            }
+        }
     }
     
     // Update/save symptomRegistraytion to database.

@@ -16,21 +16,27 @@ final class SymptomRegistrationRepository {
     // Reference to database
     let db = Firestore.firestore()
 
-    func getSymptomRegistrationsForDate(date: Date, userId: String) -> [FirebaseSymptomRegistration] {
-        var firebaseRegistrations: [FirebaseSymptomRegistration] = []
+    func getSymptomRegistrationsForDate(date: Date,
+                                        userId: String,
+                                        getSymptomRegistrationsForDateCompletionCallback: @escaping([FirebaseSymptomRegistration]) -> Void) {
+        
         db.collection(registrationCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
+                    var firebaseSymptomRegistrations: [FirebaseSymptomRegistration] = []
                     for document in querySnapshot!.documents {
                         let documentId = document.documentID
                         let symptomRegistrationDocument = document.data()
                         let firebaseSymptomRegistration = FirebaseSymptomRegistration(firebaseSymptomRegistration: symptomRegistrationDocument, symptomRegistrationId: documentId)
-                        firebaseRegistrations.append(firebaseSymptomRegistration)
+                        firebaseSymptomRegistrations.append(firebaseSymptomRegistration)
                     }
+                    
+                    // run callback passed from ModelManager.
+                    // This callback will run callback passed from VM and thereby the view will be updated.
+                    getSymptomRegistrationsForDateCompletionCallback(firebaseSymptomRegistrations)
                 }
         }
-        return firebaseRegistrations
     }
     
     // Functopn for updating or saving symptom registration to db
