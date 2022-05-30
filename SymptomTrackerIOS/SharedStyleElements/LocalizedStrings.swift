@@ -35,6 +35,7 @@ final class LocalizedStrings {
     public let createAccountButtonText = "Opret"
     public let settingsListSymptomListItem = "Symptom List"
     public let createSymptomButtonText = "Nyt Symptom"
+    public let createActivityButtonText = "Ny Aktivitet"
     public let AllDayRegistrationButtonText = "Overordnet"
     
     //MARK: Placeholder text
@@ -47,6 +48,7 @@ final class LocalizedStrings {
     
     //MARK: Labels
     public let createSymptomLabelText = "Symptom navn"
+    public let createActivityLabelText = "Aktivitetens navn"
     
     //MARK: Tabbar labels
     public let tabbarAccountText = "Indstillinger"
@@ -58,6 +60,9 @@ final class LocalizedStrings {
     public let symptomListControllerTitle = "Symptom Liste"
     public let editSymptomControllerTitle = "Rediger navn"
     public let createSymptomControllerTitle = "Opret Symptom"
+    public let activityControllerTitle = "Aktiviteter"
+    public let createActivityControllerTitle = "Opret Aktivitet"
+    public let editActivityControllerTitle = "Rediger Aktivitet"
 
     // Symptomer
     public let headache = "Hovedpine"

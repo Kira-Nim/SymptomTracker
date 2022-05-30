@@ -49,5 +49,4 @@ class ChangeSymptomNameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         changeSymptomNameViewModel.viewDidAppear()
     }
-    
 }

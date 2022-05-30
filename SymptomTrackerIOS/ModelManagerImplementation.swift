@@ -19,9 +19,9 @@ final class ModelManagerImplementation: ModelManager {
     
     //MARK: Repositories - Takes care of CRUD
     private let symptomRepository: SymptomRepository
-    private let activityReposityry: ActivityRepository
+    private let activityRepository: ActivityRepository
     private let symptomRegistrationReposityry: SymptomRegistrationRepository
-    private let intensityRegistrationReposityry: IntensityRegistrationRepository
+    private let intensityRegistrationRepository: IntensityRegistrationRepository
     private var firebaseSymptoms: [FirebaseSymptom] = []
     
     // Manages information about logged in user
@@ -73,7 +73,6 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     public func updateSymptoms(symptoms: [Symptom]) {
-        
         // use compactMap to cast all symptoms from Symptom to FirebaseSymptom before saving them to db
         let firebaseSymptoms = symptoms.compactMap({ $0 as? FirebaseSymptom })
         symptomRepository.updateSymptoms(symptoms: firebaseSymptoms)
@@ -91,6 +90,37 @@ final class ModelManagerImplementation: ModelManager {
             return symptom
         } else {
             return nil
+        }
+    }
+    
+    
+    // MARK: CRUD for Activities
+    
+    public func updateActivity(activity: Activity) {
+        if let firebaseActivity = activity as? FirebaseActivity {
+            activityRepository.update(activity: firebaseActivity)
+        }
+    }
+    
+    public func updateActivities(activity: [Activity]) {
+        
+        // use compactMap to cast all activities from Activity to Firebaseactivity before saving them to db
+        let firebaseActivity = activity.compactMap({ $0 as? FirebaseActivity })
+        activityRepository.updateActivity(activity: firebaseActivity)
+    }
+    
+    public func createActivity() -> Activity? {
+        if let userId = accountManager.loggedInUserId {
+            let activity = FirebaseActivity(userId: userId)
+            return activity
+        } else {
+            return nil
+        }
+    }
+    
+    public func delete(activity: Activity) {
+        if let firebaseActivity = activity as? FirebaseActivity {
+            activityRepository.delete(activity: firebaseActivity)
         }
     }
     

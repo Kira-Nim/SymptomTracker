@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class ActivityViewController: UIViewController {
-    
     private var activityViewModel: ActivityViewModel
     private lazy var activityView = ActivityView()
     
@@ -17,10 +16,13 @@ final class ActivityViewController: UIViewController {
         activityViewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
-        
-        title = LocalizedStrings.shared.tabbarActivityText
-        //tabBarItem = UITabBarItem(title: title, image: UIImage(named: "icons8-combo-chart-30"), tag: 0)
-        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Activity"), tag: 0)
+        title = LocalizedStrings.shared.activityControllerTitle
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
+    override func setEditing(_ state:Bool, animated: Bool) {
+        super.setEditing(state, animated: animated)
+        activityViewModel.setEditing(state, animated: animated)
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
@@ -28,10 +30,12 @@ final class ActivityViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: loadView()
     override func loadView() {
         view = activityView
     }
     
+    // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         activityViewModel.setView(view: activityView)

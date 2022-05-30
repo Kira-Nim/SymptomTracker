@@ -67,7 +67,7 @@ class SymptomRegistrationCell: UITableViewCell {
         
         registrationButtonBedTime.backgroundColor = UIColor.orange
         setButtonattributes(button: registrationButtonBedTime, color: .registrationGreen)
-        registrationButtonBedTime.setBackgroundImage(UIImage(named: "Moon_2"), for: .normal)
+        registrationButtonBedTime.setBackgroundImage(UIImage(named: "Moon_1"), for: .normal)
         
         oneCollectedRegistrationButton.backgroundColor = UIColor.red
         oneCollectedRegistrationButton.setTitle(LocalizedStrings.shared.AllDayRegistrationButtonText, for: .normal)

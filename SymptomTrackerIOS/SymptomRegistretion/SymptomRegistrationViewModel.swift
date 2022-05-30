@@ -50,7 +50,11 @@ final class SymptomRegistrationViewModel: NSObject {
         // update list containing registrations for selected date
         modelManager.getRegistrationsForDate(date: selectedDate) { symptomRegistrations in
             
-            self.selectedDateRegistrations = symptomRegistrations
+            symptomRegistrations.forEach({
+                if $0.symptom.disabled == false {
+                    self.selectedDateRegistrations.append($0)
+                }
+            })
             self.updateView()
         }
         
@@ -58,18 +62,25 @@ final class SymptomRegistrationViewModel: NSObject {
         if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
             
             modelManager.getRegistrationsForDate(date: nextDate){ symptomRegistrations in
-                self.nextDateRegistrations = symptomRegistrations
+                
+                symptomRegistrations.forEach({
+                    if $0.symptom.disabled == false {
+                        self.nextDateRegistrations.append($0)
+                    }
+                })
             }
             
             modelManager.getRegistrationsForDate(date: previousDate){ symptomRegistrations in
-                self.previousDateRegistrations = symptomRegistrations
+                
+                if $0.symptom.disabled == false {
+                    self.previousDateRegistrations.append($0)
+                }
             }
         }
     }
 }
 
 extension SymptomRegistrationViewModel: UITableViewDelegate {
-    
 }
 
 extension SymptomRegistrationViewModel: UITableViewDataSource {

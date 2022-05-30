@@ -10,9 +10,8 @@ import Foundation
 enum Strain { case red, yellow, green, white }
 
 protocol Activity: AnyObject {
-    
     var date: Date { get set }
     var name: String { get set }
-    var strain: Strain { get set }
+    var strain: Int { get set }
     var numMinutes: Int { get set }
 }

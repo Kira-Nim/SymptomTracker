@@ -9,46 +9,28 @@ import Foundation
 import Firebase
 
 class FirebaseActivity: Activity {
-
+    var id: String
     var date: Date
     var name: String
-    var strain: Strain
+    var strain: Int
     var numMinutes: Int
+    var userId: String
     
     // Initializer used when the user creates a new activity
-    init() {
+    init(userId: String) {
         self.date = Date()
-        self.name = "Ny aktivitet"
+        self.name = ""
         self.numMinutes = 0
-        self.strain = .white
+        self.strain = 0
+        self.userId = userId
     }
     
     // Initializer used when mapping from activity from Firebase
     init(firebaseActivity: [String : Any]) {
-        
         // Default values are a safety precaution - Thet should never be used
         self.date = (firebaseActivity["date"] as? Timestamp)?.dateValue() ?? Date()
         self.name = firebaseActivity["name"] as? String ?? ""
         self.numMinutes = firebaseActivity["num_minutes"] as? Int ?? 0
-        
-        if let strainInt = firebaseActivity["strain"] as? Int {
-            let strain: Strain
-            switch (strainInt) {
-                case 0:
-                    strain = Strain.red
-                case 1:
-                    strain = Strain.yellow
-                case 2:
-                    strain = Strain.green
-                default:
-                    strain = Strain.white
-            }
-            self.strain = strain
-            
-        }else {
-            // Safety precaution - This should never be a problem - "else" should never be executed
-            print("Strain parsing failed!")
-            self.strain = Strain.white
-        }
+        self.strain = firebaseActivity["strain"] as? Int ?? 0
     }
 }
