@@ -56,4 +56,8 @@ final class ViewModelProvider {
     public func getChangeSymptomNameViewModel(symptom: Symptom) -> ChangeSymptomNameViewModel {
         return ChangeSymptomNameViewModel(modelManager: modelManager, symptom: symptom)
     }
+    
+    public func getChangeActivityViewModel(activity: Activity) -> ChangeActivityViewModel {
+        return ChangeActivityViewModel(modelManager: modelManager, activity: activity)
+    }
 }

@@ -12,13 +12,16 @@ import SwiftUI
 final class ActivityRepository {
     
     // variable containing collection name for symptom collection i firebase.
-    let activityCollection = "activity"
+    let activityCollection = "activities"
     
     // Reference to database
     let db = Firestore.firestore()
     
     public func getActivitiesFor(date: Date, userId: String, getActivitiesForDateCompletionCallback: @escaping ([FirebaseActivity]) -> Void) {
-        db.collection(activityCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
+        // Because we want all activities with a timestamt set inside the intaval of a day. The two dates below is used to create an query interval of exactly one day (after midnight - last second before next nidnight)
+        let startOfDay = Calendar.current.startOfDay(for: date)
+        guard let startOfNextDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else { return }
+        db.collection(activityCollection).whereField("user_id", isEqualTo: userId).whereField("date", isGreaterThanOrEqualTo: startOfDay).whereField("date", isLessThan: startOfNextDay).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {

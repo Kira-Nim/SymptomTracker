@@ -42,6 +42,7 @@ class ActivityView: UIView {
     
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
+        activityTableView.translatesAutoresizingMaskIntoConstraints = false
         createActivityButtonView.translatesAutoresizingMaskIntoConstraints = false
         createActivityButtonView.setTitle(LocalizedStrings.shared.createActivityButtonText, for: .normal)
         createActivityButtonView.setTitleColor(UIColor.appColor(name: .buttonBlueTextColor), for: .normal)
@@ -81,3 +82,4 @@ class ActivityView: UIView {
         ])
     }
 }
+

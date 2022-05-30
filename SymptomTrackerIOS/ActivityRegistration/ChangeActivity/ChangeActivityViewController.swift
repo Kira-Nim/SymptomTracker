@@ -24,7 +24,7 @@ class ChangeActivityViewController: UIViewController {
         }
         
         let saveActivityAction = UIAction {[weak self] _ in
-            self?.changeActivityViewModel.saveActivityName()
+            self?.changeActivityViewModel.saveActivity()
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: UIBarButtonItem.SystemItem.save, primaryAction: saveActivityAction, menu: nil)
     }

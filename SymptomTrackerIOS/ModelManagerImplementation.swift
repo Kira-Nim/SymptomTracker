@@ -92,7 +92,6 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
-    
     // MARK: CRUD for Activities
     
     public func update(activity: Activity) {
@@ -132,8 +131,6 @@ final class ModelManagerImplementation: ModelManager {
             }
         }
     }
-    
-    
     
     // MARK: CRUD for Registrations
     

@@ -25,12 +25,16 @@ final class ActivityViewModel: NSObject {
         self.modelManager = modelManager
         self.selectedDate = Date()
         
+        super.init()
+        
         // It is ok to call this fynction here in stead of viewWillAppear because
         // the data on this page should not be changed due to changes made on other pages.
         // - Local update of data plus save to db is enough
         updateActivityLists()
+        
     }
     
+    // Function for updating activity lists (selected date + next and previous)
     private func updateActivityLists() {
         
         // update list containing registrations for selected date
@@ -52,8 +56,6 @@ final class ActivityViewModel: NSObject {
         }
     }
     
-  
-    
     public func setView(view: ActivityView) {
         self.view = view
         
@@ -67,18 +69,14 @@ final class ActivityViewModel: NSObject {
         
         // set functionality to be executed when create new symptom confirmation button is tapped
         view.createActivityButtonView.addAction(UIAction { [weak self] _ in
-            if let showEditActivitySceneCallback = self?.activityChangedCallback,
-               let activity = self?.modelManager.createActivity(),
-               let activityList = self?.activityList {
+            if let showEditActivitySceneCallback = self?.showEditActivitySceneCallback,
+               let newActivity = self?.modelManager.createActivity(){
                     
-                    // incert new symptom into local symptomList at index 0
-                    self?.activityList.insert(activity, at: 0)
-                
-                    // Save symptom in db
-                    //self?.modelManager.updateActivities(activities: activityList) - Method for saving/updating a single activity needs to exist
+                    // incert new activity into local activity list at index 0
+                    self?.selectedDateActivityList.insert(newActivity, at: 0)
                 
                     // Run callback to navigate back to symptom list page
-                    changeNameCallback(activity)
+                    showEditActivitySceneCallback(newActivity)
             }
         }, for: .touchUpInside)
     }

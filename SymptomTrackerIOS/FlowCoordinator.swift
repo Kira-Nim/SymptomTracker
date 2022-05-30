@@ -23,6 +23,7 @@ final class FlowCoordinator {
     private let viewModelProvider: ViewModelProvider
     private let window: UIWindow
     private var accountSettingsNavigationController: UINavigationController?
+    private var activityNavigationController: UINavigationController?
     
     //MARK: Init
     init(viewModelProvider: ViewModelProvider, window: UIWindow) {
@@ -38,21 +39,23 @@ final class FlowCoordinator {
         if viewModelProvider.modelManager.isUserLoggedIn() == true {
             let symptomRegistrationViewController = SymptomRegistrationViewController(viewModel: viewModelProvider.getSymptomRegistrationViewModel())
             
-            let activityViewController = ActivityViewController(viewModel: viewModelProvider.getActivityViewModel())
+            let activityViewModel = viewModelProvider.getActivityViewModel()
+            activityViewModel.showEditActivitySceneCallback = createChangeActivityViewController
+            let activityViewController = ActivityViewController(viewModel: activityViewModel)
+            
             let insightViewController = InsightViewController(viewModel: viewModelProvider.getInsightViewModel())
             
             let accountViewModel = viewModelProvider.getAccountSettingsViewModel()
             accountViewModel.afterLogoutCallback = setRootViewController
             accountViewModel.symptomListSelectedCallback = createSymptomListViewController
-            
             let accountSettingsViewController = AccountViewController(viewModel: accountViewModel)
             
             let symptomRegistrationNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
-            let activityNavigationController = UINavigationController(rootViewController: activityViewController)
+            activityNavigationController = UINavigationController(rootViewController: activityViewController)
             let insightNavigationController = UINavigationController(rootViewController: insightViewController)
             accountSettingsNavigationController = UINavigationController(rootViewController: accountSettingsViewController)
             
-            if let accountSettingsNavigationController = accountSettingsNavigationController {
+            if let accountSettingsNavigationController = accountSettingsNavigationController, let activityNavigationController = activityNavigationController {
                 let tabBarController = UITabBarController()
                 tabBarController.viewControllers = [symptomRegistrationNavigationController,
                                                     activityNavigationController,
@@ -94,6 +97,16 @@ final class FlowCoordinator {
             self.accountSettingsNavigationController?.popViewController(animated: true)
         }
         accountSettingsNavigationController?.pushViewController(changeSymptomNameViewController, animated: true)
+    }
+    
+    func createChangeActivityViewController(activity: Activity) {
+        let changeActivityViewModel = viewModelProvider.getChangeActivityViewModel(activity: activity)
+        let changeActivityViewController = ChangeActivityViewController(viewModel: changeActivityViewModel)
+        
+        changeActivityViewModel.newActivityCompletionCallback = {
+            self.activityNavigationController?.popViewController(animated:true)
+        }
+        activityNavigationController?.pushViewController(changeActivityViewController, animated: true)
     }
 }
 

@@ -13,7 +13,7 @@ class ChangeActivityViewModel: NSObject {
     private var view: ChangeActivityView?
     public var modelManager: ModelManager
     public var activity: Activity
-    public var changeActivityCompletionCallback: (() -> Void)? = nil
+    public var newActivityCompletionCallback: (() -> Void)? = nil
     
     // MARK: Init
     init(modelManager: ModelManager, activity: Activity) {
@@ -37,7 +37,7 @@ class ChangeActivityViewModel: NSObject {
     
     // MARK: Other
     
-    public func saveActivityName() {
+    public func saveActivity() {
         let newName = view?.nameInputField.text
         
         if let newName = newName {
@@ -46,7 +46,7 @@ class ChangeActivityViewModel: NSObject {
             } else {
                 activity.name = newName
                 modelManager.update(activity: activity)
-                changeActivityCompletionCallback?()
+                newActivityCompletionCallback?()
             }
         }
     }
