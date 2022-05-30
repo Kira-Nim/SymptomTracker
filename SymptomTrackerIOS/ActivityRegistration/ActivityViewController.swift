@@ -17,12 +17,14 @@ final class ActivityViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         title = LocalizedStrings.shared.activityControllerTitle
+        tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Activity"), tag: 0)
         navigationItem.rightBarButtonItem = editButtonItem
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {
         super.setEditing(state, animated: animated)
         activityViewModel.setEditing(state, animated: animated)
+        
     }
     
     //Formel requirement for all ViewControllers to have this initializer.

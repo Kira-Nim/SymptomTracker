@@ -14,6 +14,9 @@ class ActivityCell: UITableViewCell {
     // MARK: Subviews
     public var activityLabel = UILabel()
     public var durationLabel = UILabel()
+    private var updateActivityCallback: ((Activity) -> Void)?
+    private var presentActivityStrainColorCallback: ((Int) -> UIColor)?
+    private var presentDurationCallback: ((Int) -> String)?
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -39,19 +42,27 @@ class ActivityCell: UITableViewCell {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.numberOfLines = 0
         activityLabel.font = .appFont(ofSize: 17, weight: .medium)
-        activityLabel.textColor = activity?.strainColor
         activityLabel.text = activity?.name
         activityLabel.textAlignment = NSTextAlignment.left
+        if let activityColor = activity?.strain {
+            let strainUIColor = presentActivityStrainColorCallback?(activityColor)
+            activityLabel.textColor = strainUIColor
+        }
 
-        
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         durationLabel.numberOfLines = 0
         durationLabel.font = .appFont(ofSize: 17, weight: .medium)
-        durationLabel.textColor = activity?.strainColor
-        durationLabel.text = activity?.activityDurationString
-        activityLabel.textAlignment = NSTextAlignment.left
+        durationLabel.textAlignment = NSTextAlignment.left
+        if let activityColor = activity?.strain {
+            let strainUIColor = presentActivityStrainColorCallback?(activityColor)
+            durationLabel.textColor = strainUIColor
+        }
+        durationLabel.textAlignment = NSTextAlignment.left
+        if let duration = activity?.numMinutes {
+            durationLabel.text = presentDurationCallback?(duration)
+        }
     }
-    
+
     // MARK: Setup subviews
     private func setupSubViews() {
         [activityLabel].forEach({ self.contentView.addSubview($0) })
@@ -73,7 +84,11 @@ class ActivityCell: UITableViewCell {
     }
         
     // MARK: Confuguration for cell
-    public func configureCell(activity: Activity) {
+    public func configureCell(activity: Activity, presentDurationCallback: @escaping ((Int) -> String), presentActivityStrainColorCallback: @escaping ((Int) -> UIColor), updateActivityCallback: @escaping ((Activity) -> Void)) {
         self.activity = activity
+        self.updateActivityCallback = updateActivityCallback
+        self.presentDurationCallback = presentDurationCallback
+        self.presentActivityStrainColorCallback = presentActivityStrainColorCallback
+        self.presentDurationCallback = presentDurationCallback
     }
 }

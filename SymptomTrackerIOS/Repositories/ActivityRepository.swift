@@ -17,7 +17,7 @@ final class ActivityRepository {
     // Reference to database
     let db = Firestore.firestore()
     
-    public func getActivities(date: Date, userId: String) -> [FirebaseActivity] {
+    public func getActivities(date: Date, userId: String) { // -> [FirebaseActivity]
         
         db.collection(activityCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -33,7 +33,7 @@ final class ActivityRepository {
                     
                     // run callback passed from ModelManager.
                     // This callback will run callback passed from VM and thereby the view will be updated.
-                    getSymptomRegistrationsForDateCompletionCallback(firebaseSymptomRegistrations)
+                    //getSymptomRegistrationsForDateCompletionCallback(firebaseSymptomRegistrations) - This callback needs to be a parameter to the method, so we have it available to call now
                 }
         }
     }

@@ -30,9 +30,9 @@ final class ModelManagerImplementation: ModelManager {
     //MARK: Init
     init() {
         symptomRepository = SymptomRepository()
-        activityReposityry = ActivityRepository()
+        activityRepository = ActivityRepository()
         symptomRegistrationReposityry = SymptomRegistrationRepository()
-        intensityRegistrationReposityry = IntensityRegistrationRepository()
+        intensityRegistrationRepository = IntensityRegistrationRepository()
         accountManager = AccountManager()
         
         // If the user is still logged then the snapshot listener should be started.
@@ -85,8 +85,8 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     public func createSymptom(sortingPlacement: Int) -> Symptom? {
-        if let userId = accountManager.loggedInUserId, let symptom = FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId) as? Symptom {
-            return symptom
+        if let userId = accountManager.loggedInUserId  {
+            return FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId)
         } else {
             return nil
         }
@@ -110,8 +110,8 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     public func createActivity() -> Activity? {
-        if let userId = accountManager.loggedInUserId, let activity = FirebaseActivity(userId: userId) as? Activity {
-            return activity
+        if let userId = accountManager.loggedInUserId {
+            return FirebaseActivity(userId: userId)
         } else {
             return nil
         }
@@ -123,10 +123,10 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
-    public func getActivities() -> [Activity] {
-        let firebaseActivities = activityRepository.getActivities()
-        let activities = firebaseActivities.compactMap({$0 as? Activity})
-        return activities
+    public func getActivities() { // -> [Activity] Can't return, must use callback to give back activity list
+        // activityRepository.getActivities(PARAMETERS) { firebaseActivities in
+        //    completionCallback(firebaseActivities)
+        // }
     }
     
     // MARK: CRUD for Registrations

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ChangeActivityViewModel {
+class ChangeActivityViewModel: NSObject {
     
     private var view: ChangeActivityView?
     public var modelManager: ModelManager
@@ -45,7 +45,7 @@ class ChangeActivityViewModel {
                 view?.errorMessage.isHidden = false
             } else {
                 activity.name = newName
-                modelManager.updateActivity(activity: activity)
+                modelManager.update(activity: activity)
                 changeActivityCompletionCallback?()
             }
         }

@@ -13,6 +13,4 @@ protocol Activity: AnyObject {
     var name: String { get set }
     var strain: Int { get set }
     var numMinutes: Int { get set }
-    var activityDurationString: String { get }
-    var strainColor: UIColor { get }
 }

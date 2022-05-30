@@ -13,12 +13,17 @@ final class ActivityViewModel: NSObject {
     private var view: ActivityView? = nil
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "cell"
-    private var activityList: [Activity]
+    private var activityList: [Activity] = []
     public var changeNameCallback: ((Activity) -> Void)?
+    private let activityDurationPresenter = ActivityDurationPresenter()
+    private let activityStrainPresenter = ActivityStrainPresenter()
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
-        activityList = modelManager.getActivities()
+        //activityList = modelManager.getActivities()
+        //modelManager.getActivities(PARAMETERS) { [weak self] activities in
+        //  self.activityList = activities
+        //}
     }
     
     public func setView(view: ActivityView) {
@@ -42,7 +47,7 @@ final class ActivityViewModel: NSObject {
                     self?.activityList.insert(activity, at: 0)
                 
                     // Save symptom in db
-                    self?.modelManager.updateActivities(activities: activityList)
+                    //self?.modelManager.updateActivities(activities: activityList) - Method for saving/updating a single activity needs to exist
                 
                     // Run callback to navigate back to symptom list page
                     changeNameCallback(activity)
@@ -68,6 +73,7 @@ final class ActivityViewModel: NSObject {
     public func updateView() {
         view?.activityTableView.reloadData()
     }
+
 }
 
 extension ActivityViewModel: UITableViewDelegate {
@@ -90,7 +96,7 @@ extension ActivityViewModel: UITableViewDelegate {
         let movingActivity = activityList.remove(at: sourceIndexPath.row)
         activityList.insert(movingActivity, at: destinationIndexPath.row)
         
-        modelManager.updateActivities(activities: activityList)
+        // modelManager.updateActivities(activities: activityList) - Activity does not include an editable position like Symptom, so this can't work
     }
 }
 
@@ -115,8 +121,8 @@ extension ActivityViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         if let activityCell = cell as? ActivityCell {
-            activityCell.configureCell(symptom: activityList[indexPath.row]) { symptom in
-                self.modelManager.updateActivity(activity: activity)
+            activityCell.configureCell(activity: activityList[indexPath.row], presentDurationCallback: activityDurationPresenter.getDurationStringForMinutes, presentActivityStrainColorCallback: activityStrainPresenter.getActivityColorForStrain) { [weak self] activity in
+                self?.modelManager.update(activity: activity)
             }
         }
         return cell
