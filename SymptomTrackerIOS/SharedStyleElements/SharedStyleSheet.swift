@@ -48,6 +48,7 @@ extension UIColor {
         case activityRed
         case activityYellow
         case activityGreen
+        case activityClear
         case backgroundColor
         case placeholderTextColor
         case switchButtonOffTintColor
@@ -101,6 +102,8 @@ extension UIColor {
                 return UIColor.systemYellow
             case .activityGreen:
                 return UIColor.systemGreen
+            case .activityClear:
+                return UIColor.clear
             case .backgroundColor:
                 return UIColor.white
             case .switchButtonOffTintColor:

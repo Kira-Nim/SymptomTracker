@@ -11,9 +11,13 @@ import UIKit
 class ChangeActivityView: UIView {
     
     // MARK: Subviews
-    public lazy var activityNameLabel = UILabel()
-    public lazy var nameInputField = UITextField()
-    public lazy var errorMessage = UILabel()
+    public var activityNameLabel = UILabel()
+    public var nameInputField = UITextField()
+    public var strainPicker = UIPickerView()
+    public var strainLabel = UILabel()
+    public var durationNameLabel = UILabel()
+    public var durationPicker = UIDatePicker()
+    public var errorMessage = UILabel()
     
     // MARK: Init
     init() {
@@ -33,10 +37,24 @@ class ChangeActivityView: UIView {
         activityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         activityNameLabel.numberOfLines = 0
         activityNameLabel.textColor = UIColor.appColor(name: .textBlack)
-        activityNameLabel.text = LocalizedStrings.shared.createActivityLabelText
+        activityNameLabel.text = LocalizedStrings.shared.createActivityNameLabelText
         activityNameLabel.font = .appFont(ofSize: 23, weight: .regular)
         activityNameLabel.textAlignment = NSTextAlignment.center
+        
+        durationNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        durationNameLabel.numberOfLines = 0
+        durationNameLabel.textColor = UIColor.appColor(name: .textBlack)
+        durationNameLabel.text = LocalizedStrings.shared.createActivityDurationLabelText
+        durationNameLabel.font = .appFont(ofSize: 23, weight: .regular)
+        durationNameLabel.textAlignment = NSTextAlignment.center
 
+        strainLabel.translatesAutoresizingMaskIntoConstraints = false
+        strainLabel.numberOfLines = 0
+        strainLabel.textColor = UIColor.appColor(name: .textBlack)
+        strainLabel.text = LocalizedStrings.shared.createActivityStrainLabelText
+        strainLabel.font = .appFont(ofSize: 23, weight: .regular)
+        strainLabel.textAlignment = NSTextAlignment.center
+        
         nameInputField.translatesAutoresizingMaskIntoConstraints = false
         nameInputField.autocorrectionType = .no
         nameInputField.autocapitalizationType = .sentences
@@ -49,6 +67,8 @@ class ChangeActivityView: UIView {
         nameInputField.layer.cornerRadius = 3
         nameInputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         nameInputField.leftViewMode = .always
+
+        durationPicker.datePickerMode = UIDatePicker.Mode.countDownTimer
         
         errorMessage.translatesAutoresizingMaskIntoConstraints = false
         errorMessage.numberOfLines = 0

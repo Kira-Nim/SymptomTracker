@@ -6,12 +6,13 @@
 //
 
 import Foundation
-
-enum Strain { case red, yellow, green, white }
+import UIKit
 
 protocol Activity: AnyObject {
     var date: Date { get set }
     var name: String { get set }
     var strain: Int { get set }
     var numMinutes: Int { get set }
+    var activityDurationString: String { get }
+    var strainColor: UIColor { get }
 }

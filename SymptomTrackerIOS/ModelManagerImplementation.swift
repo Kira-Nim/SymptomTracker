@@ -85,8 +85,7 @@ final class ModelManagerImplementation: ModelManager {
     }
     
     public func createSymptom(sortingPlacement: Int) -> Symptom? {
-        if let userId = accountManager.loggedInUserId {
-            let symptom = FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId)
+        if let userId = accountManager.loggedInUserId, let symptom = FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId) as? Symptom {
             return symptom
         } else {
             return nil
@@ -96,22 +95,22 @@ final class ModelManagerImplementation: ModelManager {
     
     // MARK: CRUD for Activities
     
-    public func updateActivity(activity: Activity) {
-        if let firebaseActivity = activity as? FirebaseActivity {
-            activityRepository.update(activity: firebaseActivity)
+    public func update(activity: Activity) {
+        if let firebaseActivity = activity as? FirebaseActivity, let userId = accountManager.loggedInUserId {
+            activityRepository.updateActivity(firebaseActivity: firebaseActivity, userId: userId)
         }
     }
     
-    public func updateActivities(activity: [Activity]) {
-        
-        // use compactMap to cast all activities from Activity to Firebaseactivity before saving them to db
-        let firebaseActivity = activity.compactMap({ $0 as? FirebaseActivity })
-        activityRepository.updateActivity(activity: firebaseActivity)
+    public func update(activities: [Activity]) {
+        if let userId = accountManager.loggedInUserId{
+            // use compactMap to cast all activities from Activity to Firebaseactivity before saving them to db
+            let firebaseActivities = activities.compactMap({ $0 as? FirebaseActivity })
+            activityRepository.updateActivities(activities: firebaseActivities, userId: userId)
+        }
     }
     
     public func createActivity() -> Activity? {
-        if let userId = accountManager.loggedInUserId {
-            let activity = FirebaseActivity(userId: userId)
+        if let userId = accountManager.loggedInUserId, let activity = FirebaseActivity(userId: userId) as? Activity {
             return activity
         } else {
             return nil
@@ -122,6 +121,12 @@ final class ModelManagerImplementation: ModelManager {
         if let firebaseActivity = activity as? FirebaseActivity {
             activityRepository.delete(activity: firebaseActivity)
         }
+    }
+    
+    public func getActivities() -> [Activity] {
+        let firebaseActivities = activityRepository.getActivities()
+        let activities = firebaseActivities.compactMap({$0 as? Activity})
+        return activities
     }
     
     // MARK: CRUD for Registrations

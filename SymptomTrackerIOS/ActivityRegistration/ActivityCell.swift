@@ -13,6 +13,7 @@ class ActivityCell: UITableViewCell {
     
     // MARK: Subviews
     public var activityLabel = UILabel()
+    public var durationLabel = UILabel()
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,7 +39,17 @@ class ActivityCell: UITableViewCell {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.numberOfLines = 0
         activityLabel.font = .appFont(ofSize: 17, weight: .medium)
-        activityLabel.textColor = UIColor.appColor(name: .textBlack)
+        activityLabel.textColor = activity?.strainColor
+        activityLabel.text = activity?.name
+        activityLabel.textAlignment = NSTextAlignment.left
+
+        
+        durationLabel.translatesAutoresizingMaskIntoConstraints = false
+        durationLabel.numberOfLines = 0
+        durationLabel.font = .appFont(ofSize: 17, weight: .medium)
+        durationLabel.textColor = activity?.strainColor
+        durationLabel.text = activity?.activityDurationString
+        activityLabel.textAlignment = NSTextAlignment.left
     }
     
     // MARK: Setup subviews
@@ -51,7 +62,12 @@ class ActivityCell: UITableViewCell {
         NSLayoutConstraint.activate([
             activityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             activityLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            activityLabel.trailingAnchor.constraint(equalTo: self.contentView.centerXAnchor, constant: 95),
+            activityLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            activityLabel.trailingAnchor.constraint(equalTo: durationLabel.leadingAnchor, constant: 10),
+            
+            durationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 15),
+            durationLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            durationLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
         
     }
@@ -59,6 +75,5 @@ class ActivityCell: UITableViewCell {
     // MARK: Confuguration for cell
     public func configureCell(activity: Activity) {
         self.activity = activity
-        activityLabel.text = activity.name
     }
 }
