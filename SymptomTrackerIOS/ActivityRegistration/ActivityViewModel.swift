@@ -13,18 +13,46 @@ final class ActivityViewModel: NSObject {
     private var view: ActivityView? = nil
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "cell"
-    private var activityList: [Activity] = []
-    public var changeNameCallback: ((Activity) -> Void)?
+    public var showEditActivitySceneCallback: ((Activity) -> Void)?
     private let activityDurationPresenter = ActivityDurationPresenter()
     private let activityStrainPresenter = ActivityStrainPresenter()
+    private var selectedDate: Date
+    private var selectedDateActivityList: [Activity] = []
+    private var nextDateActivityList: [Activity] = []
+    private var previousDateActivityList: [Activity] = []
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
-        //activityList = modelManager.getActivities()
-        //modelManager.getActivities(PARAMETERS) { [weak self] activities in
-        //  self.activityList = activities
-        //}
+        self.selectedDate = Date()
+        
+        // It is ok to call this fynction here in stead of viewWillAppear because
+        // the data on this page should not be changed due to changes made on other pages.
+        // - Local update of data plus save to db is enough
+        updateActivityLists()
     }
+    
+    private func updateActivityLists() {
+        
+        // update list containing registrations for selected date
+        modelManager.getActivitiesForDate(date: selectedDate) { activityList in
+            self.selectedDateActivityList = activityList
+            self.updateView()
+        }
+        
+        // If .date returns a non nil object for both metod calls get SymptomRegistration lists for previous and next date (compared to selected date)
+        if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
+            
+            modelManager.getActivitiesForDate(date: nextDate) { activityList in
+                self.nextDateActivityList = activityList
+            }
+
+            modelManager.getActivitiesForDate(date: previousDate) { activityList in
+                self.previousDateActivityList = activityList
+            }
+        }
+    }
+    
+  
     
     public func setView(view: ActivityView) {
         self.view = view
@@ -38,8 +66,8 @@ final class ActivityViewModel: NSObject {
         self.view = view
         
         // set functionality to be executed when create new symptom confirmation button is tapped
-        view.createActivityButtonView.addAction(UIAction {[weak self] _ in
-            if let changeNameCallback = self?.changeNameCallback,
+        view.createActivityButtonView.addAction(UIAction { [weak self] _ in
+            if let showEditActivitySceneCallback = self?.activityChangedCallback,
                let activity = self?.modelManager.createActivity(),
                let activityList = self?.activityList {
                     
@@ -73,7 +101,6 @@ final class ActivityViewModel: NSObject {
     public func updateView() {
         view?.activityTableView.reloadData()
     }
-
 }
 
 extension ActivityViewModel: UITableViewDelegate {
@@ -83,20 +110,13 @@ extension ActivityViewModel: UITableViewDelegate {
         // Only navigate to change the activity name page if the activity name is selected in editing mode
         // tableView refers to self.view
         if tableView.isEditing {
-            changeNameCallback?(activityList[indexPath.row])
+            showEditActivitySceneCallback?(selectedDateActivityList[indexPath.row])
         }
     }
     
     // Method for setting editing style on cell.
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movingActivity = activityList.remove(at: sourceIndexPath.row)
-        activityList.insert(movingActivity, at: destinationIndexPath.row)
-        
-        // modelManager.updateActivities(activities: activityList) - Activity does not include an editable position like Symptom, so this can't work
     }
 }
 
@@ -109,7 +129,7 @@ extension ActivityViewModel: UITableViewDataSource {
     
     // How many rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activityList.count
+        return selectedDateActivityList.count
     }
     
     // Method for configuring row height
@@ -121,9 +141,7 @@ extension ActivityViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         if let activityCell = cell as? ActivityCell {
-            activityCell.configureCell(activity: activityList[indexPath.row], presentDurationCallback: activityDurationPresenter.getDurationStringForMinutes, presentActivityStrainColorCallback: activityStrainPresenter.getActivityColorForStrain) { [weak self] activity in
-                self?.modelManager.update(activity: activity)
-            }
+            activityCell.configureCell(activity: selectedDateActivityList[indexPath.row], presentDurationCallback: activityDurationPresenter.getDurationStringForMinutes, presentActivityStrainColorCallback: activityStrainPresenter.getActivityColorForStrain)
         }
         return cell
     }
@@ -132,11 +150,11 @@ extension ActivityViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         // Delete activity frem db
-        let activityToDelete = activityList[indexPath.row]
+        let activityToDelete = selectedDateActivityList[indexPath.row]
         modelManager.delete(activity: activityToDelete)
         
         //Remove activity from local list
-        activityList.remove(at: indexPath.row)
+        selectedDateActivityList.remove(at: indexPath.row)
         
         // Update view
         // The tableView taken as param above (and used here) refers to self.view.

@@ -17,27 +17,24 @@ final class ActivityRepository {
     // Reference to database
     let db = Firestore.firestore()
     
-    public func getActivities(date: Date, userId: String) { // -> [FirebaseActivity]
-        
+    public func getActivitiesFor(date: Date, userId: String, getActivitiesForDateCompletionCallback: @escaping ([FirebaseActivity]) -> Void) {
         db.collection(activityCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    var firebaseActivities: [FirebaseActivity] = []
-                    for document in querySnapshot!.documents {
-                        let documentId = document.documentID
-                        let activityDocument = document.data()
-                        let firebaseActivity = FirebaseActivity(firebaseActivityDocument: activityDocument, activityId: documentId)
-                        firebaseActivities.append(firebaseActivity)
-                    }
-                    
-                    // run callback passed from ModelManager.
-                    // This callback will run callback passed from VM and thereby the view will be updated.
-                    //getSymptomRegistrationsForDateCompletionCallback(firebaseSymptomRegistrations) - This callback needs to be a parameter to the method, so we have it available to call now
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var firebaseActivities: [FirebaseActivity] = []
+                for document in querySnapshot!.documents {
+                    let documentId = document.documentID
+                    let activityDocument = document.data()
+                    let firebaseActivity = FirebaseActivity(firebaseActivityDocument: activityDocument, activityId: documentId)
+                    firebaseActivities.append(firebaseActivity)
                 }
+                // Run callback passed from ModelManager.
+                // This callback will run callback passed from VM and thereby the view will be updated.
+                getActivitiesForDateCompletionCallback(firebaseActivities)
+            }
         }
     }
-    
     
     public func updateActivities(activities: [FirebaseActivity], userId: String) {
         activities.forEach({
@@ -81,3 +78,4 @@ final class ActivityRepository {
                 "numMinutes": firebaseActivity.numMinutes]
     }
 }
+

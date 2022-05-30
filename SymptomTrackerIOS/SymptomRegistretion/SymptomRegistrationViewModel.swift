@@ -42,6 +42,9 @@ final class SymptomRegistrationViewModel: NSObject {
     
     // MARK: viewWillAppear
     public func viewWillAppear() {
+        
+        // called here because the SymptomRegistrations view data should be updated when changes
+        // are made on other pages in the app
         updateSymptomRegistrationLists()
     }
     

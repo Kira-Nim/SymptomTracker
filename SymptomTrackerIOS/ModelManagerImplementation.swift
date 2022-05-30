@@ -123,11 +123,17 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
-    public func getActivities() { // -> [Activity] Can't return, must use callback to give back activity list
-        // activityRepository.getActivities(PARAMETERS) { firebaseActivities in
-        //    completionCallback(firebaseActivities)
-        // }
+    public func getActivitiesForDate(date: Date,
+                                     getActivitiesForDateCompletionCallback: @escaping (([Activity]) -> Void)) {
+
+        if let userId = accountManager.loggedInUserId {
+            activityRepository.getActivitiesFor(date: date, userId: userId) { firebaseActivityList in
+                getActivitiesForDateCompletionCallback(firebaseActivityList)
+            }
+        }
     }
+    
+    
     
     // MARK: CRUD for Registrations
     

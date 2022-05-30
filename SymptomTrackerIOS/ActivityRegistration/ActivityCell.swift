@@ -12,9 +12,8 @@ class ActivityCell: UITableViewCell {
     private var activity: Activity?
     
     // MARK: Subviews
-    public var activityLabel = UILabel()
-    public var durationLabel = UILabel()
-    private var updateActivityCallback: ((Activity) -> Void)?
+    private var activityLabel = UILabel()
+    private var durationLabel = UILabel()
     private var presentActivityStrainColorCallback: ((Int) -> UIColor)?
     private var presentDurationCallback: ((Int) -> String)?
     
@@ -84,9 +83,8 @@ class ActivityCell: UITableViewCell {
     }
         
     // MARK: Confuguration for cell
-    public func configureCell(activity: Activity, presentDurationCallback: @escaping ((Int) -> String), presentActivityStrainColorCallback: @escaping ((Int) -> UIColor), updateActivityCallback: @escaping ((Activity) -> Void)) {
+    public func configureCell(activity: Activity, presentDurationCallback: @escaping ((Int) -> String), presentActivityStrainColorCallback: @escaping ((Int) -> UIColor)) {
         self.activity = activity
-        self.updateActivityCallback = updateActivityCallback
         self.presentDurationCallback = presentDurationCallback
         self.presentActivityStrainColorCallback = presentActivityStrainColorCallback
         self.presentDurationCallback = presentDurationCallback
