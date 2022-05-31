@@ -32,6 +32,11 @@ class ChangeActivityViewModel: NSObject {
         view.nameInputField.delegate = self
         view.nameInputField.text = activity.name
         view.strainSegmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        view.strainSegmentedControl.selectedSegmentIndex = activity.strain
+        // update segmented control color
+        segmentChanged()
+        let durationSeconds = Double(activity.numMinutes) * 60.0
+        view.durationPicker.countDownDuration = durationSeconds
     }
     
     // MARK: viewDidAppear()

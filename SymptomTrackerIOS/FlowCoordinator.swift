@@ -22,8 +22,8 @@ import UIKit
 final class FlowCoordinator {
     private let viewModelProvider: ViewModelProvider
     private let window: UIWindow
-    private var accountSettingsNavigationController: UINavigationController?
-    private var activityNavigationController: UINavigationController?
+    private var accountSettingsNavigationController: PortraintLockedNavigationController?
+    private var activityNavigationController: PortraintLockedNavigationController?
     
     //MARK: Init
     init(viewModelProvider: ViewModelProvider, window: UIWindow) {
@@ -50,10 +50,10 @@ final class FlowCoordinator {
             accountViewModel.symptomListSelectedCallback = createSymptomListViewController
             let accountSettingsViewController = AccountViewController(viewModel: accountViewModel)
             
-            let symptomRegistrationNavigationController = UINavigationController(rootViewController: symptomRegistrationViewController)
-            activityNavigationController = UINavigationController(rootViewController: activityViewController)
+            let symptomRegistrationNavigationController = PortraintLockedNavigationController(rootViewController: symptomRegistrationViewController)
+            activityNavigationController = PortraintLockedNavigationController(rootViewController: activityViewController)
             let insightNavigationController = UINavigationController(rootViewController: insightViewController)
-            accountSettingsNavigationController = UINavigationController(rootViewController: accountSettingsViewController)
+            accountSettingsNavigationController = PortraintLockedNavigationController(rootViewController: accountSettingsViewController)
             
             if let accountSettingsNavigationController = accountSettingsNavigationController, let activityNavigationController = activityNavigationController {
                 let tabBarController = UITabBarController()
@@ -99,13 +99,30 @@ final class FlowCoordinator {
         accountSettingsNavigationController?.pushViewController(changeSymptomNameViewController, animated: true)
     }
     
-    func createChangeActivityViewController(activity: Activity) {
+    /*
+    // callback ("createChangeActivityViewController") will be executed when the new activity button is clicked.
+    // It takes care of navigation to create/edit activity page and sets a callback on the new VM that goes
+    // with the controller that was pushed. The callback given is to be executed when the save butten is clicked.
+    // This method takes a another callback as param that will be passed on and executed
+    // when the save activity button in edit/create state is pressed.
+    // This "createChangeActivityViewController" method is given as a callback to the activityViewModel where it is stored in an att.
+    // This method creates another callback - "newActivityCompletionCallback" which is set as an att. on changeActivityViewModel.
+    // The "createChangeActivityViewController" takes yet another callback as param - "activitySavedCallback".
+    // This callback is to be executed inside the "newActivityCompletionCallback" when this happens in the activityViewModel.
+    // The "activitySavedCallback" is defines and passed as a param inside the activityViewModel.
+    //
+    // UI wise --> "createChangeActivityViewController" is run when the "create new activity button" is pressed.
+    //         --> "newActivityCompletionCallback" and "activitySavedCallback" is executed when the "Gem" button is pressed.
+    */
+    func createChangeActivityViewController(activity: Activity, activitySavedCallback: @escaping () -> Void) {
         let changeActivityViewModel = viewModelProvider.getChangeActivityViewModel(activity: activity)
         let changeActivityViewController = ChangeActivityViewController(viewModel: changeActivityViewModel)
         
         changeActivityViewModel.newActivityCompletionCallback = {
             self.activityNavigationController?.popViewController(animated:true)
+            activitySavedCallback()
         }
+        
         activityNavigationController?.pushViewController(changeActivityViewController, animated: true)
     }
 }

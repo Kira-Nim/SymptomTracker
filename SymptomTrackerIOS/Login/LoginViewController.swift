@@ -35,16 +35,16 @@ final class LoginViewController: UIViewController {
         loginViewModel.setView(view: loginView)
     }
     
-    //MARK: Other
-    
-    /* This function overrides the getter function on UIViewController that returns the
-       property supportedInterfaceOrientations which is used by iOS to understand what
-       screen orientations is allowed. Default is .all
-       This is needed because the supportedInterfaceOrientations proporty is a get only
-       proporty.
-       This way iOS will not ask the super but this controller and it get .portrait returnes as answer
-     */
+    //MARK: Portrait lock
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return UIInterfaceOrientationMask.portrait
+    }
+
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return UIInterfaceOrientation.portrait
     }
 }

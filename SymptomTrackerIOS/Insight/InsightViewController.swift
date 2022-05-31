@@ -36,4 +36,10 @@ final class InsightViewController: UIViewController {
         super.viewDidLoad()
         insightViewModel.setView(view: insightView)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
+    }
 }

@@ -20,6 +20,8 @@
 		4F388E6A28395C4E009F684C /* SymptomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6928395C4E009F684C /* SymptomListView.swift */; };
 		4F388E6C28397430009F684C /* SymptomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6B28397430009F684C /* SymptomListCell.swift */; };
 		4F388E6E283ABD61009F684C /* AccountModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6D283ABD5F009F684C /* AccountModelManager.swift */; };
+		4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */; };
+		4F6F26A82846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */; };
 		4F8757B728228138003033B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B628228138003033B0 /* AppDelegate.swift */; };
 		4F8757B928228138003033B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B828228138003033B0 /* SceneDelegate.swift */; };
 		4F8757C02822813B003033B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8757BF2822813B003033B0 /* Assets.xcassets */; };
@@ -87,6 +89,8 @@
 		4F388E6928395C4E009F684C /* SymptomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListView.swift; sourceTree = "<group>"; };
 		4F388E6B28397430009F684C /* SymptomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListCell.swift; sourceTree = "<group>"; };
 		4F388E6D283ABD5F009F684C /* AccountModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModelManager.swift; sourceTree = "<group>"; };
+		4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitLockedNavigationController.swift; sourceTree = "<group>"; };
+		4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabbarController+OrientationHandling.swift"; sourceTree = "<group>"; };
 		4F8757B328228138003033B0 /* SymptomTrackerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymptomTrackerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8757B628228138003033B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8757B828228138003033B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +228,8 @@
 				4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */,
 				4F388E6D283ABD5F009F684C /* AccountModelManager.swift */,
 				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
+				4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */,
+				4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
 				4F8757D62822A068003033B0 /* GoogleService-Info.plist */,
 				4F8757C42822813B003033B0 /* Info.plist */,
@@ -474,6 +480,7 @@
 				4FAFCED628242151002CEFBE /* FirebaseSymptom.swift in Sources */,
 				4F1CAC62283D1B530081FA45 /* ChangeSymptomNameView.swift in Sources */,
 				4FAFCEDA282422A6002CEFBE /* FirebaseIntensityRegistration.swift in Sources */,
+				4F6F26A82846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift in Sources */,
 				4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */,
 				4F388E5C2837BEB6009F684C /* SharedStyleSheet.swift in Sources */,
 				4FAFCEF228253B41002CEFBE /* SymptomRegistrationRepository.swift in Sources */,
@@ -488,6 +495,7 @@
 				4F388E612837F71B009F684C /* ValidationService.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
 				4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */,
+				4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */,
 				4FAFCEEE28253ACC002CEFBE /* SymptomRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

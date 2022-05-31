@@ -78,7 +78,7 @@ final class ActivityRepository {
                 "name": firebaseActivity.name,
                 "user_id": firebaseActivity.userId,
                 "strain": firebaseActivity.strain,
-                "numMinutes": firebaseActivity.numMinutes]
+                "num_minutes": firebaseActivity.numMinutes]
     }
 }
 

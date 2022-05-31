@@ -13,7 +13,7 @@ final class ActivityViewModel: NSObject {
     private var view: ActivityView? = nil
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "activityCell"
-    public var showEditActivitySceneCallback: ((Activity) -> Void)?
+    public var showEditActivitySceneCallback: ((Activity, @escaping (() -> Void)) -> Void)?
     private let activityDurationService = ActivityDurationService()
     private let activityStrainPresenter = ActivityStrainService()
     private var selectedDate: Date
@@ -71,12 +71,13 @@ final class ActivityViewModel: NSObject {
         view.createActivityButtonView.addAction(UIAction { [weak self] _ in
             if let showEditActivitySceneCallback = self?.showEditActivitySceneCallback,
                let newActivity = self?.modelManager.createActivity(){
-                    
-                    // incert new activity into local activity list at index 0
-                    self?.selectedDateActivityList.insert(newActivity, at: 0)
                 
-                    // Run callback to navigate back to symptom list page
-                    showEditActivitySceneCallback(newActivity)
+                // Run callback to navigate back to symptom list page
+                showEditActivitySceneCallback(newActivity) { [weak self] in
+                    // insert new activity into local activity list at index 0
+                    self?.selectedDateActivityList.insert(newActivity, at: 0)
+                    self?.updateView()
+                }
             }
         }, for: .touchUpInside)
     }
@@ -108,7 +109,9 @@ extension ActivityViewModel: UITableViewDelegate {
         // Only navigate to change the activity name page if the activity name is selected in editing mode
         // tableView refers to self.view
         if tableView.isEditing {
-            showEditActivitySceneCallback?(selectedDateActivityList[indexPath.row])
+            showEditActivitySceneCallback?(selectedDateActivityList[indexPath.row]) { [weak self] in
+                self?.updateView()
+            }
         }
     }
     
