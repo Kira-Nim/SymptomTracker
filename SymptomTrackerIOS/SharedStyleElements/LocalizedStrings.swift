@@ -22,6 +22,7 @@ final class LocalizedStrings {
     public let loginFailedError = "Fejl ved login"
     public let accountDisabledError = "Kontoen er blevet lukket"
     public let inputIsToLongError = "Den maksimal længde symptomets navn er 55 anslag"
+    public let activityInputInIsToLongError = "Den maksimal længde symptomets navn er 50 anslag"
     //MARK: Confirmation messages
     public let passwordResetConfirmation = "Der er sendt en email. Følg linket i mailen for at vælge et nyt password."
     

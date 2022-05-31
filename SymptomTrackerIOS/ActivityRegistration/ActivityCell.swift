@@ -45,17 +45,25 @@ class ActivityCell: UITableViewCell {
         activityLabel.textAlignment = NSTextAlignment.left
         if let activityColor = activity?.strain {
             let strainUIColor = presentActivityStrainColorCallback?(activityColor)
-            //activityLabel.textColor = strainUIColor
+            activityLabel.textColor = strainUIColor
         }
 
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         durationLabel.numberOfLines = 0
         durationLabel.font = .appFont(ofSize: 17, weight: .medium)
         durationLabel.textAlignment = NSTextAlignment.left
-        if let activityColor = activity?.strain {
-            let strainUIColor = presentActivityStrainColorCallback?(activityColor)
+        
+        // Set textColor of activity based on choosen strain level. If strain level is 0 then the text should be black
+        // else the textcolor should reflect the color shown in the select strain view chen creating an activity
+        if let strain = activity?.strain {
+            var strainUIColor = UIColor.appColor(name: .textBlack)
+            if(strain != 0) {
+                if let colorForText = presentActivityStrainColorCallback?(strain) {
+                    strainUIColor = colorForText}
+            }
             durationLabel.textColor = strainUIColor
         }
+        
         durationLabel.textAlignment = NSTextAlignment.left
         if let duration = activity?.numMinutes {
             durationLabel.text = presentDurationCallback?(duration)
@@ -70,12 +78,13 @@ class ActivityCell: UITableViewCell {
     // MARK: Setup constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            activityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15),
             activityLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             activityLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            activityLabel.trailingAnchor.constraint(equalTo: durationLabel.leadingAnchor, constant: 10),
+            activityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            activityLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10),
             
-            durationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 15),
+            durationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
+            durationLabel.leadingAnchor.constraint(equalTo: activityLabel.trailingAnchor, constant: 25),
             durationLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             durationLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
