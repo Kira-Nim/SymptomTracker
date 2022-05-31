@@ -127,7 +127,12 @@ final class ModelManagerImplementation: ModelManager {
 
         if let userId = accountManager.loggedInUserId {
             activityRepository.getActivitiesFor(date: date, userId: userId) { firebaseActivityList in
-                getActivitiesForDateCompletionCallback(firebaseActivityList)
+                
+                // Creating a new list because the firebaseActivityList is imutable (let)
+                let newFirebaseList = firebaseActivityList.sorted {
+                    $0.date > $1.date
+                }
+                getActivitiesForDateCompletionCallback(newFirebaseList)
             }
         }
     }

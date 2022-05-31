@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ActivityDurationPresenter {
+class ActivityDurationService {
     
     public func getDurationStringForMinutes(_ numMinutes: Int) -> String {
         var hours = numMinutes / 60

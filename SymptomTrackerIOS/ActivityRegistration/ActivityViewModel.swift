@@ -14,8 +14,8 @@ final class ActivityViewModel: NSObject {
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "activityCell"
     public var showEditActivitySceneCallback: ((Activity) -> Void)?
-    private let activityDurationPresenter = ActivityDurationPresenter()
-    private let activityStrainPresenter = ActivityStrainPresenter()
+    private let activityDurationService = ActivityDurationService()
+    private let activityStrainPresenter = ActivityStrainService()
     private var selectedDate: Date
     private var selectedDateActivityList: [Activity] = []
     private var nextDateActivityList: [Activity] = []
@@ -139,7 +139,7 @@ extension ActivityViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         if let activityCell = cell as? ActivityCell {
-            activityCell.configureCell(activity: selectedDateActivityList[indexPath.row], presentDurationCallback: activityDurationPresenter.getDurationStringForMinutes, presentActivityStrainColorCallback: activityStrainPresenter.getActivityColorForStrain)
+            activityCell.configureCell(activity: selectedDateActivityList[indexPath.row], presentDurationCallback: activityDurationService.getDurationStringForMinutes, presentActivityStrainColorCallback: activityStrainPresenter.getActivityColorForStrain)
         }
         return cell
     }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ActivityStrainPresenter {
+class ActivityStrainService {
     
     public func getActivityColorForStrain(_ strain: Int) -> UIColor {
         switch strain {

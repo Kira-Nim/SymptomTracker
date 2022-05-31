@@ -55,12 +55,14 @@ class ChangeActivityViewModel: NSObject {
     
     public func saveActivity() {
         let newName = view?.nameInputField.text
-        
-        if let newName = newName {
+        let durationInMinutes = (view?.durationPicker.countDownDuration ?? 0)/60
+        if let strain = view?.strainSegmentedControl.selectedSegmentIndex, let newName = newName {
             if newName.count > 50 {
                 view?.errorMessage.isHidden = false
             } else {
                 activity.name = newName
+                activity.strain = strain
+                activity.numMinutes = Int(durationInMinutes)
                 modelManager.update(activity: activity)
                 newActivityCompletionCallback?()
             }
