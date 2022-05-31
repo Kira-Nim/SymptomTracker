@@ -52,12 +52,7 @@ final class SymptomRegistrationViewModel: NSObject {
         
         // update list containing registrations for selected date
         modelManager.getRegistrationsForDate(date: selectedDate) { symptomRegistrations in
-            
-            symptomRegistrations.forEach({ symptomRegistration in
-                if symptomRegistration.symptom?.disabled == false {
-                    self.selectedDateRegistrations.append(symptomRegistration)
-                }
-            })
+            self.selectedDateRegistrations = symptomRegistrations
             self.updateView()
         }
         

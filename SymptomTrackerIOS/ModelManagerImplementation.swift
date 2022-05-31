@@ -148,10 +148,13 @@ final class ModelManagerImplementation: ModelManager {
             
             symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, userId: userId) { firebaseSymptomRegistrationList in
                 
+                // Only make/fetch registrations for non-disabled symptoms
+                let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
+                
                 // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
                 let symptomRegistrationsList = registrationsService.getSymptomRegistrationListFrom(
                                                         firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
-                                                        symptomList: self.firebaseSymptoms)
+                                                        symptomList: enabledSymptoms)
                 
                 // Run callback passed from symptomRegistrationViewModel
                 getRegistrationsForDateCompletionCallback(symptomRegistrationsList)
