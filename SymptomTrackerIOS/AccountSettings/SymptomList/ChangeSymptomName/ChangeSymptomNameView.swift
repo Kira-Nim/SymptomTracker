@@ -18,7 +18,7 @@ class ChangeSymptomNameView: UIView {
     // MARK: Init
     init() {
         super.init(frame: CGRect.zero)
-        backgroundColor = UIColor.appColor(name: .backgroundColor)
+        backgroundColor = UIColor.appColor(name: .createBacgroundColor)
         
         setAttributesOnSubViews()
         setupSubViews()
@@ -34,7 +34,7 @@ class ChangeSymptomNameView: UIView {
         symptomNameLabel.numberOfLines = 0
         symptomNameLabel.textColor = UIColor.appColor(name: .textBlack)
         symptomNameLabel.text = LocalizedStrings.shared.createSymptomLabelText
-        symptomNameLabel.font = .appFont(ofSize: 23, weight: .regular)
+        symptomNameLabel.font = .appFont(ofSize: 21, weight: .medium)
         symptomNameLabel.textAlignment = NSTextAlignment.center
 
         nameInputField.translatesAutoresizingMaskIntoConstraints = false

@@ -48,7 +48,7 @@ extension UIColor {
         case activityRed
         case activityYellow
         case activityGreen
-        case activityClear
+        case activityWhite
         case backgroundColor
         case placeholderTextColor
         case switchButtonOffTintColor
@@ -59,6 +59,7 @@ extension UIColor {
         case registrationButtonBorderColor
         case registrationButtonText
         case registrationNeutral
+        case createBacgroundColor
     }
     
     static func appColor(name: AppColor) -> UIColor {
@@ -78,7 +79,8 @@ extension UIColor {
                 return UIColor.white
             case .textFieldBorderColor:
                 //return UIColor(red: 106/255, green: 126/255, blue: 168/255, alpha: 1.0)
-                return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
+                //return UIColor(red: 104/255, green: 101/255, blue: 175/255, alpha: 1.0)
+                return UIColor(red: 207/255, green: 207/255, blue: 207/255, alpha: 1.0)
             case .confirmationGreen:
                 return UIColor(red: 75/255, green: 119/255, blue: 127/255, alpha: 1.0)
             case .headerColor:
@@ -102,7 +104,7 @@ extension UIColor {
                 return UIColor.systemYellow
             case .activityGreen:
                 return UIColor.systemGreen
-            case .activityClear:
+            case .activityWhite:
                 return UIColor.clear
             case .backgroundColor:
                 return UIColor.white
@@ -124,7 +126,10 @@ extension UIColor {
             case .registrationButtonText:
                 return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
             case .registrationNeutral:
-                return UIColor.clear
+                return UIColor.white
+            case .createBacgroundColor:
+                return UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
+            
         }
     }
     

@@ -12,7 +12,7 @@ final class ActivityViewModel: NSObject {
     
     private var view: ActivityView? = nil
     public var modelManager: ModelManager
-    private let cellReuseIdentifier =  "cell"
+    private let cellReuseIdentifier =  "activityCell"
     public var showEditActivitySceneCallback: ((Activity) -> Void)?
     private let activityDurationPresenter = ActivityDurationPresenter()
     private let activityStrainPresenter = ActivityStrainPresenter()

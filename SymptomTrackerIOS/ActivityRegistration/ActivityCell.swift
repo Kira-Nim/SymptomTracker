@@ -45,7 +45,7 @@ class ActivityCell: UITableViewCell {
         activityLabel.textAlignment = NSTextAlignment.left
         if let activityColor = activity?.strain {
             let strainUIColor = presentActivityStrainColorCallback?(activityColor)
-            activityLabel.textColor = strainUIColor
+            //activityLabel.textColor = strainUIColor
         }
 
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +64,7 @@ class ActivityCell: UITableViewCell {
 
     // MARK: Setup subviews
     private func setupSubViews() {
-        [activityLabel].forEach({ self.contentView.addSubview($0) })
+        [activityLabel, durationLabel].forEach({ self.contentView.addSubview($0) })
     }
     
     // MARK: Setup constraints
@@ -88,5 +88,6 @@ class ActivityCell: UITableViewCell {
         self.presentDurationCallback = presentDurationCallback
         self.presentActivityStrainColorCallback = presentActivityStrainColorCallback
         self.presentDurationCallback = presentDurationCallback
+        self.setAttributesOnSubViews()
     }
 }

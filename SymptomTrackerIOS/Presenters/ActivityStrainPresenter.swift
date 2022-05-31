@@ -19,7 +19,7 @@ class ActivityStrainPresenter {
         case 1:
             return UIColor.appColor(name: .activityGreen)
         default:
-            return UIColor.appColor(name: .activityClear)
+            return UIColor.appColor(name: .activityWhite)
         }
     }
 }

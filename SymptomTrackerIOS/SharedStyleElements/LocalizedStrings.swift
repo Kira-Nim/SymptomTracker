@@ -49,7 +49,7 @@ final class LocalizedStrings {
     //MARK: Labels
     public let createSymptomLabelText = "Symptom navn"
     public let createActivityNameLabelText = "Aktivitetens navn"
-    public let createActivityStrainLabelText = "Anstrengelses kategori"
+    public let createActivityStrainLabelText = "Kategori"
     public let createActivityDurationLabelText = "Varighed"
     
     //MARK: Tabbar labels

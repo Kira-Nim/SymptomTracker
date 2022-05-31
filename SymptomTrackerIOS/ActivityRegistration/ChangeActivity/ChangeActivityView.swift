@@ -22,7 +22,7 @@ class ChangeActivityView: UIView {
     // MARK: Init
     init() {
         super.init(frame: CGRect.zero)
-        backgroundColor = UIColor.appColor(name: .backgroundColor)
+        backgroundColor = UIColor.appColor(name: .createBacgroundColor)
         
         setAttributesOnSubViews()
         setupSubViews()
@@ -38,21 +38,21 @@ class ChangeActivityView: UIView {
         activityNameLabel.numberOfLines = 0
         activityNameLabel.textColor = UIColor.appColor(name: .textBlack)
         activityNameLabel.text = LocalizedStrings.shared.createActivityNameLabelText
-        activityNameLabel.font = .appFont(ofSize: 23, weight: .regular)
+        activityNameLabel.font = .appFont(ofSize: 21, weight: .medium)
         activityNameLabel.textAlignment = NSTextAlignment.center
         
         durationNameLabel.translatesAutoresizingMaskIntoConstraints = false
         durationNameLabel.numberOfLines = 0
         durationNameLabel.textColor = UIColor.appColor(name: .textBlack)
         durationNameLabel.text = LocalizedStrings.shared.createActivityDurationLabelText
-        durationNameLabel.font = .appFont(ofSize: 23, weight: .regular)
+        durationNameLabel.font = .appFont(ofSize: 19, weight: .medium)
         durationNameLabel.textAlignment = NSTextAlignment.center
 
         strainLabel.translatesAutoresizingMaskIntoConstraints = false
         strainLabel.numberOfLines = 0
         strainLabel.textColor = UIColor.appColor(name: .textBlack)
         strainLabel.text = LocalizedStrings.shared.createActivityStrainLabelText
-        strainLabel.font = .appFont(ofSize: 23, weight: .regular)
+        strainLabel.font = .appFont(ofSize: 19, weight: .medium)
         strainLabel.textAlignment = NSTextAlignment.center
         
         nameInputField.translatesAutoresizingMaskIntoConstraints = false
@@ -61,15 +61,25 @@ class ChangeActivityView: UIView {
         nameInputField.textColor = .appColor(name: .textBlack)
         nameInputField.font = .appFont(ofSize: 17, weight: .regular)
         nameInputField.layer.cornerRadius = 3
-        nameInputField.layer.borderWidth = 1.5
+        nameInputField.layer.borderWidth = 1
         nameInputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor).cgColor
         nameInputField.backgroundColor = .appColor(name: .backgroundColor)
-        nameInputField.layer.cornerRadius = 3
+        nameInputField.layer.cornerRadius = 4
         nameInputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         nameInputField.leftViewMode = .always
 
         durationPicker.datePickerMode = UIDatePicker.Mode.countDownTimer
+        durationPicker.translatesAutoresizingMaskIntoConstraints = false
+        durationPicker.layer.borderWidth = 1
+        durationPicker.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor).cgColor
+        durationPicker.layer.cornerRadius = 5
+        durationPicker.backgroundColor = .appColor(name: .backgroundColor)
         
+        /*
+        strainPicker.setValue("Test", forKey: "Hard")
+        strainPicker.setValue("Other test", forKey: "Medium")
+        strainPicker.translatesAutoresizingMaskIntoConstraints = false
+        */
         errorMessage.translatesAutoresizingMaskIntoConstraints = false
         errorMessage.numberOfLines = 0
         errorMessage.textColor = .appColor(name: .errorRed)
@@ -79,26 +89,50 @@ class ChangeActivityView: UIView {
         errorMessage.isHidden = true
     }
     // MARK: Setup subviews
-    private func setupSubViews() {
-        [activityNameLabel, nameInputField, errorMessage].forEach({self.addSubview($0)})
+    private func setupSubViews() {[activityNameLabel,
+                                   nameInputField,
+                                   errorMessage,
+                                   durationNameLabel,
+                                   strainLabel,
+                                   durationPicker,
+                                   ].forEach({self.addSubview($0)})
     }
     
     // MARK: Setup constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            nameInputField.topAnchor.constraint(equalTo: self.centerYAnchor, constant: -40),
+            activityNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50),
+            activityNameLabel.bottomAnchor.constraint(equalTo: nameInputField.topAnchor, constant: -12),
+            activityNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
+            activityNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+            
             nameInputField.heightAnchor.constraint(equalToConstant: 48),
             nameInputField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             nameInputField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
             
-            activityNameLabel.bottomAnchor.constraint(equalTo: nameInputField.topAnchor, constant: -15),
-            activityNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            activityNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            activityNameLabel.heightAnchor.constraint(equalToConstant: 60),
-            
-            errorMessage.bottomAnchor.constraint(equalTo: activityNameLabel.topAnchor),
+            errorMessage.topAnchor.constraint(equalTo: nameInputField.bottomAnchor, constant: 10),
             errorMessage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
-            errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33)
+            errorMessage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+            /*
+            strainLabel.topAnchor.constraint(equalTo: errorMessage.bottomAnchor, constant: 7),
+            strainLabel.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -10),
+            strainLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
+            */
+            /*
+            strainPicker.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -10),
+            strainPicker.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            strainPicker.topAnchor.constraint(equalTo: strainLabel.bottomAnchor, constant: 10)
+             */
+            
+            durationNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
+            durationNameLabel.topAnchor.constraint(equalTo: errorMessage.bottomAnchor, constant: 7),
+            durationNameLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+            
+            durationPicker.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            durationPicker.topAnchor.constraint(equalTo: durationNameLabel.bottomAnchor, constant: 10),
+            durationPicker.heightAnchor.constraint(equalToConstant: 150)
+            
+
         ])
     }
 }
