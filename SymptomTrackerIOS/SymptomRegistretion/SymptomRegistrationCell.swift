@@ -131,14 +131,15 @@ class SymptomRegistrationCell: UITableViewCell {
         ])
     }
     
-    // MARK: Confuguration for cell
+    // MARK: Confugure cell
     public func configureCell(symptomRegistration: SymptomRegistration, presentRegistrationIntensityCallback: @escaping (Int?) -> UIColor) {
         self.symptomRegistration = symptomRegistration
         self.presentRegistrationIntensityCallback = presentRegistrationIntensityCallback
         setAttributesOnSubViews()
     }
     
-    // MARK: updateCell()
+    // MARK: Update Cell
+    
     public func addFunctionalityToIntensityRegistrationButtons() {
         registrationButtonArray.enumerated().forEach({
             addActionTo(registrationButton: $1, dailyIntensityRegistrationNumber: $0)
@@ -146,7 +147,6 @@ class SymptomRegistrationCell: UITableViewCell {
         addActionTo(collectiveRegistrationButton: oneCollectedRegistrationButton)
     }
     
-    // MARK: Helpfunctions for setting attributes on subviews
     private func setButtonAttributesOn(button: UIButton, intensity: Int?) {
         setColor(button: button, intensity: intensity)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -191,19 +191,22 @@ class SymptomRegistrationCell: UITableViewCell {
     // Method for setting the response to a click event on the collective registration button
     private func addActionTo(collectiveRegistrationButton: UIButton) {
         collectiveRegistrationButton.addAction(UIAction {[weak self] _ in
-            var newIntensityLevel: Int? = nil
+            var newIntensityLevel: Int = 0
             if let currentIntensityLevel = self?.symptomRegistration?.intensityRegistrationAverage {
                 newIntensityLevel = (currentIntensityLevel + 1) % 5
             }
             self?.updateAverageIntensityOnRegistration(intensityLevel: newIntensityLevel)
             
+            
             // Set intensity on all intensityregistrations to match the average intensity
             // Update the buttons to reflect change.
             self?.registrationButtonArray.enumerated().forEach {
+                
                 self?.symptomRegistration?.intensityRegistrationList[$0].intensity = newIntensityLevel
-                self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: $0, registrationButton: $1)
+                self?.setColor(button: $1, intensity: newIntensityLevel)
+                //self?.symptomRegistration?.intensityRegistrationList[$0].intensity = newIntensityLevel
+                //self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: $0, registrationButton: $1)
             }
-            
         }, for: .touchUpInside)
     }
     
@@ -212,34 +215,15 @@ class SymptomRegistrationCell: UITableViewCell {
     private func updateAverageIntensityOnRegistration(intensityLevel: Int?) {
         var intensityLevel = intensityLevel
         
-        if let intensityRegistrationList = symptomRegistration?.intensityRegistrationList {
-            
-            // Filter out all intensityRegistrations that have a nil intensity. Get a list of intensities.
-            let intensityListWithoutNilValues = intensityRegistrationList.compactMap({
-                $0.intensity
-            })
-            
-            // Get sum of intensity
-            var intensitySum: Int = 0
-            intensityListWithoutNilValues.forEach({
-                intensitySum += $0
-            })
-
-            // Get average intensity based only on non-nil values of intensity.
-            // If average is more than 0, and les than 1 then always round up. Else standard rounding pattern
-            if intensityListWithoutNilValues.count != 0 {
-                let intensityLevelDouble: Double = Double(intensitySum) / Double(intensityListWithoutNilValues.count)
-                if (intensityLevelDouble > 0 && intensityLevelDouble <= 1 ) {
-                    intensityLevel = 1
-                } else {
-                    intensityLevel = Int(round(intensityLevelDouble))
-                }
-            } else {
-                intensityLevel = nil
-            }
-        }
         setColor(button: oneCollectedRegistrationButton, intensity: intensityLevel)
     }
+    
+    /*
+    private func addActionTo(resetRegistrationsButton: ) {
+        resetRegistrationsButton.addAction(UIAction {[weak self] _ in
+        }, for: .touchUpInside)
+    }
+     */
 }
 
 

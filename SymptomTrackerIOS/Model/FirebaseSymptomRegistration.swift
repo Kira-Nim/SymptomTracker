@@ -71,8 +71,8 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         // If average is more than 0, and les than 1 then always round up. Else standard rounding pattern
         if intensityListWithoutNilValues.count != 0 {
             let intensityLevelDouble: Double = Double(intensitySum) / Double(intensityListWithoutNilValues.count)
-            if (intensityLevelDouble < 1) {
-                intensityLevel = 0
+            if (intensityLevelDouble > 0 && intensityLevelDouble <= 1 ) {
+                intensityLevel = 1
             } else {
                 intensityLevel = Int(round(intensityLevelDouble))
             }
