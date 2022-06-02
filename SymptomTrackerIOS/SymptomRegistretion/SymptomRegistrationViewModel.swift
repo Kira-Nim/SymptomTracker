@@ -13,6 +13,7 @@ final class SymptomRegistrationViewModel: NSObject {
     private var view: SymptomRegistrationView?
     private var navbarView: UIView?
     private let cellReuseIdentifier =  "cellReuseIdentifier"
+    private let symptomIntensityService = SymptomIntensityService()
     private var selectedDateRegistrations: [SymptomRegistration] = []
     private var nextDateRegistrations: [SymptomRegistration] = []
     private var previousDateRegistrations: [SymptomRegistration] = []
@@ -100,7 +101,9 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
         
         if let symptomRegistrationCell = cell as?  SymptomRegistrationCell {
-            symptomRegistrationCell.configureCell(symptomRegistration: selectedDateRegistrations[indexPath.row])
+            symptomRegistrationCell.configureCell(symptomRegistration: selectedDateRegistrations[indexPath.row],
+                                                  presentRegistrationIntensityCallback: symptomIntensityService.getIntensityColorForRegistration)
+                        
         }
         return cell
     }

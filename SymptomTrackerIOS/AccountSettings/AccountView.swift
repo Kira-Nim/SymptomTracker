@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 class AccountView: UITableView {
-    // MARK: Subviews
     
     //MARK: init
     init() {
         super.init(frame: CGRect.zero, style: .plain)
+        backgroundColor = UIColor.appColor(name: .backgroundColor)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

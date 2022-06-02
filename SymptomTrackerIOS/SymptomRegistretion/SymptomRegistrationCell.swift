@@ -11,6 +11,7 @@ import SwiftUI
 
 class SymptomRegistrationCell: UITableViewCell {
     private var symptomRegistration: SymptomRegistration?
+    private var presentRegistrationIntensityCallback: ((Int?) -> UIColor)?
     
     // MARK: Subviews
     public var oneCollectedRegistrationButton = UIButton()
@@ -20,6 +21,7 @@ class SymptomRegistrationCell: UITableViewCell {
     public var registrationButtonBedTime = UIButton()
     public var resetRegistrationsButton = UIButton()
     public var symptomNameLabel = UILabel()
+    private var registrationButtonArray: [UIButton] = []
     
     public lazy var cellContentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [registrationButtonMorning,
@@ -31,17 +33,19 @@ class SymptomRegistrationCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .leading
-        //stackView.spacing = 10
         return stackView
     }()
     
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = UIColor.appColor(name: .backgroundColor)
         
+        registrationButtonArray = [registrationButtonBedTime, registrationButtonEvening, registrationButtonMidday, registrationButtonMorning]
         setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
+        addFunctionalityToIntensityRegistrationButtons()
         
         //Turn off default way of showing that row has been selected
         self.selectionStyle = .none
@@ -53,31 +57,22 @@ class SymptomRegistrationCell: UITableViewCell {
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
         
-        registrationButtonMorning.backgroundColor = UIColor.orange
-        setButtonattributes(button: registrationButtonMorning, color: .registrationNeutral)
         registrationButtonMorning.setBackgroundImage(UIImage(named: "SunRise"), for: .normal)
-        
-        registrationButtonMidday.backgroundColor = UIColor.orange
-        setButtonattributes(button: registrationButtonMidday, color: .registrationOrange)
         registrationButtonMidday.setBackgroundImage(UIImage(named: "Sun"), for: .normal)
-        
-        registrationButtonEvening.backgroundColor = UIColor.orange
-        setButtonattributes(button: registrationButtonEvening, color: .registrationYellow)
         registrationButtonEvening.setBackgroundImage(UIImage(named: "SunSet"), for: .normal)
-        
-        registrationButtonBedTime.backgroundColor = UIColor.orange
-        setButtonattributes(button: registrationButtonBedTime, color: .registrationGreen)
         registrationButtonBedTime.setBackgroundImage(UIImage(named: "Moon_1"), for: .normal)
+        registrationButtonArray.enumerated().forEach({
+            setButtonAttributesOn(button: $1, intensity: symptomRegistration?.intensityRegistrationList[$0].intensity)
+        })
         
-        oneCollectedRegistrationButton.backgroundColor = UIColor.red
         oneCollectedRegistrationButton.setTitle(LocalizedStrings.shared.AllDayRegistrationButtonText, for: .normal)
         oneCollectedRegistrationButton.setTitleColor(UIColor.appColor(name: .registrationButtonText), for: .normal)
         oneCollectedRegistrationButton.titleLabel?.font = .appFont(ofSize: 15, weight: .medium)
-        setButtonattributes(button: oneCollectedRegistrationButton, color: .registrationRed)
+        setButtonAttributesOn(button: oneCollectedRegistrationButton, intensity: symptomRegistration?.intensityRegistrationAverage)
         
         resetRegistrationsButton.translatesAutoresizingMaskIntoConstraints = false
-        resetRegistrationsButton.backgroundColor = UIColor.appColor(name: .registrationNeutral)
-        resetRegistrationsButton.setBackgroundImage(UIColor.appColor(name: .registrationNeutral).image(), for: .highlighted)
+        resetRegistrationsButton.backgroundColor = UIColor.appColor(name: .registrationWhite)
+        resetRegistrationsButton.setBackgroundImage(UIColor.appColor(name: .registrationWhite).image(), for: .highlighted)
         resetRegistrationsButton.layer.cornerRadius = 15.5
         resetRegistrationsButton.layer.borderWidth = 1
         resetRegistrationsButton.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
@@ -89,9 +84,8 @@ class SymptomRegistrationCell: UITableViewCell {
         symptomNameLabel.textColor = .appColor(name: .textBlack)
         symptomNameLabel.font = .appFont(ofSize: 19, weight: .medium)
         symptomNameLabel.textAlignment = NSTextAlignment.left
-        
     }
-    
+
     // MARK: Setup subviews
     private func setupSubViews() {[oneCollectedRegistrationButton,
                                    symptomNameLabel,
@@ -138,16 +132,114 @@ class SymptomRegistrationCell: UITableViewCell {
     }
     
     // MARK: Confuguration for cell
-    public func configureCell(symptomRegistration: SymptomRegistration) {
+    public func configureCell(symptomRegistration: SymptomRegistration, presentRegistrationIntensityCallback: @escaping (Int?) -> UIColor) {
         self.symptomRegistration = symptomRegistration
+        self.presentRegistrationIntensityCallback = presentRegistrationIntensityCallback
+        setAttributesOnSubViews()
     }
     
-    private func setButtonattributes(button: UIButton, color: UIColor.AppColor) {
+    // MARK: updateCell()
+    public func addFunctionalityToIntensityRegistrationButtons() {
+        registrationButtonArray.enumerated().forEach({
+            addActionTo(registrationButton: $1, dailyIntensityRegistrationNumber: $0)
+        })
+        addActionTo(collectiveRegistrationButton: oneCollectedRegistrationButton)
+    }
+    
+    // MARK: Helpfunctions for setting attributes on subviews
+    private func setButtonAttributesOn(button: UIButton, intensity: Int?) {
+        setColor(button: button, intensity: intensity)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor.appColor(name: color)
-        button.setBackgroundImage(UIColor.appColor(name: color).image(), for: .highlighted)
-        button.layer.cornerRadius = 3
-        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
     }
+    
+    private func setColor(button: UIButton, intensity: Int?) {
+        //This function takes an Int an intensity value (Int) and returns a color (UIColor)
+        guard let color = presentRegistrationIntensityCallback?(intensity) else { return }
+        button.backgroundColor = color
+        button.setBackgroundImage(color.image(), for: .highlighted)
+    }
+    
+    /* Method for setting the response to a click event on the daily registration buttens
+       (not incl. the oneCollectedRegistrationButton)
+       When button is clicked this wil happen. The intensity level will go one up.
+       If intensity level is the heigest level (3) then the intensity will be set to the lowest level (0)
+     */
+    private func addActionTo(registrationButton: UIButton, dailyIntensityRegistrationNumber: Int ) {
+        registrationButton.addAction(UIAction {[weak self] _ in
+            self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: dailyIntensityRegistrationNumber, registrationButton: registrationButton)
+        }, for: .touchUpInside)
+    }
+    
+    private func updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: Int, registrationButton: UIButton) {
+        
+        // If the intensity id nil (there has been no registrations) then the intensity will be converted to a -1 value.
+        // When this value is operated on later (+1) then it will be set to 0 whitch is what we want.
+        let currentIntensityLevel = symptomRegistration?.intensityRegistrationList[dailyIntensityRegistrationNumber].intensity ?? -1
+        
+        // Every possible value number except 4 will become 1 bigger (Fx. 2 % 5 = 2 -> 2 + 1 = 3) except 4 because (4+1) % 5 is 0.
+        // We want 4 to become zero and the others to become them selves plus 1.
+        let newIntensityLevel = (currentIntensityLevel + 1) % 5
+        
+        symptomRegistration?.intensityRegistrationList[dailyIntensityRegistrationNumber].intensity = newIntensityLevel
+        setColor(button: registrationButton, intensity: newIntensityLevel)
+        updateAverageIntensityOnRegistration(intensityLevel: symptomRegistration?.intensityRegistrationAverage)
+    }
+    
+    // Method for setting the response to a click event on the collective registration button
+    private func addActionTo(collectiveRegistrationButton: UIButton) {
+        collectiveRegistrationButton.addAction(UIAction {[weak self] _ in
+            var newIntensityLevel: Int? = nil
+            if let currentIntensityLevel = self?.symptomRegistration?.intensityRegistrationAverage {
+                newIntensityLevel = (currentIntensityLevel + 1) % 5
+            }
+            self?.updateAverageIntensityOnRegistration(intensityLevel: newIntensityLevel)
+            
+            // Set intensity on all intensityregistrations to match the average intensity
+            // Update the buttons to reflect change.
+            self?.registrationButtonArray.enumerated().forEach {
+                self?.symptomRegistration?.intensityRegistrationList[$0].intensity = newIntensityLevel
+                self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: $0, registrationButton: $1)
+            }
+            
+        }, for: .touchUpInside)
+    }
+    
+    // Helpfunction for calculating a average for the collective symptom registrations.
+    // Executed as callback when a registration button is tapped in cell.
+    private func updateAverageIntensityOnRegistration(intensityLevel: Int?) {
+        var intensityLevel = intensityLevel
+        
+        if let intensityRegistrationList = symptomRegistration?.intensityRegistrationList {
+            
+            // Filter out all intensityRegistrations that have a nil intensity. Get a list of intensities.
+            let intensityListWithoutNilValues = intensityRegistrationList.compactMap({
+                $0.intensity
+            })
+            
+            // Get sum of intensity
+            var intensitySum: Int = 0
+            intensityListWithoutNilValues.forEach({
+                intensitySum += $0
+            })
+
+            // Get average intensity based only on non-nil values of intensity.
+            // If average is more than 0, and les than 1 then always round up. Else standard rounding pattern
+            if intensityListWithoutNilValues.count != 0 {
+                let intensityLevelDouble: Double = Double(intensitySum) / Double(intensityListWithoutNilValues.count)
+                if (intensityLevelDouble > 0 && intensityLevelDouble <= 1 ) {
+                    intensityLevel = 1
+                } else {
+                    intensityLevel = Int(round(intensityLevelDouble))
+                }
+            } else {
+                intensityLevel = nil
+            }
+        }
+        setColor(button: oneCollectedRegistrationButton, intensity: intensityLevel)
+    }
 }
+
+

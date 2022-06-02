@@ -13,15 +13,7 @@ class FirebaseSymptomRegistration: SymptomRegistration {
     var date: Date
     var symptomId: String
     var intensityRegistrationList: [IntensityRegistration]
-    var intensityRegistrationAverage: Int {
-        var intensitySum: Int = 0
-        for intensityRegistration in intensityRegistrationList {
-            if let intensity = intensityRegistration.intensity {
-                intensitySum += intensity
-            }
-        }
-        return intensitySum/intensityRegistrationList.count
-    }
+    var intensityRegistrationAverage: Int? { return calculateIntensityAverageValue() }
     var symptom: Symptom?
     
     // initializer for when creating a new registration
@@ -56,5 +48,37 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         self.date = (firebaseSymptomRegistration["date"] as? Timestamp)?.dateValue() ?? Date()
         self.symptomId = firebaseSymptomRegistration["symptomId"] as? String ?? ""
         self.intensityRegistrationList = intensityRegistrationList
+    }
+    
+    
+    // Help-function for calculating an intensity level representing the average intensity value on a daily registration
+    private func calculateIntensityAverageValue() -> Int? {
+        var intensityLevel: Int?
+        
+        // Filter out all intensityRegistrations that have a nil intensity. Get a list of intensities.
+        let intensityListWithoutNilValues = intensityRegistrationList.compactMap({
+            $0.intensity
+        })
+        
+        // Get sum of intensity
+        var intensitySum: Int = 0
+        intensityListWithoutNilValues.forEach({
+            intensitySum += $0
+        })
+
+        // If intensityListWithoutNilValues is empty set the attribute to nil, else calculate an average.
+        // Get average intensity based only on non-nil values of intensity.
+        // If average is more than 0, and les than 1 then always round up. Else standard rounding pattern
+        if intensityListWithoutNilValues.count != 0 {
+            let intensityLevelDouble: Double = Double(intensitySum) / Double(intensityListWithoutNilValues.count)
+            if (intensityLevelDouble < 1) {
+                intensityLevel = 0
+            } else {
+                intensityLevel = Int(round(intensityLevelDouble))
+            }
+        } else {
+            intensityLevel = nil
+        }
+         return intensityLevel
     }
 }

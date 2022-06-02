@@ -20,6 +20,7 @@ class ActivityCell: UITableViewCell {
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = UIColor.appColor(name: .backgroundColor)
         
         //Turn off default way of showing that row has been selected
         self.selectionStyle = .none
@@ -40,7 +41,7 @@ class ActivityCell: UITableViewCell {
     func setAttributesOnSubViews() {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.numberOfLines = 0
-        activityLabel.font = .appFont(ofSize: 17, weight: .medium)
+        activityLabel.font = .appFont(ofSize: 18, weight: .medium)
         activityLabel.text = activity?.name
         activityLabel.textAlignment = NSTextAlignment.left
         
@@ -51,14 +52,14 @@ class ActivityCell: UITableViewCell {
                 activityLabel.textColor = strainUIColor
             }
         } else {
-            activityLabel.textColor = UIColor.appColor(name: .textBlack)
+            activityLabel.textColor = UIColor.appColor(name: .placeholderTextColor)
         }
 
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         durationLabel.numberOfLines = 0
-        durationLabel.font = .appFont(ofSize: 17, weight: .medium)
+        durationLabel.font = .appFont(ofSize: 18, weight: .medium)
         durationLabel.textAlignment = NSTextAlignment.left
-        durationLabel.textColor = UIColor.appColor(name: .textBlack)
+        durationLabel.textColor = UIColor.appColor(name: .placeholderTextColor)
         durationLabel.textAlignment = NSTextAlignment.left
         if let duration = activity?.numMinutes {
             durationLabel.text = presentDurationCallback?(duration)
@@ -73,13 +74,13 @@ class ActivityCell: UITableViewCell {
     // MARK: Setup constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            activityLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            activityLabel.topAnchor.constraint(equalTo: durationLabel.topAnchor),
+            activityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
+            activityLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 50),
             activityLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            activityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5),
-            activityLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 10),
             
             durationLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15),
-            durationLabel.leadingAnchor.constraint(equalTo: activityLabel.trailingAnchor, constant: 25),
+            durationLabel.leadingAnchor.constraint(equalTo: activityLabel.trailingAnchor, constant: 10),
             durationLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             durationLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])

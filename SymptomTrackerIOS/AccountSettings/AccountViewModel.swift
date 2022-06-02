@@ -80,7 +80,7 @@ extension AccountViewModel: UITableViewDataSource {
     
     // Method for configuring row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 55
     }
     
     // Choose cell type for each row and configure it.
@@ -89,6 +89,8 @@ extension AccountViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         cell.textLabel?.text = accountSettingsOptionsList[indexPath.row].0
+        cell.textLabel?.textColor = UIColor.appColor(name: .placeholderTextColor)
+        cell.textLabel?.font = .appFont(ofSize: 18, weight: .medium)
         return cell
     }
 }

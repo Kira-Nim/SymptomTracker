@@ -12,7 +12,6 @@ class FirebaseIntensityRegistration: IntensityRegistration {
     var timeOrder: Int
     
     init(timeOrder: Int) {
-        self.intensity = 0
         self.timeOrder = timeOrder
     }
     

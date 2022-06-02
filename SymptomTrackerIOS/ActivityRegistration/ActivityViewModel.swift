@@ -135,7 +135,7 @@ extension ActivityViewModel: UITableViewDataSource {
     
     // Method for configuring row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 65
     }
     
     // Choose cell type for each row and configure it.

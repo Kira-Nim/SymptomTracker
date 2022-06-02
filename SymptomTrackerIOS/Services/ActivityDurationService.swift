@@ -12,6 +12,6 @@ class ActivityDurationService {
     public func getDurationStringForMinutes(_ numMinutes: Int) -> String {
         let hours = numMinutes / 60
         let minutes = numMinutes % 60
-        return String(format: "Varighed: %d:%02d", hours, minutes)
+        return String(format: "Varighed        %d:%02d", hours, minutes)
     }
 }

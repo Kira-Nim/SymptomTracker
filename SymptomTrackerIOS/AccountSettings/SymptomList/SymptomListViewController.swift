@@ -18,6 +18,8 @@ final class SymptomListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         title = LocalizedStrings.shared.symptomListControllerTitle
         navigationItem.rightBarButtonItem = editButtonItem
+        
+        
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {

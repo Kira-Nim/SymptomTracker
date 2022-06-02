@@ -90,44 +90,44 @@ class LoginView: UIView {
         
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         resetButton.setTitle(LocalizedStrings.shared.resetPasswordButtonText, for: .normal)
-        resetButton.setTitleColor(UIColor.white, for: .normal)
+        resetButton.setTitleColor(UIColor.appColor(name: .buttonTextColor), for: .normal)
         resetButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        resetButton.backgroundColor = .appColor(name: .buttonBlue)
-        resetButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        resetButton.backgroundColor = .appColor(name: .buttonColor)
+        resetButton.setBackgroundImage(UIColor.appColor(name: .buttonClicked).image(), for: .highlighted)
         resetButton.layer.cornerRadius = 3
         resetButton.layer.borderWidth = 1
-        resetButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        resetButton.layer.borderColor = UIColor.appColor(name: .buttonBorderColor).cgColor
         resetButton.isHidden = true
 
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle(LocalizedStrings.shared.loginButtonText, for: .normal)
-        loginButton.setTitleColor(UIColor.white, for: .normal)
-        loginButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        loginButton.backgroundColor = .appColor(name: .buttonBlue)
-        loginButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        loginButton.layer.cornerRadius = 3
-        loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        loginButton.setTitleColor(UIColor.appColor(name: .buttonTextColor), for: .normal)
+        loginButton.titleLabel?.font = .appFont(ofSize: 19, weight: .medium)
+        loginButton.backgroundColor = .appColor(name: .buttonColor)
+        loginButton.setBackgroundImage(UIColor.appColor(name: .buttonClicked).image(), for: .highlighted)
+        loginButton.layer.cornerRadius = 4
+        loginButton.layer.borderWidth = 0.5
+        loginButton.layer.borderColor = UIColor.appColor(name: .buttonBorderColor).cgColor
         
         createAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         createAccountLabel.numberOfLines = 0
-        createAccountLabel.textColor = .appColor(name: .textBlack)
+        createAccountLabel.textColor = .appColor(name: .placeholderTextColor)
         createAccountLabel.text = LocalizedStrings.shared.createAccountClickableLabelText
-        createAccountLabel.font = .appFont(ofSize: 17, weight: .medium)
+        createAccountLabel.font = .appFont(ofSize: 18, weight: .medium)
         createAccountLabel.textAlignment = NSTextAlignment.left
         
         resetPasswordLabel.translatesAutoresizingMaskIntoConstraints = false
         resetPasswordLabel.numberOfLines = 0
-        resetPasswordLabel.textColor = .appColor(name: .textBlack)
+        resetPasswordLabel.textColor = .appColor(name: .placeholderTextColor)
         resetPasswordLabel.text = LocalizedStrings.shared.forgotPasswordClickableLabetText
-        resetPasswordLabel.font = .appFont(ofSize: 17, weight: .medium)
+        resetPasswordLabel.font = .appFont(ofSize: 18, weight: .medium)
         resetPasswordLabel.textAlignment = NSTextAlignment.right
         
         errorMessage.translatesAutoresizingMaskIntoConstraints = false
         errorMessage.numberOfLines = 0
         errorMessage.textColor = .appColor(name: .errorRed)
         errorMessage.text = ""
-        errorMessage.font = .appFont(ofSize: 17, weight: .medium)
+        errorMessage.font = .appFont(ofSize: 18, weight: .medium)
         errorMessage.textAlignment = .center
         
         passwordResetConfirmationMessage.translatesAutoresizingMaskIntoConstraints = false
@@ -213,14 +213,13 @@ class LoginView: UIView {
     // Helpfunction for creating textField subclasses
     private func setAttributesOnTextFieldWith(placeholderText: String, inputField: UITextField) {
         inputField.translatesAutoresizingMaskIntoConstraints = false
-        inputField.textColor = UIColor.black
-        inputField.font = .appFont(ofSize: 17, weight: .regular)
-        inputField.layer.cornerRadius = 3
-        inputField.layer.borderWidth = 1
-        inputField.layer.borderColor = UIColor(red: 91/255, green: 107/255, blue: 142/255, alpha: 1.0).cgColor
-        inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 36/255, green: 57/255, blue: 99/255, alpha: 1.0)])
-        
-        inputField.backgroundColor = UIColor.white
+        inputField.textColor = UIColor.appColor(name: .textFieldText)
+        inputField.font = .appFont(ofSize: 17, weight: .medium)
+        inputField.layer.cornerRadius = 4
+        inputField.layer.borderWidth = 0.5
+        inputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor) .cgColor
+        inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.appColor(name: .placeholderTextColor)])
+        inputField.backgroundColor = UIColor.appColor(name: .textFieldBackgroundColor)
         inputField.layer.cornerRadius = 3
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always

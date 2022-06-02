@@ -41,6 +41,7 @@ class SymptomListCell: UITableViewCell {
     // MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = UIColor.appColor(name: .backgroundColor)
         
         //Turn off default way of showing that row has been selected
         self.selectionStyle = .none

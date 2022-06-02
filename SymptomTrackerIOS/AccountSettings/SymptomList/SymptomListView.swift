@@ -40,6 +40,7 @@ final class SymptomListView: UIView {
         setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,16 +49,18 @@ final class SymptomListView: UIView {
     // MARK: Set attributesOn subviews
     private func setAttributesOnSubViews() {
         symptomsTableView.translatesAutoresizingMaskIntoConstraints = false
+        symptomsTableView.backgroundColor = UIColor.appColor(name: .backgroundColor)
         
         createSymptomButtonView.translatesAutoresizingMaskIntoConstraints = false
         createSymptomButtonView.setTitle(LocalizedStrings.shared.createSymptomButtonText, for: .normal)
-        createSymptomButtonView.setTitleColor(UIColor.appColor(name: .buttonBlueTextColor), for: .normal)
+        createSymptomButtonView.setTitleColor(UIColor.appColor(name: .buttonTextColor), for: .normal)
         createSymptomButtonView.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        createSymptomButtonView.backgroundColor = .appColor(name: .buttonBlue)
-        createSymptomButtonView.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
+        createSymptomButtonView.backgroundColor = .appColor(name: .buttonColor)
+        createSymptomButtonView.setBackgroundImage(UIColor.appColor(name: .buttonClicked).image(), for: .highlighted)
         createSymptomButtonView.layer.cornerRadius = 3
         createSymptomButtonView.layer.borderWidth = 1
-        createSymptomButtonView.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        createSymptomButtonView.layer.borderColor = UIColor.appColor(name: .buttonBorderColor).cgColor
+        
     }
     
     // MARK: Setup SubViews
@@ -74,7 +77,7 @@ final class SymptomListView: UIView {
         }
         
         NSLayoutConstraint.activate([
-            buttonContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            buttonContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5),
             buttonContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             buttonContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             
@@ -82,7 +85,7 @@ final class SymptomListView: UIView {
             createSymptomButtonView.trailingAnchor.constraint(equalTo: buttonContentView.trailingAnchor, constant: -115),
             createSymptomButtonView.centerYAnchor.constraint(equalTo: buttonContentView.centerYAnchor, constant: 3),
             
-            symptomsTableView.topAnchor.constraint(equalTo: buttonContentView.bottomAnchor),
+            symptomsTableView.topAnchor.constraint(equalTo: buttonContentView.bottomAnchor, constant: 5),
             symptomsTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             symptomsTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             symptomsTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)

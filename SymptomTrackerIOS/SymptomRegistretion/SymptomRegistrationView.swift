@@ -29,6 +29,7 @@ class SymptomRegistrationView: UIView {
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
         registrationTableView.translatesAutoresizingMaskIntoConstraints = false
+        registrationTableView.backgroundColor = UIColor.appColor(name: .backgroundColor)
     }
     
     // MARK: Setup subviews

@@ -10,6 +10,7 @@ import UIKit
 
 class PortraintLockedNavigationController: UINavigationController {
     
+    
     //override var shouldAutorotate: Bool {
     //    return false
     //}

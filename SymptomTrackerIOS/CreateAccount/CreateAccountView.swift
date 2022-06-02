@@ -72,18 +72,18 @@ class CreateAccountView: UIView {
         createButton.translatesAutoresizingMaskIntoConstraints = false
         createButton.setTitle(LocalizedStrings.shared.createAccountButtonText, for: .normal)
         createButton.setTitleColor(UIColor.white, for: .normal)
-        createButton.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        createButton.backgroundColor = .appColor(name: .buttonBlue)
-        createButton.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        createButton.layer.cornerRadius = 3
-        createButton.layer.borderWidth = 1
-        createButton.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
-
+        createButton.titleLabel?.font = .appFont(ofSize: 19, weight: .medium)
+        createButton.backgroundColor = .appColor(name: .buttonColor)
+        createButton.setBackgroundImage(UIColor.appColor(name: .buttonClicked).image(), for: .highlighted)
+        createButton.layer.cornerRadius = 4
+        createButton.layer.borderWidth = 0.5
+        createButton.layer.borderColor = UIColor.appColor(name: .buttonBorderColor).cgColor
+        
         errorMessage.translatesAutoresizingMaskIntoConstraints = false
         errorMessage.numberOfLines = 0
         errorMessage.textColor = .appColor(name: .errorRed)
         errorMessage.text = ""
-        errorMessage.font = .appFont(ofSize: 17, weight: .regular)
+        errorMessage.font = .appFont(ofSize: 18, weight: .medium)
         errorMessage.textAlignment = NSTextAlignment.center
     }
     
@@ -128,14 +128,12 @@ class CreateAccountView: UIView {
     private func setAttributesOnInputFieldWith(placeholderText: String, inputField: UITextField) {
         inputField.translatesAutoresizingMaskIntoConstraints = false
         inputField.textColor = .appColor(name: .textBlack)
-        inputField.font = .appFont(ofSize: 17, weight: .regular)
-        //inputField.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
-        inputField.layer.cornerRadius = 3
-        inputField.layer.borderWidth = 1.5
+        inputField.font = .appFont(ofSize: 17, weight: .medium)
+        inputField.layer.cornerRadius = 4
+        inputField.layer.borderWidth = 0.5
         inputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor).cgColor
         inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.appColor(name: .placeholderTextColor)])
-        inputField.backgroundColor = .appColor(name: .backgroundColor)
-        inputField.layer.cornerRadius = 3
+        inputField.backgroundColor = .appColor(name: .textFieldBackgroundColor)
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always
     }

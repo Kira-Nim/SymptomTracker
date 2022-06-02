@@ -43,15 +43,18 @@ class ActivityView: UIView {
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
         activityTableView.translatesAutoresizingMaskIntoConstraints = false
+        activityTableView.backgroundColor = UIColor.appColor(name: .backgroundColor)
+        
         createActivityButtonView.translatesAutoresizingMaskIntoConstraints = false
         createActivityButtonView.setTitle(LocalizedStrings.shared.createActivityButtonText, for: .normal)
-        createActivityButtonView.setTitleColor(UIColor.appColor(name: .buttonBlueTextColor), for: .normal)
-        createActivityButtonView.titleLabel?.font = .appFont(ofSize: 17, weight: .medium)
-        createActivityButtonView.backgroundColor = .appColor(name: .buttonBlue)
-        createActivityButtonView.setBackgroundImage(UIColor.appColor(name: .buttonBlueClicked).image(), for: .highlighted)
-        createActivityButtonView.layer.cornerRadius = 3
-        createActivityButtonView.layer.borderWidth = 1
-        createActivityButtonView.layer.borderColor = UIColor.appColor(name: .buttonBlueBorderColor).cgColor
+        createActivityButtonView.setTitleColor(UIColor.appColor(name: .buttonTextColor), for: .normal)
+        createActivityButtonView.titleLabel?.font = .appFont(ofSize: 18, weight: .medium)
+        createActivityButtonView.backgroundColor = .appColor(name: .buttonColor)
+        createActivityButtonView.setBackgroundImage(UIColor.appColor(name: .buttonClicked).image(), for: .highlighted)
+        createActivityButtonView.layer.cornerRadius = 4
+        createActivityButtonView.layer.borderWidth = 0.5
+        createActivityButtonView.layer.borderColor = UIColor.appColor(name: .buttonBorderColor).cgColor
+        
     }
     // MARK: Setup subviews
     private func setupSubViews() {
@@ -67,7 +70,7 @@ class ActivityView: UIView {
             NSLayoutConstraint.activate([buttonContentViewConstraint, createActivityButtonViewConstraint])
         }
         NSLayoutConstraint.activate([
-            buttonContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            buttonContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 5),
             buttonContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             buttonContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             
