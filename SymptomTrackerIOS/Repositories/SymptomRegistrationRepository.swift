@@ -20,7 +20,17 @@ final class SymptomRegistrationRepository {
                                         userId: String,
                                         getSymptomRegistrationsForDateCompletionCallback: @escaping([FirebaseSymptomRegistration]) -> Void) {
         
-        db.collection(registrationCollection).whereField("user_id", isEqualTo: userId).whereField("date", isEqualTo: date).getDocuments() { (querySnapshot, err) in
+        
+        
+        
+        /* Because timestamp is incl. time we want to get all symptomRegistrations within the intaval of a day.
+            If we where to use just one date, then this would, by firebase, be interpreted as one date with one time.
+            The two dates below is used to create an query interval of exactly one day (after midnight - last second before next nidnight)
+         */
+        let startOfDay = Calendar.current.startOfDay(for: date)
+        guard let startOfNextDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay) else { return }
+       
+        db.collection(registrationCollection).whereField("user_id", isEqualTo: userId).whereField("date", isGreaterThanOrEqualTo: startOfDay).whereField("date", isLessThan: startOfNextDay).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
