@@ -47,14 +47,16 @@ final class SymptomRegistrationRepository {
         if let documentId = firebaseSymptomRegistration.id {
             db.collection(registrationCollection).document(documentId).setData(registrationDict)
         } else {
-            saveSymptomRegistration(symptomRegistrationDict: registrationDict)
+            let documentId = saveSymptomRegistration(symptomRegistrationDict: registrationDict)
+            firebaseSymptomRegistration.id = documentId
         }
     }
     
     // Help function that saves a prepared symptom dict representing a symptom registration to db
-    func saveSymptomRegistration(symptomRegistrationDict: [String: Any]) {
+    func saveSymptomRegistration(symptomRegistrationDict: [String: Any]) -> String {
         // Add a new document with a generated id to collection.
-        db.collection(registrationCollection).addDocument(data: symptomRegistrationDict)
+        let documentReference = db.collection(registrationCollection).addDocument(data: symptomRegistrationDict)
+        return documentReference.documentID
     }
     
     // Help function used for mapping a FirebaseSymptomRegistration instance to a dictionary

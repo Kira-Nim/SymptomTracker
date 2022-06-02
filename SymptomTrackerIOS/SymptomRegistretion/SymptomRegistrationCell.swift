@@ -235,11 +235,14 @@ class SymptomRegistrationCell: UITableViewCell {
     // Functionality setting action on the reset registrations button
     private func addActionTo(resetRegistrationsButton: UIButton) {
         resetRegistrationsButton.addAction(UIAction {[weak self] _ in
-            self?.symptomRegistration?.intensityRegistrationList.forEach({
-                $0.intensity = nil
-            })
+            
             if let symptomRegistration = self?.symptomRegistration {
+                
+                self?.symptomRegistration?.intensityRegistrationList.forEach({
+                    $0.intensity = nil
+                })
                 self?.updateRegistrationCompleationCallback?(symptomRegistration)
+                self?.setAttributesOnSubViews()
             }
         }, for: .touchUpInside)
     }
