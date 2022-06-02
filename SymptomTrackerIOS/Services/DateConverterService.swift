@@ -13,9 +13,7 @@ class DateConverterService {
     public func convertDateFrom(date: Date) -> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "d MMM"
-        
         let dateString = dateFormatterGet.string(from: date)
-        
         return dateString
     }
 }

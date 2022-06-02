@@ -10,7 +10,7 @@ import UIKit
 
 class SymptomRegistrationNavbarView: UIView {
     public var changeDateCallback: ((Date) -> Void)?
-    public var dateString: String?
+    public var getDateStringCallback: ((Date) -> String)?
     public var date = Date()
 
     // MARK: Subviews
@@ -50,14 +50,7 @@ class SymptomRegistrationNavbarView: UIView {
         datePickerOverlay.translatesAutoresizingMaskIntoConstraints = false
         datePickerOverlay.numberOfLines = 0
         datePickerOverlay.textColor = .appColor(name: .dateLabelColor)
-        
-
-        
-        datePickerOverlay.text = ""
-        gfiqgwrfiuqgrfiqgri
-        
-        
-        
+        if let getDateStringCallback = getDateStringCallback { datePickerOverlay.text = getDateStringCallback(date) }
         datePickerOverlay.font = .appFont(ofSize: 25, weight: .bold)
         datePickerOverlay.textAlignment = NSTextAlignment.center
         datePickerOverlay.backgroundColor = UIColor.appColor(name: .buttonColor)

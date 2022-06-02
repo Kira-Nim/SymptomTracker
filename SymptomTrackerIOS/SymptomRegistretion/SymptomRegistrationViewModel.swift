@@ -31,20 +31,16 @@ final class SymptomRegistrationViewModel: NSObject {
         view.registrationTableView.delegate = self
         view.registrationTableView.dataSource = self
         
-        wies.reg
-        
-        
-        
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "d MMM"
-        dateFormatterPrint.string(from: date)
-        
-        
-        
         // To make sure that a cell of type SymptomRegistrationCell is now available to the tableView.
         view.registrationTableView.register(SymptomRegistrationCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-            navbarView.changeDateCallback = { date in
-                self.changeToSelectedDate(chosenDate: date)
+        
+        navbarView.changeDateCallback = { date in
+            self.changeToSelectedDate(chosenDate: date)
+        }
+        navbarView.getDateStringCallback = { date in
+            let dateConverterService = DateConverterService()
+            let dateString = dateConverterService.convertDateFrom(date: date)
+            return dateString
         }
         self.view = view
     }

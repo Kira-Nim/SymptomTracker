@@ -21,7 +21,6 @@
 		4F388E6C28397430009F684C /* SymptomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6B28397430009F684C /* SymptomListCell.swift */; };
 		4F388E6E283ABD61009F684C /* AccountModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6D283ABD5F009F684C /* AccountModelManager.swift */; };
 		4F48AC0D2846E5790043CB77 /* SymptomIntensityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */; };
-		4F48AC0F2849044E0043CB77 /* ChangeDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC0E2849044D0043CB77 /* ChangeDateService.swift */; };
 		4F48AC11284930E60043CB77 /* DateConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC10284930E60043CB77 /* DateConverterService.swift */; };
 		4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */; };
 		4F6F26A82846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */; };
@@ -93,7 +92,6 @@
 		4F388E6B28397430009F684C /* SymptomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomListCell.swift; sourceTree = "<group>"; };
 		4F388E6D283ABD5F009F684C /* AccountModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModelManager.swift; sourceTree = "<group>"; };
 		4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomIntensityService.swift; sourceTree = "<group>"; };
-		4F48AC0E2849044D0043CB77 /* ChangeDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateService.swift; sourceTree = "<group>"; };
 		4F48AC10284930E60043CB77 /* DateConverterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverterService.swift; sourceTree = "<group>"; };
 		4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitLockedNavigationController.swift; sourceTree = "<group>"; };
 		4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabbarController+OrientationHandling.swift"; sourceTree = "<group>"; };
@@ -294,7 +292,6 @@
 				4F388E602837F71B009F684C /* ValidationService.swift */,
 				4F3693E62843B4B50077F3A8 /* RegistrationService.swift */,
 				4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */,
-				4F48AC0E2849044D0043CB77 /* ChangeDateService.swift */,
 				4F48AC10284930E60043CB77 /* DateConverterService.swift */,
 			);
 			path = Services;
@@ -505,7 +502,6 @@
 				4F388E612837F71B009F684C /* ValidationService.swift in Sources */,
 				4FAFCED82824220A002CEFBE /* FirebaseSymptomRegistration.swift in Sources */,
 				4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */,
-				4F48AC0F2849044E0043CB77 /* ChangeDateService.swift in Sources */,
 				4F48AC0D2846E5790043CB77 /* SymptomIntensityService.swift in Sources */,
 				4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */,
 				4FAFCEEE28253ACC002CEFBE /* SymptomRepository.swift in Sources */,
