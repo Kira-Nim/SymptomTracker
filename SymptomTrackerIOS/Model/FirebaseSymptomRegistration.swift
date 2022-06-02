@@ -30,12 +30,9 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         
         // If let here because the compiler needs reasurrence that the db object is infact a list of dictionaries
         if let intensityRegistrationDictList = firebaseSymptomRegistration["intensity_registrations"] as? [[String: Any]] {
-            
             intensityRegistrationList = intensityRegistrationDictList.map {
-                
                 if let intensity = $0["intensity"] as? Int?, let timeOrder = $0["timeOrder"] as? Int {
                     let intensityRegistration = FirebaseIntensityRegistration(intensity: intensity, timeOrder: timeOrder)
-                    
                     return intensityRegistration
                 }
                 // This will never happen if data is properly stored in db. This insecuryty os an evil of a schemaless db solution

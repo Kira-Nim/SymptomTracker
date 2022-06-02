@@ -50,7 +50,6 @@ final class SymptomRegistrationViewModel: NSObject {
     }
     
     private func updateSymptomRegistrationLists() {
-        
         // update list containing registrations for selected date
         modelManager.getRegistrationsForDate(date: selectedDate) { symptomRegistrations in
             self.selectedDateRegistrations = symptomRegistrations
@@ -102,8 +101,9 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
         
         if let symptomRegistrationCell = cell as?  SymptomRegistrationCell {
             symptomRegistrationCell.configureCell(symptomRegistration: selectedDateRegistrations[indexPath.row],
-                                                  presentRegistrationIntensityCallback: symptomIntensityService.getIntensityColorForRegistration)
-                        
+                                                  presentRegistrationIntensityCallback: symptomIntensityService.getIntensityColorForRegistration) { symptomRegistration in
+                self.modelManager.updateRegistration(symptomRegistration: symptomRegistration)
+            }
         }
         return cell
     }

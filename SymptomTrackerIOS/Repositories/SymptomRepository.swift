@@ -45,11 +45,9 @@ final class SymptomRepository {
             // iterate through alle symptom documents in snapshot/collection
             // and create a firebaseSymptom for each document.
             for doc in docs.documents {
-                // Create firebasesymptom
                 let documentId = doc.documentID
                 let symptomDocument = doc.data()
                 let firebaseSymptom = FirebaseSymptom(firebaseSymptom: symptomDocument, symptomId: documentId)
-                // Add firebaseSymptom to firebaseSymptoms list
                 self.firebaseSymptoms.append(firebaseSymptom)
             }
             

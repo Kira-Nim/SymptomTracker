@@ -12,6 +12,7 @@ import SwiftUI
 class SymptomRegistrationCell: UITableViewCell {
     private var symptomRegistration: SymptomRegistration?
     private var presentRegistrationIntensityCallback: ((Int?) -> UIColor)?
+    private var updateRegistrationCompleationCallback: ((SymptomRegistration) -> Void)?
     
     // MARK: Subviews
     public var oneCollectedRegistrationButton = UIButton()
@@ -45,7 +46,7 @@ class SymptomRegistrationCell: UITableViewCell {
         setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
-        addFunctionalityToIntensityRegistrationButtons()
+        addActionToButtons()
         
         //Turn off default way of showing that row has been selected
         self.selectionStyle = .none
@@ -132,21 +133,26 @@ class SymptomRegistrationCell: UITableViewCell {
     }
     
     // MARK: Confugure cell
-    public func configureCell(symptomRegistration: SymptomRegistration, presentRegistrationIntensityCallback: @escaping (Int?) -> UIColor) {
+    public func configureCell(symptomRegistration: SymptomRegistration, presentRegistrationIntensityCallback: @escaping (Int?) -> UIColor, updateRegistrationCompleationCallback: @escaping (SymptomRegistration) -> Void) {
         self.symptomRegistration = symptomRegistration
         self.presentRegistrationIntensityCallback = presentRegistrationIntensityCallback
+        self.updateRegistrationCompleationCallback = updateRegistrationCompleationCallback
         setAttributesOnSubViews()
     }
     
-    // MARK: Update Cell
+    // MARK: addActionToButtons()
     
-    public func addFunctionalityToIntensityRegistrationButtons() {
+    public func addActionToButtons() {
         registrationButtonArray.enumerated().forEach({
             addActionTo(registrationButton: $1, dailyIntensityRegistrationNumber: $0)
         })
         addActionTo(collectiveRegistrationButton: oneCollectedRegistrationButton)
+        addActionTo(resetRegistrationsButton: resetRegistrationsButton)
     }
     
+    // MARK: Help functions
+    
+    // Set attributes on intensity buttons
     private func setButtonAttributesOn(button: UIButton, intensity: Int?) {
         setColor(button: button, intensity: intensity)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -155,6 +161,7 @@ class SymptomRegistrationCell: UITableViewCell {
         button.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
     }
     
+    // Set color on buttons
     private func setColor(button: UIButton, intensity: Int?) {
         //This function takes an Int an intensity value (Int) and returns a color (UIColor)
         guard let color = presentRegistrationIntensityCallback?(intensity) else { return }
@@ -162,7 +169,9 @@ class SymptomRegistrationCell: UITableViewCell {
         button.setBackgroundImage(color.image(), for: .highlighted)
     }
     
-    /* Method for setting the response to a click event on the daily registration buttens
+    
+    /* Functionality for setting action on daily registration buttens
+       Method for setting the response to a click event on the daily registration buttens
        (not incl. the oneCollectedRegistrationButton)
        When button is clicked this wil happen. The intensity level will go one up.
        If intensity level is the heigest level (3) then the intensity will be set to the lowest level (0)
@@ -170,9 +179,14 @@ class SymptomRegistrationCell: UITableViewCell {
     private func addActionTo(registrationButton: UIButton, dailyIntensityRegistrationNumber: Int ) {
         registrationButton.addAction(UIAction {[weak self] _ in
             self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: dailyIntensityRegistrationNumber, registrationButton: registrationButton)
+        
+            if let symptomRegistration = self?.symptomRegistration {
+                self?.updateRegistrationCompleationCallback?(symptomRegistration)
+            }
         }, for: .touchUpInside)
     }
     
+    // Help function for the action set on daily registation buttons
     private func updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: Int, registrationButton: UIButton) {
         
         // If the intensity id nil (there has been no registrations) then the intensity will be converted to a -1 value.
@@ -188,7 +202,7 @@ class SymptomRegistrationCell: UITableViewCell {
         updateAverageIntensityOnRegistration(intensityLevel: symptomRegistration?.intensityRegistrationAverage)
     }
     
-    // Method for setting the response to a click event on the collective registration button
+    // Functionality for setting action that performs response to a click event on the collective registration button
     private func addActionTo(collectiveRegistrationButton: UIButton) {
         collectiveRegistrationButton.addAction(UIAction {[weak self] _ in
             var newIntensityLevel: Int = 0
@@ -204,26 +218,31 @@ class SymptomRegistrationCell: UITableViewCell {
                 
                 self?.symptomRegistration?.intensityRegistrationList[$0].intensity = newIntensityLevel
                 self?.setColor(button: $1, intensity: newIntensityLevel)
-                //self?.symptomRegistration?.intensityRegistrationList[$0].intensity = newIntensityLevel
-                //self?.updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: $0, registrationButton: $1)
+            }
+            if let symptomRegistration = self?.symptomRegistration {
+                self?.updateRegistrationCompleationCallback?(symptomRegistration)
             }
         }, for: .touchUpInside)
     }
     
-    // Helpfunction for calculating a average for the collective symptom registrations.
+    // Help function for calculating a average for the collective symptom registrations.
     // Executed as callback when a registration button is tapped in cell.
     private func updateAverageIntensityOnRegistration(intensityLevel: Int?) {
-        var intensityLevel = intensityLevel
-        
+        let intensityLevel = intensityLevel
         setColor(button: oneCollectedRegistrationButton, intensity: intensityLevel)
     }
     
-    /*
-    private func addActionTo(resetRegistrationsButton: ) {
+    // Functionality setting action on the reset registrations button
+    private func addActionTo(resetRegistrationsButton: UIButton) {
         resetRegistrationsButton.addAction(UIAction {[weak self] _ in
+            self?.symptomRegistration?.intensityRegistrationList.forEach({
+                $0.intensity = nil
+            })
+            if let symptomRegistration = self?.symptomRegistration {
+                self?.updateRegistrationCompleationCallback?(symptomRegistration)
+            }
         }, for: .touchUpInside)
     }
-     */
 }
 
 
