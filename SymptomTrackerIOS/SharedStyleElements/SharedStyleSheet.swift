@@ -113,16 +113,22 @@ extension UIColor {
             
             case .registrationGreen:
                 return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0)
+            
             case .registrationYellow:
                 return UIColor(red: 240/255, green: 178/255, blue: 11/255, alpha: 1.0)
+            
             case .registrationOrange:
                 return UIColor(red: 240/255, green: 131/255, blue: 11/255, alpha: 1.0)
+            
             case .registrationRed:
                 return UIColor(red: 217/255, green: 91/255, blue: 30/255, alpha: 1.0)
+            
             case .registrationNeutral:
                 return UIColor(red: 129/255, green: 123/255, blue: 123/255, alpha: 1.0)
+            
             case .registrationWhite:
                 return UIColor.white
+            
             case .registrationButtonBorderColor:
                 return UIColor(red: 125/255, green: 117/255, blue: 114/255, alpha: 1.0)
             
@@ -154,10 +160,7 @@ extension UIColor {
                 //return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
             
             case .dateLabelColor:
-                //return UIColor(red: 122/255, green: 145/255, blue: 195/255, alpha: 1.0)
-                return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
-            
-
+                return UIColor.white
             
             case .registrationButtonText:
                 return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
@@ -167,12 +170,8 @@ extension UIColor {
             
             case .shadowColor:
                 return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
-    
         }
     }
-    
-    // Other purple: return UIColor(red: 169/255, green: 166/255, blue: 205/255, alpha: 1.0)
-    
     
     // Make an image containing a color to be used as background when applying color to view element
     /* Syntax painfully explained here:
@@ -195,7 +194,6 @@ extension UIColor {
 }
 
 /*
- 
  createActivityButtonView.layer.shadowColor = UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0).cgColor
  createActivityButtonView.layer.shadowOffset = CGSize(width: 0, height: 0)
  createActivityButtonView.layer.shadowRadius = 15
@@ -204,14 +202,11 @@ extension UIColor {
  // https://www.envato.com/blog/color-scheme-trends-in-mobile-app-design/
  */
 
-
-
 /* Skal laves i scene delegate - før flowcoordinatoren laver controllers.
 UITabBar.appearance().barTintColor = .yellow
 UINavigationBar.appearance().barTintColor = UIColor.appColor(name: .activityYellow)
 UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]
 UIBarButtonItem.appearance().tintColor = .magenta
-
 
 //UITabBar.appearance().barTintColor = .yellow
 */

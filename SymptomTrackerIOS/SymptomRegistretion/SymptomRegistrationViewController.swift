@@ -20,7 +20,6 @@ final class SymptomRegistrationViewController: UIViewController {
         
         title = LocalizedStrings.shared.tabbarRegistrationsText
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Symptoms"), tag: 0)
-        
         navigationItem.titleView = navbarView
     }
     //Formel requirement for all ViewControllers to have this initializer.

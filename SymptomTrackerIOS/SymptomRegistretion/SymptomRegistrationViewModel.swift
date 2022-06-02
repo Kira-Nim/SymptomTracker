@@ -17,12 +17,12 @@ final class SymptomRegistrationViewModel: NSObject {
     private var selectedDateRegistrations: [SymptomRegistration] = []
     private var nextDateRegistrations: [SymptomRegistration] = []
     private var previousDateRegistrations: [SymptomRegistration] = []
-    private var selectedDate: Date
+    private var currentDate: Date
     
     // MARK: Init
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
-        self.selectedDate = Date()
+        self.currentDate = Date()
     }
     
     public func setView(view: SymptomRegistrationView, navbarView: SymptomRegistrationNavbarView) {
@@ -31,8 +31,21 @@ final class SymptomRegistrationViewModel: NSObject {
         view.registrationTableView.delegate = self
         view.registrationTableView.dataSource = self
         
+        wies.reg
+        
+        
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "d MMM"
+        dateFormatterPrint.string(from: date)
+        
+        
+        
         // To make sure that a cell of type SymptomRegistrationCell is now available to the tableView.
         view.registrationTableView.register(SymptomRegistrationCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+            navbarView.changeDateCallback = { date in
+                self.changeToSelectedDate(chosenDate: date)
+        }
         self.view = view
     }
     
@@ -51,13 +64,13 @@ final class SymptomRegistrationViewModel: NSObject {
     
     private func updateSymptomRegistrationLists() {
         // update list containing registrations for selected date
-        modelManager.getRegistrationsForDate(date: selectedDate) { symptomRegistrations in
+        modelManager.getRegistrationsForDate(date: currentDate) { symptomRegistrations in
             self.selectedDateRegistrations = symptomRegistrations
             self.updateView()
         }
         
         // If .date returns a non nil object for both metod calls get SymptomRegistration lists for previous and next date (compared to selected date)
-        if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
+        if let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate), let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) {
             
             modelManager.getRegistrationsForDate(date: nextDate){ symptomRegistrations in
                 
@@ -78,7 +91,47 @@ final class SymptomRegistrationViewModel: NSObject {
             }
         }
     }
+    
+    private func updateSymptomRegistrationListFor(date: Date, list: [SymptomRegistration]) {
+        var list = list
+        modelManager.getRegistrationsForDate(date: date){ symptomRegistrations in
+            symptomRegistrations.forEach({ symptomRegistration in
+                if symptomRegistration.symptom?.disabled == false {
+                    list.append(symptomRegistration)
+                }
+            })
+        }
+    }
+    
+    public func changeToSelectedDate(chosenDate: Date) {
+        guard let previousDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate),
+              let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else {return}
+        
+        if chosenDate == nextDate {
+            nextDateRegistrations = selectedDateRegistrations
+            selectedDateRegistrations = previousDateRegistrations
+            
+            if let previousToChosenDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate) {
+                updateSymptomRegistrationListFor(date: previousToChosenDate, list: previousDateRegistrations)
+            }
+        } else if chosenDate == previousDate {
+            previousDateRegistrations = selectedDateRegistrations
+            selectedDateRegistrations = nextDateRegistrations
+            
+            if let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) {
+                updateSymptomRegistrationListFor(date: nextDate, list: nextDateRegistrations)
+            }
+        } else {
+            currentDate = chosenDate
+            updateSymptomRegistrationLists()
+        }
+        
+        currentDate = chosenDate
+    }
 }
+
+
+
 
 extension SymptomRegistrationViewModel: UITableViewDelegate {
 }
