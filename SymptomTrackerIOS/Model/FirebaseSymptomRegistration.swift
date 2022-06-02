@@ -17,8 +17,8 @@ class FirebaseSymptomRegistration: SymptomRegistration {
     var symptom: Symptom?
     
     // initializer for when creating a new registration
-    init(intensityRegistrationsSet: [FirebaseIntensityRegistration], symptomId: String) {
-        self.date = Date()
+    init(intensityRegistrationsSet: [FirebaseIntensityRegistration], symptomId: String, date: Date) {
+        self.date = date
         self.intensityRegistrationList = intensityRegistrationsSet
         self.symptomId = symptomId
     }
@@ -29,9 +29,9 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         var intensityRegistrationList: [FirebaseIntensityRegistration] = []
         
         // If let here because the compiler needs reasurrence that the db object is infact a list of dictionaries
-        if let intensityRegistrationDictList = firebaseSymptomRegistration["intensity_registrations"] as? [[String: Any]] {
+        if let intensityRegistrationDictList = firebaseSymptomRegistration["intensity_registration_list"] as? [[String: Any]] {
             intensityRegistrationList = intensityRegistrationDictList.map {
-                if let intensity = $0["intensity"] as? Int?, let timeOrder = $0["timeOrder"] as? Int {
+                if let intensity = $0["intensity"] as? Int?, let timeOrder = $0["time_order"] as? Int {
                     let intensityRegistration = FirebaseIntensityRegistration(intensity: intensity, timeOrder: timeOrder)
                     return intensityRegistration
                 }
@@ -43,7 +43,7 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         // Default value is a safety precaution - It should never be used
         self.id = symptomRegistrationId
         self.date = (firebaseSymptomRegistration["date"] as? Timestamp)?.dateValue() ?? Date()
-        self.symptomId = firebaseSymptomRegistration["symptomId"] as? String ?? ""
+        self.symptomId = firebaseSymptomRegistration["symptom_id"] as? String ?? ""
         self.intensityRegistrationList = intensityRegistrationList
     }
     

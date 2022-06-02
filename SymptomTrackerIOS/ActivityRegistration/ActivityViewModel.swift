@@ -11,6 +11,7 @@ import UIKit
 final class ActivityViewModel: NSObject {
     
     private var view: ActivityView? = nil
+    private var navbarView: NavBarDatePickerView?
     public var modelManager: ModelManager
     private let cellReuseIdentifier =  "activityCell"
     public var showEditActivitySceneCallback: ((Activity, @escaping (() -> Void)) -> Void)?
@@ -18,8 +19,6 @@ final class ActivityViewModel: NSObject {
     private let activityStrainPresenter = ActivityStrainService()
     private var selectedDate: Date
     private var selectedDateActivityList: [Activity] = []
-    private var nextDateActivityList: [Activity] = []
-    private var previousDateActivityList: [Activity] = []
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -42,22 +41,16 @@ final class ActivityViewModel: NSObject {
             self.selectedDateActivityList = activityList
             self.updateView()
         }
-        
-        // If .date returns a non nil object for both metod calls get SymptomRegistration lists for previous and next date (compared to selected date)
-        if let previousDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate), let nextDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) {
-            
-            modelManager.getActivitiesForDate(date: nextDate) { activityList in
-                self.nextDateActivityList = activityList
-            }
-
-            modelManager.getActivitiesForDate(date: previousDate) { activityList in
-                self.previousDateActivityList = activityList
-            }
-        }
     }
     
-    public func setView(view: ActivityView) {
+    public func changeToSelectedDate(chosenDate: Date) {
+        selectedDate = chosenDate
+        updateActivityLists()
+    }
+    
+    public func setView(view: ActivityView, navbarView: NavBarDatePickerView) {
         self.view = view
+        self.navbarView = navbarView
         
         view.activityTableView.delegate = self
         view.activityTableView.dataSource = self
@@ -70,7 +63,8 @@ final class ActivityViewModel: NSObject {
         // set functionality to be executed when create new symptom confirmation button is tapped
         view.createActivityButtonView.addAction(UIAction { [weak self] _ in
             if let showEditActivitySceneCallback = self?.showEditActivitySceneCallback,
-               let newActivity = self?.modelManager.createActivity(){
+               let selectedDate = self?.selectedDate,
+               let newActivity = self?.modelManager.createActivity(date: selectedDate) {
                 
                 // Run callback to navigate back to symptom list page
                 showEditActivitySceneCallback(newActivity) { [weak self] in
@@ -80,6 +74,18 @@ final class ActivityViewModel: NSObject {
                 }
             }
         }, for: .touchUpInside)
+        
+        let changeDateCallback = { date in
+            self.changeToSelectedDate(chosenDate: date)
+        }
+        let getDateStringCallback: (Date) -> String = { date in
+            let dateConverterService = DateConverterService()
+            let dateString = dateConverterService.convertDateFrom(date: date)
+            return dateString
+        }
+        self.view = view
+        
+        navbarView.configureView(date: selectedDate, changeDateCallback: changeDateCallback, getDateStringCallback: getDateStringCallback)
     }
     
     // When OS calles setEditing() on ActivityViewController, the controller will call this method.

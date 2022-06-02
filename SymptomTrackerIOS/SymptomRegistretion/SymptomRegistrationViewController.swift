@@ -11,7 +11,7 @@ import UIKit
 final class SymptomRegistrationViewController: UIViewController {
     private var symptomRegistrationViewModel: SymptomRegistrationViewModel
     private lazy var symptomRegistrationView = SymptomRegistrationView()
-    private lazy var navbarView = SymptomRegistrationNavbarView()
+    private lazy var navbarView = NavBarDatePickerView()
     
     // MARK: Init
     init(viewModel: SymptomRegistrationViewModel) {

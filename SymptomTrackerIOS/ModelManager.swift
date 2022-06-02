@@ -20,7 +20,7 @@ protocol ModelManager {
     
     func update(activity: Activity)
     func update(activities: [Activity])
-    func createActivity() -> Activity?
+    func createActivity(date: Date) -> Activity?
     func delete(activity: Activity)
     
 }

@@ -108,9 +108,9 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
-    public func createActivity() -> Activity? {
+    public func createActivity(date: Date) -> Activity? {
         if let userId = accountManager.loggedInUserId {
-            return FirebaseActivity(userId: userId)
+            return FirebaseActivity(userId: userId, date: date)
         } else {
             return nil
         }
@@ -154,7 +154,8 @@ final class ModelManagerImplementation: ModelManager {
                 // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
                 let symptomRegistrationsList = registrationsService.getSymptomRegistrationListFrom(
                                                         firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
-                                                        symptomList: enabledSymptoms)
+                                                        symptomList: enabledSymptoms,
+                                                        date: date)
                 
                 // Run callback passed from symptomRegistrationViewModel
                 getRegistrationsForDateCompletionCallback(symptomRegistrationsList)

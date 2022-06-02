@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SymptomRegistrationNavbarView: UIView {
+class NavBarDatePickerView: UIView {
     public var changeDateCallback: ((Date) -> Void)?
     public var getDateStringCallback: ((Date) -> String)?
     public var date = Date()
@@ -50,7 +50,6 @@ class SymptomRegistrationNavbarView: UIView {
         datePickerOverlay.translatesAutoresizingMaskIntoConstraints = false
         datePickerOverlay.numberOfLines = 0
         datePickerOverlay.textColor = .appColor(name: .dateLabelColor)
-        if let getDateStringCallback = getDateStringCallback { datePickerOverlay.text = getDateStringCallback(date) }
         datePickerOverlay.font = .appFont(ofSize: 25, weight: .bold)
         datePickerOverlay.textAlignment = NSTextAlignment.center
         datePickerOverlay.backgroundColor = UIColor.appColor(name: .buttonColor)
@@ -94,6 +93,15 @@ class SymptomRegistrationNavbarView: UIView {
         ])
     }
     
+    // MARK: Configure
+    public func configureView(date: Date, changeDateCallback: @escaping (Date) -> Void, getDateStringCallback: @escaping (Date) -> String) {
+        self.date = date
+        self.changeDateCallback = changeDateCallback
+        self.getDateStringCallback = getDateStringCallback
+        datePickerOverlay.text = getDateStringCallback(date)
+        
+    }
+    
     // MARK: Register action on date picker and datepicker arrow buttons
     
     /* Method for setting action that activates callback when calenderbutton is pressed.
@@ -105,8 +113,7 @@ class SymptomRegistrationNavbarView: UIView {
         calenderButton.addAction(UIAction {[weak self] _ in
             if let date = self?.date,
                let newDate = Calendar.current.date(byAdding: .day, value: dateModerator, to: date) {
-                    self?.changeDateCallback?(newDate)
-                    self?.date = newDate
+                self?.updateToDate(date: newDate)
             }
         }, for: .touchUpInside)
     }
@@ -114,7 +121,18 @@ class SymptomRegistrationNavbarView: UIView {
     @objc
     func newDateChosen() {
         let newDate = self.datePicker.date
-            changeDateCallback?(newDate)
-            date = newDate
+        updateToDate(date: newDate)
+    }
+    
+    // Common method to set the new date, send it to the callback (viewmodel) and update the overlay label
+    private func updateToDate(date: Date) {
+        self.date = date
+        changeDateCallback?(date)
+        // this only really matters if the arrow buttons were used to change the date, since otherwise
+        // the datePicker already has this date
+        self.datePicker.date = date
+        if let getDateStringCallback = getDateStringCallback {
+            datePickerOverlay.text = getDateStringCallback(date)
+        }
     }
 }

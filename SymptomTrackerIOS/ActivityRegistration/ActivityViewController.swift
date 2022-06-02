@@ -11,6 +11,7 @@ import UIKit
 final class ActivityViewController: UIViewController {
     private var activityViewModel: ActivityViewModel
     private lazy var activityView = ActivityView()
+    private lazy var navbarView = NavBarDatePickerView()
     
     init(viewModel: ActivityViewModel) {
         activityViewModel = viewModel
@@ -19,6 +20,7 @@ final class ActivityViewController: UIViewController {
         title = LocalizedStrings.shared.activityControllerTitle
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Activity"), tag: 0)
         navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.titleView = navbarView
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {
@@ -40,7 +42,7 @@ final class ActivityViewController: UIViewController {
     // MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityViewModel.setView(view: activityView)
+        activityViewModel.setView(view: activityView, navbarView: navbarView)
     }
         
     //MARK: Other

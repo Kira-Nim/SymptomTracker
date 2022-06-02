@@ -64,7 +64,7 @@
 		4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */; };
 		4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */; };
 		4FB0C9F0283FBAF100DB553C /* SymptomRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */; };
-		4FB0C9F22840D5EB00DB553C /* SymptomRegistrationNavbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9F12840D5EB00DB553C /* SymptomRegistrationNavbarView.swift */; };
+		4FB0C9F22840D5EB00DB553C /* NavBarDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */; };
 		4FDB44C728319DD8005D35A1 /* SymptomRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */; };
 		4FDB44C92831A14C005D35A1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */; };
 		4FDB44CB2831A160005D35A1 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */; };
@@ -134,7 +134,7 @@
 		4FAFCF0B28317D56002CEFBE /* SymptomRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewController.swift; sourceTree = "<group>"; };
 		4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewModel.swift; sourceTree = "<group>"; };
 		4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationCell.swift; sourceTree = "<group>"; };
-		4FB0C9F12840D5EB00DB553C /* SymptomRegistrationNavbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationNavbarView.swift; sourceTree = "<group>"; };
+		4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarDatePickerView.swift; sourceTree = "<group>"; };
 		4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationView.swift; sourceTree = "<group>"; };
 		4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
 				4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */,
 				4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */,
-				4FB0C9F12840D5EB00DB553C /* SymptomRegistrationNavbarView.swift */,
+				4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */,
 			);
 			path = SymptomRegistretion;
 			sourceTree = "<group>";
@@ -467,7 +467,7 @@
 				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
 				4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */,
 				4F88F49B2844EF3C00809664 /* ActivityDurationService.swift in Sources */,
-				4FB0C9F22840D5EB00DB553C /* SymptomRegistrationNavbarView.swift in Sources */,
+				4FB0C9F22840D5EB00DB553C /* NavBarDatePickerView.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,
 				4FAFCF0C28317D57002CEFBE /* SymptomRegistrationViewController.swift in Sources */,
 				4FAFCEE728252BDF002CEFBE /* ModelManagerImplementation.swift in Sources */,

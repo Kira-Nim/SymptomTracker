@@ -12,7 +12,7 @@ class RegistrationService {
     // Function for getting list of symptomregistrations for a day.
     // If registrations on symptoms does not exist. they will be created.
     // The registration list will be ordered the same way the symptom list is.
-    func getSymptomRegistrationListFrom(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom]) -> [SymptomRegistration] {
+    func getSymptomRegistrationListFrom(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom], date: Date) -> [SymptomRegistration] {
     
         var symptomRegistrations: [SymptomRegistration] = []
         
@@ -39,7 +39,8 @@ class RegistrationService {
                     let intensityRegistrationsSet: [FirebaseIntensityRegistration] = createNewIntensityRegistrationList()
                     let newFirebaseSymptomRegistration = FirebaseSymptomRegistration(
                                                         intensityRegistrationsSet: intensityRegistrationsSet,
-                                                        symptomId: firebaseSymptomId)
+                                                        symptomId: firebaseSymptomId,
+                                                        date: date)
                     newFirebaseSymptomRegistration.symptom = $0
                     symptomRegistrations.append(newFirebaseSymptomRegistration)
                 }

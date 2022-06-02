@@ -18,8 +18,8 @@ class FirebaseActivity: Activity {
     var userId: String
 
     // Initializer used when the user creates a new activity
-    init(userId: String) {
-        self.date = Date()
+    init(userId: String, date: Date) {
+        self.date = date
         self.name = ""
         self.numMinutes = 0
         self.strain = 0
