@@ -49,6 +49,33 @@ final class SymptomRegistrationRepository {
         }
     }
     
+    func getSymptomRegistrationsForInterval(startDate: Date,
+                                            endDate: Date,
+                                            userId: String,
+                                            getSymptomRegistrationsForIntervalCompletionCallback: @escaping([FirebaseSymptomRegistration]) -> Void) {
+        let startOfStartDay = Calendar.current.startOfDay(for: startDate)
+        let startOfEndDay = Calendar.current.startOfDay(for: endDate)
+        guard let startOfDayAfterEndDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfEndDay) else { return }
+       
+        db.collection(registrationCollection).whereField("user_id", isEqualTo: userId).whereField("date", isGreaterThanOrEqualTo: startOfStartDay).whereField("date", isLessThan: startOfDayAfterEndDay).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var firebaseSymptomRegistrations: [FirebaseSymptomRegistration] = []
+                    for document in querySnapshot!.documents {
+                        let documentId = document.documentID
+                        let symptomRegistrationDocument = document.data()
+                        let firebaseSymptomRegistration = FirebaseSymptomRegistration(firebaseSymptomRegistration: symptomRegistrationDocument, symptomRegistrationId: documentId)
+                        firebaseSymptomRegistrations.append(firebaseSymptomRegistration)
+                    }
+                    
+                    // run callback passed from ModelManager.
+                    // This callback will run callback passed from VM and thereby the view will be updated.
+                    getSymptomRegistrationsForIntervalCompletionCallback(firebaseSymptomRegistrations)
+                }
+        }
+    }
+    
     // Functopn for updating or saving symptom registration to db
     func updateSymptomRegistration(firebaseSymptomRegistration: FirebaseSymptomRegistration, userId: String) {
         

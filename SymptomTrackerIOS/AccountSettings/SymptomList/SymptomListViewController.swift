@@ -12,14 +12,15 @@ final class SymptomListViewController: UIViewController {
     private var symptomListViewModel: SymptomListViewModel
     private lazy var symptomListView = SymptomListView()
     
-    init(viewModel: SymptomListViewModel) {
+    init(viewModel: SymptomListViewModel, showEditNavbarItem: Bool = true) {
         symptomListViewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
         title = LocalizedStrings.shared.symptomListControllerTitle
-        navigationItem.rightBarButtonItem = editButtonItem
         
-        
+        if showEditNavbarItem {
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {

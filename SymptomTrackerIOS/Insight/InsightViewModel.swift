@@ -10,17 +10,22 @@ import UIKit
 
 final class InsightViewModel: NSObject {
     
+    public var presentSelectFromSymptomListController: (() -> Void)?
     private var view: InsightView? = nil
     public var modelManager: ModelManager
+    public var navigationBarButtonItem = UIBarButtonItem()
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
+        super.init()
+        self.navigationBarButtonItem = UIBarButtonItem(title: LocalizedStrings.shared.insightNavigationItemText, image: nil, primaryAction: UIAction {[weak self] _ in
+            self?.presentSelectFromSymptomListController?()
+        }, menu: nil)
     }
     
     public func setView(view: InsightView) {
         self.view = view
     }
-    
 }
 
 extension InsightViewModel: UITableViewDelegate {

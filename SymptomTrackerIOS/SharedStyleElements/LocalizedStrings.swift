@@ -39,6 +39,9 @@ final class LocalizedStrings {
     public let createActivityButtonText = "Ny Aktivitet"
     public let AllDayRegistrationButtonText = "Overordnet"
     
+    // Clickable navigation items
+    public let insightNavigationItemText = "Filter"
+    
     //MARK: Placeholder text
     public let emailPlaceholderText = "Email"
     public let passwordPlaceholderText = "Password"

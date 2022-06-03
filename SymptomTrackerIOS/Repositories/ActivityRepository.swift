@@ -39,6 +39,30 @@ final class ActivityRepository {
         }
     }
     
+    public func getActivitiesForInterval(startDate: Date,
+                                         endDate: Date, userId: String,
+                                         getActivitiesForIntervalCompletionCallback: @escaping ([FirebaseActivity]) -> Void) {
+        
+        let startOfStartDay = Calendar.current.startOfDay(for: startDate)
+        let startOfEndDay = Calendar.current.startOfDay(for: endDate)
+        guard let startOfDayAfterEndDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfEndDay) else { return }
+        
+        db.collection(activityCollection).whereField("user_id", isEqualTo: userId).whereField("date", isGreaterThanOrEqualTo: startOfStartDay).whereField("date", isLessThan: startOfDayAfterEndDay).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var firebaseActivities: [FirebaseActivity] = []
+                for document in querySnapshot!.documents {
+                    let documentId = document.documentID
+                    let activityDocument = document.data()
+                    let firebaseActivity = FirebaseActivity(firebaseActivityDocument: activityDocument, activityId: documentId)
+                    firebaseActivities.append(firebaseActivity)
+                }
+                getActivitiesForIntervalCompletionCallback(firebaseActivities)
+            }
+        }
+    }
+    
     public func updateActivities(activities: [FirebaseActivity], userId: String) {
         activities.forEach({
             updateActivity(firebaseActivity: $0, userId: userId)

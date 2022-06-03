@@ -20,7 +20,8 @@ final class InsightViewController: UIViewController {
         
         title = LocalizedStrings.shared.tabbarInsightText
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Insight"), tag: 0)
-        //tabBarItem = UITabBarItem(title: "Indsigt", image: UIImage(named: "icons8-slider-30"), tag: 0)
+        
+        navigationItem.rightBarButtonItem = viewModel.navigationBarButtonItem
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
