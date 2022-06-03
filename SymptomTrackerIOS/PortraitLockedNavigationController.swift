@@ -11,9 +11,9 @@ import UIKit
 class PortraintLockedNavigationController: UINavigationController {
     
     
-    //override var shouldAutorotate: Bool {
-    //    return false
-    //}
+    override var shouldAutorotate: Bool {
+        return UIDevice.current.orientation == .portrait
+    }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
