@@ -163,6 +163,31 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
+    // function for getting all registrations in a time interval
+    public func getRegistrationsForInterval(startDate: Date,
+                                            endDate: Date,
+                                            getRegistrationsForIntervalCompletionCallback: @escaping (([SymptomRegistration]) -> Void)) {
+        let registrationsService = RegistrationService()
+        
+        // If user is not logged in - should never happen
+        if let userId = accountManager.loggedInUserId {
+            
+            symptomRegistrationReposityry.getSymptomRegistrationsForInterval(startDate: startDate, endDate: endDate, userId: userId) { firebaseSymptomRegistrationList in
+                
+                // Only make/fetch registrations for non-disabled symptoms
+                let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
+                
+                // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
+                let symptomRegistrationsList = registrationsService.connectSymptonsAndRegistrations(
+                    firebaseSymptomRegistrationList: firebaseSymptomRegistrationList,
+                    symptomList: enabledSymptoms)
+                
+                // Run callback passed from symptomRegistrationViewModel
+                getRegistrationsForIntervalCompletionCallback(symptomRegistrationsList)
+            }
+        }
+    }
+    
     // Update/save symptomRegistraytion to database.
     public func updateRegistration(symptomRegistration: SymptomRegistration) {
         if let firebaseSymptomRegistration = symptomRegistration as? FirebaseSymptomRegistration, let userId = accountManager.loggedInUserId {

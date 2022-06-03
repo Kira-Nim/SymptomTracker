@@ -76,6 +76,6 @@ class FirebaseSymptomRegistration: SymptomRegistration {
         } else {
             intensityLevel = nil
         }
-         return intensityLevel
+        return intensityLevel
     }
 }

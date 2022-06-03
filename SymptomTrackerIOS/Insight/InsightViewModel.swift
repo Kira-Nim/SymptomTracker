@@ -14,9 +14,13 @@ final class InsightViewModel: NSObject {
     private var view: InsightView? = nil
     public var modelManager: ModelManager
     public var navigationBarButtonItem = UIBarButtonItem()
+    private var startDate: Date
+    private var endDate: Date
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
+        self.startDate = Date()
+        self.endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) ?? startDate
         super.init()
         self.navigationBarButtonItem = UIBarButtonItem(title: LocalizedStrings.shared.insightNavigationItemText, image: nil, primaryAction: UIAction {[weak self] _ in
             self?.presentSelectFromSymptomListController?()
@@ -25,6 +29,18 @@ final class InsightViewModel: NSObject {
     
     public func setView(view: InsightView) {
         self.view = view
+    }
+    
+    private func fetchData() {
+        
+        modelManager.getRegistrationsForInterval(startDate: startDate, endDate: endDate) { symptomRegistrations in
+            self.selectedDateRegistrations = symptomRegistrations
+            self.updateView()
+        }
+    }
+    
+    private func updateView() {
+        
     }
 }
 

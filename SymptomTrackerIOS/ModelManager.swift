@@ -15,6 +15,9 @@ protocol ModelManager {
     func delete(symptom: Symptom)
     func createSymptom(sortingPlacement: Int) -> Symptom?
     func getRegistrationsForDate(date: Date, getRegistrationsForDateCompletionCallback: @escaping (([SymptomRegistration]) -> Void))
+    func getRegistrationsForInterval(startDate: Date,
+                                     endDate: Date,
+                                     getRegistrationsForIntervalCompletionCallback: @escaping (([SymptomRegistration]) -> Void))
     func updateRegistration(symptomRegistration: SymptomRegistration)
     func getActivitiesForDate(date: Date, getActivitiesForDateCompletionCallback: @escaping (([Activity]) -> Void))
     
