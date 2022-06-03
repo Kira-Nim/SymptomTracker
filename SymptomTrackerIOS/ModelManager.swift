@@ -20,7 +20,9 @@ protocol ModelManager {
                                      getRegistrationsForIntervalCompletionCallback: @escaping (([SymptomRegistration]) -> Void))
     func updateRegistration(symptomRegistration: SymptomRegistration)
     func getActivitiesForDate(date: Date, getActivitiesForDateCompletionCallback: @escaping (([Activity]) -> Void))
-    
+    func getActivitiesForInterval(startDate: Date,
+                                  endDate: Date,
+                                  getActivitiesForIntervalCompletionCallback: @escaping (([Activity]) -> Void))
     func update(activity: Activity)
     func update(activities: [Activity])
     func createActivity(date: Date) -> Activity?

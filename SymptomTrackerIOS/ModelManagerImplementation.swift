@@ -137,6 +137,22 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
+    public func getActivitiesForInterval(startDate: Date,
+                                         endDate: Date,
+                                         getActivitiesForIntervalCompletionCallback: @escaping (([Activity]) -> Void)) {
+
+        if let userId = accountManager.loggedInUserId {
+            activityRepository.getActivitiesForInterval(startDate: startDate, endDate: endDate, userId: userId) { firebaseActivityList in
+                
+                // Creating a new list because the firebaseActivityList is imutable (let)
+                let newFirebaseList = firebaseActivityList.sorted {
+                    $0.date > $1.date
+                }
+                getActivitiesForIntervalCompletionCallback(newFirebaseList)
+            }
+        }
+    }
+    
     // MARK: CRUD for Registrations
     
     public func getRegistrationsForDate(date: Date,

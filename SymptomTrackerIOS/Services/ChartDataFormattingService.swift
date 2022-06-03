@@ -106,3 +106,29 @@ class ChartDataFormattingService {
         }
     }
 }
+
+// Pie Chart
+extension ChartDataFormattingService {
+    public func generatePieChartDataVTOs(activities: [Activity]) -> PieChartDataSet {
+        // make a dictionary to keep track of the sum for each of the strain levels
+        var strainDictionary = [
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0
+        ]
+        // run through all activities and record the sum of the strain levels into the dictionary
+        for activity in activities {
+            guard let currentMinutes = strainDictionary[activity.strain] else { continue }
+            let newMinutes = currentMinutes + activity.numMinutes
+            strainDictionary[activity.strain] = newMinutes
+        }
+        let strainNames = ["Ingen", "Lidt", "Mellem", "Svær"]
+        let entries: [PieChartDataEntry] = strainDictionary.map { strain, numMinutes in
+            let name = strainNames[strain]
+            let numHours = Double(numMinutes)/60.0
+            return PieChartDataEntry(value: numHours, label: name)
+        }
+        return PieChartDataSet(entries: entries)
+    }
+}

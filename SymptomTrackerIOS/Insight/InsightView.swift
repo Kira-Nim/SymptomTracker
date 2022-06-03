@@ -17,7 +17,7 @@ class InsightView: UIView {
     public let graphView = LineChartView()
     public let changeOrientationImage = UIImageView()
     public let pieChartContentView = UIView()
-    public let pieChart = UIView()
+    public let pieChart = PieChartView()
     public let segmentedControlContentView = UIView()
     public let segmentedControlView = UISegmentedControl(items: ["Uge", "Måned"])
     

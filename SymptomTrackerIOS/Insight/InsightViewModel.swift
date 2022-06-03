@@ -23,6 +23,8 @@ final class InsightViewModel: NSObject {
     private let intervalService = CalendarDateIntervalService()
     private let weekDateFormatter = DateFormatter()
     private let monthDateFormatter = DateFormatter()
+    private let dataFormattingService = ChartDataFormattingService()
+    private let activityStrainService = ActivityStrainService()
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -42,6 +44,7 @@ final class InsightViewModel: NSObject {
         self.view = view
         self.navbarView = navbarView
         setupGraphView(view.graphView)
+        setupPieChartView(view.pieChart)
         
         // For the date picker shown in the navbar
         let getDateStringCallback: (Date) -> String = { date in
@@ -77,7 +80,7 @@ final class InsightViewModel: NSObject {
            when/if the data is succesfulle fetched.
          */
         modelManager.getRegistrationsForInterval(startDate: startDate, endDate: endDate) { symptomRegistrations in
-            let graphDataDict = ChartDataFormattingService().generateChartDataVTOs(for: symptomRegistrations)
+            let graphDataDict = self.dataFormattingService.generateChartDataVTOs(for: symptomRegistrations)
             
             // Greate array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
             // Is used below to get a LineChartDataSet object that will be given to the LineChartView()
@@ -88,6 +91,14 @@ final class InsightViewModel: NSObject {
             // Set attribute called data on the graphView (type: LineChartView())
             self.view?.graphView.data = data
             self.updateGraphView()
+        }
+        
+        modelManager.getActivitiesForInterval(startDate: startDate, endDate: endDate) { activities in
+            let dataSet = self.dataFormattingService.generatePieChartDataVTOs(activities: activities)
+            self.configurePieChartDataSet(dataSet: dataSet)
+            let data = PieChartData(dataSet: dataSet)
+            self.view?.pieChart.data = data
+            self.view?.pieChart.notifyDataSetChanged()
         }
     }
     
@@ -112,6 +123,15 @@ final class InsightViewModel: NSObject {
         graphView.xAxis.granularity = 24.0 * 60.0 * 60.0 // a full day in seconds
         graphView.xAxis.granularityEnabled = true
         graphView.pinchZoomEnabled = false
+        graphView.dragEnabled = false
+        graphView.highlightPerTapEnabled = false
+        graphView.highlightPerDragEnabled = false
+    }
+    
+    private func setupPieChartView(_ pieChartView: PieChartView) {
+        pieChartView.backgroundColor = .white
+        pieChartView.drawEntryLabelsEnabled = false
+        pieChartView.rotationEnabled = false
     }
     
     private func updateGraphView() {
@@ -134,6 +154,15 @@ final class InsightViewModel: NSObject {
     private func configureLineChartDataSet(dataSet: LineChartDataSet) {
         dataSet.drawCirclesEnabled = false
         dataSet.drawValuesEnabled = false
+    }
+    
+    private func configurePieChartDataSet(dataSet: PieChartDataSet) {
+        dataSet.colors = [
+            activityStrainService.getActivityColorForStrain(0),
+            activityStrainService.getActivityColorForStrain(1),
+            activityStrainService.getActivityColorForStrain(2),
+            activityStrainService.getActivityColorForStrain(3)
+        ]
     }
     
     // Callback for when a strain option is selected when creating or editing activity
