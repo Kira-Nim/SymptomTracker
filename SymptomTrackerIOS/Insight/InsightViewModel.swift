@@ -21,6 +21,8 @@ final class InsightViewModel: NSObject {
     private var endDate: Date
     private var selectedCalendarIntervalType: CalendarIntervalType = .month
     private let intervalService = CalendarDateIntervalService()
+    private let weekDateFormatter = DateFormatter()
+    private let monthDateFormatter = DateFormatter()
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -32,6 +34,8 @@ final class InsightViewModel: NSObject {
         self.navigationBarButtonItem = UIBarButtonItem(title: LocalizedStrings.shared.insightNavigationItemText, image: nil, primaryAction: UIAction {[weak self] _ in
             self?.presentSelectFromSymptomListController?()
         }, menu: nil)
+        self.weekDateFormatter.dateFormat = "EEE d"
+        self.monthDateFormatter.dateFormat = "d"
     }
     
     public func setView(view: InsightView, navbarView: NavBarDatePickerView) {
@@ -83,9 +87,7 @@ final class InsightViewModel: NSObject {
             
             // Set attribute called data on the graphView (type: LineChartView())
             self.view?.graphView.data = data
-            
-            self.view?.graphView.setNeedsDisplay()
-            
+            self.updateGraphView()
         }
     }
     
@@ -101,9 +103,32 @@ final class InsightViewModel: NSObject {
         graphView.rightAxis.enabled = false
         graphView.leftAxis.granularity = 1.0
         graphView.leftAxis.drawGridLinesEnabled = false
+        graphView.leftAxis.axisMinimum = 0.0
+        graphView.leftAxis.axisMaximum = 4.0
         graphView.xAxis.labelPosition = .bottom
         graphView.xAxis.centerAxisLabelsEnabled = true
-        graphView.xAxis.drawGridLinesEnabled = false
+        //graphView.xAxis.drawGridLinesEnabled = false
+        graphView.xAxis.valueFormatter = self
+        graphView.xAxis.granularity = 24.0 * 60.0 * 60.0 // a full day in seconds
+        graphView.xAxis.granularityEnabled = true
+        graphView.pinchZoomEnabled = false
+    }
+    
+    private func updateGraphView() {
+        let startOfStartDate = Calendar.current.startOfDay(for: self.startDate)
+        let dayAfterEndDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate) ?? endDate
+        let startOfDayAfterEndDate = Calendar.current.startOfDay(for: dayAfterEndDate)
+        //print("start date")
+        //print(startOfStartDate)
+        //print("end date")
+        //print(startOfDayAfterEndDate)
+        
+        self.view?.graphView.xAxis.axisMinimum = startOfStartDate.timeIntervalSince1970
+        self.view?.graphView.xAxis.axisMaximum = startOfDayAfterEndDate.timeIntervalSince1970
+        
+        self.view?.graphView.xAxis.setLabelCount(8, force: true)
+        
+        self.view?.graphView.notifyDataSetChanged()
     }
     
     private func configureLineChartDataSet(dataSet: LineChartDataSet) {
@@ -125,23 +150,20 @@ final class InsightViewModel: NSObject {
     }
 }
 
-extension InsightViewModel: UITableViewDelegate {
-    
-}
-
-extension InsightViewModel: UITableViewDataSource {
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+extension InsightViewModel: AxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier", for: indexPath)
-
-        cell.textLabel?.text = "Hello world"
-    
-        return cell
+        let date = Date(timeIntervalSince1970: value)
+        //print(date)
+        var dateFormatter = weekDateFormatter
+        switch selectedCalendarIntervalType {
+        case .week:
+            dateFormatter = weekDateFormatter
+        case .month:
+            dateFormatter = monthDateFormatter
+        default:
+            dateFormatter = weekDateFormatter
+        }
+        return dateFormatter.string(from: date)
     }
 }

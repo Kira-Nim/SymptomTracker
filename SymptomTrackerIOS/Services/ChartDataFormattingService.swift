@@ -55,17 +55,13 @@ class ChartDataFormattingService {
     // These conversions are all happening by making a new dictionary that uses the same keys as the first one, i.e. the symptom placement
     private func convertRegistrationsToChartVTOs(for symptomToRegistrationsDict: [Int: [SymptomRegistration]]) -> [Int: [ChartDataEntry]] {
         let symptomToChartDataEntryListDict: [Int: [ChartDataEntry]] = symptomToRegistrationsDict.mapValues { registrationsList in
-            var startDate: Date? = nil
             let chartEntriesList = registrationsList.map { registration -> ChartDataEntry in
-                if startDate == nil {
-                    startDate = registration.date
-                }
-                let fromDate = startDate ?? registration.date
-                let daysDiff = daysBetweenDates(fromDate: fromDate, toDate: registration.date)
+                let normalizedDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: registration.date) ?? registration.date
+                
+                let dateAsTimeInterval = normalizedDate.timeIntervalSince1970
             
                 let intensityAverage = averageIntensityFor(registration: registration)
-                print("x: " + String(daysDiff) + " y: " + String(intensityAverage))
-                let entry = ChartDataEntry(x: Double(daysDiff), y: intensityAverage, data: registration)
+                let entry = ChartDataEntry(x: dateAsTimeInterval, y: intensityAverage, data: registration)
                 return entry
             }
             return chartEntriesList
@@ -106,7 +102,7 @@ class ChartDataFormattingService {
                     label = name
                 }
             }
-            return LineChartDataSet(entries: chartEntryVTOs, label: label)
+            return ReplacementLineChartDataSet(entries: chartEntryVTOs, label: label)
         }
     }
 }
