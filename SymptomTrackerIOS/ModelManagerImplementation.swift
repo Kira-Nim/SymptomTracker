@@ -20,7 +20,7 @@ final class ModelManagerImplementation: ModelManager {
     //MARK: Repositories - Takes care of CRUD
     private let symptomRepository: SymptomRepository
     private let activityRepository: ActivityRepository
-    private let symptomRegistrationReposityry: SymptomRegistrationRepository
+    private let symptomRegistrationRepository: SymptomRegistrationRepository
     private let intensityRegistrationRepository: IntensityRegistrationRepository
     private var firebaseSymptoms: [FirebaseSymptom] = []
     
@@ -31,7 +31,7 @@ final class ModelManagerImplementation: ModelManager {
     init() {
         symptomRepository = SymptomRepository()
         activityRepository = ActivityRepository()
-        symptomRegistrationReposityry = SymptomRegistrationRepository()
+        symptomRegistrationRepository = SymptomRegistrationRepository()
         intensityRegistrationRepository = IntensityRegistrationRepository()
         accountManager = AccountManager()
         
@@ -162,7 +162,7 @@ final class ModelManagerImplementation: ModelManager {
         // If user is not logged in - should never happen
         if let userId = accountManager.loggedInUserId {
             
-            symptomRegistrationReposityry.getSymptomRegistrationsForDate(date: date, userId: userId) { firebaseSymptomRegistrationList in
+            symptomRegistrationRepository.getSymptomRegistrationsForDate(date: date, userId: userId) { firebaseSymptomRegistrationList in
                 
                 // Only make/fetch registrations for non-disabled symptoms
                 let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
@@ -188,7 +188,7 @@ final class ModelManagerImplementation: ModelManager {
         // If user is not logged in - should never happen
         if let userId = accountManager.loggedInUserId {
             
-            symptomRegistrationReposityry.getSymptomRegistrationsForInterval(startDate: startDate, endDate: endDate, userId: userId) { firebaseSymptomRegistrationList in
+            symptomRegistrationRepository.getSymptomRegistrationsForInterval(startDate: startDate, endDate: endDate, userId: userId) { firebaseSymptomRegistrationList in
                 
                 // Only make/fetch registrations for non-disabled symptoms
                 let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
@@ -208,7 +208,7 @@ final class ModelManagerImplementation: ModelManager {
     public func updateRegistration(symptomRegistration: SymptomRegistration) {
         if let firebaseSymptomRegistration = symptomRegistration as? FirebaseSymptomRegistration, let userId = accountManager.loggedInUserId {
             
-            symptomRegistrationReposityry.updateSymptomRegistration(firebaseSymptomRegistration: firebaseSymptomRegistration, userId: userId)
+            symptomRegistrationRepository.updateSymptomRegistration(firebaseSymptomRegistration: firebaseSymptomRegistration, userId: userId)
         }
     }
 }

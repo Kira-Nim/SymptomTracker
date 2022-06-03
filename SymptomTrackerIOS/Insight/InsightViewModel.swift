@@ -88,11 +88,12 @@ final class InsightViewModel: NSObject {
         modelManager.getRegistrationsForInterval(startDate: startDate, endDate: endDate) { symptomRegistrations in
             let graphDataDict = self.dataFormattingService.generateChartDataVTOs(for: symptomRegistrations)
             
-            // Greate array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
+            // Create array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
             // Is used below to get a LineChartDataSet object that will be given to the LineChartView()
             
             self.configureLineChartDataSets(dataSetsDict: graphDataDict)
-            let dataSetList = Array(graphDataDict.values)
+            let dataSetList = graphDataDict.map { k, v in (k, v) }.sorted { $0.0 < $1.0 }.map { $1 }
+            //let dataSetList = Array(graphDataDict.values)
             let data = LineChartData(dataSets: dataSetList)
             
             // Set attribute called data on the graphView (type: LineChartView())

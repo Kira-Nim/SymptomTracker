@@ -56,12 +56,14 @@ class RegistrationService {
         // Dictionary to look up a Symptom based in its Id (so we can match up registartions with their symptoms)
         let symptomsDict: [String: FirebaseSymptom] = Dictionary(uniqueKeysWithValues: symptomList.map{ ($0.id ?? "", $0) })
         
+        var result: [FirebaseSymptomRegistration] = []
         for registration in firebaseSymptomRegistrationList {
             if let symptom = symptomsDict[registration.symptomId] {
                 registration.symptom = symptom
+                result.append(registration)
             }
         }
-        return firebaseSymptomRegistrationList
+        return result
     }
     
     // Create list containing 4 new intensity instances
