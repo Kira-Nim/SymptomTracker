@@ -60,4 +60,17 @@ final class InsightViewController: UIViewController {
         super.viewWillAppear(animated)
         insightViewModel.viewWillAppear()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.tabBarController?.tabBar.isHidden = true
+        } else {
+            print("Portrait")
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
 }
