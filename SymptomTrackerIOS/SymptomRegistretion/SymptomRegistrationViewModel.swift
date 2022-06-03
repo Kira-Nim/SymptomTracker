@@ -41,7 +41,6 @@ final class SymptomRegistrationViewModel: NSObject {
             return dateString
         }
         self.view = view
-        
         navbarView.configureView(date: currentDate, changeDateCallback: changeDateCallback, getDateStringCallback: getDateStringCallback)
     }
     

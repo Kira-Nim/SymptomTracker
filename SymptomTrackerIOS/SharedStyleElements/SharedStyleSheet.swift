@@ -65,6 +65,7 @@ extension UIColor {
         case createBacgroundColor
         case shadowColor
         case tabbarColor
+        case graphSegmentedControlColor
     }
     
     static func appColor(name: AppColor) -> UIColor {
@@ -169,6 +170,9 @@ extension UIColor {
                 return  UIColor.white
             
             case .shadowColor:
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
+            
+            case .graphSegmentedControlColor:
                 return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
         }
     }

@@ -12,26 +12,48 @@ import Charts
 final class InsightViewModel: NSObject {
     
     public var presentSelectFromSymptomListController: (() -> Void)?
-    private var view: InsightView? = nil
+    private var view: InsightView?
+    private var navbarView: NavBarDatePickerView?
     public var modelManager: ModelManager
     public var navigationBarButtonItem = UIBarButtonItem()
+    private var currentDate: Date
     private var startDate: Date
     private var endDate: Date
+    private var selectedCalendarIntervalType: CalendarIntervalType = .month
+    private let intervalService = CalendarDateIntervalService()
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
-        self.startDate = Date()
-        self.endDate = Date()
+        self.currentDate = Date()
+        let (startDate, endDate) = intervalService.startAndEndDateOfIntervalFor(date: self.currentDate, intervalType: selectedCalendarIntervalType)
+        self.startDate = startDate
+        self.endDate = endDate
         super.init()
-        self.endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) ?? startDate
         self.navigationBarButtonItem = UIBarButtonItem(title: LocalizedStrings.shared.insightNavigationItemText, image: nil, primaryAction: UIAction {[weak self] _ in
             self?.presentSelectFromSymptomListController?()
         }, menu: nil)
     }
     
-    public func setView(view: InsightView) {
+    public func setView(view: InsightView, navbarView: NavBarDatePickerView) {
         self.view = view
+        self.navbarView = navbarView
         setupGraphView(view.graphView)
+        
+        // For the date picker shown in the navbar
+        let getDateStringCallback: (Date) -> String = { date in
+            let dateConverterService = DateConverterService()
+            let dateString = dateConverterService.convertDateFrom(date: date)
+            return dateString
+        }
+        let changeDateCallback: (Date) -> Void = { chosenDate in
+            self.currentDate = chosenDate
+            self.updateView()
+        }
+        navbarView.configureView(date: currentDate, changeDateCallback: changeDateCallback, getDateStringCallback: getDateStringCallback)
+        
+        // For segmented control view
+        view.segmentedControlView.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        view.segmentedControlView.selectedSegmentIndex = selectedCalendarIntervalType.rawValue
     }
     
     public func viewWillAppear() {
@@ -61,7 +83,6 @@ final class InsightViewModel: NSObject {
             
             // Set attribute called data on the graphView (type: LineChartView())
             self.view?.graphView.data = data
-            self.updateView()
             
             self.view?.graphView.setNeedsDisplay()
             
@@ -69,7 +90,10 @@ final class InsightViewModel: NSObject {
     }
     
     private func updateView() {
-        
+        let (startDate, endDate) = intervalService.startAndEndDateOfIntervalFor(date: self.currentDate, intervalType: selectedCalendarIntervalType)
+        self.startDate = startDate
+        self.endDate = endDate
+        fetchData()
     }
     
     private func setupGraphView(_ graphView: LineChartView) {
@@ -85,6 +109,19 @@ final class InsightViewModel: NSObject {
     private func configureLineChartDataSet(dataSet: LineChartDataSet) {
         dataSet.drawCirclesEnabled = false
         dataSet.drawValuesEnabled = false
+    }
+    
+    // Callback for when a strain option is selected when creating or editing activity
+    @objc
+    private func segmentChanged() {
+        guard let segmentedControlView = view?.segmentedControlView else { return }
+                
+        let value = segmentedControlView.selectedSegmentIndex
+        // cast int to enum and assign the selectedCalendarIntervalType attribute, then update the view with the new settings
+        if let newIntervalValue = CalendarIntervalType(rawValue: value) {
+            selectedCalendarIntervalType = newIntervalValue
+            updateView()
+        }
     }
 }
 

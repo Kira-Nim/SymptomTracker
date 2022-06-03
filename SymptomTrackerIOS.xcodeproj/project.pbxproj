@@ -24,6 +24,7 @@
 		4F48AC11284930E60043CB77 /* DateConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC10284930E60043CB77 /* DateConverterService.swift */; };
 		4F698B2F2849AD51002FD5AB /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4F698B2E2849AD51002FD5AB /* Charts */; };
 		4F698B342849BBD4002FD5AB /* ChartDataFormattingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F698B332849BBD4002FD5AB /* ChartDataFormattingService.swift */; };
+		4F698B36284A6F62002FD5AB /* CalendarDateIntervalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F698B35284A6F62002FD5AB /* CalendarDateIntervalService.swift */; };
 		4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */; };
 		4F6F26A82846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */; };
 		4F8757B728228138003033B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8757B628228138003033B0 /* AppDelegate.swift */; };
@@ -96,6 +97,7 @@
 		4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomIntensityService.swift; sourceTree = "<group>"; };
 		4F48AC10284930E60043CB77 /* DateConverterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverterService.swift; sourceTree = "<group>"; };
 		4F698B332849BBD4002FD5AB /* ChartDataFormattingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataFormattingService.swift; sourceTree = "<group>"; };
+		4F698B35284A6F62002FD5AB /* CalendarDateIntervalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDateIntervalService.swift; sourceTree = "<group>"; };
 		4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitLockedNavigationController.swift; sourceTree = "<group>"; };
 		4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabbarController+OrientationHandling.swift"; sourceTree = "<group>"; };
 		4F8757B328228138003033B0 /* SymptomTrackerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymptomTrackerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +238,7 @@
 				4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */,
 				4F388E6D283ABD5F009F684C /* AccountModelManager.swift */,
 				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
+				4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */,
 				4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */,
 				4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
@@ -298,6 +301,7 @@
 				4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */,
 				4F48AC10284930E60043CB77 /* DateConverterService.swift */,
 				4F698B332849BBD4002FD5AB /* ChartDataFormattingService.swift */,
+				4F698B35284A6F62002FD5AB /* CalendarDateIntervalService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -329,7 +333,6 @@
 				4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */,
 				4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */,
 				4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */,
-				4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */,
 			);
 			path = SymptomRegistretion;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				4F388E66283959DF009F684C /* SymptomListViewController.swift in Sources */,
 				4FAFCEF72827F68B002CEFBE /* CreateAccountViewController.swift in Sources */,
 				4FDB44CF2831A3DB005D35A1 /* InsightViewController.swift in Sources */,
+				4F698B36284A6F62002FD5AB /* CalendarDateIntervalService.swift in Sources */,
 				4F88F49B2844EF3C00809664 /* ActivityDurationService.swift in Sources */,
 				4FB0C9F22840D5EB00DB553C /* NavBarDatePickerView.swift in Sources */,
 				4FAFCEDD282423CC002CEFBE /* Activity.swift in Sources */,

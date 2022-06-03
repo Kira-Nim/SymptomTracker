@@ -12,6 +12,7 @@ final class InsightViewController: UIViewController {
     
     private var insightViewModel: InsightViewModel
     private lazy var insightView = InsightView()
+    private lazy var navBarView = NavBarDatePickerView()
     
     // MARK: init()
     
@@ -22,8 +23,9 @@ final class InsightViewController: UIViewController {
         
         title = LocalizedStrings.shared.tabbarInsightText
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Insight"), tag: 0)
-        
+        navigationItem.titleView = navBarView
         navigationItem.rightBarButtonItem = viewModel.navigationBarButtonItem
+        
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
@@ -41,7 +43,7 @@ final class InsightViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        insightViewModel.setView(view: insightView)
+        insightViewModel.setView(view: insightView, navbarView: navBarView)
     }
     
     // MARK: viewDidAppear

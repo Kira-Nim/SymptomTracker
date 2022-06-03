@@ -14,7 +14,7 @@ class ChangeActivityViewModel: NSObject {
     public var modelManager: ModelManager
     public var activity: Activity
     public var newActivityCompletionCallback: (() -> Void)? = nil
-    private let activityStrainPresenter = ActivityStrainService()
+    private let activityStrainService = ActivityStrainService()
     
     // MARK: Init
     init(modelManager: ModelManager, activity: Activity) {
@@ -51,7 +51,7 @@ class ChangeActivityViewModel: NSObject {
         guard let strainSegmentedControl = view?.strainSegmentedControl else { return }
                 
         let value = strainSegmentedControl.selectedSegmentIndex
-        let color = activityStrainPresenter.getActivityColorForStrain(value)
+        let color = activityStrainService.getActivityColorForStrain(value)
         strainSegmentedControl.selectedSegmentTintColor = color
     }
     

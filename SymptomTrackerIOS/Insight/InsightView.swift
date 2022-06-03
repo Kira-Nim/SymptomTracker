@@ -19,7 +19,7 @@ class InsightView: UIView {
     public let pieChartContentView = UIView()
     public let pieChart = UIView()
     public let segmentedControlContentView = UIView()
-    public let segmentedControlView = UISegmentedControl()
+    public let segmentedControlView = UISegmentedControl(items: ["Uge", "Måned"])
     
     
     // MARK: Init
@@ -37,6 +37,8 @@ class InsightView: UIView {
     
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
+        segmentedControlView.selectedSegmentTintColor = UIColor.appColor(name: .graphSegmentedControlColor)
+        
         graphOuterContentView.translatesAutoresizingMaskIntoConstraints = false
         graphOuterContentView.backgroundColor = UIColor.lightGray
         graphOuterContentView.layer.cornerRadius = 4
@@ -69,7 +71,7 @@ class InsightView: UIView {
         segmentedControlContentView.layer.borderWidth = 0.5
         
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControlView.backgroundColor = UIColor.brown
+        segmentedControlView.backgroundColor = UIColor.white
         segmentedControlView.layer.cornerRadius = 4
         segmentedControlView.layer.borderWidth = 0.5
     }
