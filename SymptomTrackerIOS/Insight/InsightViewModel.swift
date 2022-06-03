@@ -157,6 +157,7 @@ final class InsightViewModel: NSObject {
     }
     
     private func configurePieChartDataSet(dataSet: PieChartDataSet) {
+        dataSet.resetColors()
         dataSet.colors = [
             activityStrainService.getActivityColorForStrain(0),
             activityStrainService.getActivityColorForStrain(1),

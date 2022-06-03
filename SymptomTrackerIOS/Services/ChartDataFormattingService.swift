@@ -124,7 +124,8 @@ extension ChartDataFormattingService {
             strainDictionary[activity.strain] = newMinutes
         }
         let strainNames = ["Ingen", "Lidt", "Mellem", "Svær"]
-        let entries: [PieChartDataEntry] = strainDictionary.map { strain, numMinutes in
+        let entries: [PieChartDataEntry] = [0, 1, 2, 3].map { strain in
+            let numMinutes = strainDictionary[strain] ?? 0
             let name = strainNames[strain]
             let numHours = Double(numMinutes)/60.0
             return PieChartDataEntry(value: numHours, label: name)
