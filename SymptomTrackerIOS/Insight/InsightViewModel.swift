@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Charts
 
 final class InsightViewModel: NSObject {
     
@@ -20,8 +21,9 @@ final class InsightViewModel: NSObject {
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         self.startDate = Date()
-        self.endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) ?? startDate
+        self.endDate = Date()
         super.init()
+        self.endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate) ?? startDate
         self.navigationBarButtonItem = UIBarButtonItem(title: LocalizedStrings.shared.insightNavigationItemText, image: nil, primaryAction: UIAction {[weak self] _ in
             self?.presentSelectFromSymptomListController?()
         }, menu: nil)
@@ -31,15 +33,44 @@ final class InsightViewModel: NSObject {
         self.view = view
     }
     
+    public func viewWillAppear() {
+        fetchData()
+    }
+    
+    /* Method for fetching Value transfer objects carriing symptom registration data for the graph view
+       The VTO's are dictionaries of key = Int (placementOrder value on symptoms), value: LineChartDataSet (type in grapg dependency)
+       LineChartDataSet is an object containing an array of chartDataEntry objects.
+       ChartDataEntry are also objects in the Charts library. They each represent a data point in the graph. They have a x and y attribute.
+     */
     private func fetchData() {
-        
+            
+        /* getRegistrationsForInterval is called on modelManager.
+           A function os passed as argument, This callback function will be passed on by the modelManager
+           in yet another callback to the symptomRegistrationRepository where the callback chail will be started
+           when/if the data is succesfulle fetched.
+         */
         modelManager.getRegistrationsForInterval(startDate: startDate, endDate: endDate) { symptomRegistrations in
-            self.selectedDateRegistrations = symptomRegistrations
+            let graphDataDict = ChartDataFormattingService().generateChartDataVTOs(for: symptomRegistrations)
+            
+            // Greate array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
+            // Is used below to get a LineChartDataSet object that will be given to the LineChartView()
+            let dataSetList = Array(graphDataDict.values)
+            let data = LineChartData(dataSets: dataSetList)
+            
+            // Set attribute called data on the graphView (type: LineChartView())
+            self.view?.graphView.data = data
             self.updateView()
+            
+            self.view?.graphView.setNeedsDisplay()
+            
         }
     }
     
     private func updateView() {
+        
+    }
+    
+    private func setupGraphView() {
         
     }
 }

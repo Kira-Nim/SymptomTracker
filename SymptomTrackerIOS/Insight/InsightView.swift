@@ -7,13 +7,14 @@
 
 import Foundation
 import UIKit
+import Charts
 
 class InsightView: UIView {
     
     // MARK: Subviews
     public let graphOuterContentView = UIView()
     public let graphInnerContentView = UIView()
-    public let graphView = UIView()
+    public let graphView = LineChartView()
     public let changeOrientationImage = UIImageView()
     public let pieChartContentView = UIView()
     public let pieChart = UIView()
@@ -38,27 +39,39 @@ class InsightView: UIView {
     private func setAttributesOnSubViews() {
         graphOuterContentView.translatesAutoresizingMaskIntoConstraints = false
         graphOuterContentView.backgroundColor = UIColor.lightGray
+        graphOuterContentView.layer.cornerRadius = 4
+        graphOuterContentView.layer.borderWidth = 0.5
         
         graphInnerContentView.translatesAutoresizingMaskIntoConstraints = false
         graphInnerContentView.backgroundColor = UIColor.green
+        graphInnerContentView.layer.cornerRadius = 4
+        graphInnerContentView.layer.borderWidth = 0.5
         
         graphView.translatesAutoresizingMaskIntoConstraints = false
-        graphView.backgroundColor = UIColor.white
+ 
         
         changeOrientationImage.translatesAutoresizingMaskIntoConstraints = false
         changeOrientationImage.backgroundColor = UIColor.black
         
         pieChartContentView.translatesAutoresizingMaskIntoConstraints = false
         pieChartContentView.backgroundColor = UIColor.darkGray
+        pieChartContentView.layer.cornerRadius = 4
+        pieChartContentView.layer.borderWidth = 0.5
         
         pieChart.translatesAutoresizingMaskIntoConstraints = false
         pieChart.backgroundColor = UIColor.white
+        pieChart.layer.cornerRadius = 4
+        pieChart.layer.borderWidth = 0.5
         
         segmentedControlContentView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControlContentView.backgroundColor = UIColor.blue
+        segmentedControlContentView.layer.cornerRadius = 4
+        segmentedControlContentView.layer.borderWidth = 0.5
         
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControlView.backgroundColor = UIColor.brown
+        segmentedControlView.layer.cornerRadius = 4
+        segmentedControlView.layer.borderWidth = 0.5
     }
     
     // MARK: Setup subviews

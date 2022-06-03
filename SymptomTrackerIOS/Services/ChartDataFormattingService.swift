@@ -10,14 +10,15 @@ import UIKit
 import Charts
 
 class ChartDataFormattingService {
-    public func generateChartDataVTOs(for symptomRegistrations: [SymptomRegistration]) {
+    public func generateChartDataVTOs(for symptomRegistrations: [SymptomRegistration]) -> [Int: LineChartDataSet] {
         // make a dict that maps from symptom to list of registrations, so we can spearate the registration lists
         // We use the placement order int from symptom object as the key, to represent its symptom
         var symptomToRegistrationsDict = createSymptomToRegistrationsDict(from: symptomRegistrations)
         symptomToRegistrationsDict = removeRegistrationsWithNoIntensities(for: symptomToRegistrationsDict)
         sortRegistrationsByDate(for: symptomToRegistrationsDict)
         let symptomToChartVTOsDict = convertRegistrationsToChartVTOs(for: symptomToRegistrationsDict)
-        
+        let result = insertChartVTOsIntoLineChartDataSets(dict: symptomToChartVTOsDict)
+        return result
     }
     
     // make a dict that maps from symptom to list of registrations, so we can spearate the registration lists
@@ -29,12 +30,9 @@ class ChartDataFormattingService {
             // continue is used like return, but instead of breaking out of the method completely, it
             // just stops this iteration of the for loop and starts the next interation in loop
             guard let placement = registration.symptom?.sortingPlacement else { continue }
-            var registrationsList = symptomToRegistrationsDict[placement]
-            if registrationsList == nil {
-                registrationsList = []
-                symptomToRegistrationsDict[placement] = registrationsList
-            }
-            registrationsList?.append(registration)
+            var registrationsList = symptomToRegistrationsDict[placement] ?? []
+            registrationsList.append(registration)
+            symptomToRegistrationsDict[placement] = registrationsList
         }
         
         return symptomToRegistrationsDict
@@ -66,6 +64,7 @@ class ChartDataFormattingService {
                 let daysDiff = daysBetweenDates(fromDate: fromDate, toDate: registration.date)
             
                 let intensityAverage = averageIntensityFor(registration: registration)
+                print("x: " + String(daysDiff) + " y: " + String(intensityAverage))
                 let entry = ChartDataEntry(x: Double(daysDiff), y: intensityAverage, data: registration)
                 return entry
             }

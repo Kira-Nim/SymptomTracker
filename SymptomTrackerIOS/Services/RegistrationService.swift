@@ -52,23 +52,16 @@ class RegistrationService {
     // Function for getting connecting list of registrations with their symptoms
     // The registration list will be ordered the same way the symptom list is.
     func connectSymptonsAndRegistrations(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom]) -> [SymptomRegistration] {
-    
-        var symptomRegistrations: [SymptomRegistration] = []
         
-        var firebaseSymptomRegistrationsDict: [String: FirebaseSymptomRegistration] = [:]
-        firebaseSymptomRegistrationList.forEach({
-            firebaseSymptomRegistrationsDict[$0.symptomId] = $0
-        })
+        // Dictionary to look up a Symptom based in its Id (so we can match up registartions with their symptoms)
+        let symptomsDict: [String: FirebaseSymptom] = Dictionary(uniqueKeysWithValues: symptomList.map{ ($0.id ?? "", $0) })
         
-        symptomList.forEach({
-            if let firebaseSymptomId = $0.id {
-                if let firebaseSymptomRegistration = firebaseSymptomRegistrationsDict[firebaseSymptomId] {
-                    firebaseSymptomRegistration.symptom = $0
-                    symptomRegistrations.append(firebaseSymptomRegistration)
-                }
+        for registration in firebaseSymptomRegistrationList {
+            if let symptom = symptomsDict[registration.symptomId] {
+                registration.symptom = symptom
             }
-        })
-        return symptomRegistrations
+        }
+        return firebaseSymptomRegistrationList
     }
     
     // Create list containing 4 new intensity instances

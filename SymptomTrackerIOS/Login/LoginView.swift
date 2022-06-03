@@ -220,7 +220,6 @@ class LoginView: UIView {
         inputField.layer.borderColor = UIColor.appColor(name: .textFieldBorderColor) .cgColor
         inputField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.appColor(name: .placeholderTextColor)])
         inputField.backgroundColor = UIColor.appColor(name: .textFieldBackgroundColor)
-        inputField.layer.cornerRadius = 3
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: 1))
         inputField.leftViewMode = .always
     }

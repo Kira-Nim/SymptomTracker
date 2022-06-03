@@ -13,6 +13,8 @@ final class InsightViewController: UIViewController {
     private var insightViewModel: InsightViewModel
     private lazy var insightView = InsightView()
     
+    // MARK: init()
+    
     init(viewModel: InsightViewModel) {
         insightViewModel = viewModel
         
@@ -29,18 +31,31 @@ final class InsightViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: loadView
+    
     override func loadView() {
         view = insightView
     }
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         insightViewModel.setView(view: insightView)
     }
     
+    // MARK: viewDidAppear
+    
     override func viewDidDisappear(_ animated: Bool) {
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
+    }
+    
+    // MARK: viewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        insightViewModel.viewWillAppear()
     }
 }
