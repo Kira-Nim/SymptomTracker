@@ -25,6 +25,12 @@ final class InsightViewModel: NSObject {
     private let monthDateFormatter = DateFormatter()
     private let dataFormattingService = ChartDataFormattingService()
     private let activityStrainService = ActivityStrainService()
+    private let symptomGraphLineColors = [
+        UIColor.red,
+        UIColor.green,
+        UIColor.blue,
+        UIColor.brown
+    ]
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
@@ -84,8 +90,9 @@ final class InsightViewModel: NSObject {
             
             // Greate array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
             // Is used below to get a LineChartDataSet object that will be given to the LineChartView()
+            
+            self.configureLineChartDataSets(dataSetsDict: graphDataDict)
             let dataSetList = Array(graphDataDict.values)
-            dataSetList.forEach { self.configureLineChartDataSet(dataSet: $0) }
             let data = LineChartData(dataSets: dataSetList)
             
             // Set attribute called data on the graphView (type: LineChartView())
@@ -151,9 +158,13 @@ final class InsightViewModel: NSObject {
         self.view?.graphView.notifyDataSetChanged()
     }
     
-    private func configureLineChartDataSet(dataSet: LineChartDataSet) {
-        dataSet.drawCirclesEnabled = false
-        dataSet.drawValuesEnabled = false
+    private func configureLineChartDataSets(dataSetsDict: [Int: LineChartDataSet]) {
+        dataSetsDict.forEach { symptomPlacement, dataSet in
+            dataSet.drawCirclesEnabled = false
+            dataSet.drawValuesEnabled = false
+            let index = symptomPlacement % symptomGraphLineColors.count
+            dataSet.colors = [symptomGraphLineColors[index]]
+        }
     }
     
     private func configurePieChartDataSet(dataSet: PieChartDataSet) {
