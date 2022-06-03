@@ -31,6 +31,7 @@ final class InsightViewModel: NSObject {
     
     public func setView(view: InsightView) {
         self.view = view
+        setupGraphView(view.graphView)
     }
     
     public func viewWillAppear() {
@@ -55,6 +56,7 @@ final class InsightViewModel: NSObject {
             // Greate array containing all the values from the "graphDataDict" dictionary (being LineChartDataSet)
             // Is used below to get a LineChartDataSet object that will be given to the LineChartView()
             let dataSetList = Array(graphDataDict.values)
+            dataSetList.forEach { self.configureLineChartDataSet(dataSet: $0) }
             let data = LineChartData(dataSets: dataSetList)
             
             // Set attribute called data on the graphView (type: LineChartView())
@@ -70,8 +72,19 @@ final class InsightViewModel: NSObject {
         
     }
     
-    private func setupGraphView() {
-        
+    private func setupGraphView(_ graphView: LineChartView) {
+        graphView.backgroundColor = .white
+        graphView.rightAxis.enabled = false
+        graphView.leftAxis.granularity = 1.0
+        graphView.leftAxis.drawGridLinesEnabled = false
+        graphView.xAxis.labelPosition = .bottom
+        graphView.xAxis.centerAxisLabelsEnabled = true
+        graphView.xAxis.drawGridLinesEnabled = false
+    }
+    
+    private func configureLineChartDataSet(dataSet: LineChartDataSet) {
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawValuesEnabled = false
     }
 }
 
