@@ -168,6 +168,7 @@ final class InsightViewModel: NSObject {
         pieChartView.drawEntryLabelsEnabled = false
         pieChartView.rotationEnabled = false
         pieChartView.centerText = LocalizedStrings.shared.tabbarActivityText
+        pieChartView.minOffset = 0.0
     }
     
     private func updateGraphView() {
@@ -187,9 +188,6 @@ final class InsightViewModel: NSObject {
         } else {
             self.view?.graphView.xAxis.centerAxisLabelsEnabled = true
             customAxisRenderer?.overrideWithWeekInterval = true
-            //self.view?.graphView.xAxis.granularity = 7.0 * 24.0 * 60.0 * 60.0 // a full week in seconds
-            //self.view?.graphView.xAxis.granularityEnabled = true
-            //self.view?.graphView.xAxis.setLabelCount(5, force: true)
         }
         
         self.view?.graphView.notifyDataSetChanged()
@@ -212,6 +210,7 @@ final class InsightViewModel: NSObject {
             activityStrainService.getActivityColorForStrain(2),
             activityStrainService.getActivityColorForStrain(3)
         ]
+        dataSet.selectionShift = 0.0
     }
     
     public func willTransitionTo(landscape: Bool) {
@@ -241,7 +240,6 @@ extension InsightViewModel: AxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         
         let date = Date(timeIntervalSince1970: value)
-        //var dateFormatter = weekDateFormatter
         switch selectedCalendarIntervalType {
         case .week:
             return weekDateFormatter.string(from: date)
