@@ -154,6 +154,7 @@ final class InsightViewModel: NSObject {
         graphView.dragEnabled = false
         graphView.highlightPerTapEnabled = false
         graphView.highlightPerDragEnabled = false
+        graphView.extraBottomOffset = 5
     }
     
     private func setupPieChartView(_ pieChartView: PieChartView) {
