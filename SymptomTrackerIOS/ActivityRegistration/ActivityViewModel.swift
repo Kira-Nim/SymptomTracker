@@ -62,17 +62,7 @@ final class ActivityViewModel: NSObject {
         
         // set functionality to be executed when create new symptom confirmation button is tapped
         view.createActivityButtonView.addAction(UIAction { [weak self] _ in
-            if let showEditActivitySceneCallback = self?.showEditActivitySceneCallback,
-               let selectedDate = self?.selectedDate,
-               let newActivity = self?.modelManager.createActivity(date: selectedDate) {
-                
-                // Run callback to navigate back to symptom list page
-                showEditActivitySceneCallback(newActivity) { [weak self] in
-                    // insert new activity into local activity list at index 0
-                    self?.selectedDateActivityList.insert(newActivity, at: 0)
-                    self?.updateView()
-                }
-            }
+            self?.showCreateActivity()
         }, for: .touchUpInside)
         
         let changeDateCallback = { date in
@@ -88,19 +78,31 @@ final class ActivityViewModel: NSObject {
         navbarView.configureView(date: selectedDate, changeDateCallback: changeDateCallback, getDateStringCallback: getDateStringCallback)
     }
     
+    public func showCreateActivity() {
+        if let showEditActivitySceneCallback = self.showEditActivitySceneCallback,
+           let newActivity = self.modelManager.createActivity(date: selectedDate) {
+            // Run callback to navigate back to symptom list page
+            showEditActivitySceneCallback(newActivity) { [weak self] in
+                // insert new activity into local activity list at index 0
+                self?.selectedDateActivityList.insert(newActivity, at: 0)
+                self?.updateView()
+            }
+        }
+    }
+    
     // When OS calles setEditing() on ActivityViewController, the controller will call this method.
     public func setEditing(_ state: Bool, animated: Bool) {
         view?.activityTableView.setEditing(state, animated: animated)
         
-        if let view = view {
-            if state {
-                view.buttonContentViewConstraint?.constant = 75
-                view.createActivityButtonViewConstraint?.constant = 38
-            } else {
-                view.buttonContentViewConstraint?.constant = 0
-                view.createActivityButtonViewConstraint?.constant = 0
-            }
-        }
+//        if let view = view {
+//            if state {
+//                view.buttonContentViewConstraint?.constant = 75
+//                view.createActivityButtonViewConstraint?.constant = 38
+//            } else {
+//                view.buttonContentViewConstraint?.constant = 0
+//                view.createActivityButtonViewConstraint?.constant = 0
+//            }
+//        }
     }
     
     public func updateView() {

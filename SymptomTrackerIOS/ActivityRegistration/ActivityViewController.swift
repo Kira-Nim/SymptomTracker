@@ -21,12 +21,14 @@ final class ActivityViewController: UIViewController {
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Activity"), tag: 0)
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.titleView = navbarView
+        navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction() {[weak self] _ in
+            self?.activityViewModel.showCreateActivity()
+        }, menu: nil)
     }
     
     override func setEditing(_ state:Bool, animated: Bool) {
         super.setEditing(state, animated: animated)
         activityViewModel.setEditing(state, animated: animated)
-        
     }
     
     //Formel requirement for all ViewControllers to have this initializer.
