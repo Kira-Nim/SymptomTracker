@@ -148,11 +148,8 @@ final class InsightViewModel: NSObject {
         graphView.leftAxis.axisMinimum = 0.0
         graphView.leftAxis.axisMaximum = 4.0
         graphView.xAxis.labelPosition = .bottom
-        graphView.xAxis.centerAxisLabelsEnabled = true
         //graphView.xAxis.drawGridLinesEnabled = false
         graphView.xAxis.valueFormatter = self
-        graphView.xAxis.granularity = 24.0 * 60.0 * 60.0 // a full day in seconds
-        graphView.xAxis.granularityEnabled = true
         graphView.pinchZoomEnabled = false
         graphView.dragEnabled = false
         graphView.highlightPerTapEnabled = false
@@ -174,7 +171,19 @@ final class InsightViewModel: NSObject {
         
         self.view?.graphView.xAxis.axisMinimum = startOfStartDate.timeIntervalSince1970
         self.view?.graphView.xAxis.axisMaximum = startOfDayAfterEndDate.timeIntervalSince1970
-        self.view?.graphView.xAxis.setLabelCount(8, force: true)
+        
+        if selectedCalendarIntervalType == .week {
+            self.view?.graphView.xAxis.centerAxisLabelsEnabled = true
+            self.view?.graphView.xAxis.granularity = 24.0 * 60.0 * 60.0 // a full day in seconds
+            self.view?.graphView.xAxis.granularityEnabled = true
+            self.view?.graphView.xAxis.setLabelCount(8, force: true)
+        } else {
+            self.view?.graphView.xAxis.centerAxisLabelsEnabled = false
+            self.view?.graphView.xAxis.granularity = 7.0 * 24.0 * 60.0 * 60.0 // a full week in seconds
+            self.view?.graphView.xAxis.granularityEnabled = true
+            self.view?.graphView.xAxis.setLabelCount(5, force: true)
+        }
+        
         self.view?.graphView.notifyDataSetChanged()
     }
     
