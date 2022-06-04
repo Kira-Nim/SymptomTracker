@@ -200,51 +200,51 @@ extension UIColor {
             
             
             case .graphLineColor01:
-                return UIColor(red: 158/255, green: 0/255, blue: 89/255, alpha: 1.0)
+                return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0) // varm gul
             case .graphLineColor02:
-                return UIColor(red: 172/255, green: 94/255, blue: 39/255, alpha: 1.0)
+                return UIColor(red: 134/255, green: 136/255, blue: 228/255, alpha: 1.0) // Lys blå-lilla
             case .graphLineColor03:
-                return UIColor(red: 255/255, green: 128/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 133/255, green: 173/255, blue: 20/255, alpha: 1.0) // lys Avokado
             case .graphLineColor04:
-                return UIColor(red: 108/255, green: 0/255, blue: 121/255, alpha: 1.0)
+                return UIColor(red: 108/255, green: 0/255, blue: 121/255, alpha: 1.0) // Mørk lilla
             case .graphLineColor05:
-                return UIColor(red: 133/255, green: 173/255, blue: 20/255, alpha: 1.0)
+                return UIColor(red: 232/255, green: 143/255, blue: 199/255, alpha: 1.0) // Orange
             case .graphLineColor06:
-                return UIColor(red: 33/255, green: 131/255, blue: 128/255, alpha: 1.0)
+                return UIColor(red: 33/255, green: 131/255, blue: 128/255, alpha: 1.0) // tyrkis grøn
             case .graphLineColor07:
-                return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0) // Varm gul /Sol
             case .graphLineColor08:
-                return UIColor(red: 255/255, green: 64/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 255/255, green: 64/255, blue: 0/255, alpha: 1.0) // Magenta mørk
             case .graphLineColor09:
-                return UIColor(red: 124/255, green: 181/255, blue: 24/255, alpha: 1.0)
+                return UIColor(red: 255/255, green: 64/255, blue: 0/255, alpha: 1.0) // Klar rød
             case .graphLineColor10:
-                return UIColor(red: 255/255, green: 137/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 255/255, green: 137/255, blue: 0/255, alpha: 1.0) // Lys varm orange
             case .graphLineColor11:
-                return UIColor(red: 158/255, green: 0/255, blue: 89/255, alpha: 1.0)
+                return UIColor(red: 158/255, green: 0/255, blue: 89/255, alpha: 1.0) // Mørk Magenta
             case .graphLineColor12:
-                return UIColor(red: 0/255, green: 160/255, blue: 227/255, alpha: 1.0)
+                return UIColor(red: 0/255, green: 160/255, blue: 227/255, alpha: 1.0) // Mellem lys blå
             case .graphLineColor13:
-                return UIColor(red: 3/255, green: 4/255, blue: 94/255, alpha: 1.0)
+                return UIColor(red: 3/255, green: 4/255, blue: 94/255, alpha: 1.0) // Mørkeblå/ næsten sort
             case .graphLineColor14:
-                return UIColor(red: 107/255, green: 5/255, blue: 4/255, alpha: 1.0)
+                return UIColor(red: 130/255, green: 82/255, blue: 23/255, alpha: 1.0) // Grønlig mellembrun
             case .graphLineColor15:
-                return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 107/255, green: 5/255, blue: 4/255, alpha: 1.0) // Mørk rødbrun
             case .graphLineColor16:
-                return UIColor(red: 216/255, green: 17/255, blue: 89/255, alpha: 1.0)
+                return UIColor(red: 216/255, green: 17/255, blue: 89/255, alpha: 1.0) // Mørke lille
             case .graphLineColor17:
-                return UIColor(red: 134/255, green: 136/255, blue: 228/255, alpha: 1.0)
+                return UIColor(red: 172/255, green: 94/255, blue: 39/255, alpha: 1.0) // Penacotta/Camel
             case .graphLineColor18:
-                return UIColor (red: 130/255, green: 82/255, blue: 23/255, alpha: 1.0)
+                return UIColor(red: 172/255, green: 94/255, blue: 39/255, alpha: 1.0) // Penacotta/Camel
             case .graphLineColor19:
-                return UIColor(red: 26/255, green: 161/255, blue: 34/255, alpha: 1.0)
+                return UIColor(red: 26/255, green: 161/255, blue: 34/255, alpha: 1.0) // Mørk græsgrøn
             case .graphLineColor20:
-                return UIColor(red: 128/255, green: 208/255, blue: 114/255, alpha: 1.0)
+                return UIColor(red: 114/255, green: 187/255, blue: 208/255, alpha: 1.0) // lyseblå
             case .graphLineColor21:
-                return UIColor(red: 64/255, green: 221/255, blue: 200/255, alpha: 1.0)
+                return UIColor(red: 64/255, green: 221/255, blue: 200/255, alpha: 1.0) // Turkis
             case .graphLineColor22:
-                return UIColor(red: 222/255, green: 203/255, blue: 39/255, alpha: 1.0)
+                return UIColor(red: 222/255, green: 203/255, blue: 39/255, alpha: 1.0) // Grønlig gul
             case .graphLineColor23:
-                return UIColor(red: 255/255, green: 64/255, blue: 0/255, alpha: 1.0)
+                return UIColor(red: 186/255, green: 143/255, blue: 232/255, alpha: 1.0) // lilla
         }
     }
     

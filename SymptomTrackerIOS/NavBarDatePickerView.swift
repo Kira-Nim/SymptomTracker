@@ -52,7 +52,7 @@ class NavBarDatePickerView: UIView {
         datePickerOverlay.textColor = .appColor(name: .dateLabelColor)
         datePickerOverlay.font = .appFont(ofSize: 25, weight: .bold)
         datePickerOverlay.textAlignment = NSTextAlignment.center
-        datePickerOverlay.backgroundColor = UIColor.appColor(name: .buttonColor)
+        datePickerOverlay.backgroundColor = UIColor.clear//UIColor.appColor(name: .buttonColor)
         datePickerOverlay.layer.cornerRadius = 18
         datePickerOverlay.layer.borderWidth = 0.5
         datePickerOverlay.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
@@ -77,19 +77,21 @@ class NavBarDatePickerView: UIView {
             datePicker.topAnchor.constraint(equalTo: self.topAnchor),
             datePicker.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2),
             datePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            datePicker.widthAnchor.constraint(equalToConstant: 160),
             
             datePickerOverlay.topAnchor.constraint(equalTo: self.topAnchor),
             datePickerOverlay.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2),
             datePickerOverlay.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            datePickerOverlay.widthAnchor.constraint(equalToConstant: 133),
-            
+            datePickerOverlay.widthAnchor.constraint(equalToConstant: 136),
+    
             calenderbuttonLeft.topAnchor.constraint(equalTo: self.topAnchor),
             calenderbuttonLeft.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            calenderbuttonLeft.trailingAnchor.constraint(equalTo: datePicker.leadingAnchor, constant: -30),
+            calenderbuttonLeft.trailingAnchor.constraint(equalTo: datePicker.leadingAnchor),
+            calenderbuttonLeft.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             
-            calenderbuttonRigh.leadingAnchor.constraint(equalTo: datePicker.trailingAnchor, constant: 30),
+            calenderbuttonRigh.leadingAnchor.constraint(equalTo: datePicker.trailingAnchor),
             calenderbuttonRigh.topAnchor.constraint(equalTo: self.topAnchor),
-            calenderbuttonRigh.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            calenderbuttonRigh.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
     
