@@ -14,7 +14,7 @@ class NavBarDatePickerView: UIView {
     public var date = Date()
 
     // MARK: Subviews
-    public var calenderbuttonRigh = UIButton()
+    public var calenderbuttonRight = UIButton()
     public var calenderbuttonLeft = UIButton()
     public var datePicker = UIDatePicker()
     public var datePickerOverlay = UILabel()
@@ -27,7 +27,7 @@ class NavBarDatePickerView: UIView {
         setupSubViews()
         setupConstraints()
         
-        setActionOnCalenderButtons(calenderButton: calenderbuttonRigh, dateModerator: 1)
+        setActionOnCalenderButtons(calenderButton: calenderbuttonRight, dateModerator: 1)
         setActionOnCalenderButtons(calenderButton: calenderbuttonLeft, dateModerator: -1)
         datePicker.addTarget(self, action: #selector(newDateChosen), for: .valueChanged)
     }
@@ -37,8 +37,8 @@ class NavBarDatePickerView: UIView {
     
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
-        calenderbuttonRigh.translatesAutoresizingMaskIntoConstraints = false
-        calenderbuttonRigh.setBackgroundImage(UIImage(named: "Arrow_right"), for: .normal)
+        calenderbuttonRight.translatesAutoresizingMaskIntoConstraints = false
+        calenderbuttonRight.setBackgroundImage(UIImage(named: "Arrow_right"), for: .normal)
         
         calenderbuttonLeft.translatesAutoresizingMaskIntoConstraints = false
         calenderbuttonLeft.setBackgroundImage(UIImage(named: "Arrow_left"), for: .normal)
@@ -63,7 +63,7 @@ class NavBarDatePickerView: UIView {
     private func setupSubViews() {[calenderbuttonLeft,
                                    datePicker,
                                    datePickerOverlay,
-                                   calenderbuttonRigh].forEach({self.addSubview($0)})
+                                   calenderbuttonRight].forEach({self.addSubview($0)})
         
         self.bringSubviewToFront(datePickerOverlay)
     }
@@ -86,12 +86,16 @@ class NavBarDatePickerView: UIView {
     
             calenderbuttonLeft.topAnchor.constraint(equalTo: self.topAnchor),
             calenderbuttonLeft.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            calenderbuttonLeft.trailingAnchor.constraint(equalTo: datePicker.leadingAnchor),
+            calenderbuttonLeft.widthAnchor.constraint(equalToConstant: 42),
+            calenderbuttonLeft.trailingAnchor.constraint(lessThanOrEqualTo: datePicker.leadingAnchor, constant: -7),
+            calenderbuttonLeft.trailingAnchor.constraint(lessThanOrEqualTo: datePickerOverlay.leadingAnchor, constant: 0),
             calenderbuttonLeft.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             
-            calenderbuttonRigh.leadingAnchor.constraint(equalTo: datePicker.trailingAnchor),
-            calenderbuttonRigh.topAnchor.constraint(equalTo: self.topAnchor),
-            calenderbuttonRigh.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            calenderbuttonRight.leadingAnchor.constraint(greaterThanOrEqualTo: datePicker.trailingAnchor, constant: 7),
+            calenderbuttonRight.leadingAnchor.constraint(greaterThanOrEqualTo: datePickerOverlay.trailingAnchor, constant: 0),
+            calenderbuttonRight.topAnchor.constraint(equalTo: self.topAnchor),
+            calenderbuttonRight.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            calenderbuttonRight.widthAnchor.constraint(equalToConstant: 42),
         ])
     }
     
