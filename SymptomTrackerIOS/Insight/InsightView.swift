@@ -20,7 +20,8 @@ class InsightView: UIView {
     public let pieChart = PieChartView()
     public let segmentedControlContentView = UIView()
     public let segmentedControlView = UISegmentedControl(items: ["Uge", "Måned"])
-    
+    private var portraitGraphViewConstraints: [NSLayoutConstraint]?
+    private var landscapeGraphViewConstraints: [NSLayoutConstraint]?
     
     // MARK: Init
     init() {
@@ -72,9 +73,10 @@ class InsightView: UIView {
     private func setupSubViews() {
         segmentedControlContentView.addSubview(segmentedControlView)
         pieChartContentView.addSubview(pieChart)
-        [graphView, changeOrientationImage].forEach({graphInnerContentView.addSubview($0)})
+        [changeOrientationImage].forEach({graphInnerContentView.addSubview($0)})
         [segmentedControlContentView, graphInnerContentView].forEach({graphOuterContentView.addSubview($0)})
         [pieChartContentView, graphOuterContentView].forEach({self.addSubview($0)})
+        [graphView].forEach({self.addSubview($0)})
     }
     
     // MARK: Setup constraints
@@ -107,10 +109,6 @@ class InsightView: UIView {
             changeOrientationImage.bottomAnchor.constraint(greaterThanOrEqualTo: graphView.topAnchor, constant: -4),
             changeOrientationImage.heightAnchor.constraint(equalToConstant: 33),
             changeOrientationImage.widthAnchor.constraint(equalToConstant: 33),
-             
-            graphView.leadingAnchor.constraint(equalTo: graphInnerContentView.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
-            graphView.bottomAnchor.constraint(equalTo: graphInnerContentView.bottomAnchor),
             
             pieChart.centerYAnchor.constraint(equalTo: pieChartContentView.centerYAnchor),
             pieChart.centerXAnchor.constraint(equalTo: pieChartContentView.centerXAnchor),
@@ -122,75 +120,44 @@ class InsightView: UIView {
             pieChartContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             pieChartContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
         ])
+        
+        let portraitGraphViewConstraints = [
+            graphView.leadingAnchor.constraint(equalTo: graphInnerContentView.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
+            graphView.bottomAnchor.constraint(equalTo: graphInnerContentView.bottomAnchor),
+        ]
+        
+        self.portraitGraphViewConstraints = portraitGraphViewConstraints
+        
+        landscapeGraphViewConstraints = [
+            graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            graphView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+        ]
+        
+        NSLayoutConstraint.activate(portraitGraphViewConstraints)
     }
     
     public func setRotation(to isLandscape:Bool) {
         if isLandscape {
-            setupConstraintsForLanscape()
+            setupConstraintsForLandscape()
         } else {
-            deactivateConstraintsForLandscape()
-            setupConstraints()
+            setupConstraintsForPortrait()
         }
     }
     
-    private func setupConstraintsForLanscape() {
-        NSLayoutConstraint.deactivate([
-            graphOuterContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            graphOuterContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
-            graphOuterContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-            graphOuterContentView.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: 70),
+    private func setupConstraintsForLandscape() {
+        guard let portraitGraphViewConstraints = portraitGraphViewConstraints, let landscapeGraphViewConstraints = landscapeGraphViewConstraints  else { return }
         
-            segmentedControlContentView.topAnchor.constraint(equalTo: graphOuterContentView.topAnchor, constant: 40),
-            segmentedControlContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
-            segmentedControlContentView.trailingAnchor.constraint(equalTo: graphOuterContentView.trailingAnchor),
-            segmentedControlContentView.heightAnchor.constraint(equalToConstant: 50),
-            
-            segmentedControlView.centerXAnchor.constraint(equalTo: segmentedControlContentView.centerXAnchor),
-            segmentedControlView.topAnchor.constraint(equalTo: segmentedControlContentView.topAnchor),
-            segmentedControlView.bottomAnchor.constraint(equalTo: segmentedControlContentView.bottomAnchor),
-            segmentedControlView.leadingAnchor.constraint(equalTo: segmentedControlContentView.leadingAnchor, constant: 20),
-            segmentedControlView.trailingAnchor.constraint(equalTo: segmentedControlView.trailingAnchor, constant: -20),
-            
-            graphInnerContentView.bottomAnchor.constraint(equalTo: graphOuterContentView.bottomAnchor),
-            graphInnerContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
-            graphInnerContentView.trailingAnchor.constraint(equalTo: graphOuterContentView.trailingAnchor),
-            graphInnerContentView.topAnchor.constraint(equalTo: segmentedControlContentView.bottomAnchor, constant: 40),
-            
-            changeOrientationImage.topAnchor.constraint(equalTo: graphInnerContentView.topAnchor, constant: 4),
-            changeOrientationImage.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
-            changeOrientationImage.bottomAnchor.constraint(greaterThanOrEqualTo: graphView.topAnchor, constant: -4),
-            changeOrientationImage.heightAnchor.constraint(equalToConstant: 33),
-            changeOrientationImage.widthAnchor.constraint(equalToConstant: 33),
-            
-            graphView.leadingAnchor.constraint(equalTo: graphInnerContentView.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
-            graphView.bottomAnchor.constraint(equalTo: graphInnerContentView.bottomAnchor),
-            
-            pieChart.centerYAnchor.constraint(equalTo: pieChartContentView.centerYAnchor),
-            pieChart.centerXAnchor.constraint(equalTo: pieChartContentView.centerXAnchor),
-            pieChart.heightAnchor.constraint(equalToConstant: 175),
-            pieChart.widthAnchor.constraint(equalToConstant: 175),
-             
-            pieChartContentView.topAnchor.constraint(equalTo: graphOuterContentView.bottomAnchor),
-            pieChartContentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            pieChartContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
-            pieChartContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
-        ])
-        
-        NSLayoutConstraint.activate([
-            graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            graphView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-        ])
+        NSLayoutConstraint.deactivate(portraitGraphViewConstraints)
+        NSLayoutConstraint.activate(landscapeGraphViewConstraints)
     }
     
-    private func deactivateConstraintsForLandscape(){
-        NSLayoutConstraint.deactivate([
-            graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            graphView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
-            graphView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
-            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-        ])
+    private func setupConstraintsForPortrait(){
+        guard let portraitGraphViewConstraints = portraitGraphViewConstraints, let landscapeGraphViewConstraints = landscapeGraphViewConstraints  else { return }
+        
+        NSLayoutConstraint.deactivate(landscapeGraphViewConstraints)
+        NSLayoutConstraint.activate(portraitGraphViewConstraints)
     }
 }
