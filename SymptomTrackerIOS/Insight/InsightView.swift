@@ -41,39 +41,31 @@ class InsightView: UIView {
         
         graphOuterContentView.translatesAutoresizingMaskIntoConstraints = false
         graphOuterContentView.backgroundColor = UIColor.lightGray
-        graphOuterContentView.layer.cornerRadius = 4
-        graphOuterContentView.layer.borderWidth = 0.5
         
         graphInnerContentView.translatesAutoresizingMaskIntoConstraints = false
         graphInnerContentView.backgroundColor = UIColor.green
-        graphInnerContentView.layer.cornerRadius = 4
-        graphInnerContentView.layer.borderWidth = 0.5
         
         graphView.translatesAutoresizingMaskIntoConstraints = false
- 
         
         changeOrientationImage.translatesAutoresizingMaskIntoConstraints = false
         changeOrientationImage.backgroundColor = UIColor.black
         
         pieChartContentView.translatesAutoresizingMaskIntoConstraints = false
         pieChartContentView.backgroundColor = UIColor.darkGray
-        pieChartContentView.layer.cornerRadius = 4
-        pieChartContentView.layer.borderWidth = 0.5
         
         pieChart.translatesAutoresizingMaskIntoConstraints = false
         pieChart.backgroundColor = UIColor.white
-        pieChart.layer.cornerRadius = 4
-        pieChart.layer.borderWidth = 0.5
         
         segmentedControlContentView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControlContentView.backgroundColor = UIColor.blue
-        segmentedControlContentView.layer.cornerRadius = 4
-        segmentedControlContentView.layer.borderWidth = 0.5
         
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         segmentedControlView.backgroundColor = UIColor.white
-        segmentedControlView.layer.cornerRadius = 4
-        segmentedControlView.layer.borderWidth = 0.5
+        
+        /*
+        pieChartContentView.layer.cornerRadius = 4
+        pieChartContentView.layer.borderWidth = 0.5
+         */
     }
     
     // MARK: Setup subviews
@@ -81,12 +73,13 @@ class InsightView: UIView {
         segmentedControlContentView.addSubview(segmentedControlView)
         pieChartContentView.addSubview(pieChart)
         [graphView, changeOrientationImage].forEach({graphInnerContentView.addSubview($0)})
-        [graphInnerContentView, segmentedControlContentView].forEach({graphOuterContentView.addSubview($0)})
-        [graphOuterContentView, pieChartContentView].forEach({self.addSubview($0)})
+        [segmentedControlContentView, graphInnerContentView].forEach({graphOuterContentView.addSubview($0)})
+        [pieChartContentView, graphOuterContentView].forEach({self.addSubview($0)})
     }
     
     // MARK: Setup constraints
     private func setupConstraints() {
+        
         NSLayoutConstraint.activate([
             graphOuterContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             graphOuterContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
@@ -97,7 +90,12 @@ class InsightView: UIView {
             segmentedControlContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
             segmentedControlContentView.trailingAnchor.constraint(equalTo: graphOuterContentView.trailingAnchor),
             segmentedControlContentView.heightAnchor.constraint(equalToConstant: 50),
-            segmentedControlContentView.bottomAnchor.constraint(equalTo: graphInnerContentView.topAnchor),
+            
+            segmentedControlView.centerXAnchor.constraint(equalTo: segmentedControlContentView.centerXAnchor),
+            segmentedControlView.topAnchor.constraint(equalTo: segmentedControlContentView.topAnchor),
+            segmentedControlView.bottomAnchor.constraint(equalTo: segmentedControlContentView.bottomAnchor),
+            segmentedControlView.leadingAnchor.constraint(equalTo: segmentedControlContentView.leadingAnchor, constant: 20),
+            segmentedControlView.trailingAnchor.constraint(equalTo: segmentedControlView.trailingAnchor, constant: -20),
             
             graphInnerContentView.bottomAnchor.constraint(equalTo: graphOuterContentView.bottomAnchor),
             graphInnerContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
@@ -123,6 +121,76 @@ class InsightView: UIView {
             pieChartContentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             pieChartContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
             pieChartContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+        ])
+    }
+    
+    public func setRotation(to isLandscape:Bool) {
+        if isLandscape {
+            setupConstraintsForLanscape()
+        } else {
+            deactivateConstraintsForLandscape()
+            setupConstraints()
+        }
+    }
+    
+    private func setupConstraintsForLanscape() {
+        NSLayoutConstraint.deactivate([
+            graphOuterContentView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            graphOuterContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
+            graphOuterContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+            graphOuterContentView.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: 70),
+        
+            segmentedControlContentView.topAnchor.constraint(equalTo: graphOuterContentView.topAnchor, constant: 40),
+            segmentedControlContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
+            segmentedControlContentView.trailingAnchor.constraint(equalTo: graphOuterContentView.trailingAnchor),
+            segmentedControlContentView.heightAnchor.constraint(equalToConstant: 50),
+            
+            segmentedControlView.centerXAnchor.constraint(equalTo: segmentedControlContentView.centerXAnchor),
+            segmentedControlView.topAnchor.constraint(equalTo: segmentedControlContentView.topAnchor),
+            segmentedControlView.bottomAnchor.constraint(equalTo: segmentedControlContentView.bottomAnchor),
+            segmentedControlView.leadingAnchor.constraint(equalTo: segmentedControlContentView.leadingAnchor, constant: 20),
+            segmentedControlView.trailingAnchor.constraint(equalTo: segmentedControlView.trailingAnchor, constant: -20),
+            
+            graphInnerContentView.bottomAnchor.constraint(equalTo: graphOuterContentView.bottomAnchor),
+            graphInnerContentView.leadingAnchor.constraint(equalTo: graphOuterContentView.leadingAnchor),
+            graphInnerContentView.trailingAnchor.constraint(equalTo: graphOuterContentView.trailingAnchor),
+            graphInnerContentView.topAnchor.constraint(equalTo: segmentedControlContentView.bottomAnchor, constant: 40),
+            
+            changeOrientationImage.topAnchor.constraint(equalTo: graphInnerContentView.topAnchor, constant: 4),
+            changeOrientationImage.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
+            changeOrientationImage.bottomAnchor.constraint(greaterThanOrEqualTo: graphView.topAnchor, constant: -4),
+            changeOrientationImage.heightAnchor.constraint(equalToConstant: 33),
+            changeOrientationImage.widthAnchor.constraint(equalToConstant: 33),
+            
+            graphView.leadingAnchor.constraint(equalTo: graphInnerContentView.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: graphInnerContentView.trailingAnchor),
+            graphView.bottomAnchor.constraint(equalTo: graphInnerContentView.bottomAnchor),
+            
+            pieChart.centerYAnchor.constraint(equalTo: pieChartContentView.centerYAnchor),
+            pieChart.centerXAnchor.constraint(equalTo: pieChartContentView.centerXAnchor),
+            pieChart.heightAnchor.constraint(equalToConstant: 175),
+            pieChart.widthAnchor.constraint(equalToConstant: 175),
+             
+            pieChartContentView.topAnchor.constraint(equalTo: graphOuterContentView.bottomAnchor),
+            pieChartContentView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            pieChartContentView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 33),
+            pieChartContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
+        ])
+        
+        NSLayoutConstraint.activate([
+            graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            graphView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+        ])
+    }
+    
+    private func deactivateConstraintsForLandscape(){
+        NSLayoutConstraint.deactivate([
+            graphView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            graphView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            graphView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
         ])
     }
 }

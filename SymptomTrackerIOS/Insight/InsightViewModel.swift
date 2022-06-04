@@ -25,11 +25,10 @@ final class InsightViewModel: NSObject {
     private let monthDateFormatter = DateFormatter()
     private let dataFormattingService = ChartDataFormattingService()
     private let activityStrainService = ActivityStrainService()
+    
+    // Colors for graph
     private let symptomGraphLineColors = [
-        UIColor.red,
-        UIColor.green,
-        UIColor.blue,
-        UIColor.brown
+
     ]
     
     init(modelManager: ModelManager) {
@@ -146,16 +145,10 @@ final class InsightViewModel: NSObject {
         let startOfStartDate = Calendar.current.startOfDay(for: self.startDate)
         let dayAfterEndDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate) ?? endDate
         let startOfDayAfterEndDate = Calendar.current.startOfDay(for: dayAfterEndDate)
-        //print("start date")
-        //print(startOfStartDate)
-        //print("end date")
-        //print(startOfDayAfterEndDate)
         
         self.view?.graphView.xAxis.axisMinimum = startOfStartDate.timeIntervalSince1970
         self.view?.graphView.xAxis.axisMaximum = startOfDayAfterEndDate.timeIntervalSince1970
-        
         self.view?.graphView.xAxis.setLabelCount(8, force: true)
-        
         self.view?.graphView.notifyDataSetChanged()
     }
     
@@ -176,6 +169,15 @@ final class InsightViewModel: NSObject {
             activityStrainService.getActivityColorForStrain(2),
             activityStrainService.getActivityColorForStrain(3)
         ]
+    }
+    
+    public func willTransitionTo(landscape: Bool) {
+        
+        if landscape {
+            view?.setRotation(to: true)
+        } else {
+            view?.setRotation(to: false)
+        }
     }
     
     // Callback for when a strain option is selected when creating or editing activity

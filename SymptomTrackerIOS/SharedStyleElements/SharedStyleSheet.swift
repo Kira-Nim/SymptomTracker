@@ -213,4 +213,104 @@ UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foreg
 UIBarButtonItem.appearance().tintColor = .magenta
 
 //UITabBar.appearance().barTintColor = .yellow
+
 */
+
+
+
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor02:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor03:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor04:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor05:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor06:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor07:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor08:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor09:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor10:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor11:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor12:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor13:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor14:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor15:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor16:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor17:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor18:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor19:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor20:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor20:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor21:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor22:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor23:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor24:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor25:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor26:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor27:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)
+case .graphLineColor01:
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1.0)

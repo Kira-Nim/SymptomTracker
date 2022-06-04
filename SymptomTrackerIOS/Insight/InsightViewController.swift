@@ -67,10 +67,12 @@ final class InsightViewController: UIViewController {
             print("Landscape")
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             self.tabBarController?.tabBar.isHidden = true
+            self.insightViewModel.willTransitionTo(landscape: true)
         } else {
             print("Portrait")
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.tabBarController?.tabBar.isHidden = false
+            self.insightViewModel.willTransitionTo(landscape: false)
         }
     }
 }
