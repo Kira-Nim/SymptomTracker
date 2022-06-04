@@ -125,6 +125,9 @@ final class InsightViewModel: NSObject {
             let dataSet = self.dataFormattingService.generatePieChartDataVTOs(activities: activities)
             self.configurePieChartDataSet(dataSet: dataSet)
             let data = PieChartData(dataSet: dataSet)
+            //data.setValueFont(.systemFont(ofSize: 11, weight: .light))
+            data.setValueTextColor(UIColor.black)
+            
             self.view?.pieChart.data = data
             self.view?.pieChart.notifyDataSetChanged()
         }
@@ -161,6 +164,7 @@ final class InsightViewModel: NSObject {
         pieChartView.backgroundColor = .white
         pieChartView.drawEntryLabelsEnabled = false
         pieChartView.rotationEnabled = false
+        pieChartView.centerText = LocalizedStrings.shared.tabbarActivityText
     }
     
     private func updateGraphView() {

@@ -130,6 +130,6 @@ extension ChartDataFormattingService {
             let numHours = Double(numMinutes)/60.0
             return PieChartDataEntry(value: numHours, label: name)
         }
-        return PieChartDataSet(entries: entries)
+        return PieChartDataSet(entries: entries, label: LocalizedStrings.shared.tabbarActivityText)
     }
 }
