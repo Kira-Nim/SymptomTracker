@@ -25,6 +25,7 @@ final class InsightViewModel: NSObject {
     private let monthDateFormatter = DateFormatter()
     private let dataFormattingService = ChartDataFormattingService()
     private let activityStrainService = ActivityStrainService()
+    private var customAxisRenderer: MonthAxisRenderer?
     
     // Colors for graph
     private let symptomGraphLineColors = [UIColor.appColor(name: .graphLineColor01),
@@ -150,6 +151,11 @@ final class InsightViewModel: NSObject {
         graphView.xAxis.labelPosition = .bottom
         //graphView.xAxis.drawGridLinesEnabled = false
         graphView.xAxis.valueFormatter = self
+        let customAxisRenderer = MonthAxisRenderer(viewPortHandler: graphView.xAxisRenderer.viewPortHandler,
+                                                   axis: graphView.xAxisRenderer.axis,
+                                                   transformer: graphView.xAxisRenderer.transformer)
+        self.customAxisRenderer = customAxisRenderer
+        graphView.xAxisRenderer = customAxisRenderer
         graphView.pinchZoomEnabled = false
         graphView.dragEnabled = false
         graphView.highlightPerTapEnabled = false
@@ -177,11 +183,13 @@ final class InsightViewModel: NSObject {
             self.view?.graphView.xAxis.granularity = 24.0 * 60.0 * 60.0 // a full day in seconds
             self.view?.graphView.xAxis.granularityEnabled = true
             self.view?.graphView.xAxis.setLabelCount(8, force: true)
+            customAxisRenderer?.overrideWithWeekInterval = false
         } else {
-            self.view?.graphView.xAxis.centerAxisLabelsEnabled = false
-            self.view?.graphView.xAxis.granularity = 7.0 * 24.0 * 60.0 * 60.0 // a full week in seconds
-            self.view?.graphView.xAxis.granularityEnabled = true
-            self.view?.graphView.xAxis.setLabelCount(5, force: true)
+            self.view?.graphView.xAxis.centerAxisLabelsEnabled = true
+            customAxisRenderer?.overrideWithWeekInterval = true
+            //self.view?.graphView.xAxis.granularity = 7.0 * 24.0 * 60.0 * 60.0 // a full week in seconds
+            //self.view?.graphView.xAxis.granularityEnabled = true
+            //self.view?.graphView.xAxis.setLabelCount(5, force: true)
         }
         
         self.view?.graphView.notifyDataSetChanged()
@@ -233,16 +241,15 @@ extension InsightViewModel: AxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         
         let date = Date(timeIntervalSince1970: value)
-        //print(date)
-        var dateFormatter = weekDateFormatter
+        //var dateFormatter = weekDateFormatter
         switch selectedCalendarIntervalType {
         case .week:
-            dateFormatter = weekDateFormatter
+            return weekDateFormatter.string(from: date)
         case .month:
-            dateFormatter = monthDateFormatter
+            let weekNumber = Calendar.current.component(.weekOfYear, from: date)
+            return "Uge \(weekNumber)"
         default:
-            dateFormatter = weekDateFormatter
+            return ""
         }
-        return dateFormatter.string(from: date)
     }
 }

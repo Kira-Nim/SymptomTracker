@@ -69,6 +69,7 @@
 		4FAFCF162831808E002CEFBE /* SymptomRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */; };
 		4FB0C9F0283FBAF100DB553C /* SymptomRegistrationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */; };
 		4FB0C9F22840D5EB00DB553C /* NavBarDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */; };
+		4FCE6AA6284BE28C0011562F /* MonthAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE6AA5284BE28C0011562F /* MonthAxisRenderer.swift */; };
 		4FDB44C728319DD8005D35A1 /* SymptomRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */; };
 		4FDB44C92831A14C005D35A1 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */; };
 		4FDB44CB2831A160005D35A1 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */; };
@@ -142,6 +143,7 @@
 		4FAFCF152831808E002CEFBE /* SymptomRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationViewModel.swift; sourceTree = "<group>"; };
 		4FB0C9EF283FBAF000DB553C /* SymptomRegistrationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationCell.swift; sourceTree = "<group>"; };
 		4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarDatePickerView.swift; sourceTree = "<group>"; };
+		4FCE6AA5284BE28C0011562F /* MonthAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthAxisRenderer.swift; sourceTree = "<group>"; };
 		4FDB44C628319DD8005D35A1 /* SymptomRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomRegistrationView.swift; sourceTree = "<group>"; };
 		4FDB44C82831A14C005D35A1 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		4FDB44CA2831A15F005D35A1 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				4FDB44CE2831A3DB005D35A1 /* InsightViewController.swift */,
 				4FDB44D02831A411005D35A1 /* InsightViewModel.swift */,
 				4FDB44D22831A46A005D35A1 /* InsightView.swift */,
+				4FCE6AA5284BE28C0011562F /* MonthAxisRenderer.swift */,
 			);
 			path = Insight;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				4FAFCEF028253AED002CEFBE /* ActivityRepository.swift in Sources */,
 				4F698B342849BBD4002FD5AB /* ChartDataFormattingService.swift in Sources */,
 				4F48AC0D2846E5790043CB77 /* SymptomIntensityService.swift in Sources */,
+				4FCE6AA6284BE28C0011562F /* MonthAxisRenderer.swift in Sources */,
 				4F6F26A62846CE1F00B11E71 /* PortraitLockedNavigationController.swift in Sources */,
 				4FAFCEEE28253ACC002CEFBE /* SymptomRepository.swift in Sources */,
 			);
