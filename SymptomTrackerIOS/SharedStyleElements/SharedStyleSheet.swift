@@ -234,7 +234,7 @@ extension UIColor {
             case .graphLineColor17:
                 return UIColor(red: 134/255, green: 136/255, blue: 228/255, alpha: 1.0)
             case .graphLineColor18:
-                return UIColor:(red: 130/255, green: 82/255, blue: 23/255, alpha: 1.0)
+                return UIColor (red: 130/255, green: 82/255, blue: 23/255, alpha: 1.0)
             case .graphLineColor19:
                 return UIColor(red: 26/255, green: 161/255, blue: 34/255, alpha: 1.0)
             case .graphLineColor20:

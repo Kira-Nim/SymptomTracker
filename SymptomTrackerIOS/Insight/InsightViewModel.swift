@@ -27,9 +27,29 @@ final class InsightViewModel: NSObject {
     private let activityStrainService = ActivityStrainService()
     
     // Colors for graph
-    private let symptomGraphLineColors = [
-
-    ]
+    private let symptomGraphLineColors = [UIColor.AppColor.graphLineColor01,
+                                          UIColor.AppColor.graphLineColor02,
+                                          UIColor.AppColor.graphLineColor03,
+                                          UIColor.AppColor.graphLineColor04,
+                                          UIColor.AppColor.graphLineColor05,
+                                          UIColor.AppColor.graphLineColor06,
+                                          UIColor.AppColor.graphLineColor07,
+                                          UIColor.AppColor.graphLineColor08,
+                                          UIColor.AppColor.graphLineColor09,
+                                          UIColor.AppColor.graphLineColor10,
+                                          UIColor.AppColor.graphLineColor11,
+                                          UIColor.AppColor.graphLineColor12,
+                                          UIColor.AppColor.graphLineColor13,
+                                          UIColor.AppColor.graphLineColor14,
+                                          UIColor.AppColor.graphLineColor15,
+                                          UIColor.AppColor.graphLineColor16,
+                                          UIColor.AppColor.graphLineColor17,
+                                          UIColor.AppColor.graphLineColor18,
+                                          UIColor.AppColor.graphLineColor19,
+                                          UIColor.AppColor.graphLineColor20,
+                                          UIColor.AppColor.graphLineColor21,
+                                          UIColor.AppColor.graphLineColor22,
+                                          UIColor.AppColor.graphLineColor23 ]
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
