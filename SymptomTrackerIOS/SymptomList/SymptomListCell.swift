@@ -23,13 +23,12 @@ class SymptomListCell: UITableViewCell {
         symptomLabel.textColor = UIColor.appColor(name: .textBlack)
         
         switchButton.translatesAutoresizingMaskIntoConstraints = false
-        //switchButton.thumbTintColor = UIColor.appColor(name: .switchButtonThumbColor)
-        switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
+        //switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
         
         switchButton.addAction(UIAction { [weak self] _ in
             if let switchCallback = self?.switchCallback,
-               var symptom = self?.symptom {
+               let symptom = self?.symptom {
                 if let switchButtonState = self?.switchButton.isOn {
                     symptom.disabled = !switchButtonState
                 }

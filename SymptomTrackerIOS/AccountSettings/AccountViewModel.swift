@@ -89,8 +89,8 @@ extension AccountViewModel: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         cell.textLabel?.text = accountSettingsOptionsList[indexPath.row].0
-        cell.textLabel?.textColor = UIColor.appColor(name: .placeholderTextColor)
-        cell.textLabel?.font = .appFont(ofSize: 18, weight: .medium)
+        cell.textLabel?.textColor = UIColor.appColor(name: .textBlack)
+        cell.textLabel?.font = .appFont(ofSize: 17, weight: .medium)
         return cell
     }
 }

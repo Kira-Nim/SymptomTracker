@@ -101,6 +101,6 @@ extension SymptomRegistrationViewModel: UITableViewDataSource {
     
     // Method for configuring row height
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 97
+        return 83//97
     }
 }

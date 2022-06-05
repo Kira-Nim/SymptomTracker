@@ -41,7 +41,7 @@ class ActivityCell: UITableViewCell {
     func setAttributesOnSubViews() {
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
         activityLabel.numberOfLines = 0
-        activityLabel.font = .appFont(ofSize: 18, weight: .medium)
+        activityLabel.font = .appFont(ofSize: 17, weight: .medium)
         activityLabel.text = activity?.name
         activityLabel.textAlignment = NSTextAlignment.left
         

@@ -74,7 +74,9 @@ class SymptomRegistrationCell: UITableViewCell {
         resetRegistrationsButton.translatesAutoresizingMaskIntoConstraints = false
         resetRegistrationsButton.backgroundColor = UIColor.appColor(name: .registrationWhite)
         resetRegistrationsButton.setBackgroundImage(UIColor.appColor(name: .registrationWhite).image(), for: .highlighted)
+        
         resetRegistrationsButton.layer.cornerRadius = 15.5
+            
         resetRegistrationsButton.layer.borderWidth = 1
         resetRegistrationsButton.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
         resetRegistrationsButton.setBackgroundImage(UIImage(named: "ResetRegistrations_x"), for: .normal)
@@ -83,7 +85,7 @@ class SymptomRegistrationCell: UITableViewCell {
         symptomNameLabel.text = symptomRegistration?.symptom?.name
         symptomNameLabel.numberOfLines = 0
         symptomNameLabel.textColor = .appColor(name: .textBlack)
-        symptomNameLabel.font = .appFont(ofSize: 19, weight: .medium)
+        symptomNameLabel.font = .appFont(ofSize: 17, weight: .medium)
         symptomNameLabel.textAlignment = NSTextAlignment.left
     }
 
@@ -97,17 +99,17 @@ class SymptomRegistrationCell: UITableViewCell {
     // MARK: Setup constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            oneCollectedRegistrationButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -24),
+            oneCollectedRegistrationButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -13),
             oneCollectedRegistrationButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 17),
             oneCollectedRegistrationButton.trailingAnchor.constraint(equalTo: cellContentStackView.leadingAnchor, constant: -40),
             oneCollectedRegistrationButton.heightAnchor.constraint(equalToConstant: 30),
             oneCollectedRegistrationButton.widthAnchor.constraint(equalToConstant: 90),
             
             cellContentStackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            cellContentStackView.topAnchor.constraint(equalTo: symptomNameLabel.bottomAnchor, constant: 9),
+            cellContentStackView.topAnchor.constraint(equalTo: symptomNameLabel.bottomAnchor, constant: 6),
             cellContentStackView.heightAnchor.constraint(equalToConstant: 35),
             
-            symptomNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
+            symptomNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 11),
             symptomNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 17),
             symptomNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor,constant: -20),
             symptomNameLabel.heightAnchor.constraint(equalToConstant: 25),
@@ -124,7 +126,7 @@ class SymptomRegistrationCell: UITableViewCell {
             registrationButtonBedTime.heightAnchor.constraint(equalToConstant: 30),
             registrationButtonBedTime.widthAnchor.constraint(equalToConstant: 30),
             
-            resetRegistrationsButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -23),
+            resetRegistrationsButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
             resetRegistrationsButton.heightAnchor.constraint(equalToConstant: 31),
             resetRegistrationsButton.widthAnchor.constraint(equalToConstant: 31),
             resetRegistrationsButton.leadingAnchor.constraint(equalTo: cellContentStackView.trailingAnchor, constant: 25),
@@ -156,8 +158,8 @@ class SymptomRegistrationCell: UITableViewCell {
     private func setButtonAttributesOn(button: UIButton, intensity: Int?) {
         setColor(button: button, intensity: intensity)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 4
-        button.layer.borderWidth = 0.5
+        button.layer.cornerRadius = 6
+        button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
     }
     

@@ -55,9 +55,7 @@ extension UIColor {
         case activityWhite
         case backgroundColor
         case placeholderTextColor
-        case switchButtonOffTintColor
         case switchButtonOnTintColor
-        case switchButtonThumbColor
         case sectionBacgroundColor
         case dateLabelColor
         case registrationButtonBorderColor
@@ -69,7 +67,7 @@ extension UIColor {
         case insightBackgroundColor
         case graphWhite
         case insightSegmentedControlBackgroundColor
-        
+        case calenderPickerButtonBorderColor
         
         case graphLineColor01
         case graphLineColor02
@@ -99,118 +97,77 @@ extension UIColor {
     static func appColor(name: AppColor) -> UIColor {
         switch name {
             case .errorRed:
-                return UIColor(red: 217/255, green: 91/255, blue: 30/255, alpha: 1.0)
-            
+                return UIColor(red: 217/255, green: 91/255, blue: 30/255, alpha: 1.0) // Error red
             case .confirmationGreen:
-                return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0)
-            
+                return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0) // Confirmation green
             case .buttonColor:
-                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .buttonBorderColor:
-                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .buttonClicked:
-                return UIColor(red: 200/255, green: 182/255, blue: 174/255, alpha: 1.0)
-            
+                return UIColor(red: 200/255, green: 182/255, blue: 174/255, alpha: 1.0) // Grey/brown semi darker
             case .buttonTextColor:
-                return UIColor.white
-            
+                return UIColor.white // white
             case .textFieldBorderColor:
-                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0)
-
+                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0) // "Text Black"
             case .textFieldBackgroundColor:
-                return UIColor.white
-            
+                return UIColor.white // white
             case .textFieldText:
-                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0)
-            
+                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0) // "Text Black"
             case .headerColor:
-                return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
-            
+                return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0) // "Header black"
             case .textBlack:
-                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0)
-            
+                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0) // "Text Black"
             case .placeholderTextColor:
                 return UIColor(red: 125/255, green: 117/255, blue: 114/255, alpha: 1.0)
-            
             case .backgroundColor:
-                return UIColor.white
-            
+                return UIColor.white // white
             case .createBacgroundColor:
-                return UIColor(red: 245/255, green: 247/255, blue: 243/255, alpha: 1.0)
-            
+                return UIColor(red: 242/255, green: 241/255, blue: 239/255, alpha: 1.0)
             case .registrationGreen:
-                return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0)
-            
+                return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0) // Conformaton green
             case .registrationYellow:
                 return UIColor(red: 240/255, green: 178/255, blue: 11/255, alpha: 1.0)
-            
             case .registrationOrange:
                 return UIColor(red: 240/255, green: 131/255, blue: 11/255, alpha: 1.0)
-            
             case .registrationRed:
-                return UIColor(red: 217/255, green: 91/255, blue: 30/255, alpha: 1.0)
-            
+                return UIColor(red: 217/255, green: 91/255, blue: 30/255, alpha: 1.0) // Error red
             case .registrationNeutral:
-                return UIColor(red: 129/255, green: 123/255, blue: 123/255, alpha: 1.0)
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .registrationWhite:
-                return UIColor.white
-            
+                return UIColor.white // white
+            case .registrationButtonText:
+                return UIColor(red: 73/255, green: 69/255, blue: 70/255, alpha: 1.0) // "Text Black"
             case .registrationButtonBorderColor:
-                return UIColor(red: 125/255, green: 117/255, blue: 114/255, alpha: 1.0)
-            
+                return UIColor(red: 97/255, green: 85/255, blue: 82/255, alpha: 1.0) // very dark grey/brown
             case .activityRed:
                 return UIColor(red: 224/255, green: 85/255, blue: 18/255, alpha: 1.0)
-            
             case .activityYellow:
                 return UIColor(red: 240/255, green: 178/255, blue: 11/255, alpha: 1.0)
-            
             case .activityGreen:
-                //return UIColor(red: 161/255, green: 179/255, blue: 132/255, alpha: 1.0)
                 return UIColor(red: 127/255, green: 157/255, blue: 82/255, alpha: 1.0)
-            
             case .activityWhite:
                 return UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
-
-            case .switchButtonOffTintColor:
-                //return UIColor(red: 239/255, green: 244/255, blue: 255/255, alpha: 1.0)
-                return UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1.0)
-            
             case .switchButtonOnTintColor:
-                return UIColor(red: 131/255, green: 126/255, blue: 182/255, alpha: 1.0)
-            
-            case .switchButtonThumbColor:
-                return UIColor.orange
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .sectionBacgroundColor:
-                return UIColor.white
-                //return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
-            
+                return UIColor.white // white
             case .dateLabelColor:
-                return UIColor.white
-            
-            case .registrationButtonText:
-                return UIColor(red: 45/255, green: 45/255, blue: 45/255, alpha: 1.0)
-            
+                return UIColor.white // white
             case .tabbarColor:
-                return  UIColor.white
-            
+                return UIColor.white // white
             case .shadowColor:
-                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .graphSegmentedControlColor:
-                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
-            
+                return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0) // Grey/brown
             case .insightBackgroundColor:
-                return UIColor.white
-            
+                return UIColor.white // white
             case .graphWhite:
-                return UIColor.white
-            
-        case .insightSegmentedControlBackgroundColor:
-                return UIColor.white
+                return UIColor.white // white
+            case .insightSegmentedControlBackgroundColor:
+                return UIColor.white // white
+            case .calenderPickerButtonBorderColor:
+                return UIColor(red: 171/255, green: 160/255, blue: 155/255, alpha: 1.0) // A little darker Grey/brown
             
             case .graphLineColor01:
                 return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0) // varm gul
@@ -280,25 +237,6 @@ extension UIColor {
         }
     }
 }
-
-/*
- createActivityButtonView.layer.shadowColor = UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0).cgColor
- createActivityButtonView.layer.shadowOffset = CGSize(width: 0, height: 0)
- createActivityButtonView.layer.shadowRadius = 15
- createActivityButtonView.layer.shadowOpacity = 0.5
- 
- // https://www.envato.com/blog/color-scheme-trends-in-mobile-app-design/
- */
-
-/* Skal laves i scene delegate - før flowcoordinatoren laver controllers.
-UITabBar.appearance().barTintColor = .yellow
-UINavigationBar.appearance().barTintColor = UIColor.appColor(name: .activityYellow)
-UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blue]
-UIBarButtonItem.appearance().tintColor = .magenta
-
-//UITabBar.appearance().barTintColor = .yellow
-
-*/
 
 
 

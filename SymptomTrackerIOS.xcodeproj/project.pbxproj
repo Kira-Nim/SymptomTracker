@@ -233,7 +233,9 @@
 				4FDB44D42831A709005D35A1 /* AccountSettings */,
 				4FAFCEFC282D353C002CEFBE /* CreateAccount */,
 				4FAFCF032831539D002CEFBE /* Login */,
+				4F388E642839599C009F684C /* SymptomList */,
 				4FAFCEF52826CC93002CEFBE /* Services */,
+				4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */,
 				4F8757B628228138003033B0 /* AppDelegate.swift */,
 				4F8757B828228138003033B0 /* SceneDelegate.swift */,
 				4FAFCEEA282534E3002CEFBE /* FlowCoordinator.swift */,
@@ -242,7 +244,6 @@
 				4FAFCF01282D4B4E002CEFBE /* ModelManager.swift */,
 				4F388E6D283ABD5F009F684C /* AccountModelManager.swift */,
 				4FAFCEE428252AD6002CEFBE /* AccountManager.swift */,
-				4FB0C9F12840D5EB00DB553C /* NavBarDatePickerView.swift */,
 				4F6F26A52846CE1F00B11E71 /* PortraitLockedNavigationController.swift */,
 				4F6F26A72846D0BB00B11E71 /* UITabbarController+OrientationHandling.swift */,
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
@@ -368,7 +369,6 @@
 		4FDB44D42831A709005D35A1 /* AccountSettings */ = {
 			isa = PBXGroup;
 			children = (
-				4F388E642839599C009F684C /* SymptomList */,
 				4FDB44D52831A72C005D35A1 /* AccountViewController.swift */,
 				4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */,
 				4FDB44D92831A88A005D35A1 /* AccountView.swift */,

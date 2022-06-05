@@ -55,7 +55,7 @@ class NavBarDatePickerView: UIView {
         datePickerOverlay.backgroundColor = UIColor.appColor(name: .buttonColor)
         datePickerOverlay.layer.cornerRadius = 18
         datePickerOverlay.layer.borderWidth = 0.5
-        datePickerOverlay.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
+        datePickerOverlay.layer.borderColor = UIColor.appColor(name: .calenderPickerButtonBorderColor).cgColor
         datePickerOverlay.layer.masksToBounds = true
     }
     

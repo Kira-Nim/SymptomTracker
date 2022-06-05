@@ -63,13 +63,7 @@ class InsightView: UIView {
         segmentedControlContentView.backgroundColor = UIColor.appColor(name: .insightBackgroundColor)
         
         segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
-segmentedControlView.layer.borderColor = UIColor.black.cgColor
         segmentedControlView.backgroundColor = UIColor.appColor(name: .insightSegmentedControlBackgroundColor)
-        
-        /*
-        pieChartContentView.layer.cornerRadius = 4
-        pieChartContentView.layer.borderWidth = 0.5
-         */
     }
     
     // MARK: Setup subviews
