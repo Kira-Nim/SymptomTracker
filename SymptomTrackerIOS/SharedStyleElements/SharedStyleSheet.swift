@@ -66,6 +66,11 @@ extension UIColor {
         case shadowColor
         case tabbarColor
         case graphSegmentedControlColor
+        case insightBackgroundColor
+        case graphWhite
+        case insightSegmentedControlBackgroundColor
+        
+        
         case graphLineColor01
         case graphLineColor02
         case graphLineColor03
@@ -198,6 +203,14 @@ extension UIColor {
             case .graphSegmentedControlColor:
                 return UIColor(red: 208/255, green: 193/255, blue: 184/255, alpha: 1.0)
             
+            case .insightBackgroundColor:
+                return UIColor.white
+            
+            case .graphWhite:
+                return UIColor.white
+            
+        case .insightSegmentedControlBackgroundColor:
+                return UIColor.white
             
             case .graphLineColor01:
                 return UIColor(red: 255/255, green: 189/255, blue: 0/255, alpha: 1.0) // varm gul

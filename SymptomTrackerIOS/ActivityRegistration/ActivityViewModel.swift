@@ -93,16 +93,6 @@ final class ActivityViewModel: NSObject {
     // When OS calles setEditing() on ActivityViewController, the controller will call this method.
     public func setEditing(_ state: Bool, animated: Bool) {
         view?.activityTableView.setEditing(state, animated: animated)
-        
-//        if let view = view {
-//            if state {
-//                view.buttonContentViewConstraint?.constant = 75
-//                view.createActivityButtonViewConstraint?.constant = 38
-//            } else {
-//                view.buttonContentViewConstraint?.constant = 0
-//                view.createActivityButtonViewConstraint?.constant = 0
-//            }
-//        }
     }
     
     public func updateView() {

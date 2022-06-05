@@ -52,7 +52,7 @@ class NavBarDatePickerView: UIView {
         datePickerOverlay.textColor = .appColor(name: .dateLabelColor)
         datePickerOverlay.font = .appFont(ofSize: 25, weight: .bold)
         datePickerOverlay.textAlignment = NSTextAlignment.center
-        datePickerOverlay.backgroundColor = UIColor.clear//UIColor.appColor(name: .buttonColor)
+        datePickerOverlay.backgroundColor = UIColor.appColor(name: .buttonColor)
         datePickerOverlay.layer.cornerRadius = 18
         datePickerOverlay.layer.borderWidth = 0.5
         datePickerOverlay.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor

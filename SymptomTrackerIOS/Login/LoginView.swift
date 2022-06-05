@@ -71,7 +71,6 @@ class LoginView: UIView {
     private func setAttributesOnSubview() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
-            //titleLabel.textColor = UIColor(red: 107/255, green: 126/255, blue: 165/255, alpha: 1.0)
         titleLabel.textColor = .appColor(name: .textBlack)
         titleLabel.text = LocalizedStrings.shared.appTitle
         titleLabel.font = .appFont(ofSize: 30, weight: .medium)

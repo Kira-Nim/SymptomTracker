@@ -142,7 +142,6 @@ final class InsightViewModel: NSObject {
     }
     
     private func setupGraphView(_ graphView: LineChartView) {
-        graphView.backgroundColor = .white
         graphView.rightAxis.enabled = false
         graphView.leftAxis.granularity = 1.0
         graphView.leftAxis.drawGridLinesEnabled = false
