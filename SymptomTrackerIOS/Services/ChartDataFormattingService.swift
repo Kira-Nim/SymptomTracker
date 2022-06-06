@@ -146,6 +146,6 @@ extension ChartDataFormattingService {
             entries.append(entry)
         }
         
-        return PieChartDataSet(entries: entries, label: LocalizedStrings.shared.tabbarActivityText)
+        return PieChartDataSet(entries: entries)
     }
 }

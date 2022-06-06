@@ -119,6 +119,7 @@ final class InsightViewModel: NSObject {
             
             // Set attribute called data on the graphView (type: LineChartView())
             self.view?.graphView.data = data
+            data.setValueTextColor(UIColor.appColor(name: .textBlack))
             self.updateGraphView()
         }
         
@@ -127,7 +128,7 @@ final class InsightViewModel: NSObject {
             self.configurePieChartDataSet(dataSet: dataSet)
             let data = PieChartData(dataSet: dataSet)
             //data.setValueFont(.systemFont(ofSize: 11, weight: .light))
-            data.setValueTextColor(UIColor.black)
+            data.setValueTextColor(UIColor.appColor(name: .textBlack))
             self.view?.pieChart.data = data
             // There is a bug in the charts library that requires this to be set after data has been assigned to the chart
             // See https://github.com/danielgindi/Charts/issues/4690
@@ -162,6 +163,7 @@ final class InsightViewModel: NSObject {
         graphView.highlightPerTapEnabled = false
         graphView.highlightPerDragEnabled = false
         graphView.extraBottomOffset = 5
+        graphView.legend.textColor = UIColor.appColor(name: .textBlack)
     }
     
     private func setupPieChartView(_ pieChartView: PieChartView) {
@@ -170,6 +172,9 @@ final class InsightViewModel: NSObject {
         pieChartView.rotationEnabled = false
         pieChartView.centerText = LocalizedStrings.shared.tabbarActivityText
         pieChartView.minOffset = 0.0
+        let attribute = [NSAttributedString.Key.foregroundColor: UIColor.appColor(name: .textBlack)]
+        let attributedString = NSAttributedString(string: LocalizedStrings.shared.tabbarActivityText, attributes: attribute)
+        pieChartView.centerAttributedText = attributedString
     }
     
     private func updateGraphView() {

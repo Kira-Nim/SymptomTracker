@@ -15,7 +15,7 @@ class InsightView: UIView {
     public let graphOuterContentView = UIView()
     public let graphInnerContentView = UIView()
     public let graphView = LineChartView()
-    public let changeOrientationImage = UIImageView(image: UIImage(named: "ScreenRotation"))
+    public let changeOrientationImage: UIImageView
     public let pieChartContentView = UIView()
     public let pieChart = PieChartView()
     public let segmentedControlContentView = UIView()
@@ -25,6 +25,13 @@ class InsightView: UIView {
     
     // MARK: Init
     init() {
+        var tintableImage: UIImage? = nil
+        if let rotationImage = UIImage(named: "ScreenRotation") {
+            tintableImage = rotationImage.withRenderingMode(.alwaysTemplate)
+        }
+        changeOrientationImage = UIImageView(image: tintableImage)
+        changeOrientationImage.tintColor = UIColor.appColor(name: .buttonColor)
+        
         super.init(frame: CGRect.zero)
         backgroundColor = UIColor.appColor(name: .backgroundColor)
         
@@ -39,6 +46,9 @@ class InsightView: UIView {
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
         segmentedControlView.selectedSegmentTintColor = UIColor.appColor(name: .graphSegmentedControlColor)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.appColor(name: .textBlack)]
+        segmentedControlView.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        segmentedControlView.setTitleTextAttributes(titleTextAttributes, for: .selected)
         
         graphOuterContentView.translatesAutoresizingMaskIntoConstraints = false
         graphOuterContentView.backgroundColor = UIColor.appColor(name: .insightBackgroundColor)
