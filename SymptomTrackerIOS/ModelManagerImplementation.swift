@@ -15,6 +15,7 @@ Holds the model data classes adapted to be used throuhout the system.
 Manages the Combine pipeline
  */
 
+
 final class ModelManagerImplementation: ModelManager {
     
     //MARK: Repositories - Takes care of CRUD
@@ -27,6 +28,8 @@ final class ModelManagerImplementation: ModelManager {
     // Manages information about logged in user
     private let accountManager: AccountManager
     
+    public let symptomsUpdatedNotificationName = NSNotification.Name("SymptomsUpdatedNotification")
+    
     //MARK: Init
     init() {
         symptomRepository = SymptomRepository()
@@ -38,13 +41,15 @@ final class ModelManagerImplementation: ModelManager {
         // If the user is still logged then the snapshot listener should be started.
         if let userId = self.accountManager.loggedInUserId {
             self.symptomRepository.startListener(loggedInUser: userId)
-            self.symptomRepository.callbacks.append(updateFirebaseSymptomList)
         }
+        // always register callback, even if we don't fetch the symptoms immediately (we'll still need it after logging in)
+        self.symptomRepository.callbacks.append(updateFirebaseSymptomList)
     }
 
     // MARK: Update symptomlist
     public func updateFirebaseSymptomList() {
         firebaseSymptoms = symptomRepository.firebaseSymptoms
+        NotificationCenter.default.post(name: symptomsUpdatedNotificationName, object: nil)
     }
     
     // MARK Get logged in user

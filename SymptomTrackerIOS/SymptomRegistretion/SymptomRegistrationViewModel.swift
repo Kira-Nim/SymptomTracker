@@ -21,6 +21,11 @@ final class SymptomRegistrationViewModel: NSObject {
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         self.currentDate = Date()
+        super.init()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateSymptomRegistrationList),
+                                               name: modelManager.symptomsUpdatedNotificationName,
+                                               object: nil)
     }
     
     public func setView(view: SymptomRegistrationView, navbarView: NavBarDatePickerView) {
@@ -57,7 +62,8 @@ final class SymptomRegistrationViewModel: NSObject {
         updateSymptomRegistrationList()
     }
     
-    private func updateSymptomRegistrationList() {
+    @objc
+    public func updateSymptomRegistrationList() {
         // update list containing registrations for selected date
         modelManager.getRegistrationsForDate(date: currentDate) { symptomRegistrations in
             self.selectedDateRegistrations = symptomRegistrations

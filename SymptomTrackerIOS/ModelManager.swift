@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ModelManager {
+    var symptomsUpdatedNotificationName: NSNotification.Name { get }
     func isUserLoggedIn() -> Bool
     func getSymptoms() -> [Symptom]
     func updateSymptom(symptom: Symptom)
