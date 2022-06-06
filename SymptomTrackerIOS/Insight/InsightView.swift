@@ -152,6 +152,7 @@ class InsightView: UIView {
         NSLayoutConstraint.activate(landscapeGraphViewConstraints)
         
         bringSubviewToFront(graphView)
+        pieChart.isHidden = true
     }
     
     private func setupConstraintsForPortrait(){
@@ -161,5 +162,6 @@ class InsightView: UIView {
         NSLayoutConstraint.activate(portraitGraphViewConstraints)
         
         bringSubviewToFront(changeOrientationImage)
+        pieChart.isHidden = false
     }
 }
