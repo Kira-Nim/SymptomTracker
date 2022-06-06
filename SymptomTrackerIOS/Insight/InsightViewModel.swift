@@ -122,8 +122,8 @@ final class InsightViewModel: NSObject {
             self.updateGraphView()
         }
         
-        modelManager.getActivitiesForInterval(startDate: startDate, endDate: endDate) { activities in
-            let dataSet = self.dataFormattingService.generatePieChartDataVTOs(activities: activities)
+        modelManager.getActivitiesForInterval(startDate: startDate, endDate: endDate) { [self] activities in
+            let dataSet = self.dataFormattingService.generatePieChartDataVTOs(activities: activities, startDate: startDate, endDate: self.endDate)
             self.configurePieChartDataSet(dataSet: dataSet)
             let data = PieChartData(dataSet: dataSet)
             //data.setValueFont(.systemFont(ofSize: 11, weight: .light))

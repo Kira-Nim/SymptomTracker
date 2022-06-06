@@ -109,7 +109,7 @@ class ChartDataFormattingService {
 
 // Pie Chart
 extension ChartDataFormattingService {
-    public func generatePieChartDataVTOs(activities: [Activity]) -> PieChartDataSet {
+    public func generatePieChartDataVTOs(activities: [Activity], startDate: Date, endDate: Date) -> PieChartDataSet {
         // make a dictionary to keep track of the sum for each of the strain levels
         var strainDictionary = [
             0: 0,
@@ -124,12 +124,28 @@ extension ChartDataFormattingService {
             strainDictionary[activity.strain] = newMinutes
         }
         let strainNames = ["Ingen", "Lidt", "Mellem", "Svær"]
-        let entries: [PieChartDataEntry] = [0, 1, 2, 3].map { strain in
+        var entryHours = 0.0
+        var entries: [PieChartDataEntry] = [0, 1, 2, 3].map { strain in
             let numMinutes = strainDictionary[strain] ?? 0
             let name = strainNames[strain]
             let numHours = Double(numMinutes)/60.0
+            entryHours += numHours
             return PieChartDataEntry(value: numHours, label: name)
         }
+        // add non-registered time as an entry
+        let addNonRegisteredEntry = false
+        if addNonRegisteredEntry {
+            let startOfStartDate = Calendar.current.startOfDay(for: startDate)
+            let dayAfterEndDate = Calendar.current.date(byAdding: .day, value: 1, to: endDate) ?? endDate
+            let startOfDayAfterEndDate = Calendar.current.startOfDay(for: dayAfterEndDate)
+            
+            let diffSeconds = startOfDayAfterEndDate.timeIntervalSince1970 - startOfStartDate.timeIntervalSince1970
+            let diffHours = diffSeconds / (60 * 60)
+            let unregisteredHours = diffHours - entryHours
+            let entry = PieChartDataEntry(value: unregisteredHours, label: "")
+            entries.append(entry)
+        }
+        
         return PieChartDataSet(entries: entries, label: LocalizedStrings.shared.tabbarActivityText)
     }
 }
