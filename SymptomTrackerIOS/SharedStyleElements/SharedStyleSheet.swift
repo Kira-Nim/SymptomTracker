@@ -238,5 +238,11 @@ extension UIColor {
     }
 }
 
+// the colors for tabbars and navbars once and for all
+func setAppearanceProxies() {
+    UIBarButtonItem.appearance().tintColor = UIColor.appColor(name: .textBlack)
+    UITabBar.appearance().tintColor = UIColor.appColor(name: .buttonClicked)
+}
+
 
 

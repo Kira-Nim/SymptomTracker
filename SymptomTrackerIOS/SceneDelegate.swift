@@ -41,6 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          */
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{return}
         
+        setAppearanceProxies() // setup navbar and tabbar tints
+        
         // The flowcoordinator is needed for setting initial controller on window
         let flowCoordinator = FlowCoordinator(viewModelProvider: appDelegate.viewModelProvider!, window: window!)
         flowCoordinator.setRootViewController()
