@@ -128,8 +128,10 @@ final class InsightViewModel: NSObject {
             let data = PieChartData(dataSet: dataSet)
             //data.setValueFont(.systemFont(ofSize: 11, weight: .light))
             data.setValueTextColor(UIColor.black)
-            
             self.view?.pieChart.data = data
+            // There is a bug in the charts library that requires this to be set after data has been assigned to the chart
+            // See https://github.com/danielgindi/Charts/issues/4690
+            data.setValueFormatter(DefaultValueFormatter(decimals: 1))
             self.view?.pieChart.notifyDataSetChanged()
         }
     }
