@@ -38,10 +38,18 @@ class NavBarDatePickerView: UIView {
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
         calenderbuttonRight.translatesAutoresizingMaskIntoConstraints = false
-        calenderbuttonRight.setBackgroundImage(UIImage(named: "Arrow_right"), for: .normal)
+        if let arrowRightImage = UIImage(named: "Arrow_right") {
+            let tintableRightArrowImage = arrowRightImage.withRenderingMode(.alwaysTemplate)
+            calenderbuttonRight.setBackgroundImage(tintableRightArrowImage, for: .normal)
+        }
+        calenderbuttonRight.tintColor = UIColor.appColor(name: .textBlack)
         
         calenderbuttonLeft.translatesAutoresizingMaskIntoConstraints = false
-        calenderbuttonLeft.setBackgroundImage(UIImage(named: "Arrow_left"), for: .normal)
+        if let arrowLeftImage = UIImage(named: "Arrow_left") {
+            let tintableLeftArrowImage = arrowLeftImage.withRenderingMode(.alwaysTemplate)
+            calenderbuttonLeft.setBackgroundImage(tintableLeftArrowImage, for: .normal)
+        }
+        calenderbuttonLeft.tintColor = UIColor.appColor(name: .textBlack)
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .compact

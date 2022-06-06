@@ -249,7 +249,6 @@
 				4F8757C12822813B003033B0 /* LaunchScreen.storyboard */,
 				4F8757D62822A068003033B0 /* GoogleService-Info.plist */,
 				4F8757C42822813B003033B0 /* Info.plist */,
-				4F698B37284A9BD4002FD5AB /* ReplacementLineChartDataSet.swift */,
 			);
 			path = SymptomTrackerIOS;
 			sourceTree = "<group>";
@@ -362,6 +361,7 @@
 				4FDB44D02831A411005D35A1 /* InsightViewModel.swift */,
 				4FDB44D22831A46A005D35A1 /* InsightView.swift */,
 				4FCE6AA5284BE28C0011562F /* MonthAxisRenderer.swift */,
+				4F698B37284A9BD4002FD5AB /* ReplacementLineChartDataSet.swift */,
 			);
 			path = Insight;
 			sourceTree = "<group>";

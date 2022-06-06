@@ -57,11 +57,10 @@ class SymptomRegistrationCell: UITableViewCell {
     
     // MARK: Set attributes on subviews
     private func setAttributesOnSubViews() {
-        
-        registrationButtonMorning.setBackgroundImage(UIImage(named: "SunRise"), for: .normal)
-        registrationButtonMidday.setBackgroundImage(UIImage(named: "Sun"), for: .normal)
-        registrationButtonEvening.setBackgroundImage(UIImage(named: "SunSet"), for: .normal)
-        registrationButtonBedTime.setBackgroundImage(UIImage(named: "Moon_1"), for: .normal)
+        setUpButton(registrationButtonMorning, withImageNamed: "SunRise", withTint: UIColor.appColor(name: .textBlack))
+        setUpButton(registrationButtonMidday, withImageNamed: "Sun", withTint: UIColor.appColor(name: .textBlack))
+        setUpButton(registrationButtonEvening, withImageNamed: "SunSet", withTint: UIColor.appColor(name: .textBlack))
+        setUpButton(registrationButtonBedTime, withImageNamed: "Moon_1", withTint: UIColor.appColor(name: .textBlack))
         registrationButtonArray.enumerated().forEach({
             setButtonAttributesOn(button: $1, intensity: symptomRegistration?.intensityRegistrationList[$0].intensity)
         })
@@ -79,7 +78,8 @@ class SymptomRegistrationCell: UITableViewCell {
             
         resetRegistrationsButton.layer.borderWidth = 1
         resetRegistrationsButton.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
-        resetRegistrationsButton.setBackgroundImage(UIImage(named: "ResetRegistrations_x"), for: .normal)
+        //resetRegistrationsButton.setBackgroundImage(UIImage(named: "ResetRegistrations_x"), for: .normal)
+        setUpButton(resetRegistrationsButton, withImageNamed: "ResetRegistrations_x", withTint: UIColor.appColor(name: .textBlack))
         
         symptomNameLabel.translatesAutoresizingMaskIntoConstraints = false
         symptomNameLabel.text = symptomRegistration?.symptom?.name
@@ -247,6 +247,13 @@ class SymptomRegistrationCell: UITableViewCell {
                 self?.setAttributesOnSubViews()
             }
         }, for: .touchUpInside)
+    }
+    
+    private func setUpButton(_ button: UIButton, withImageNamed imageName: String, withTint tintColor: UIColor) {
+        guard let image = UIImage(named: imageName) else { return }
+        let tintableImage = image.withRenderingMode(.alwaysTemplate)
+        button.setBackgroundImage(tintableImage, for: .normal)
+        button.tintColor = tintColor
     }
 }
 
