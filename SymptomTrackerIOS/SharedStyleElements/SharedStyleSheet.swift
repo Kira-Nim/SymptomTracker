@@ -243,6 +243,3 @@ func setAppearanceProxies() {
     UIBarButtonItem.appearance().tintColor = UIColor.appColor(name: .textBlack)
     UITabBar.appearance().tintColor = UIColor.appColor(name: .buttonClicked)
 }
-
-
-

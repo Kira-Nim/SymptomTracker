@@ -10,6 +10,7 @@ import UIKit
 
 final class SymptomRegistrationViewController: UIViewController {
     private var symptomRegistrationViewModel: SymptomRegistrationViewModel
+    
     private lazy var symptomRegistrationView = SymptomRegistrationView()
     private lazy var navbarView = NavBarDatePickerView()
     
@@ -27,19 +28,23 @@ final class SymptomRegistrationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: loadView()
+    
     override func loadView() {
         view = symptomRegistrationView
     }
+    
+    // MARK: viewDidLoad()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         symptomRegistrationViewModel.setView(view: symptomRegistrationView, navbarView: navbarView)
     }
     
+    // MARK: viewWillAppear()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         symptomRegistrationViewModel.viewWillAppear()
     }
-    
-    //MARK: Other
 }

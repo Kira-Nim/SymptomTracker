@@ -49,6 +49,4 @@ class ChangeActivityViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         changeActivityViewModel.viewDidAppear()
     }
-    
-    // MARK: Other
 }

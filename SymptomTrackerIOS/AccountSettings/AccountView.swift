@@ -18,10 +18,4 @@ class AccountView: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: Set attributes on subviews
-    
-    // MARK: Setup subviews
-    
-    // MARK: Setup constraints
 }

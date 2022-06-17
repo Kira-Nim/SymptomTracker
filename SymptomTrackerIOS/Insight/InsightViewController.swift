@@ -61,6 +61,9 @@ final class InsightViewController: UIViewController {
         insightViewModel.viewWillAppear()
     }
     
+    // MARK: viewWillTransition()
+    
+    // Function for configuring how page is presented if in landscape or portrait rotation mode
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {

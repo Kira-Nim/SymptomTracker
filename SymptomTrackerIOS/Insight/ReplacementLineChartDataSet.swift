@@ -8,7 +8,11 @@
 import UIKit
 import Charts
 
-// BUG WORKAROUND based on https://github.com/danielgindi/Charts/issues/4605
+/* BUG WORKAROUND based on https://github.com/danielgindi/Charts/issues/4605
+   Problem:
+   When using a line chart if the x axis has its maximum value set above the largest value in the data set the chart will not render.
+*/
+
 class ReplacementLineChartDataSet: LineChartDataSet {
     override func entryIndex(x xValue: Double, closestToY yValue: Double, rounding: ChartDataSetRounding) -> Int {
         var closest = partitioningIndex { $0.x >= xValue }

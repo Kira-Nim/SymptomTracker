@@ -27,7 +27,7 @@ class AccountViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Load iew
+    // MARK: loadView()
     override func loadView() {
         view = accountSettingsView
     }

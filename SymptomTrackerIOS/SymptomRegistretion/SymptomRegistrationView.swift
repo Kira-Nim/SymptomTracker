@@ -26,18 +26,18 @@ class SymptomRegistrationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Set attributes on subviews
+    // MARK: setAttributesOnSubviews()
     private func setAttributesOnSubViews() {
         registrationTableView.translatesAutoresizingMaskIntoConstraints = false
         registrationTableView.backgroundColor = UIColor.appColor(name: .backgroundColor)
     }
     
-    // MARK: Setup subviews
+    // MARK: setupSubviews()
     private func setupSubViews() {
         self.addSubview(registrationTableView)
     }
     
-    // MARK: Setup constraints
+    // MARK: setupConstraints()
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             registrationTableView.topAnchor.constraint(equalTo: self.topAnchor),

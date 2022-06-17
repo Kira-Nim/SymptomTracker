@@ -7,6 +7,7 @@
 
 import Foundation
 
+// The state and functionality represented in this protocol represents a promise of what shall be consistent even if the backend and db is changed.
 protocol ModelManager {
     var symptomsUpdatedNotificationName: NSNotification.Name { get }
     func isUserLoggedIn() -> Bool

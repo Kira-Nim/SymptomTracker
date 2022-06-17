@@ -9,14 +9,10 @@ import Foundation
 
 
 // Provides VM classes for the Flowcoordinator, provides data for the VM classes.
+// Is instantiated in the AppDelegate class.
 final class ViewModelProvider {
     
-    /* Manages business logic - For the model data that has been adapted to the system.
-    Manages the model-adapter classes (that takes care of CRUD).
-    Holds the model data classes adapted to be used throuhout the system.
-    Manages the Combine pipeline
-    Handles business logic
-     */
+    // Because every VM needs to be provided with the ModelManager instance
     public let modelManager: ModelManager
     public let accountModelManager: AccountModelManager
     

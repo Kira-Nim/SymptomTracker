@@ -20,13 +20,17 @@ class InsightView: UIView {
     public let pieChart = PieChartView()
     public let segmentedControlContentView = UIView()
     public let segmentedControlView = UISegmentedControl(items: ["Uge", "Måned"])
+    
     private var portraitGraphViewConstraints: [NSLayoutConstraint]?
     private var landscapeGraphViewConstraints: [NSLayoutConstraint]?
     
     // MARK: Init
     init() {
+        
+        // create UIImage for changeOrientationImage att.
         var tintableImage: UIImage? = nil
         if let rotationImage = UIImage(named: "ScreenRotation") {
+            // make rotationImage costimizable so that it is possible to change its color later
             tintableImage = rotationImage.withRenderingMode(.alwaysTemplate)
         }
         changeOrientationImage = UIImageView(image: tintableImage)
@@ -128,6 +132,7 @@ class InsightView: UIView {
             pieChartContentView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -33),
         ])
         
+        // Created this way at set afterwards becase we need it to be a non optional to activate it right away
         let portraitGraphViewConstraints = [
             graphView.topAnchor.constraint(equalTo: graphInnerContentView.topAnchor),
             graphView.leadingAnchor.constraint(equalTo: graphInnerContentView.leadingAnchor),
@@ -135,6 +140,7 @@ class InsightView: UIView {
             graphView.bottomAnchor.constraint(equalTo: graphInnerContentView.bottomAnchor),
         ]
         
+        // It is ok that this is just stores as an optional.
         self.portraitGraphViewConstraints = portraitGraphViewConstraints
         
         landscapeGraphViewConstraints = [
@@ -144,6 +150,7 @@ class InsightView: UIView {
             graphView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
         ]
         
+        // Only takes a non-optional.
         NSLayoutConstraint.activate(portraitGraphViewConstraints)
     }
     

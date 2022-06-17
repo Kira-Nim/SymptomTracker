@@ -47,11 +47,9 @@ final class CreateAccountViewController: UIViewController {
     override var shouldAutorotate: Bool {
         return false
     }
-
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
-
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }

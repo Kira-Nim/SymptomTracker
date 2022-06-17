@@ -12,22 +12,25 @@ import SwiftUI
 The ModelManager manages business logic concerning model data that has been adapted to the system.
 It manages the model-adapter classes (that takes care of CRUD).
 Holds the model data classes adapted to be used throuhout the system.
-Manages the Combine pipeline
  */
 
 
 final class ModelManagerImplementation: ModelManager {
     
-    //MARK: Repositories - Takes care of CRUD
+    //MARK: Repositories
     private let symptomRepository: SymptomRepository
     private let activityRepository: ActivityRepository
     private let symptomRegistrationRepository: SymptomRegistrationRepository
     private let intensityRegistrationRepository: IntensityRegistrationRepository
-    private var firebaseSymptoms: [FirebaseSymptom] = []
     
+    //MARK: Other attributes
+    
+    // All symptoms for loggedin user
+    private var firebaseSymptoms: [FirebaseSymptom] = []
     // Manages information about logged in user
     private let accountManager: AccountManager
     
+    // An object of type Name containing a notification name that can be croadcast.
     public let symptomsUpdatedNotificationName = NSNotification.Name("SymptomsUpdatedNotification")
     
     //MARK: Init
@@ -38,57 +41,83 @@ final class ModelManagerImplementation: ModelManager {
         intensityRegistrationRepository = IntensityRegistrationRepository()
         accountManager = AccountManager()
         
-        // If the user is still logged then the snapshot listener should be started.
+        // If the user is still logged in then the snapshot listener should be started.
         if let userId = self.accountManager.loggedInUserId {
             self.symptomRepository.startListener(loggedInUser: userId)
         }
-        // always register callback, even if we don't fetch the symptoms immediately (we'll still need it after logging in)
+        
+        // Always register callback, even if we don't fetch the symptoms immediately (we'll still need it after logging in)
+        // When the symptom list is updated in the symptomsRepository, then this callback will be run and the symptomslist here will be updated. further more it will be broadcasted that everyone else should update their symptomslist as well.
         self.symptomRepository.callbacks.append(updateFirebaseSymptomList)
     }
 
-    // MARK: Update symptomlist
+    // MARK: UpdateFirebaseSymptomList()
     public func updateFirebaseSymptomList() {
+        
+        // Update attribute "firebaseSymptoms" to contain the same list as the list of the same name in symptomRepository.
         firebaseSymptoms = symptomRepository.firebaseSymptoms
+        
+        // Notify everyone that is registrered to be notified that symptoms has been updated.
+        /*
+         NotificationCenter is a class made available in the Foundation framework.
+         There is a singleton stored in a variable called "default"
+         
+         NotificationCenter acts as a central middle man between all other classes that might be interested in registrering notifications and all classes that would be interested in listening for notifications. It is a broad casting center.
+         
+         A notification must have a "name" og type NSNotification.Name "Name" is essentialy a wrapper around a String.
+         
+         When listening for at breadcast a class must first register that it will be listening on a notification og a given "name"
+         
+         --> Pattern Pub-sub (publish and subscribe)
+         
+         object can be used to send extra context data to the listeners when broadcasting a notification.
+        */
         NotificationCenter.default.post(name: symptomsUpdatedNotificationName, object: nil)
     }
     
-    // MARK Get logged in user
+    // MARK: isUserLoggedIn()
     public func isUserLoggedIn() -> Bool {
         return accountManager.isLoggedIn
     }
     
     // MARK: Symptom CRUD
 
+    // Function for gerring a list of all symptoms for logged in user
     public func getSymptoms() -> [Symptom] {
         var symptomList: [Symptom] = firebaseSymptoms
         
-        for item in symptomList {
-            print(item.sortingPlacement)
-        }
+                                                        // For testing purposes
+                                                        for item in symptomList {
+                                                            print(item.sortingPlacement)
+                                                        }
         symptomList.sort {
             $0.sortingPlacement < $1.sortingPlacement
         }
         return symptomList
     }
     
+    // Update symptom that has been edited
     public func updateSymptom(symptom: Symptom) {
         if let firebaseSymptom = symptom as? FirebaseSymptom {
             symptomRepository.update(symptom: firebaseSymptom)
         }
     }
     
+    // for updating more than one symptom that has been edited
     public func updateSymptoms(symptoms: [Symptom]) {
-        // use compactMap to cast all symptoms from Symptom to FirebaseSymptom before saving them to db
+        // use compactMap to cast all symptoms from Symptom to FirebaseSymptom before sending them to be saved in db.
         let firebaseSymptoms = symptoms.compactMap({ $0 as? FirebaseSymptom })
         symptomRepository.updateSymptoms(symptoms: firebaseSymptoms)
     }
     
+    // For deleting symptom
     public func delete(symptom: Symptom) {
         if let firebaseSymptom = symptom as? FirebaseSymptom {
             symptomRepository.delete(symptom: firebaseSymptom)
         }
     }
     
+    // For creating a new symptom with a given sortingPlacement
     public func createSymptom(sortingPlacement: Int) -> Symptom? {
         if let userId = accountManager.loggedInUserId  {
             return FirebaseSymptom(sortingPlacement: sortingPlacement, userId: userId)
@@ -99,12 +128,14 @@ final class ModelManagerImplementation: ModelManager {
     
     // MARK: CRUD for Activities
     
+    // for updating an activity in db
     public func update(activity: Activity) {
         if let firebaseActivity = activity as? FirebaseActivity, let userId = accountManager.loggedInUserId {
             activityRepository.updateActivity(firebaseActivity: firebaseActivity, userId: userId)
         }
     }
     
+    // For updating a list of activities in db
     public func update(activities: [Activity]) {
         if let userId = accountManager.loggedInUserId{
             // use compactMap to cast all activities from Activity to Firebaseactivity before saving them to db
@@ -113,6 +144,7 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
+    // For creating a new activity
     public func createActivity(date: Date) -> Activity? {
         if let userId = accountManager.loggedInUserId {
             return FirebaseActivity(userId: userId, date: date)
@@ -121,12 +153,15 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
+    // For deleting an activity from db
     public func delete(activity: Activity) {
         if let firebaseActivity = activity as? FirebaseActivity {
             activityRepository.delete(activity: firebaseActivity)
         }
     }
     
+    // For getting list of activities for a given date.
+    // The activities will be delivered to the caller of this function when the callback given as param in the call to this method is run. It is run inside another callback given as param to a function call to a method on the activityRepository.
     public func getActivitiesForDate(date: Date,
                                      getActivitiesForDateCompletionCallback: @escaping (([Activity]) -> Void)) {
 
@@ -142,6 +177,7 @@ final class ModelManagerImplementation: ModelManager {
         }
     }
     
+    // For getting list of activities for a given interval of dates.
     public func getActivitiesForInterval(startDate: Date,
                                          endDate: Date,
                                          getActivitiesForIntervalCompletionCallback: @escaping (([Activity]) -> Void)) {
@@ -160,8 +196,11 @@ final class ModelManagerImplementation: ModelManager {
     
     // MARK: CRUD for Registrations
     
+    // Get all registrations for a given date.
     public func getRegistrationsForDate(date: Date,
                                         getRegistrationsForDateCompletionCallback: @escaping (([SymptomRegistration]) -> Void)) {
+        
+        // RegistrationService is used to prerare the symptoms-registrations in the symptomRegistrationsList.
         let registrationsService = RegistrationService()
         
         // If user is not logged in - should never happen
@@ -169,7 +208,7 @@ final class ModelManagerImplementation: ModelManager {
             
             symptomRegistrationRepository.getSymptomRegistrationsForDate(date: date, userId: userId) { firebaseSymptomRegistrationList in
                 
-                // Only make/fetch registrations for non-disabled symptoms
+                // Only save registrations for non-disabled symptoms
                 let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
                 
                 // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
@@ -188,6 +227,7 @@ final class ModelManagerImplementation: ModelManager {
     public func getRegistrationsForInterval(startDate: Date,
                                             endDate: Date,
                                             getRegistrationsForIntervalCompletionCallback: @escaping (([SymptomRegistration]) -> Void)) {
+        // RegistrationService is used to prerare the symptoms-registrations in the symptomRegistrationsList.
         let registrationsService = RegistrationService()
         
         // If user is not logged in - should never happen
@@ -195,7 +235,7 @@ final class ModelManagerImplementation: ModelManager {
             
             symptomRegistrationRepository.getSymptomRegistrationsForInterval(startDate: startDate, endDate: endDate, userId: userId) { firebaseSymptomRegistrationList in
                 
-                // Only make/fetch registrations for non-disabled symptoms
+                // Only save registrations for non-disabled symptoms
                 let enabledSymptoms = self.firebaseSymptoms.filter { !$0.disabled }
                 
                 // registrationsService will return a list that has one registration for each symptom. If a registration does not exist in firebaseSymptomregistrationList, then a fresh registration will be generated and added to symptomRegistrationList.
@@ -270,13 +310,13 @@ extension ModelManagerImplementation: AccountModelManager {
         
     //MARK: Login
     
+    // Method for logging in user.
     public func loginWith(email: String, password: String, showErrorMessageFor: @escaping (AccountLoginResult) -> Void) {
         
-        // "getLoginResult(..)" returns the enum value used to determine which error message
-        // (if any) should be passed to the view from the VM
         accountManager.loginWith(email: email, password: password) { errorMessage in
             showErrorMessageFor(self.getLoginResult(errorMessage: errorMessage))
             
+            // "loggedInUserId" is a computed property that returns the user that is registred as loggedin in Firebase auth.
             if let userId = self.accountManager.loggedInUserId {
                 self.symptomRepository.startListener(loggedInUser: userId)
             }

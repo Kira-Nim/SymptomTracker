@@ -22,6 +22,7 @@ public enum AccountLoginResult {case loginSucceded,
                                      emptyField,
                                      invalidEmail}
 
+// The functionality represented in this protocol represents a promise of what shall be consistent even if the backend and db is changed.
 protocol AccountModelManager {
     func createNewAccountWith (email: String, password: String, showErrorMessageFor: @escaping (AccountCreationResult) -> Void)
     

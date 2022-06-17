@@ -20,20 +20,23 @@ final class ActivityViewModel: NSObject {
     private var selectedDate: Date
     private var selectedDateActivityList: [Activity] = []
     
+    // MARK: Init
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
         self.selectedDate = Date()
         
         super.init()
         
-        // It is ok to call this fynction here in stead of viewWillAppear because
-        // the data on this page should not be changed due to changes made on other pages.
-        // - Local update of data plus save to db is enough
+        /* It is ok to call this fynction here in stead of in viewWillAppear()
+         because the data on this page should not be changed due to changes made on other pages.
+           - Local update of data plus save to db is enough
+         */
         updateActivityLists()
-        
     }
     
-    // Function for updating activity lists (selected date + next and previous)
+    // MARK: HelpFunction
+    
+    // Function for updating activity list
     private func updateActivityLists() {
         
         // update list containing registrations for selected date
@@ -48,6 +51,7 @@ final class ActivityViewModel: NSObject {
         updateActivityLists()
     }
     
+    // MARK: SetView()
     public func setView(view: ActivityView, navbarView: NavBarDatePickerView) {
         self.view = view
         self.navbarView = navbarView
@@ -78,17 +82,22 @@ final class ActivityViewModel: NSObject {
         navbarView.configureView(date: selectedDate, changeDateCallback: changeDateCallback, getDateStringCallback: getDateStringCallback)
     }
     
+    // This is a method that will be passed on as a callback to be run,
+    // when the create new symptom confirmation button is tapped
     public func showCreateActivity() {
         if let showEditActivitySceneCallback = self.showEditActivitySceneCallback,
            let newActivity = self.modelManager.createActivity(date: selectedDate) {
+            
             // Run callback to navigate back to symptom list page
             showEditActivitySceneCallback(newActivity) { [weak self] in
-                // insert new activity into local activity list at index 0
+                // Insert new activity into local activity list at index 0
                 self?.selectedDateActivityList.insert(newActivity, at: 0)
                 self?.updateView()
             }
         }
     }
+    
+    // MARK: More help functions
     
     // When OS calles setEditing() on ActivityViewController, the controller will call this method.
     public func setEditing(_ state: Bool, animated: Bool) {
@@ -100,6 +109,7 @@ final class ActivityViewModel: NSObject {
     }
 }
 
+// MARK Extention - UITableViewDelegate
 extension ActivityViewModel: UITableViewDelegate {
     
     // Method for when a row is selected by user.
@@ -119,6 +129,7 @@ extension ActivityViewModel: UITableViewDelegate {
     }
 }
 
+// MARK Extention - UITableViewDataSource
 extension ActivityViewModel: UITableViewDataSource {
     
     // How many sections

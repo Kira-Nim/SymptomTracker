@@ -15,8 +15,8 @@ final class ActivityViewController: UIViewController {
     
     init(viewModel: ActivityViewModel) {
         activityViewModel = viewModel
-        
         super.init(nibName: nil, bundle: nil)
+        
         title = LocalizedStrings.shared.activityControllerTitle
         tabBarItem = UITabBarItem(title: title, image: UIImage(named: "Activity"), tag: 0)
         navigationItem.rightBarButtonItem = editButtonItem
@@ -26,7 +26,8 @@ final class ActivityViewController: UIViewController {
         }, menu: nil)
     }
     
-    override func setEditing(_ state:Bool, animated: Bool) {
+    // Using iOS build in functionality (foundation framework) for going into editing mode
+    override func setEditing(_ state: Bool, animated: Bool) {
         super.setEditing(state, animated: animated)
         activityViewModel.setEditing(state, animated: animated)
     }
@@ -46,6 +47,4 @@ final class ActivityViewController: UIViewController {
         super.viewDidLoad()
         activityViewModel.setView(view: activityView, navbarView: navbarView)
     }
-        
-    //MARK: Other
 }

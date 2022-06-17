@@ -43,6 +43,7 @@ class SymptomRegistrationCell: UITableViewCell {
         backgroundColor = UIColor.appColor(name: .backgroundColor)
         
         registrationButtonArray = [registrationButtonBedTime, registrationButtonEvening, registrationButtonMidday, registrationButtonMorning]
+        
         setAttributesOnSubViews()
         setupSubViews()
         setupConstraints()
@@ -143,7 +144,6 @@ class SymptomRegistrationCell: UITableViewCell {
     }
     
     // MARK: addActionToButtons()
-    
     public func addActionToButtons() {
         registrationButtonArray.enumerated().forEach({
             addActionTo(registrationButton: $1, dailyIntensityRegistrationNumber: $0)
@@ -163,12 +163,12 @@ class SymptomRegistrationCell: UITableViewCell {
         button.layer.borderColor = UIColor.appColor(name: .registrationButtonBorderColor).cgColor
     }
     
-    // Set color on buttons
+    // Set color on buttons, This is a seperated method because we want to set the backgroundcolor everytime the button is clicked (oppose to the image that will be set once and for all)
     private func setColor(button: UIButton, intensity: Int?) {
         //This function takes an Int an intensity value (Int) and returns a color (UIColor)
         guard let color = presentRegistrationIntensityCallback?(intensity) else { return }
         button.backgroundColor = color
-        button.setBackgroundImage(color.image(), for: .highlighted)
+        //button.setBackgroundImage(color.image(), for: .highlighted)
     }
     
     
@@ -191,7 +191,7 @@ class SymptomRegistrationCell: UITableViewCell {
     // Help function for the action set on daily registation buttons
     private func updateIntensityOnRegistrationFor(dailyIntensityRegistrationNumber: Int, registrationButton: UIButton) {
         
-        // If the intensity id nil (there has been no registrations) then the intensity will be converted to a -1 value.
+        // If the intensity is nil (there has been no registrations) then the intensity will be converted to a -1 value.
         // When this value is operated on later (+1) then it will be set to 0 whitch is what we want.
         let currentIntensityLevel = symptomRegistration?.intensityRegistrationList[dailyIntensityRegistrationNumber].intensity ?? -1
         
@@ -249,6 +249,7 @@ class SymptomRegistrationCell: UITableViewCell {
         }, for: .touchUpInside)
     }
     
+    // For giving images like the time indicator imagas a selected color.
     private func setUpButton(_ button: UIButton, withImageNamed imageName: String, withTint tintColor: UIColor) {
         guard let image = UIImage(named: imageName) else { return }
         let tintableImage = image.withRenderingMode(.alwaysTemplate)

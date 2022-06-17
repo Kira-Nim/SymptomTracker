@@ -39,7 +39,7 @@ final class CreateAccountViewModel: NSObject, UITextFieldDelegate {
         if let error = error {
             self.showErrorMessageFor(identifyer: error)
         } else {
-            // Email and password can be forced unwrapped here because it has been validated that they are not nuill in createNewAccountWith
+            // Email and password can be forced unwrapped here because it has been validated that they are not nill in createNewAccountWith
             self.modelManager.createNewAccountWith(email: email!, password: password!) { [weak self] (identifyer) in
                 self?.showErrorMessageFor(identifyer: identifyer)
             }

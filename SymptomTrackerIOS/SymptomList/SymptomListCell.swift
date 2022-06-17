@@ -26,6 +26,7 @@ class SymptomListCell: UITableViewCell {
         //switchButton.tintColor = UIColor.appColor(name: .switchButtonOffTintColor)
         switchButton.onTintColor = UIColor.appColor(name: .switchButtonOnTintColor)
         
+        
         switchButton.addAction(UIAction { [weak self] _ in
             if let switchCallback = self?.switchCallback,
                let symptom = self?.symptom {

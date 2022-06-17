@@ -10,12 +10,13 @@ import Firebase
 
 final class SymptomRepository {
     
-    // variable containing collection name for symptom collection i firebase.
+    // Variable containing collection name for symptom collection i firebase.
     let symptomCollection = "symptoms"
     
     // Reference to database
     let db = Firestore.firestore()
     
+    // List of all FirebaseSymptoms for a user
     var firebaseSymptoms: [FirebaseSymptom] = []
     
     // List of callbacks to be run when the Symptoms collection in db changes
@@ -42,7 +43,7 @@ final class SymptomRepository {
             // Because we dont want duplicates
             self.firebaseSymptoms.removeAll()
             
-            // iterate through alle symptom documents in snapshot/collection
+            // Iterate through alle symptom documents in snapshot/collection
             // and create a firebaseSymptom for each document.
             for doc in docs.documents {
                 let documentId = doc.documentID

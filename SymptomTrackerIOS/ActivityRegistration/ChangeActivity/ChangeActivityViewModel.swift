@@ -30,6 +30,7 @@ class ChangeActivityViewModel: NSObject {
         view.nameInputField.text = activity.name
         view.strainSegmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         view.strainSegmentedControl.selectedSegmentIndex = activity.strain
+        
         // update segmented control color
         segmentChanged()
         let durationSeconds = Double(activity.numMinutes) * 60.0
@@ -45,11 +46,11 @@ class ChangeActivityViewModel: NSObject {
     
     // MARK: Other
     
-    // Callback for when a strain option is selected when creating or editing activity
+    // Callback for presentation of segmented controll
+    // when a strain option is selected when creating on editing activity site.
     @objc
     private func segmentChanged() {
         guard let strainSegmentedControl = view?.strainSegmentedControl else { return }
-                
         let value = strainSegmentedControl.selectedSegmentIndex
         let color = activityStrainService.getActivityColorForStrain(value)
         strainSegmentedControl.selectedSegmentTintColor = color

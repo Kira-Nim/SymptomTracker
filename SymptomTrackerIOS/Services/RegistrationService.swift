@@ -7,16 +7,17 @@
 
 import Foundation
 
+
 class RegistrationService {
     
-    // Function for getting list of symptomregistrations for a day.
+    // Function for preparing a list of symptomregistrations for one day.
     // If registrations on symptoms does not exist. they will be created.
     // The registration list will be ordered the same way the symptom list is.
     func getSymptomRegistrationListFrom(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom], date: Date) -> [SymptomRegistration] {
     
         var symptomRegistrations: [SymptomRegistration] = []
         
-        // Create a dictionnary where element keys are symptomId on sympTomRegistration and values are sympTomRegistrations
+        // Create a dictionnary where element keys are symptomId on sympTomRegistration and values are symptomRegistrations
         // Created for the purpose of checking that there is an registration for each symptom in symptomList
         var firebaseSymptomRegistrationsDict: [String: FirebaseSymptomRegistration] = [:]
         firebaseSymptomRegistrationList.forEach({
@@ -49,11 +50,12 @@ class RegistrationService {
         return symptomRegistrations
     }
     
-    // Function for getting connecting list of registrations with their symptoms
-    // The registration list will be ordered the same way the symptom list is.
+    // Function for connecting list of registrations with their symptoms - setting symptoms on symptomRegistration instances in list.
+    // The registration list will be ordered the same way the symptomList is.
     func connectSymptonsAndRegistrations(firebaseSymptomRegistrationList: [FirebaseSymptomRegistration], symptomList: [FirebaseSymptom]) -> [SymptomRegistration] {
         
-        // Dictionary to look up a Symptom based in its Id (so we can match up registartions with their symptoms)
+        // Dictionary to look up a Symptom based on its Id (so we can match up registartions with their symptoms)
+        // Creating a dictionary using a constructor for at Dictionary that takes a list of tupples as param. Using named parameter called "uniqueKeysWithValues". The map function is used to convert the list of symptoms to a list of tuples.
         let symptomsDict: [String: FirebaseSymptom] = Dictionary(uniqueKeysWithValues: symptomList.map{ ($0.id ?? "", $0) })
         
         var result: [FirebaseSymptomRegistration] = []
