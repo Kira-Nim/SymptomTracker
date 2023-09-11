@@ -22,7 +22,6 @@
 		4F388E6E283ABD61009F684C /* AccountModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F388E6D283ABD5F009F684C /* AccountModelManager.swift */; };
 		4F48AC0D2846E5790043CB77 /* SymptomIntensityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC0C2846E5790043CB77 /* SymptomIntensityService.swift */; };
 		4F48AC11284930E60043CB77 /* DateConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F48AC10284930E60043CB77 /* DateConverterService.swift */; };
-		4F698B2F2849AD51002FD5AB /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4F698B2E2849AD51002FD5AB /* Charts */; };
 		4F698B342849BBD4002FD5AB /* ChartDataFormattingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F698B332849BBD4002FD5AB /* ChartDataFormattingService.swift */; };
 		4F698B36284A6F62002FD5AB /* CalendarDateIntervalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F698B35284A6F62002FD5AB /* CalendarDateIntervalService.swift */; };
 		4F698B38284A9BD4002FD5AB /* ReplacementLineChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F698B37284A9BD4002FD5AB /* ReplacementLineChartDataSet.swift */; };
@@ -80,6 +79,7 @@
 		4FDB44D62831A72C005D35A1 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D52831A72C005D35A1 /* AccountViewController.swift */; };
 		4FDB44D82831A7B0005D35A1 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D72831A7B0005D35A1 /* AccountViewModel.swift */; };
 		4FDB44DA2831A88A005D35A1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB44D92831A88A005D35A1 /* AccountView.swift */; };
+		8C6A44ED2AAF333D0044977A /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6A44EC2AAF333D0044977A /* Charts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F698B2F2849AD51002FD5AB /* Charts in Frameworks */,
+				8C6A44ED2AAF333D0044977A /* Charts in Frameworks */,
 				4F8757CC282293D9003033B0 /* FirebaseAuth in Frameworks */,
 				4F388E5F2837EA40009F684C /* IQKeyboardManagerSwift in Frameworks */,
 				4F8757D528229EF7003033B0 /* FirebaseFirestoreSwift-Beta in Frameworks */,
@@ -397,7 +397,7 @@
 				4F8757CF282293D9003033B0 /* FirebaseFirestore */,
 				4F8757D428229EF7003033B0 /* FirebaseFirestoreSwift-Beta */,
 				4F388E5E2837EA40009F684C /* IQKeyboardManagerSwift */,
-				4F698B2E2849AD51002FD5AB /* Charts */,
+				8C6A44EC2AAF333D0044977A /* Charts */,
 			);
 			productName = SymptomTrackerIOS;
 			productReference = 4F8757B328228138003033B0 /* SymptomTrackerIOS.app */;
@@ -775,11 +775,6 @@
 			package = 4F388E5D2837EA40009F684C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
-		4F698B2E2849AD51002FD5AB /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4F698B2D2849AD51002FD5AB /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
-		};
 		4F8757CB282293D9003033B0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -794,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F8757CA282293D9003033B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		8C6A44EC2AAF333D0044977A /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F698B2D2849AD51002FD5AB /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
